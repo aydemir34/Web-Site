@@ -1,6 +1,6 @@
 ---
 import type { Business, ServiceItem } from "../types";
-import { getServiceMedia } from "../lib/assets";
+import { getFeaturedServiceMedia } from "../lib/assets";
 import { slugify } from "../lib/slugify";
 import EditorialVisualFallback from "./EditorialVisualFallback.astro";
 
@@ -25,18 +25,12 @@ const servicesPath = `/demo/${business.slug}/hizmetler/`;
       <a class="all-link" href={servicesPath}>Tüm Hizmetleri Gör</a>
     </div>
 
-    <div class="list">
+    <div class="strip">
       {
-        featured.map((service, index) => {
-          const media = getServiceMedia(business, service);
+        featured.map((service) => {
+          const media = getFeaturedServiceMedia(business, service);
           return (
             <article id={`featured-${slugify(service.name)}`} class="item">
-              <p class="order">{String(index + 1).padStart(2, "0")}</p>
-              <div class="copy">
-                <h3>{service.name}</h3>
-                <p>{service.description}</p>
-                <a class="mini-link" href={`${servicesPath}#${slugify(service.name)}`}>Detayı İncele</a>
-              </div>
               <figure class="media">
                 {
                   media ? (
@@ -48,14 +42,20 @@ const servicesPath = `/demo/${business.slug}/hizmetler/`;
                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
                       />
                       <div class="fallback">
-                        <EditorialVisualFallback theme={business.themeId} aspectRatio="1/1" labels={["GELİN", "KINA", "DAVET"]} />
+                        <EditorialVisualFallback theme={business.themeId} aspectRatio="3/4" labels={["GELİN", "KINA", "DAVET"]} />
                       </div>
                     </>
                   ) : (
-                    <EditorialVisualFallback theme={business.themeId} aspectRatio="1/1" labels={["GELİN", "KINA", "DAVET"]} />
+                    <EditorialVisualFallback theme={business.themeId} aspectRatio="3/4" labels={["GELİN", "KINA", "DAVET"]} />
                   )
                 }
               </figure>
+              <div class="overlay"></div>
+              <div class="copy glass">
+                <h3>{service.name}</h3>
+                <p>{service.description}</p>
+                <a class="mini-link" href={`${servicesPath}#${slugify(service.name)}`}>Detayı İncele</a>
+              </div>
             </article>
           );
         })
@@ -83,63 +83,86 @@ const servicesPath = `/demo/${business.slug}/hizmetler/`;
     font-size: 0.86rem;
   }
 
-  .list {
+  .strip {
     margin-top: 1rem;
-    border-top: 1px solid color-mix(in srgb, var(--primary), white 66%);
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.7rem;
   }
 
   .item {
-    display: grid;
-    grid-template-columns: 42px minmax(0, 1fr) minmax(140px, 220px);
-    gap: 0.7rem 1rem;
-    padding: 0.95rem 0;
-    border-bottom: 1px solid color-mix(in srgb, var(--primary), white 72%);
-  }
-
-  .order {
-    font-size: 0.74rem;
-    color: var(--muted);
-    letter-spacing: 0.05em;
-    padding-top: 0.2rem;
+    position: relative;
+    min-height: 350px;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--primary), white 64%);
+    background: color-mix(in srgb, var(--surface), white 6%);
   }
 
   .copy {
+    position: absolute;
+    left: 0.58rem;
+    right: 0.58rem;
+    bottom: 0.58rem;
     display: grid;
     gap: 0.38rem;
+    z-index: 2;
+    padding: 0.55rem;
   }
 
   .copy h3 {
-    font-size: clamp(1rem, 2vw, 1.3rem);
+    font-size: clamp(0.95rem, 1.7vw, 1.12rem);
+    color: #fff8f3;
   }
 
   .copy p {
-    color: var(--muted);
+    color: #f8eae0;
+    font-size: 0.82rem;
   }
 
   .mini-link {
     justify-self: start;
     text-decoration: none;
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     font-weight: 700;
-    color: var(--primary);
+    color: #fff7ef;
   }
 
   .media {
     margin: 0;
-    border: 1px solid color-mix(in srgb, var(--primary), white 66%);
-    overflow: hidden;
+    height: 100%;
   }
 
   .media img {
     width: 100%;
     height: 100%;
-    min-height: 120px;
+    min-height: 350px;
     object-fit: cover;
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(180deg, rgba(26, 16, 13, 0.02) 42%, rgba(26, 16, 13, 0.78) 100%),
+      linear-gradient(160deg, rgba(26, 16, 13, 0.22), rgba(26, 16, 13, 0.05));
+  }
+
+  .glass {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 250, 246, 0.13);
+    backdrop-filter: blur(4px);
   }
 
   .fallback {
     display: none;
     height: 100%;
+  }
+
+  @media (max-width: 1120px) {
+    .strip {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
   @media (max-width: 860px) {
@@ -148,13 +171,14 @@ const servicesPath = `/demo/${business.slug}/hizmetler/`;
       flex-direction: column;
     }
 
-    .item {
+    .strip {
       grid-template-columns: 1fr;
-      gap: 0.55rem;
+      gap: 0.62rem;
     }
 
-    .media {
-      max-width: 400px;
+    .item,
+    .media img {
+      min-height: 320px;
     }
   }
 </style>

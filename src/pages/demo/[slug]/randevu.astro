@@ -2,6 +2,8 @@
 import type { Business } from "../../../types";
 import { getBusinesses, getThemeByVariant } from "../../../lib/data";
 import { buildLocalBusinessSchema, buildSeoMeta } from "../../../lib/seo";
+import { buildWhatsAppUrl } from "../../../lib/whatsapp";
+import { getContactMedia } from "../../../lib/assets";
 import SiteLayout from "../../../components/SiteLayout.astro";
 import Hero from "../../../components/Hero.astro";
 import ServicesGrid from "../../../components/ServicesGrid.astro";
@@ -14,7 +16,7 @@ import Faq from "../../../components/Faq.astro";
 import ProductPreview from "../../../components/ProductPreview.astro";
 import InstagramPreviewGrid from "../../../components/InstagramPreviewGrid.astro";
 import ServiceCarousel from "../../../components/ServiceCarousel.astro";
-import WhyUsEditorial from "../../../components/WhyUsEditorial.astro";
+import FAQAccordion from "../../../components/FAQAccordion.astro";
 
 export function getStaticPaths() {
   return getBusinesses().map((business) => ({
@@ -37,24 +39,97 @@ const modules = business.moduleOrder.appointment.filter(
   (moduleId) => moduleId !== "productPreview" || business.hasProducts
 );
 const isSimay = business.slug === "simay-sarikaya-hair-makeup";
+const simayWaUrl = buildWhatsAppUrl(business);
+const simayContactMedia = getContactMedia(business);
 ---
 
 <SiteLayout business={business} theme={theme} seo={seo} schema={schema} currentPath={path} variant={variant}>
   {
     isSimay ? (
       <>
-        <Hero business={business} theme={theme} h1={`Randevu ve iletişim - ${business.businessName}`} summary={`${business.district} için hızlı randevu akışı`} />
-        <section class="trust-strip">
-          <div class="container">
-            <ul>
-              {business.trustBadges.slice(0, 4).map((badge) => <li>{badge}</li>)}
-            </ul>
+        <section class="section contact-hero">
+          <div class="container contact-hero-wrap">
+            <div class="intro">
+              <p class="eyebrow">Randevu ve İletişim</p>
+              <h1>Gaziosmanpaşa’da özel gün hazırlıkları için hızlı iletişim</h1>
+              <p>
+                Randevu tarihi, hizmet içeriği ve prova detaylarını tek sayfada inceleyin. Telefon veya WhatsApp üzerinden
+                kısa sürede bilgi alabilirsiniz.
+              </p>
+              <div class="btn-row">
+                <a class="btn btn-primary" href={simayWaUrl} target="_blank" rel="noreferrer">WhatsApp’tan Randevu Bilgisi Al</a>
+                <a class="btn btn-secondary" href={`tel:${business.phone}`}>Telefonla Ara</a>
+              </div>
+            </div>
+            <figure class="hero-media">
+              {
+                simayContactMedia ? (
+                  <>
+                    <img
+                      src={simayContactMedia}
+                      alt={`${business.businessName} stüdyo görseli`}
+                      loading="lazy"
+                      onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
+                    />
+                    <div class="media-fallback fallback" role="img" aria-label="Temsili stüdyo görseli"></div>
+                  </>
+                ) : (
+                  <div class="media-fallback" role="img" aria-label="Temsili stüdyo görseli"></div>
+                )
+              }
+            </figure>
           </div>
         </section>
-        <WhyUsEditorial business={business} />
-        <ProcessSteps steps={business.processSteps} />
-        <ContactMap business={business} />
-        <Faq items={business.faq} />
+
+        <section class="section trust-contact">
+          <div class="container trust-grid">
+            <article class="about-panel">
+              <h2>Kısa Hakkında</h2>
+              <p>
+                Simay Sarıkaya Hair & Makeup Studio, Gaziosmanpaşa’da gelin, kına, nişan ve davet hazırlıkları için saç ve
+                makyaj hizmetleri sunan özel gün odaklı bir stüdyodur. Randevu ve hizmet detayları için WhatsApp üzerinden
+                iletişime geçebilirsiniz.
+              </p>
+            </article>
+
+            <article class="contact-panel">
+              <h2>İletişim Bilgileri</h2>
+              <ul>
+                <li><span>Telefon</span><a href={`tel:${business.phone}`}>{business.phone}</a></li>
+                <li><span>WhatsApp</span><a href={simayWaUrl} target="_blank" rel="noreferrer">Randevu Bilgisi Al</a></li>
+                <li><span>Adres</span><p>{business.address}</p></li>
+                <li><span>Instagram</span><a href={business.instagramUrl} target="_blank" rel="noreferrer">@simaysarikayahairmakeup</a></li>
+              </ul>
+            </article>
+
+            <article class="map-panel">
+              <h2>Konum ve Ulaşım</h2>
+              {
+                business.mapEmbedUrl ? (
+                  <iframe
+                    src={business.mapEmbedUrl}
+                    title={`${business.businessName} konum haritası`}
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                  ></iframe>
+                ) : (
+                  <a class="map-link-card" href={business.mapUrl} target="_blank" rel="noreferrer">Google Maps / Yol Tarifi Al</a>
+                )
+              }
+              <a class="map-link" href={business.mapUrl} target="_blank" rel="noreferrer">Google Maps / Yol Tarifi</a>
+            </article>
+
+            <article class="hours-panel">
+              <h2>Çalışma Saatleri</h2>
+              <ul>
+                <li><span>Pazartesi - Cuma</span><strong>10:00 - 19:00</strong></li>
+                <li><span>Cumartesi</span><strong>10:00 - 18:00</strong></li>
+                <li><span>Pazar</span><strong>Randevuya göre</strong></li>
+              </ul>
+            </article>
+          </div>
+        </section>
+        <FAQAccordion items={business.faq} />
         <AppointmentCta business={business} />
       </>
     ) : (
@@ -94,23 +169,159 @@ const isSimay = business.slug === "simay-sarikaya-hair-makeup";
 </SiteLayout>
 
 <style>
-  .trust-strip {
-    border-top: 1px solid color-mix(in srgb, var(--primary), white 70%);
-    border-bottom: 1px solid color-mix(in srgb, var(--primary), white 70%);
+  .contact-hero {
+    padding-top: 1rem;
+    padding-bottom: 1.4rem;
   }
 
-  .trust-strip ul {
-    margin: 0;
-    padding: 0.62rem 0;
-    list-style: none;
-    display: flex;
-    gap: 0.9rem;
-    flex-wrap: wrap;
+  .contact-hero-wrap {
+    display: grid;
+    grid-template-columns: 1fr minmax(260px, 420px);
+    gap: 0.9rem 1.2rem;
+    align-items: stretch;
   }
 
-  .trust-strip li {
-    font-size: 0.78rem;
+  .intro {
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .intro h1 {
+    font-size: clamp(1.5rem, 3.4vw, 2.4rem);
+  }
+
+  .intro p {
     color: var(--muted);
-    letter-spacing: 0.02em;
+    max-width: 60ch;
+  }
+
+  .hero-media {
+    margin: 0;
+    border: 1px solid color-mix(in srgb, var(--primary), white 66%);
+    min-height: 260px;
+    overflow: hidden;
+  }
+
+  .hero-media img {
+    width: 100%;
+    height: 100%;
+    min-height: 260px;
+    object-fit: cover;
+  }
+
+  .media-fallback {
+    min-height: 260px;
+    display: grid;
+    place-items: center;
+    background:
+      radial-gradient(120px 80px at 82% 14%, color-mix(in srgb, var(--accent), white 44%), transparent 55%),
+      radial-gradient(110px 70px at 18% 84%, color-mix(in srgb, var(--primary), white 75%), transparent 60%),
+      linear-gradient(135deg, color-mix(in srgb, var(--surface), white 24%), color-mix(in srgb, var(--bg-elevated), white 8%));
+  }
+
+  .media-fallback::after {
+    content: "Temsili görsel";
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--text), white 40%);
+  }
+
+  .media-fallback.fallback {
+    display: none;
+  }
+
+  .trust-contact {
+    padding-top: 0.9rem;
+  }
+
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+
+  .trust-grid article {
+    border: 1px solid color-mix(in srgb, var(--primary), white 68%);
+    background: color-mix(in srgb, var(--surface), white 16%);
+    padding: 0.9rem;
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  .trust-grid h2 {
+    font-size: 1rem;
+  }
+
+  .contact-panel ul,
+  .hours-panel ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.48rem;
+  }
+
+  .contact-panel li,
+  .hours-panel li {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.6rem;
+  }
+
+  .contact-panel li span,
+  .hours-panel li span {
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+
+  .contact-panel li a,
+  .contact-panel li p,
+  .hours-panel li strong {
+    margin: 0;
+    font-size: 0.84rem;
+    text-align: right;
+  }
+
+  .contact-panel li a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .map-panel iframe {
+    border: none;
+    width: 100%;
+    min-height: 250px;
+  }
+
+  .map-link {
+    color: var(--primary);
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.82rem;
+  }
+
+  .map-link-card {
+    border: 1px solid color-mix(in srgb, var(--primary), white 64%);
+    min-height: 250px;
+    display: grid;
+    place-items: center;
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 700;
+    background: color-mix(in srgb, var(--surface), white 20%);
+  }
+
+  @media (max-width: 980px) {
+    .contact-hero-wrap,
+    .trust-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-panel li,
+    .hours-panel li {
+      align-items: center;
+    }
   }
 </style>

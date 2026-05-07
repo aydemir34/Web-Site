@@ -5,7 +5,6 @@ import type { SeoMeta } from "../lib/seo";
 import HeaderContact from "./HeaderContact.astro";
 import FloatingWhatsApp from "./FloatingWhatsApp.astro";
 import BackgroundOrnaments from "./BackgroundOrnaments.astro";
-import DemoNotice from "./DemoNotice.astro";
 import FooterMega from "./FooterMega.astro";
 import { buildWhatsAppUrl } from "../lib/whatsapp";
 import { getBusinessLogo } from "../lib/assets";
@@ -29,6 +28,7 @@ const navItems = [
 const whatsApp = buildWhatsAppUrl(business);
 const logo = getBusinessLogo(business);
 const compactDesktopCta = business.themeId === "clean-clinic-minimal" ? "Randevu Al" : "Randevu Bilgisi Al";
+const mobileBrandFallback = business.businessName.split(" ").slice(0, 2).join(" ");
 ---
 
 <!doctype html>
@@ -52,7 +52,6 @@ const compactDesktopCta = business.themeId === "clean-clinic-minimal" ? "Randevu
     style={`--bg:${theme.palette.bg};--bg-elevated:${theme.palette.bgElevated};--surface:${theme.palette.surface};--text:${theme.palette.text};--muted:${theme.palette.muted};--primary:${theme.palette.primary};--primary-contrast:${theme.palette.primaryContrast};--accent:${theme.palette.accent};--border:${theme.palette.border};--glow:${theme.palette.glow};--font-heading:${theme.fontHeading};--font-body:${theme.fontBody};`}
   >
     <BackgroundOrnaments styleId={business.visualProfile?.ornamentStyle ?? theme.ornamentStyle} />
-    <DemoNotice />
 
     <header class="site-header">
       <div class="container desktop-bar">
@@ -86,10 +85,10 @@ const compactDesktopCta = business.themeId === "clean-clinic-minimal" ? "Randevu
             logo ? (
               <>
                 <img src={logo} alt={`${business.businessName} logosu`} class="brand-logo mobile-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';" />
-                <span class="brand-text fallback">{business.businessName}</span>
+                <span class="brand-text fallback">{mobileBrandFallback}</span>
               </>
             ) : (
-              <span class="brand-text">{business.businessName}</span>
+              <span class="brand-text">{mobileBrandFallback}</span>
             )
           }
         </a>

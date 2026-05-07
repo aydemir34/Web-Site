@@ -76,6 +76,26 @@ Set these fields in `src/data/businesses.json`:
 - `visualProfile.gridImages`
 - `visualProfile.videos`
 
+Primary manifest file:
+- `src/data/assets.json`
+
+Role-based asset entries support:
+- `src`
+- `type` (`image` | `video` | `logo`)
+- `category`
+- `role` (`logo` | `hero` | `featured` | `service` | `grid` | `video` | `contact` | `background`)
+- `tags`
+- `serviceSlug` (optional)
+- `alt`
+- `source` (optional)
+- `isRemote` (optional)
+
+Selection priority:
+1. `serviceSlug` match
+2. tag match
+3. category match
+4. fallback chain from helper logic
+
 ## Compliance
 
 - Do not add copyrighted media.

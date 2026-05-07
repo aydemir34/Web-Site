@@ -35,6 +35,7 @@ Prefer reusable components, data-driven rendering, CSS variables, static output,
 Before building or redesigning any demo, read these files completely:
 - `docs/site-standards.md`
 - `docs/page-blueprints.md`
+- `docs/section-blueprints.md`
 - `docs/component-standards.md`
 - `docs/copy-rules.md`
 - `docs/visual-acceptance-checklist.md`
@@ -272,11 +273,22 @@ If a new visual direction is needed, create or extend a reusable theme instead.
 
 ## Asset Rules
 
-Use shared assets first:
-- `public/assets/library/soft-beauty/`
-- `public/assets/library/clean-clinic/`
-- `public/assets/library/product-led/`
-- `public/assets/library/campaign/`
+Use shared assets under category-based library paths:
+- `public/assets/library/[category]/`
+
+Common categories:
+- `hair-makeup`
+- `bridal-makeup`
+- `nails`
+- `lashes-brows`
+- `skincare`
+- `laser-epilation`
+- `med-aesthetic`
+- `clinic`
+- `spa`
+- `products`
+- `interiors`
+- `contact-location`
 
 Use business-specific assets only when provided:
 - `public/assets/businesses/[slug]/`

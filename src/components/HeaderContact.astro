@@ -12,6 +12,7 @@ const whatsappUrl = buildWhatsAppUrl(business);
 ---
 
 <div class="header-contact">
+  <a class="phone-link" href={`tel:${business.phone}`} aria-label="Telefon ile ara">Telefon</a>
   <a href={whatsappUrl} target="_blank" rel="noreferrer" aria-label="WhatsApp üzerinden randevu bilgisi al">
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path
@@ -28,6 +29,7 @@ const whatsappUrl = buildWhatsAppUrl(business);
     display: inline-flex;
     align-items: center;
     justify-content: flex-end;
+    gap: 0.32rem;
   }
 
   .header-contact a {
@@ -44,6 +46,13 @@ const whatsappUrl = buildWhatsAppUrl(business);
     gap: 0.36rem;
     line-height: 1;
     white-space: nowrap;
+  }
+
+  .header-contact a.phone-link {
+    border-color: color-mix(in srgb, var(--primary), white 56%);
+    background: color-mix(in srgb, var(--surface), white 18%);
+    color: var(--text);
+    padding-inline: 0.52rem;
   }
 
   .header-contact svg {

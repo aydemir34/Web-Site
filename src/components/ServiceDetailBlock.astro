@@ -1,6 +1,6 @@
 ---
 import type { Business, ServiceItem } from "../types";
-import { getServiceMedia } from "../lib/assets";
+import { getServiceMediaGallery } from "../lib/assets";
 import { buildWhatsAppUrl } from "../lib/whatsapp";
 import { slugify } from "../lib/slugify";
 import EditorialVisualFallback from "./EditorialVisualFallback.astro";
@@ -12,27 +12,40 @@ type Props = {
 };
 
 const { business, service, index } = Astro.props;
-const media = getServiceMedia(business, service);
+const mediaGallery = getServiceMediaGallery(business, service, 3);
+const media = mediaGallery[0] ?? null;
+const serviceId = slugify(service.name);
 const waUrl = buildWhatsAppUrl(business, service);
 ---
 
-<article id={slugify(service.name)} class="service-row">
+<article id={serviceId} class="service-row">
   <p class="order">{String(index + 1).padStart(2, "0")}</p>
   <div class="service-copy">
     <h3>{service.name}</h3>
     <p>{service.description}</p>
-    <a class="wa-link" href={waUrl} target="_blank" rel="noreferrer">WhatsApp’tan Randevu ve Fiyat Sor</a>
+    <a class="wa-link" href={waUrl} target="_blank" rel="noreferrer">Bu Hizmet İçin Bilgi Al</a>
   </div>
   <figure class="service-media">
     {
       media ? (
         <>
-          <img
-            src={media}
-            alt={`${service.name} hizmet görseli`}
-            loading="lazy"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-          />
+          {mediaGallery.map((_, i) => <input type="radio" name={`gallery-${serviceId}`} id={`${serviceId}-tab-${i}`} checked={i === 0} />)}
+          {mediaGallery.map((item, i) => (
+            <img
+              class={`media-shot media-shot-${i}`}
+              src={item}
+              alt={`${service.name} hizmet görseli ${i + 1}`}
+              loading="lazy"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+            />
+          ))}
+          {
+            mediaGallery.length > 1 && (
+              <div class="media-tabs" role="tablist" aria-label={`${service.name} görselleri`}>
+                {mediaGallery.map((_, i) => <label for={`${serviceId}-tab-${i}`}>Görünüm {i + 1}</label>)}
+              </div>
+            )
+          }
           <div class="fallback" aria-hidden="true">
             <EditorialVisualFallback theme={business.themeId} aspectRatio="1/1" labels={["GELİN", "KINA", "NİŞAN"]} />
           </div>
@@ -47,9 +60,9 @@ const waUrl = buildWhatsAppUrl(business, service);
 <style>
   .service-row {
     display: grid;
-    grid-template-columns: 44px minmax(0, 1fr) minmax(160px, 260px);
-    gap: 0.8rem 1rem;
-    padding: 1rem 0;
+    grid-template-columns: 56px minmax(0, 1fr) minmax(260px, 420px);
+    gap: 0.9rem 1.1rem;
+    padding: 1.1rem 0;
     border-bottom: 1px solid color-mix(in srgb, var(--primary), white 72%);
   }
 
@@ -90,13 +103,51 @@ const waUrl = buildWhatsAppUrl(business, service);
     margin: 0;
     border: 1px solid color-mix(in srgb, var(--primary), white 66%);
     overflow: hidden;
+    position: relative;
+    min-height: 290px;
+    background: color-mix(in srgb, var(--surface), white 14%);
+  }
+
+  .service-media input {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    opacity: 0;
+    pointer-events: none;
   }
 
   .service-media img {
     width: 100%;
     height: 100%;
-    min-height: 170px;
+    min-height: 290px;
     object-fit: cover;
+    display: none;
+  }
+
+  .service-media input:nth-of-type(1):checked ~ .media-shot-0,
+  .service-media input:nth-of-type(2):checked ~ .media-shot-1,
+  .service-media input:nth-of-type(3):checked ~ .media-shot-2 {
+    display: block;
+  }
+
+  .media-tabs {
+    position: absolute;
+    left: 0.6rem;
+    right: 0.6rem;
+    bottom: 0.6rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    z-index: 2;
+  }
+
+  .media-tabs label {
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    background: rgba(18, 12, 10, 0.38);
+    color: #fff6ef;
+    padding: 0.2rem 0.42rem;
+    font-size: 0.68rem;
   }
 
   .fallback {
@@ -116,7 +167,12 @@ const waUrl = buildWhatsAppUrl(business, service);
 
     .service-media {
       order: 3;
-      max-width: 420px;
+      max-width: 100%;
+      min-height: 250px;
+    }
+
+    .service-media img {
+      min-height: 250px;
     }
   }
 </style>

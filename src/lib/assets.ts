@@ -3,8 +3,22 @@ import type { Business, ServiceItem } from "../types";
 import { slugify } from "./slugify";
 
 type AssetKind = "hero" | "grid" | "video";
-type FallbackKind = "hero" | "service" | "grid" | "video" | "contact";
+type FallbackKind = "hero" | "service" | "featured" | "grid" | "video" | "contact" | "background";
 type ServiceGroup = "hair" | "makeup" | "nails" | "lashes" | "skincare" | "laser" | "clinic" | "default";
+type AssetRole = "logo" | "hero" | "featured" | "service" | "grid" | "video" | "contact" | "background";
+type AssetType = "image" | "video" | "logo";
+
+type AssetEntry = {
+  src: string;
+  type: AssetType;
+  category: string;
+  role: AssetRole;
+  tags: string[];
+  serviceSlug?: string;
+  alt?: string;
+  source?: string;
+  isRemote?: boolean;
+};
 
 const EXTENSIONS = ["jpg", "jpeg", "webp", "png"] as const;
 const VIDEO_EXTENSIONS = ["mp4", "webm"] as const;
@@ -102,17 +116,107 @@ function configuredRemote(business: Business, kind: AssetKind | "contact"): stri
   return candidate.map((item) => ensureAbsolute(typeof item === "string" ? item : null)).filter((item): item is string => Boolean(item));
 }
 
-function pickServiceBucket(
-  source: Record<string, string[]> | null | undefined,
-  group: ServiceGroup
-): string[] {
+function pickServiceBucket(source: Record<string, string[]> | null | undefined, group: ServiceGroup): string[] {
   if (!source) {
     return [];
   }
   return source[group] ?? source.default ?? [];
 }
 
+function sanitizeEntry(input: unknown): AssetEntry | null {
+  const raw = input as Partial<AssetEntry> | null;
+  if (!raw || typeof raw.src !== "string" || typeof raw.role !== "string" || typeof raw.type !== "string") {
+    return null;
+  }
+  const src = ensureAbsolute(raw.src);
+  if (!src) {
+    return null;
+  }
+  return {
+    src,
+    type: raw.type as AssetType,
+    category: typeof raw.category === "string" ? raw.category : "misc",
+    role: raw.role as AssetRole,
+    tags: Array.isArray(raw.tags) ? raw.tags.filter((tag): tag is string => typeof tag === "string") : [],
+    serviceSlug: typeof raw.serviceSlug === "string" ? raw.serviceSlug : undefined,
+    alt: typeof raw.alt === "string" ? raw.alt : undefined,
+    source: typeof raw.source === "string" ? raw.source : undefined,
+    isRemote: typeof raw.isRemote === "boolean" ? raw.isRemote : undefined
+  };
+}
+
+function getStructuredAssets(business: Business): { businessAssets: AssetEntry[]; sharedAssets: AssetEntry[] } {
+  const cfg = businessConfig(business) as Record<string, unknown> | null;
+  const businessAssetsRaw = (cfg?.assets as unknown[]) ?? [];
+  const sharedAssetsRaw = (assetsConfig.assets as unknown[]) ?? [];
+
+  return {
+    businessAssets: businessAssetsRaw.map(sanitizeEntry).filter((item): item is AssetEntry => Boolean(item)),
+    sharedAssets: sharedAssetsRaw.map(sanitizeEntry).filter((item): item is AssetEntry => Boolean(item))
+  };
+}
+
+function getServiceTokens(serviceName: string): string[] {
+  return slugify(serviceName)
+    .split("-")
+    .map((part) => part.trim())
+    .filter(Boolean);
+}
+
+function hashString(input: string): number {
+  let hash = 0;
+  for (let i = 0; i < input.length; i += 1) {
+    hash = (hash * 31 + input.charCodeAt(i)) >>> 0;
+  }
+  return hash;
+}
+
+function pickRoleAsset(
+  entries: AssetEntry[],
+  options: { role: AssetRole; serviceSlug?: string; serviceTokens?: string[]; category?: string }
+): string | null {
+  const byRole = entries.filter((entry) => entry.role === options.role || (options.role === "featured" && entry.role === "service"));
+  if (byRole.length === 0) {
+    return null;
+  }
+
+  const serviceSlug = options.serviceSlug;
+  const serviceTokens = options.serviceTokens ?? [];
+  const category = options.category;
+
+  const byServiceSlug = serviceSlug ? byRole.filter((entry) => entry.serviceSlug === serviceSlug) : [];
+  if (byServiceSlug.length > 0) {
+    return byServiceSlug[0]?.src ?? null;
+  }
+
+  const byTag = byRole.filter((entry) =>
+    serviceTokens.length > 0 && entry.tags.some((tag) => serviceTokens.some((token) => slugify(tag).includes(token)))
+  );
+  if (byTag.length > 0) {
+    const i = hashString(serviceSlug ?? byTag[0]!.src) % byTag.length;
+    return byTag[i]?.src ?? null;
+  }
+
+  const byCategory = category ? byRole.filter((entry) => entry.category === category) : [];
+  if (byCategory.length > 0) {
+    const i = hashString((serviceSlug ?? category) + options.role) % byCategory.length;
+    return byCategory[i]?.src ?? null;
+  }
+
+  if (byRole.length === 1) {
+    return byRole[0]!.src;
+  }
+
+  const i = hashString((serviceSlug ?? options.role) + (category ?? "")) % byRole.length;
+  return byRole[i]?.src ?? null;
+}
+
 export function getBusinessLogo(business: Business): string | null {
+  const { businessAssets, sharedAssets } = getStructuredAssets(business);
+  const byRole = pickRoleAsset(businessAssets, { role: "logo" }) ?? pickRoleAsset(sharedAssets, { role: "logo" });
+  if (byRole) {
+    return byRole;
+  }
   const base = businessMediaBase(business);
   return firstValid([`${base}logo.svg`, `${base}logo.png`, `${base}logo.webp`]);
 }
@@ -121,14 +225,12 @@ export function getAssetSetFallback(assetSet: string | null | undefined, type: F
   if (!assetSet) {
     return null;
   }
-  const setConfig = assetsConfig.assetSets[assetSet as keyof typeof assetsConfig.assetSets] as
-    | Record<string, unknown>
-    | undefined;
+  const setConfig = assetsConfig.assetSets[assetSet as keyof typeof assetsConfig.assetSets] as Record<string, unknown> | undefined;
   if (!setConfig) {
     return null;
   }
 
-  if (type === "service") {
+  if (type === "service" || type === "featured") {
     const serviceBuckets = (setConfig.service as Record<string, string[]> | undefined) ?? undefined;
     return firstValid(serviceBuckets?.default ?? []);
   }
@@ -143,57 +245,92 @@ export function getHeroMedia(business: Business): string | null {
   const setConfig = getAssetSetConfig(business);
   const group = serviceGroupFromName(business.mainService);
   const base = businessMediaBase(business);
-  const businessExplicit = allValid((cfg?.heroMedia as string[] | undefined) ?? []);
+  const { businessAssets, sharedAssets } = getStructuredAssets(business);
 
-  const businessPattern = buildPatternCandidates(
-    base,
-    [`hero-${group}-01`, "hero-hair-makeup-01", "hero-bridal-makeup-01", "hero-01"],
-    EXTENSIONS
-  );
+  const structuredBusiness = pickRoleAsset(businessAssets, { role: "hero", category: group });
+  const structuredShared = pickRoleAsset(sharedAssets, { role: "hero", category: group });
+  const businessExplicit = allValid((cfg?.heroMedia as string[] | undefined) ?? []);
+  const businessPattern = buildPatternCandidates(base, [`hero-${group}-01`, "hero-hair-makeup-01", "hero-bridal-makeup-01", "hero-01"], EXTENSIONS);
   const shared = setConfig?.hero ?? [];
   const remote = configuredRemote(business, "hero");
-
   const assetSetFallback = getAssetSetFallback(assetSetId, "hero");
 
-  return firstValid([explicit, ...businessExplicit, ...businessPattern, ...shared, ...remote, assetSetFallback]);
+  return firstValid([explicit, structuredBusiness, ...businessExplicit, ...businessPattern, structuredShared, ...shared, ...remote, assetSetFallback]);
+}
+
+export function getFeaturedServiceMedia(business: Business, service: ServiceItem | string): string | null {
+  const serviceName = typeof service === "string" ? service : service.name;
+  const serviceSlug = slugify(serviceName);
+  const serviceTokens = getServiceTokens(serviceName);
+  const group = serviceGroupFromName(serviceName);
+  const { businessAssets, sharedAssets } = getStructuredAssets(business);
+  const structuredBusiness = pickRoleAsset(businessAssets, { role: "featured", serviceSlug, serviceTokens, category: group });
+  const structuredShared = pickRoleAsset(sharedAssets, { role: "featured", serviceSlug, serviceTokens, category: group });
+  return firstValid([structuredBusiness, structuredShared, getServiceMedia(business, service)]);
 }
 
 export function getServiceMedia(business: Business, service: ServiceItem | string): string | null {
   const serviceName = typeof service === "string" ? service : service.name;
+  const serviceSlug = slugify(serviceName);
+  const serviceTokens = getServiceTokens(serviceName);
   const group = serviceGroupFromName(serviceName);
   const base = businessMediaBase(business);
   const cfg = businessConfig(business);
   const assetSetId = getAssetSetId(business);
   const setConfig = getAssetSetConfig(business);
+  const { businessAssets, sharedAssets } = getStructuredAssets(business);
 
-  const explicitBusinessMapped = pickServiceBucket(
-    (cfg?.serviceMedia as Record<string, string[]> | undefined) ?? undefined,
-    group
-  );
+  const structuredBusiness = pickRoleAsset(businessAssets, { role: "service", serviceSlug, serviceTokens, category: group });
+  const structuredShared = pickRoleAsset(sharedAssets, { role: "service", serviceSlug, serviceTokens, category: group });
+  const explicitBusinessMapped = pickServiceBucket((cfg?.serviceMedia as Record<string, string[]> | undefined) ?? undefined, group);
   const businessPattern = buildPatternCandidates(
     base,
-    [
-      `service-${group}-01`,
-      `service-${slugify(serviceName)}-01`,
-      "service-hair-01",
-      "service-makeup-01",
-      "service-01"
-    ],
+    [`service-${group}-01`, `service-${serviceSlug}-01`, "service-hair-01", "service-makeup-01", "service-01"],
     EXTENSIONS
   );
   const shared = pickServiceBucket((setConfig?.service as Record<string, string[]> | undefined) ?? undefined, group);
-  const remoteService = pickServiceBucket(
-    (cfg?.remote?.service as Record<string, string[]> | undefined) ?? undefined,
-    group
-  );
+  const remoteService = pickServiceBucket((cfg?.remote?.service as Record<string, string[]> | undefined) ?? undefined, group);
   const assetSetFallback = getAssetSetFallback(assetSetId, "service");
 
-  return firstValid([...explicitBusinessMapped, ...businessPattern, ...shared, ...remoteService, assetSetFallback]);
+  return firstValid([structuredBusiness, ...explicitBusinessMapped, ...businessPattern, structuredShared, ...shared, ...remoteService, assetSetFallback]);
+}
+
+export function getServiceMediaGallery(business: Business, service: ServiceItem | string, maxItems = 3): string[] {
+  const primary = getServiceMedia(business, service);
+  const serviceName = typeof service === "string" ? service : service.name;
+  const serviceSlug = slugify(serviceName);
+  const serviceTokens = getServiceTokens(serviceName);
+  const group = serviceGroupFromName(serviceName);
+  const { businessAssets, sharedAssets } = getStructuredAssets(business);
+
+  const roleMatches = [
+    ...businessAssets.filter(
+      (entry) =>
+        (entry.role === "service" || entry.role === "featured") &&
+        (entry.serviceSlug === serviceSlug ||
+          entry.tags.some((tag) => serviceTokens.some((token) => slugify(tag).includes(token))) ||
+          entry.category === group)
+    ),
+    ...sharedAssets.filter(
+      (entry) =>
+        (entry.role === "service" || entry.role === "featured") &&
+        (entry.serviceSlug === serviceSlug ||
+          entry.tags.some((tag) => serviceTokens.some((token) => slugify(tag).includes(token))) ||
+          entry.category === group)
+    )
+  ].map((entry) => entry.src);
+
+  const fallbackGallery = getGridMedia(business).slice(0, 2);
+  const merged = allValid([primary, ...roleMatches, ...fallbackGallery]);
+  return merged.slice(0, maxItems);
 }
 
 export function getGridMedia(business: Business): string[] {
   const explicit = (business.visualProfile?.gridImages ?? []).map((item) => ensureAbsolute(item));
   const cfg = businessConfig(business);
+  const { businessAssets, sharedAssets } = getStructuredAssets(business);
+  const structuredBusiness = businessAssets.filter((entry) => entry.role === "grid").map((entry) => entry.src);
+  const structuredShared = sharedAssets.filter((entry) => entry.role === "grid").map((entry) => entry.src);
   const businessExplicit = allValid((cfg?.gridMedia as string[] | undefined) ?? []);
   const base = businessMediaBase(business);
   const businessPattern = [
@@ -203,26 +340,30 @@ export function getGridMedia(business: Business): string[] {
   const setConfig = getAssetSetConfig(business);
   const shared = setConfig?.grid ?? [];
   const remote = configuredRemote(business, "grid");
-
   const assetSetFallback = getAssetSetFallback(getAssetSetId(business), "grid");
-  const merged = allValid([...explicit, ...businessExplicit, ...businessPattern, ...shared, ...remote, assetSetFallback]);
-  return merged.length > 0 ? merged : [];
+  return allValid([...explicit, ...structuredBusiness, ...businessExplicit, ...businessPattern, ...structuredShared, ...shared, ...remote, assetSetFallback]);
 }
 
 export function getVideoMedia(business: Business): string[] {
   const explicit = (business.visualProfile?.videos ?? []).map((item) => ensureAbsolute(item));
+  const { businessAssets, sharedAssets } = getStructuredAssets(business);
+  const structuredBusiness = businessAssets.filter((entry) => entry.role === "video").map((entry) => entry.src);
+  const structuredShared = sharedAssets.filter((entry) => entry.role === "video").map((entry) => entry.src);
   const base = businessMediaBase(business);
   const pattern = buildPatternCandidates(base, ["video-01", "reel-01", "video-makeup-process-01"], VIDEO_EXTENSIONS);
   const setConfig = getAssetSetConfig(business);
   const shared = setConfig?.video ?? [];
   const remote = configuredRemote(business, "video");
   const assetSetFallback = getAssetSetFallback(getAssetSetId(business), "video");
-  return allValid([...explicit, ...pattern, ...shared, ...remote, assetSetFallback]);
+  return allValid([...explicit, ...structuredBusiness, ...pattern, ...structuredShared, ...shared, ...remote, assetSetFallback]);
 }
 
 export function getContactMedia(business: Business): string | null {
   const base = businessMediaBase(business);
   const cfg = businessConfig(business);
+  const { businessAssets, sharedAssets } = getStructuredAssets(business);
+  const structuredBusiness = pickRoleAsset(businessAssets, { role: "contact", category: "contact-location" });
+  const structuredShared = pickRoleAsset(sharedAssets, { role: "contact", category: "contact-location" });
   const businessExplicit = allValid((cfg?.contactMedia as string[] | undefined) ?? []);
   const explicitCandidates = allValid([
     `${base}contact-location-01.jpg`,
@@ -238,5 +379,5 @@ export function getContactMedia(business: Business): string | null {
   const remote = configuredRemote(business, "contact");
   const assetSetFallback = getAssetSetFallback(getAssetSetId(business), "contact");
 
-  return firstValid([...businessExplicit, ...explicitCandidates, ...shared, ...remote, assetSetFallback]);
+  return firstValid([structuredBusiness, ...businessExplicit, ...explicitCandidates, structuredShared, ...shared, ...remote, assetSetFallback]);
 }

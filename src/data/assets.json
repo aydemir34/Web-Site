@@ -1,4 +1,51 @@
 {
+  "assets": [
+    {
+      "src": "/assets/library/hair-makeup/hero-hair-makeup-01.jpg",
+      "type": "image",
+      "category": "hair-makeup",
+      "role": "hero",
+      "tags": ["saç", "makyaj", "gelin"],
+      "alt": "Saç ve makyaj hizmetleri için hero görseli",
+      "source": "library"
+    },
+    {
+      "src": "/assets/library/bridal-makeup/hero-bridal-makeup-01.webp",
+      "type": "image",
+      "category": "bridal-makeup",
+      "role": "hero",
+      "tags": ["gelin", "kına", "nişan"],
+      "alt": "Bridal hero görseli",
+      "source": "library"
+    },
+    {
+      "src": "/assets/library/hair-makeup/grid-hair-makeup-01.jpg",
+      "type": "image",
+      "category": "hair-makeup",
+      "role": "grid",
+      "tags": ["galeri", "saç", "makyaj"],
+      "alt": "Saç ve makyaj galeri görseli",
+      "source": "library"
+    },
+    {
+      "src": "/assets/library/hair-makeup/video-makeup-process-01.mp4",
+      "type": "video",
+      "category": "hair-makeup",
+      "role": "video",
+      "tags": ["makyaj", "hazırlık"],
+      "alt": "Makyaj hazırlık videosu",
+      "source": "library"
+    },
+    {
+      "src": "/assets/library/contact-location/contact-location-01.jpg",
+      "type": "image",
+      "category": "contact-location",
+      "role": "contact",
+      "tags": ["konum", "stüdyo"],
+      "alt": "Konum ve stüdyo görseli",
+      "source": "library"
+    }
+  ],
   "assetSets": {
     "soft-beauty": {
       "hero": [
@@ -58,6 +105,93 @@
   },
   "businesses": {
     "simay-sarikaya-hair-makeup": {
+      "assets": [
+        {
+          "src": "/assets/businesses/simay-sarikaya/hero-bridal-01.jpg",
+          "type": "image",
+          "category": "hair-makeup",
+          "role": "hero",
+          "tags": ["gelin", "saç", "makyaj", "özel gün"],
+          "alt": "Gelin saçı ve makyaj hazırlığı",
+          "source": "business"
+        },
+        {
+          "src": "/assets/businesses/simay-sarikaya/service-makeup-01.jpg",
+          "type": "image",
+          "category": "hair-makeup",
+          "role": "service",
+          "tags": ["gelin", "kına", "nişan", "makyaj"],
+          "serviceSlug": "gelin-saci-ve-makyaji",
+          "alt": "Gelin saçı ve makyaj hazırlığı",
+          "source": "business"
+        },
+        {
+          "src": "/assets/businesses/simay-sarikaya/service-hair-01.jpg",
+          "type": "image",
+          "category": "hair-makeup",
+          "role": "service",
+          "tags": ["özel gün", "saç", "tasarım"],
+          "serviceSlug": "ozel-gun-sac-tasarimi",
+          "alt": "Özel gün saç tasarımı",
+          "source": "business"
+        },
+        {
+          "src": "/assets/businesses/simay-sarikaya/service-makeup-01.jpg",
+          "type": "image",
+          "category": "hair-makeup",
+          "role": "featured",
+          "tags": ["gelin", "kına", "davet", "makyaj"],
+          "serviceSlug": "davet-makyaji",
+          "alt": "Davet makyajı hazırlığı",
+          "source": "business"
+        },
+        {
+          "src": "/assets/businesses/simay-sarikaya/service-hair-01.jpg",
+          "type": "image",
+          "category": "hair-makeup",
+          "role": "featured",
+          "tags": ["saç", "kına", "nişan"],
+          "serviceSlug": "kina-hazirligi",
+          "alt": "Kına hazırlığı için saç tasarımı",
+          "source": "business"
+        },
+        {
+          "src": "/assets/businesses/simay-sarikaya/grid-01.jpg",
+          "type": "image",
+          "category": "hair-makeup",
+          "role": "grid",
+          "tags": ["galeri", "gelin", "saç", "makyaj"],
+          "alt": "Instagram galeri görseli 1",
+          "source": "business"
+        },
+        {
+          "src": "/assets/businesses/simay-sarikaya/grid-02.jpg",
+          "type": "image",
+          "category": "hair-makeup",
+          "role": "grid",
+          "tags": ["galeri", "kına", "nişan"],
+          "alt": "Instagram galeri görseli 2",
+          "source": "business"
+        },
+        {
+          "src": "/assets/businesses/simay-sarikaya/grid-03.jpg",
+          "type": "image",
+          "category": "hair-makeup",
+          "role": "grid",
+          "tags": ["galeri", "davet", "özel gün"],
+          "alt": "Instagram galeri görseli 3",
+          "source": "business"
+        },
+        {
+          "src": "/assets/businesses/simay-sarikaya/pexels-kerimeveyik-22589552.jpg",
+          "type": "image",
+          "category": "contact-location",
+          "role": "contact",
+          "tags": ["stüdyo", "iç mekan", "konum"],
+          "alt": "Stüdyo iç mekan görseli",
+          "source": "business"
+        }
+      ],
       "heroMedia": [
         "/assets/businesses/simay-sarikaya/hero-bridal-01.jpg",
         "/assets/businesses/simay-sarikaya/pexels-kerimeveyik-22589552.jpg"
