@@ -1,0 +1,592 @@
+{
+  "color": {
+    "isla-red": {
+      "$value": "#e4263d",
+      "$type": "color",
+      "$description": "Isla Red — Primary action buttons, critical links, brand accents, small heading underlines. It provides a confident punctuation to the otherwise neutral palette"
+    },
+    "pure-black": {
+      "$value": "#000000",
+      "$type": "color",
+      "$description": "Pure Black — Primary text, core borders, header elements. It grounds the design with strong contrast"
+    },
+    "ink-grey": {
+      "$value": "#1a1a1a",
+      "$type": "color",
+      "$description": "Ink Grey — Secondary text, subheadings, badge text, and deeper neutral components. Offers a softer alternative to Pure Black for text"
+    },
+    "cream-canvas": {
+      "$value": "#f8f6f3",
+      "$type": "color",
+      "$description": "Cream Canvas — Dominant page background, soft card backgrounds, and subtle badges. Establishes the light, welcoming tone"
+    },
+    "white-surface": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "White Surface — Main card backgrounds, elevated sections, and button text when paired with Isla Red. Provides bright contrast"
+    },
+    "deep-grey": {
+      "$value": "#2e2e2e",
+      "$type": "color",
+      "$description": "Deep Grey — Muted text in navigation and other secondary UI elements. Darker than Ink Grey, yet lighter than Pure Black, providing a specific hierarchy"
+    },
+    "warm-grey-border": {
+      "$value": "#e4dfd9",
+      "$type": "color",
+      "$description": "Warm Grey Border — Subtle borders on ghost buttons and delicate dividing lines. Adds texture without strong visual weight"
+    },
+    "muted-text-grey": {
+      "$value": "#6f6f6f",
+      "$type": "color",
+      "$description": "Muted Text Grey — Fine print, helper text, and secondary badge text where readability is paramount but visual hierarchy needs to be lower than primary text"
+    },
+    "stone-grey": {
+      "$value": "#8a8580",
+      "$type": "color",
+      "$description": "Stone Grey — Tertiary text, descriptive labels, and badge text when a warmer, softer tone is needed"
+    },
+    "minimal-border-grey": {
+      "$value": "#212121",
+      "$type": "color",
+      "$description": "Minimal Border Grey — Dark borders and separators for elevated surfaces and inverted UI. Do not promote it to the primary CTA color"
+    },
+    "soft-peach": {
+      "$value": "#f5e7df",
+      "$type": "color",
+      "$description": "Soft Peach — Subtle background for informational badges or highlight areas. Adds a touch of warmth to the neutral palette"
+    }
+  },
+  "font": {
+    "soehne-buch": {
+      "$value": "Soehne Buch",
+      "$type": "fontFamily",
+      "$description": "Standard body text, navigation links, and smaller UI elements. Its clean, readable nature handles the bulk of informational content."
+    },
+    "nimbus-sans": {
+      "$value": "Nimbus Sans",
+      "$type": "fontFamily",
+      "$description": "Headlines, product titles, and key UI elements requiring precise tracking and strong hierarchy. The varied weights and condensed letter spacing create a modern, efficient voice."
+    },
+    "soehne-kraftig": {
+      "$value": "Soehne Kraftig",
+      "$type": "fontFamily",
+      "$description": "Brand elements and impactful statements, using a more robust sans-serif character. The tighter tracking for larger sizes reinforces a sense of directness."
+    },
+    "agaramondpro": {
+      "$value": "AGaramondPro",
+      "$type": "fontFamily",
+      "$description": "Elegant, editorial headings and block quotes. The subtle negative letter spacing at this weight gives a refined, composed feel."
+    },
+    "eb-garamond": {
+      "$value": "EB Garamond",
+      "$type": "fontFamily",
+      "$description": "Refined secondary headings and descriptive text, adding an approachable, classic touch."
+    },
+    "garamond-italic": {
+      "$value": "Garamond Italic",
+      "$type": "fontFamily",
+      "$description": "Emphasized body copy, subtle quotes, and small contextual asides. The slight positive tracking ensures legibility at smaller italic sizes alongside the serifs."
+    }
+  },
+  "typography": {
+    "xs": {
+      "$value": {
+        "fontFamily": "Nimbus Sans",
+        "fontSize": "10px",
+        "fontWeight": 500,
+        "lineHeight": 1.2
+      },
+      "$type": "typography",
+      "$description": "Typography step xs at 10px"
+    },
+    "xs-2": {
+      "$value": {
+        "fontFamily": "Nimbus Sans",
+        "fontSize": "11px",
+        "fontWeight": 400,
+        "lineHeight": 1.2
+      },
+      "$type": "typography",
+      "$description": "Typography step xs-2 at 11px"
+    },
+    "xs-3": {
+      "$value": {
+        "fontFamily": "Nimbus Sans",
+        "fontSize": "11px",
+        "fontWeight": 400,
+        "lineHeight": 1
+      },
+      "$type": "typography",
+      "$description": "Typography step xs-3 at 11px"
+    },
+    "xs-4": {
+      "$value": {
+        "fontFamily": "Soehne Kraftig",
+        "fontSize": "11px",
+        "fontWeight": 400,
+        "lineHeight": 1.2
+      },
+      "$type": "typography",
+      "$description": "Typography step xs-4 at 11px"
+    },
+    "xs-5": {
+      "$value": {
+        "fontFamily": "Nimbus Sans",
+        "fontSize": "11px",
+        "fontWeight": 500,
+        "lineHeight": 1.2
+      },
+      "$type": "typography",
+      "$description": "Typography step xs-5 at 11px"
+    },
+    "xs-6": {
+      "$value": {
+        "fontFamily": "Soehne Buch",
+        "fontSize": "12px",
+        "fontWeight": 400,
+        "lineHeight": 1.2
+      },
+      "$type": "typography",
+      "$description": "Typography step xs-6 at 12px"
+    },
+    "xs-7": {
+      "$value": {
+        "fontFamily": "Soehne Kraftig",
+        "fontSize": "12px",
+        "fontWeight": 400,
+        "lineHeight": 1.4
+      },
+      "$type": "typography",
+      "$description": "Typography step xs-7 at 12px"
+    },
+    "xs-8": {
+      "$value": {
+        "fontFamily": "Soehne Kraftig",
+        "fontSize": "12px",
+        "fontWeight": 500,
+        "lineHeight": 1
+      },
+      "$type": "typography",
+      "$description": "Typography step xs-8 at 12px"
+    },
+    "sm": {
+      "$value": {
+        "fontFamily": "Soehne Buch",
+        "fontSize": "13px",
+        "fontWeight": 400,
+        "lineHeight": 1.2
+      },
+      "$type": "typography",
+      "$description": "Typography step sm at 13px"
+    },
+    "sm-2": {
+      "$value": {
+        "fontFamily": "Nimbus Sans",
+        "fontSize": "13px",
+        "fontWeight": 400,
+        "lineHeight": 1
+      },
+      "$type": "typography",
+      "$description": "Typography step sm-2 at 13px"
+    },
+    "sm-3": {
+      "$value": {
+        "fontFamily": "Garamond Italic",
+        "fontSize": "13px",
+        "fontWeight": 400,
+        "lineHeight": 1.2
+      },
+      "$type": "typography",
+      "$description": "Typography step sm-3 at 13px"
+    },
+    "sm-4": {
+      "$value": {
+        "fontFamily": "Soehne Kraftig",
+        "fontSize": "14px",
+        "fontWeight": 500,
+        "lineHeight": 1.2
+      },
+      "$type": "typography",
+      "$description": "Typography step sm-4 at 14px"
+    },
+    "sm-5": {
+      "$value": {
+        "fontFamily": "Soehne Kraftig",
+        "fontSize": "14px",
+        "fontWeight": 500,
+        "lineHeight": 1
+      },
+      "$type": "typography",
+      "$description": "Typography step sm-5 at 14px"
+    },
+    "sm-6": {
+      "$value": {
+        "fontFamily": "Soehne Kraftig",
+        "fontSize": "14px",
+        "fontWeight": 400,
+        "lineHeight": 1.4
+      },
+      "$type": "typography",
+      "$description": "Typography step sm-6 at 14px"
+    },
+    "sm-7": {
+      "$value": {
+        "fontFamily": "EB Garamond",
+        "fontSize": "14px",
+        "fontWeight": 600,
+        "lineHeight": 1.4
+      },
+      "$type": "typography",
+      "$description": "Typography step sm-7 at 14px"
+    },
+    "sm-8": {
+      "$value": {
+        "fontFamily": "Nimbus Sans",
+        "fontSize": "14px",
+        "fontWeight": 700,
+        "lineHeight": 1.2
+      },
+      "$type": "typography",
+      "$description": "Typography step sm-8 at 14px"
+    },
+    "sm-9": {
+      "$value": {
+        "fontFamily": "AGaramondPro",
+        "fontSize": "14px",
+        "fontWeight": 600,
+        "lineHeight": 1.35
+      },
+      "$type": "typography",
+      "$description": "Typography step sm-9 at 14px"
+    },
+    "base": {
+      "$value": {
+        "fontFamily": "Soehne Buch",
+        "fontSize": "15px",
+        "fontWeight": 400,
+        "lineHeight": 1.2
+      },
+      "$type": "typography",
+      "$description": "Typography step base at 15px"
+    },
+    "base-2": {
+      "$value": {
+        "fontFamily": "Nimbus Sans",
+        "fontSize": "15px",
+        "fontWeight": 400,
+        "lineHeight": 1.2
+      },
+      "$type": "typography",
+      "$description": "Typography step base-2 at 15px"
+    },
+    "base-3": {
+      "$value": {
+        "fontFamily": "Nimbus Sans",
+        "fontSize": "15px",
+        "fontWeight": 400,
+        "lineHeight": 1.55
+      },
+      "$type": "typography",
+      "$description": "Typography step base-3 at 15px"
+    },
+    "base-4": {
+      "$value": {
+        "fontFamily": "Nimbus Sans",
+        "fontSize": "15px",
+        "fontWeight": 400,
+        "lineHeight": 1.2
+      },
+      "$type": "typography",
+      "$description": "Typography step base-4 at 15px"
+    },
+    "base-5": {
+      "$value": {
+        "fontFamily": "Soehne Buch",
+        "fontSize": "16px",
+        "fontWeight": 400,
+        "lineHeight": 1.2
+      },
+      "$type": "typography",
+      "$description": "Typography step base-5 at 16px"
+    },
+    "base-6": {
+      "$value": {
+        "fontFamily": "Nimbus Sans",
+        "fontSize": "16px",
+        "fontWeight": 400,
+        "lineHeight": 1.2
+      },
+      "$type": "typography",
+      "$description": "Typography step base-6 at 16px"
+    },
+    "base-7": {
+      "$value": {
+        "fontFamily": "Soehne Buch",
+        "fontSize": "16px",
+        "fontWeight": 400,
+        "lineHeight": 1.4
+      },
+      "$type": "typography",
+      "$description": "Typography step base-7 at 16px"
+    },
+    "base-8": {
+      "$value": {
+        "fontFamily": "Nimbus Sans",
+        "fontSize": "16px",
+        "fontWeight": 400,
+        "lineHeight": 1.55
+      },
+      "$type": "typography",
+      "$description": "Typography step base-8 at 16px"
+    },
+    "base-9": {
+      "$value": {
+        "fontFamily": "Garamond Italic",
+        "fontSize": "16px",
+        "fontWeight": 400,
+        "lineHeight": 1.55
+      },
+      "$type": "typography",
+      "$description": "Typography step base-9 at 16px"
+    },
+    "base-10": {
+      "$value": {
+        "fontFamily": "Soehne Buch",
+        "fontSize": "16px",
+        "fontWeight": 400,
+        "lineHeight": 1
+      },
+      "$type": "typography",
+      "$description": "Typography step base-10 at 16px"
+    },
+    "lg": {
+      "$value": {
+        "fontFamily": "AGaramondPro",
+        "fontSize": "17px",
+        "fontWeight": 600,
+        "lineHeight": 1.3
+      },
+      "$type": "typography",
+      "$description": "Typography step lg at 17px"
+    },
+    "lg-2": {
+      "$value": {
+        "fontFamily": "Nimbus Sans",
+        "fontSize": "17px",
+        "fontWeight": 400,
+        "lineHeight": 1.2
+      },
+      "$type": "typography",
+      "$description": "Typography step lg-2 at 17px"
+    },
+    "lg-3": {
+      "$value": {
+        "fontFamily": "EB Garamond",
+        "fontSize": "19px",
+        "fontWeight": 500,
+        "lineHeight": 1.2
+      },
+      "$type": "typography",
+      "$description": "Typography step lg-3 at 19px"
+    },
+    "xl": {
+      "$value": {
+        "fontFamily": "AGaramondPro",
+        "fontSize": "20px",
+        "fontWeight": 600,
+        "lineHeight": 1.3
+      },
+      "$type": "typography",
+      "$description": "Typography step xl at 20px"
+    },
+    "2xl": {
+      "$value": {
+        "fontFamily": "AGaramondPro",
+        "fontSize": "26px",
+        "fontWeight": 600,
+        "lineHeight": 1.25
+      },
+      "$type": "typography",
+      "$description": "Typography step 2xl at 26px"
+    },
+    "3xl": {
+      "$value": {
+        "fontFamily": "Nimbus Sans",
+        "fontSize": "30px",
+        "fontWeight": 400,
+        "lineHeight": 1.1
+      },
+      "$type": "typography",
+      "$description": "Typography step 3xl at 30px"
+    },
+    "4xl": {
+      "$value": {
+        "fontFamily": "Nimbus Sans",
+        "fontSize": "36px",
+        "fontWeight": 400,
+        "lineHeight": 1.2
+      },
+      "$type": "typography",
+      "$description": "Typography step 4xl at 36px"
+    },
+    "5xl": {
+      "$value": {
+        "fontFamily": "Nimbus Sans",
+        "fontSize": "54px",
+        "fontWeight": 400,
+        "lineHeight": 1.05
+      },
+      "$type": "typography",
+      "$description": "Typography step 5xl at 54px"
+    },
+    "5xl-2": {
+      "$value": {
+        "fontFamily": "AGaramondPro",
+        "fontSize": "54px",
+        "fontWeight": 600,
+        "lineHeight": 1.05
+      },
+      "$type": "typography",
+      "$description": "Typography step 5xl-2 at 54px"
+    },
+    "5xl-3": {
+      "$value": {
+        "fontFamily": "Soehne Kraftig",
+        "fontSize": "60px",
+        "fontWeight": 400,
+        "lineHeight": 0.98
+      },
+      "$type": "typography",
+      "$description": "Typography step 5xl-3 at 60px"
+    },
+    "5xl-4": {
+      "$value": {
+        "fontFamily": "Nimbus Sans",
+        "fontSize": "68px",
+        "fontWeight": 400,
+        "lineHeight": 1
+      },
+      "$type": "typography",
+      "$description": "Typography step 5xl-4 at 68px"
+    }
+  },
+  "spacing": {
+    "4": {
+      "$value": "4px",
+      "$type": "dimension",
+      "$description": "Spacing 4px"
+    },
+    "6": {
+      "$value": "6px",
+      "$type": "dimension",
+      "$description": "Spacing 6px"
+    },
+    "7": {
+      "$value": "7px",
+      "$type": "dimension",
+      "$description": "Spacing 7px"
+    },
+    "8": {
+      "$value": "8px",
+      "$type": "dimension",
+      "$description": "Spacing 8px"
+    },
+    "10": {
+      "$value": "10px",
+      "$type": "dimension",
+      "$description": "Spacing 10px"
+    },
+    "12": {
+      "$value": "12px",
+      "$type": "dimension",
+      "$description": "Spacing 12px"
+    },
+    "15": {
+      "$value": "15px",
+      "$type": "dimension",
+      "$description": "Spacing 15px"
+    },
+    "16": {
+      "$value": "16px",
+      "$type": "dimension",
+      "$description": "Spacing 16px"
+    },
+    "18": {
+      "$value": "18px",
+      "$type": "dimension",
+      "$description": "Spacing 18px"
+    },
+    "20": {
+      "$value": "20px",
+      "$type": "dimension",
+      "$description": "Spacing 20px"
+    },
+    "24": {
+      "$value": "24px",
+      "$type": "dimension",
+      "$description": "Spacing 24px"
+    },
+    "29": {
+      "$value": "29px",
+      "$type": "dimension",
+      "$description": "Spacing 29px"
+    },
+    "32": {
+      "$value": "32px",
+      "$type": "dimension",
+      "$description": "Spacing 32px"
+    },
+    "40": {
+      "$value": "40px",
+      "$type": "dimension",
+      "$description": "Spacing 40px"
+    },
+    "50": {
+      "$value": "50px",
+      "$type": "dimension",
+      "$description": "Spacing 50px"
+    },
+    "56": {
+      "$value": "56px",
+      "$type": "dimension",
+      "$description": "Spacing 56px"
+    }
+  },
+  "radius": {
+    "sm": {
+      "$value": "3px",
+      "$type": "dimension",
+      "$description": "Border radius sm"
+    },
+    "full": {
+      "$value": "999px",
+      "$type": "dimension",
+      "$description": "Border radius full"
+    }
+  },
+  "surface": {
+    "cream-canvas": {
+      "$value": "#f8f6f3",
+      "$type": "color",
+      "$description": "Surface level 0: Base page background and soft foundational surfaces."
+    },
+    "white-surface": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "Surface level 1: Elevated cards, component backgrounds, and areas requiring higher contrast."
+    },
+    "soft-peach": {
+      "$value": "#f5e7df",
+      "$type": "color",
+      "$description": "Surface level 2: Informational accent surfaces, such as subtle badge backgrounds."
+    }
+  },
+  "$extensions": {
+    "com.refero.extraction": {
+      "url": "https://isla-beauty.com",
+      "siteName": "Isla Beauty",
+      "extractedAt": "2026-04-30T03:59:35.363Z",
+      "variant": "extended"
+    }
+  }
+}

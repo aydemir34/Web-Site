@@ -1,0 +1,64 @@
+{
+  "color": {
+    "canvas-white": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "Canvas White — Primary page background, elevated card surfaces"
+    },
+    "ghost-fog": {
+      "$value": "#f2f5f8",
+      "$type": "color",
+      "$description": "Ghost Fog — Subtle background panels, light hover states, decorative borders. This is a very light, almost white grey"
+    },
+    "border-mist": {
+      "$value": "#e6ebee",
+      "$type": "color",
+      "$description": "Border Mist — Secondary background panels, subtle section dividers"
+    },
+    "deep-ocean": {
+      "$value": "#3b505a",
+      "$type": "color",
+      "$description": "Deep Ocean — Primary text color, bold accents, brand elements, active states. This particular cool blue-grey defines the brand's primary visual identity"
+    },
+    "text-slate": {
+      "$value": "#202f3b",
+      "$type": "color",
+      "$description": "Text Slate — Darkest text for contrast on light backgrounds"
+    },
+    "link-blue": {
+      "$value": "#58737e",
+      "$type": "color",
+      "$description": "Link Blue — Secondary text, muted links, subtle button borders"
+    },
+    "light-steel": {
+      "$value": "#cfdce7",
+      "$type": "color",
+      "$description": "Light Steel — Subtle button borders, decorative strokes, light element outlines"
+    },
+    "black-ink": {
+      "$value": "#000000",
+      "$type": "color",
+      "$description": "Black Ink — Iconography, strong text emphasis, borders on dark elements"
+    }
+  },
+  "font": {
+    "libre-caslon-condensed": {
+      "$value": "Libre Caslon Condensed",
+      "$type": "fontFamily",
+      "$description": "Headline typeface. Its delicate, almost whispery quality (despite large sizes) evokes a crafted, sophisticated brand rather than shouting for attention. letter-spacing reduces at smaller headline sizes."
+    },
+    "circular-pro": {
+      "$value": "Circular Pro",
+      "$type": "fontFamily",
+      "$description": "Body copy, navigation, buttons, and all functional text. The slightly wider letter spacing gives it an airy, open feel, enhancing the minimalist aesthetic."
+    }
+  },
+  "$extensions": {
+    "com.refero.extraction": {
+      "url": "https://faceformula.com",
+      "siteName": "Face Formula",
+      "extractedAt": "2026-04-30T00:38:56.808Z",
+      "variant": "compact"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+---
+import type { Business } from "../types";
+
+type Props = {
+  business: Business;
+};
+
+const { business } = Astro.props;
+---
+
+<section class="services-intro section">
+  <div class="container intro-wrap">
+    <p class="eyebrow">Hizmet Kataloğu</p>
+    <h1>{business.mainService} ve özel gün hazırlık hizmetleri</h1>
+    <p class="summary">
+      {business.district} {business.neighborhood} lokasyonunda sunulan hizmetleri tek akışta inceleyin, size uygun hizmet
+      için WhatsApp üzerinden randevu ve fiyat bilgisi alın.
+    </p>
+  </div>
+</section>
+
+<style>
+  .services-intro {
+    padding-bottom: clamp(1.2rem, 3vw, 2.1rem);
+  }
+
+  .intro-wrap {
+    display: grid;
+    gap: 0.65rem;
+    max-width: 78ch;
+  }
+
+  .summary {
+    color: var(--muted);
+  }
+</style>

@@ -1,0 +1,202 @@
+[
+  {
+    "id": "soft-beauty-blush",
+    "name": "Soft Beauty Blush",
+    "direction": "soft-beauty",
+    "fontHeading": "'Playfair Display', 'Times New Roman', serif",
+    "fontBody": "'Manrope', 'Trebuchet MS', sans-serif",
+    "ornamentStyle": "blush-waves",
+    "palette": {
+      "bg": "#fff8f7",
+      "bgElevated": "#fff1ee",
+      "surface": "#ffffff",
+      "text": "#281f24",
+      "muted": "#705a63",
+      "primary": "#d86d8d",
+      "primaryContrast": "#fff6fb",
+      "accent": "#f2c8d5",
+      "border": "#f0dce3",
+      "glow": "rgba(216,109,141,0.2)"
+    }
+  },
+  {
+    "id": "soft-beauty-nude",
+    "name": "Soft Beauty Nude",
+    "direction": "soft-beauty",
+    "fontHeading": "'Cormorant Garamond', 'Times New Roman', serif",
+    "fontBody": "'Manrope', 'Segoe UI', sans-serif",
+    "ornamentStyle": "blush-waves",
+    "palette": {
+      "bg": "#fffaf3",
+      "bgElevated": "#fdf3e6",
+      "surface": "#ffffff",
+      "text": "#2f241d",
+      "muted": "#6d5b4e",
+      "primary": "#c3865d",
+      "primaryContrast": "#fff9f2",
+      "accent": "#efd6c0",
+      "border": "#eddccf",
+      "glow": "rgba(195,134,93,0.22)"
+    }
+  },
+  {
+    "id": "clean-clinic-white",
+    "name": "Clean Clinic White",
+    "direction": "clean-clinic",
+    "fontHeading": "'Space Grotesk', 'Segoe UI', sans-serif",
+    "fontBody": "'Work Sans', 'Arial', sans-serif",
+    "ornamentStyle": "minimal-lines",
+    "palette": {
+      "bg": "#f6fbff",
+      "bgElevated": "#edf6fc",
+      "surface": "#ffffff",
+      "text": "#12222f",
+      "muted": "#3f5e74",
+      "primary": "#168bc2",
+      "primaryContrast": "#f3fbff",
+      "accent": "#b9e4f6",
+      "border": "#d7e9f3",
+      "glow": "rgba(22,139,194,0.2)"
+    }
+  },
+  {
+    "id": "clean-clinic-mint",
+    "name": "Clean Clinic Mint",
+    "direction": "clean-clinic",
+    "fontHeading": "'Space Grotesk', 'Segoe UI', sans-serif",
+    "fontBody": "'Work Sans', 'Arial', sans-serif",
+    "ornamentStyle": "mint-halo",
+    "palette": {
+      "bg": "#f4fffb",
+      "bgElevated": "#e9f9f3",
+      "surface": "#ffffff",
+      "text": "#122620",
+      "muted": "#3d6557",
+      "primary": "#1c9b77",
+      "primaryContrast": "#f3fffb",
+      "accent": "#bdeedc",
+      "border": "#d4eee5",
+      "glow": "rgba(28,155,119,0.2)"
+    }
+  },
+  {
+    "id": "soft-beauty-bridal",
+    "name": "Soft Beauty Bridal",
+    "direction": "soft-beauty",
+    "fontHeading": "'Playfair Display', 'Times New Roman', serif",
+    "fontBody": "'Manrope', 'Trebuchet MS', sans-serif",
+    "ornamentStyle": "blush-waves",
+    "palette": {
+      "bg": "#fff9fb",
+      "bgElevated": "#fff3f8",
+      "surface": "#ffffff",
+      "text": "#2c1e2a",
+      "muted": "#7a5b74",
+      "primary": "#cc6ea4",
+      "primaryContrast": "#fff7fd",
+      "accent": "#f3d2e7",
+      "border": "#f0ddeb",
+      "glow": "rgba(204,110,164,0.2)"
+    }
+  },
+  {
+    "id": "bridal-editorial-luxe",
+    "name": "Bridal Editorial Luxe",
+    "direction": "soft-beauty",
+    "fontHeading": "'Cormorant Garamond', 'Times New Roman', serif",
+    "fontBody": "'Manrope', 'Trebuchet MS', sans-serif",
+    "ornamentStyle": "bridal-silk",
+    "palette": {
+      "bg": "#fffbf8",
+      "bgElevated": "#fdf4ee",
+      "surface": "#ffffff",
+      "text": "#2d211f",
+      "muted": "#7d655f",
+      "primary": "#b97a68",
+      "primaryContrast": "#fff9f6",
+      "accent": "#ecd8cc",
+      "border": "#ead8cd",
+      "glow": "rgba(185,122,104,0.2)"
+    }
+  },
+  {
+    "id": "soft-beauty-editorial",
+    "name": "Soft Beauty Editorial",
+    "direction": "soft-beauty",
+    "fontHeading": "'Cormorant Garamond', 'Times New Roman', serif",
+    "fontBody": "'Manrope', 'Trebuchet MS', sans-serif",
+    "ornamentStyle": "blush-waves",
+    "palette": {
+      "bg": "#fdf8f4",
+      "bgElevated": "#f9f0e8",
+      "surface": "#ffffff",
+      "text": "#2e251f",
+      "muted": "#736358",
+      "primary": "#be7f63",
+      "primaryContrast": "#fffbf8",
+      "accent": "#eddacb",
+      "border": "#e9d7c9",
+      "glow": "rgba(190,127,99,0.2)"
+    }
+  },
+  {
+    "id": "clean-clinic-minimal",
+    "name": "Clean Clinic Minimal",
+    "direction": "clean-clinic",
+    "fontHeading": "'Space Grotesk', 'Segoe UI', sans-serif",
+    "fontBody": "'Work Sans', 'Arial', sans-serif",
+    "ornamentStyle": "minimal-lines",
+    "palette": {
+      "bg": "#f8fcfd",
+      "bgElevated": "#f0f7f9",
+      "surface": "#ffffff",
+      "text": "#11222a",
+      "muted": "#47606d",
+      "primary": "#2a7b98",
+      "primaryContrast": "#f5fcff",
+      "accent": "#c9e6ef",
+      "border": "#d8e8ee",
+      "glow": "rgba(42,123,152,0.2)"
+    }
+  },
+  {
+    "id": "product-led-beauty",
+    "name": "Product Led Beauty",
+    "direction": "soft-beauty",
+    "fontHeading": "'Playfair Display', 'Times New Roman', serif",
+    "fontBody": "'Manrope', 'Trebuchet MS', sans-serif",
+    "ornamentStyle": "mint-halo",
+    "palette": {
+      "bg": "#fffdf8",
+      "bgElevated": "#f8f4e7",
+      "surface": "#ffffff",
+      "text": "#2d2a20",
+      "muted": "#70674d",
+      "primary": "#9c8a42",
+      "primaryContrast": "#fffeef",
+      "accent": "#e9dfb7",
+      "border": "#e6ddbe",
+      "glow": "rgba(156,138,66,0.2)"
+    }
+  },
+  {
+    "id": "campaign-playful-premium",
+    "name": "Campaign Playful Premium",
+    "direction": "soft-beauty",
+    "fontHeading": "'Space Grotesk', 'Segoe UI', sans-serif",
+    "fontBody": "'Work Sans', 'Arial', sans-serif",
+    "ornamentStyle": "playful-shapes",
+    "palette": {
+      "bg": "#fffdf6",
+      "bgElevated": "#fff5dd",
+      "surface": "#ffffff",
+      "text": "#322410",
+      "muted": "#7f6341",
+      "primary": "#e3832a",
+      "primaryContrast": "#fff9ef",
+      "accent": "#f5c58f",
+      "border": "#edd8bb",
+      "glow": "rgba(227,131,42,0.22)"
+    }
+  }
+]

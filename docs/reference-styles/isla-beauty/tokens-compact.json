@@ -1,0 +1,99 @@
+{
+  "color": {
+    "isla-red": {
+      "$value": "#e4263d",
+      "$type": "color",
+      "$description": "Isla Red — Primary action buttons, critical links, brand accents, small heading underlines. It provides a confident punctuation to the otherwise neutral palette"
+    },
+    "pure-black": {
+      "$value": "#000000",
+      "$type": "color",
+      "$description": "Pure Black — Primary text, core borders, header elements. It grounds the design with strong contrast"
+    },
+    "ink-grey": {
+      "$value": "#1a1a1a",
+      "$type": "color",
+      "$description": "Ink Grey — Secondary text, subheadings, badge text, and deeper neutral components. Offers a softer alternative to Pure Black for text"
+    },
+    "cream-canvas": {
+      "$value": "#f8f6f3",
+      "$type": "color",
+      "$description": "Cream Canvas — Dominant page background, soft card backgrounds, and subtle badges. Establishes the light, welcoming tone"
+    },
+    "white-surface": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "White Surface — Main card backgrounds, elevated sections, and button text when paired with Isla Red. Provides bright contrast"
+    },
+    "deep-grey": {
+      "$value": "#2e2e2e",
+      "$type": "color",
+      "$description": "Deep Grey — Muted text in navigation and other secondary UI elements. Darker than Ink Grey, yet lighter than Pure Black, providing a specific hierarchy"
+    },
+    "warm-grey-border": {
+      "$value": "#e4dfd9",
+      "$type": "color",
+      "$description": "Warm Grey Border — Subtle borders on ghost buttons and delicate dividing lines. Adds texture without strong visual weight"
+    },
+    "muted-text-grey": {
+      "$value": "#6f6f6f",
+      "$type": "color",
+      "$description": "Muted Text Grey — Fine print, helper text, and secondary badge text where readability is paramount but visual hierarchy needs to be lower than primary text"
+    },
+    "stone-grey": {
+      "$value": "#8a8580",
+      "$type": "color",
+      "$description": "Stone Grey — Tertiary text, descriptive labels, and badge text when a warmer, softer tone is needed"
+    },
+    "minimal-border-grey": {
+      "$value": "#212121",
+      "$type": "color",
+      "$description": "Minimal Border Grey — Dark borders and separators for elevated surfaces and inverted UI. Do not promote it to the primary CTA color"
+    },
+    "soft-peach": {
+      "$value": "#f5e7df",
+      "$type": "color",
+      "$description": "Soft Peach — Subtle background for informational badges or highlight areas. Adds a touch of warmth to the neutral palette"
+    }
+  },
+  "font": {
+    "soehne-buch": {
+      "$value": "Soehne Buch",
+      "$type": "fontFamily",
+      "$description": "Standard body text, navigation links, and smaller UI elements. Its clean, readable nature handles the bulk of informational content."
+    },
+    "nimbus-sans": {
+      "$value": "Nimbus Sans",
+      "$type": "fontFamily",
+      "$description": "Headlines, product titles, and key UI elements requiring precise tracking and strong hierarchy. The varied weights and condensed letter spacing create a modern, efficient voice."
+    },
+    "soehne-kraftig": {
+      "$value": "Soehne Kraftig",
+      "$type": "fontFamily",
+      "$description": "Brand elements and impactful statements, using a more robust sans-serif character. The tighter tracking for larger sizes reinforces a sense of directness."
+    },
+    "agaramondpro": {
+      "$value": "AGaramondPro",
+      "$type": "fontFamily",
+      "$description": "Elegant, editorial headings and block quotes. The subtle negative letter spacing at this weight gives a refined, composed feel."
+    },
+    "eb-garamond": {
+      "$value": "EB Garamond",
+      "$type": "fontFamily",
+      "$description": "Refined secondary headings and descriptive text, adding an approachable, classic touch."
+    },
+    "garamond-italic": {
+      "$value": "Garamond Italic",
+      "$type": "fontFamily",
+      "$description": "Emphasized body copy, subtle quotes, and small contextual asides. The slight positive tracking ensures legibility at smaller italic sizes alongside the serifs."
+    }
+  },
+  "$extensions": {
+    "com.refero.extraction": {
+      "url": "https://isla-beauty.com",
+      "siteName": "Isla Beauty",
+      "extractedAt": "2026-04-30T03:59:35.363Z",
+      "variant": "compact"
+    }
+  }
+}

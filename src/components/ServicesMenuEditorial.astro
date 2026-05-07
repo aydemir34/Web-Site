@@ -1,0 +1,155 @@
+---
+import type { Business, ServiceItem } from "../types";
+import { getServiceMedia } from "../lib/assets";
+import { slugify } from "../lib/slugify";
+import { buildWhatsAppUrl } from "../lib/whatsapp";
+
+type Props = {
+  services: ServiceItem[];
+  business?: Business;
+};
+
+const { services, business } = Astro.props;
+---
+
+<section class="services-menu">
+  <div class="container">
+    <h2>Hizmet Menüsü</h2>
+    <div class="menu-list">
+      {
+        services.map((service, index) => (
+          <article id={slugify(service.name)}>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            {
+              (() => {
+                if (!business) {
+                  return null;
+                }
+                const serviceMedia = getServiceMedia(business, service);
+                return (
+                  <figure class="service-media">
+                    {serviceMedia ? (
+                      <>
+                        <img
+                          src={serviceMedia}
+                          alt={`${service.name} görseli`}
+                          loading="lazy"
+                          onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
+                        />
+                        <div class="media-fallback fallback">Hizmet görseli</div>
+                      </>
+                    ) : (
+                      <div class="media-fallback">Hizmet görseli</div>
+                    )}
+                  </figure>
+                );
+              })()
+            }
+            <div>
+              <h3>{service.name}</h3>
+              <p>{service.description}</p>
+              {
+                business && (
+                  <a class="service-cta" href={buildWhatsAppUrl(business, service)} target="_blank" rel="noreferrer">
+                    Randevu ve Fiyat Sor
+                  </a>
+                )
+              }
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .services-menu {
+    padding: clamp(2rem, 4vw, 3rem) 0;
+  }
+
+  .services-menu h2 {
+    margin-bottom: 0.8rem;
+  }
+
+  .menu-list {
+    border-top: 1px solid color-mix(in srgb, var(--primary), white 62%);
+  }
+
+  .menu-list article {
+    display: grid;
+    grid-template-columns: 52px minmax(0, 180px) 1fr;
+    gap: 0.6rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--primary), white 72%);
+  }
+
+  .menu-list span {
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    padding-top: 0.2rem;
+  }
+
+  .menu-list h3 {
+    font-size: 1rem;
+    margin-bottom: 0.28rem;
+  }
+
+  .menu-list p {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .service-cta {
+    margin-top: 0.45rem;
+    display: inline-flex;
+    text-decoration: none;
+    font-size: 0.74rem;
+    border: 1px solid color-mix(in srgb, #25d366, black 16%);
+    color: #157347;
+    background: color-mix(in srgb, #25d366, white 90%);
+    border-radius: 999px;
+    padding: 0.24rem 0.52rem;
+  }
+
+  .service-media {
+    margin: 0;
+    border: 1px solid color-mix(in srgb, var(--primary), white 66%);
+    min-height: 100px;
+    overflow: hidden;
+  }
+
+  .service-media img {
+    width: 100%;
+    height: 100%;
+    min-height: 100px;
+    object-fit: cover;
+  }
+
+  .media-fallback {
+    min-height: 100px;
+    display: grid;
+    place-items: center;
+    font-size: 0.74rem;
+    color: var(--muted);
+    background:
+      radial-gradient(100px 70px at 85% 12%, color-mix(in srgb, var(--accent), white 42%), transparent 50%),
+      linear-gradient(140deg, color-mix(in srgb, var(--surface), white 34%), color-mix(in srgb, var(--bg-elevated), white 10%));
+  }
+
+  .media-fallback.fallback {
+    display: none;
+  }
+
+  @media (max-width: 860px) {
+    .menu-list article {
+      grid-template-columns: 44px 1fr;
+    }
+
+    .service-media {
+      grid-column: 1 / -1;
+      min-height: 140px;
+    }
+  }
+</style>

@@ -1,0 +1,49 @@
+{
+  "color": {
+    "midnight-ink": {
+      "$value": "#101722",
+      "$type": "color",
+      "$description": "Midnight Ink — Dark page backgrounds, primary text, navigation elements, subtle borders. This deep gray creates depth and a calm, focused atmosphere"
+    },
+    "canvas-ice": {
+      "$value": "#f9f0ff",
+      "$type": "color",
+      "$description": "Canvas Ice — Light page backgrounds, secondary card surfaces, and select large UI sections. It offers a contrasting yet soft backdrop to dark text"
+    },
+    "plasma-violet": {
+      "$value": "#4541fe",
+      "$type": "color",
+      "$description": "Plasma Violet — Primary action buttons, prominent card backgrounds, and a key color in the brand's signature gradient. It signifies interaction and energy; Hero section backgrounds and key decorative visuals. This gradient from vibrant violet to hot pink is a signature brand element"
+    },
+    "soft-lavender": {
+      "$value": "#d9c6ff",
+      "$type": "color",
+      "$description": "Soft Lavender — Muted background for supporting cards and large content blocks, providing a gentle visual break from starker neutrals"
+    },
+    "pale-stone": {
+      "$value": "#6c6c7a",
+      "$type": "color",
+      "$description": "Pale Stone — Secondary text, muted headings, and decorative borders. A slightly darker neutral useful for de-emphasizing elements"
+    },
+    "snow-white": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "Snow White — Card backgrounds, navigation text, and occasional text in dark sections for maximum contrast"
+    }
+  },
+  "font": {
+    "inter": {
+      "$value": "Inter",
+      "$type": "fontFamily",
+      "$description": "The sole typeface for all text content from body paragraphs to display headlines. Its clear, modern sans-serif form maintains legibility across diverse applications, with a notable consistent negative letter-spacing for a sophisticated, tight feel."
+    }
+  },
+  "$extensions": {
+    "com.refero.extraction": {
+      "url": "https://www.healthytogether.co",
+      "siteName": "Healthy Together",
+      "extractedAt": "2026-04-30T01:22:01.659Z",
+      "variant": "compact"
+    }
+  }
+}

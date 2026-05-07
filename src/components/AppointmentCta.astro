@@ -1,0 +1,49 @@
+---
+import type { Business } from "../types";
+import { buildWhatsAppUrl } from "../lib/whatsapp";
+
+type Props = {
+  business: Business;
+};
+
+const { business } = Astro.props;
+const whatsAppUrl = buildWhatsAppUrl(business);
+---
+
+<section class="section">
+  <div class="container">
+    <div class="card cta">
+      <div>
+        <h2>{business.cta.title}</h2>
+        <p>{business.cta.description}</p>
+      </div>
+      <a class="btn btn-primary" href={whatsAppUrl} target="_blank" rel="noreferrer">
+        {business.cta.buttonText}
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    padding: clamp(1rem, 4vw, 2rem);
+    display: flex;
+    gap: 0.9rem;
+    align-items: center;
+    justify-content: space-between;
+    background:
+      linear-gradient(125deg, color-mix(in srgb, var(--accent), white 70%), transparent),
+      color-mix(in srgb, var(--surface), white 15%);
+  }
+
+  .cta h2 {
+    margin-bottom: 0.45rem;
+  }
+
+  @media (max-width: 700px) {
+    .cta {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

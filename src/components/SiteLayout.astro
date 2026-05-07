@@ -1,0 +1,315 @@
+---
+import "../styles/global.css";
+import type { Business, Theme } from "../types";
+import type { SeoMeta } from "../lib/seo";
+import HeaderContact from "./HeaderContact.astro";
+import FloatingWhatsApp from "./FloatingWhatsApp.astro";
+import BackgroundOrnaments from "./BackgroundOrnaments.astro";
+import DemoNotice from "./DemoNotice.astro";
+import FooterMega from "./FooterMega.astro";
+import { buildWhatsAppUrl } from "../lib/whatsapp";
+import { getBusinessLogo } from "../lib/assets";
+
+type Props = {
+  business: Business;
+  theme: Theme;
+  seo: SeoMeta;
+  currentPath: string;
+  schema: Record<string, unknown>;
+  variant?: string;
+};
+
+const { business, theme, seo, currentPath, schema, variant = "default" } = Astro.props;
+const basePath = `/demo/${business.slug}/`;
+const navItems = [
+  { label: "Ana Sayfa", href: basePath },
+  { label: "Hizmetler", href: `${basePath}hizmetler/` },
+  { label: "Randevu & İletişim", href: `${basePath}randevu/` }
+];
+const whatsApp = buildWhatsAppUrl(business);
+const logo = getBusinessLogo(business);
+const compactDesktopCta = business.themeId === "clean-clinic-minimal" ? "Randevu Al" : "Randevu Bilgisi Al";
+---
+
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{seo.title}</title>
+    <meta name="description" content={seo.description} />
+    <meta name="robots" content={seo.robots} />
+    <link rel="canonical" href={seo.canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={seo.ogTitle} />
+    <meta property="og:description" content={seo.ogDescription} />
+    <meta property="og:url" content={seo.canonical} />
+    <meta property="og:image" content={seo.ogImage} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </head>
+  <body
+    data-variant={variant}
+    style={`--bg:${theme.palette.bg};--bg-elevated:${theme.palette.bgElevated};--surface:${theme.palette.surface};--text:${theme.palette.text};--muted:${theme.palette.muted};--primary:${theme.palette.primary};--primary-contrast:${theme.palette.primaryContrast};--accent:${theme.palette.accent};--border:${theme.palette.border};--glow:${theme.palette.glow};--font-heading:${theme.fontHeading};--font-body:${theme.fontBody};`}
+  >
+    <BackgroundOrnaments styleId={business.visualProfile?.ornamentStyle ?? theme.ornamentStyle} />
+    <DemoNotice />
+
+    <header class="site-header">
+      <div class="container desktop-bar">
+        <a class="brand" href={basePath}>
+          {
+            logo ? (
+              <>
+                <img src={logo} alt={`${business.businessName} logosu`} class="brand-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';" />
+                <span class="brand-text fallback">{business.businessName}</span>
+              </>
+            ) : (
+              <span class="brand-text">{business.businessName}</span>
+            )
+          }
+        </a>
+        <nav aria-label="Site bölümleri">
+          <ul>
+            {
+              navItems.map((item) => (
+                <li><a href={item.href} aria-current={currentPath === item.href ? "page" : undefined}>{item.label}</a></li>
+              ))
+            }
+          </ul>
+        </nav>
+        <HeaderContact business={business} ctaLabel={compactDesktopCta} />
+      </div>
+
+      <div class="container mobile-bar">
+        <a class="brand mobile-brand" href={basePath}>
+          {
+            logo ? (
+              <>
+                <img src={logo} alt={`${business.businessName} logosu`} class="brand-logo mobile-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';" />
+                <span class="brand-text fallback">{business.businessName}</span>
+              </>
+            ) : (
+              <span class="brand-text">{business.businessName}</span>
+            )
+          }
+        </a>
+        <div class="mobile-actions">
+          <a class="wa-mini" href={whatsApp} target="_blank" rel="noreferrer" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M19.1 4.9A9.83 9.83 0 0 0 12.02 2a9.99 9.99 0 0 0-8.7 14.9L2 22l5.3-1.3A9.95 9.95 0 0 0 12 22h.02a10 10 0 0 0 7.08-17.1Zm-7.08 15.4h-.02a8.3 8.3 0 0 1-4.23-1.15l-.3-.17-3.15.77.85-3.07-.2-.31a8.3 8.3 0 1 1 7.05 3.93Z"
+                fill="currentColor"
+              />
+            </svg>
+          </a>
+          <details class="menu">
+            <summary aria-label="Menü">
+              <span></span><span></span><span></span>
+            </summary>
+            <nav aria-label="Mobil menü">
+              <ul>
+                {
+                  navItems.map((item) => (
+                    <li><a href={item.href} aria-current={currentPath === item.href ? "page" : undefined}>{item.label}</a></li>
+                  ))
+                }
+                <li><a class="menu-phone" href={`tel:${business.phone}`}>Telefon</a></li>
+                <li><a class="menu-instagram" href={business.instagramUrl} target="_blank" rel="noreferrer">Instagram</a></li>
+                <li><a class="menu-wa" href={whatsApp} target="_blank" rel="noreferrer">WhatsApp'tan Randevu Bilgisi Al</a></li>
+              </ul>
+            </nav>
+          </details>
+        </div>
+      </div>
+    </header>
+
+    <main class="fade-up">
+      <slot />
+    </main>
+
+    <FooterMega business={business} basePath={basePath} />
+    <FloatingWhatsApp business={business} />
+  </body>
+</html>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid color-mix(in srgb, var(--primary), white 78%);
+    background: color-mix(in srgb, var(--bg), white 28%);
+  }
+
+  .brand {
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .brand-logo {
+    height: 26px;
+    width: auto;
+    max-width: 160px;
+    object-fit: contain;
+  }
+
+  .brand-logo.mobile-logo {
+    height: 22px;
+    max-width: 120px;
+  }
+
+  .brand-text.fallback {
+    display: none;
+  }
+
+  .desktop-bar {
+    min-height: 68px;
+    display: grid;
+    grid-template-columns: minmax(180px, 1fr) auto auto;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .desktop-bar nav ul {
+    list-style: none;
+    display: flex;
+    gap: 0.62rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .desktop-bar nav a {
+    text-decoration: none;
+    font-size: 0.82rem;
+    line-height: 1;
+    color: var(--muted);
+  }
+
+  .desktop-bar nav a[aria-current="page"] {
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  .mobile-bar {
+    display: none;
+    min-height: 64px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.45rem;
+  }
+
+  .mobile-brand {
+    font-size: 0.9rem;
+    line-height: 1;
+    max-width: calc(100% - 104px);
+  }
+
+  .mobile-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .wa-mini {
+    width: 30px;
+    height: 30px;
+    display: inline-grid;
+    place-items: center;
+    color: #157347;
+    border: 1px solid color-mix(in srgb, #25d366, black 14%);
+    background: color-mix(in srgb, #25d366, white 84%);
+    border-radius: 999px;
+    text-decoration: none;
+  }
+
+  .wa-mini svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .menu summary {
+    list-style: none;
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    border: 1px solid color-mix(in srgb, var(--primary), white 64%);
+    border-radius: 999px;
+    cursor: pointer;
+    background: color-mix(in srgb, var(--surface), white 18%);
+  }
+
+  .menu summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .menu summary span {
+    width: 12px;
+    height: 1px;
+    background: var(--text);
+    margin: 1px 0;
+    display: block;
+  }
+
+  .menu nav {
+    position: absolute;
+    right: 0.55rem;
+    top: 56px;
+    min-width: 205px;
+    border: 1px solid color-mix(in srgb, var(--primary), white 70%);
+    border-radius: 14px;
+    background: color-mix(in srgb, var(--surface), white 14%);
+    box-shadow: 0 16px 30px -24px var(--glow);
+    padding: 0.2rem;
+  }
+
+  .menu nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .menu nav a {
+    display: block;
+    padding: 0.5rem 0.58rem;
+    text-decoration: none;
+    font-size: 0.8rem;
+    border-radius: 8px;
+  }
+
+  .menu nav a[aria-current="page"] {
+    color: var(--primary);
+    font-weight: 700;
+    background: color-mix(in srgb, var(--accent), white 64%);
+  }
+
+  .menu nav a.menu-phone,
+  .menu nav a.menu-instagram,
+  .menu nav a.menu-wa {
+    margin-top: 0.15rem;
+  }
+
+  .menu nav a.menu-wa {
+    color: #157347;
+    font-weight: 700;
+    background: color-mix(in srgb, #25d366, white 88%);
+  }
+
+  @media (max-width: 920px) {
+    .desktop-bar {
+      display: none;
+    }
+
+    .mobile-bar {
+      display: flex;
+    }
+  }
+</style>

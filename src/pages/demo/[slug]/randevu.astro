@@ -1,0 +1,116 @@
+---
+import type { Business } from "../../../types";
+import { getBusinesses, getThemeByVariant } from "../../../lib/data";
+import { buildLocalBusinessSchema, buildSeoMeta } from "../../../lib/seo";
+import SiteLayout from "../../../components/SiteLayout.astro";
+import Hero from "../../../components/Hero.astro";
+import ServicesGrid from "../../../components/ServicesGrid.astro";
+import TrustBadges from "../../../components/TrustBadges.astro";
+import ProcessSteps from "../../../components/ProcessSteps.astro";
+import ReviewsPreview from "../../../components/ReviewsPreview.astro";
+import AppointmentCta from "../../../components/AppointmentCta.astro";
+import ContactMap from "../../../components/ContactMap.astro";
+import Faq from "../../../components/Faq.astro";
+import ProductPreview from "../../../components/ProductPreview.astro";
+import InstagramPreviewGrid from "../../../components/InstagramPreviewGrid.astro";
+import ServiceCarousel from "../../../components/ServiceCarousel.astro";
+import WhyUsEditorial from "../../../components/WhyUsEditorial.astro";
+
+export function getStaticPaths() {
+  return getBusinesses().map((business) => ({
+    params: { slug: business.slug },
+    props: { business }
+  }));
+}
+
+const { business } = Astro.props as { business: Business };
+const variant = Astro.url.searchParams.get("variant") ?? "default";
+const theme = getThemeByVariant(business.themeId, variant);
+if (!theme) {
+  throw new Error(`Theme not found for business ${business.slug}`);
+}
+
+const path = `/demo/${business.slug}/randevu/`;
+const seo = buildSeoMeta(business, path, { isDemo: true });
+const schema = buildLocalBusinessSchema(business, seo.canonical);
+const modules = business.moduleOrder.appointment.filter(
+  (moduleId) => moduleId !== "productPreview" || business.hasProducts
+);
+const isSimay = business.slug === "simay-sarikaya-hair-makeup";
+---
+
+<SiteLayout business={business} theme={theme} seo={seo} schema={schema} currentPath={path} variant={variant}>
+  {
+    isSimay ? (
+      <>
+        <Hero business={business} theme={theme} h1={`Randevu ve iletişim - ${business.businessName}`} summary={`${business.district} için hızlı randevu akışı`} />
+        <section class="trust-strip">
+          <div class="container">
+            <ul>
+              {business.trustBadges.slice(0, 4).map((badge) => <li>{badge}</li>)}
+            </ul>
+          </div>
+        </section>
+        <WhyUsEditorial business={business} />
+        <ProcessSteps steps={business.processSteps} />
+        <ContactMap business={business} />
+        <Faq items={business.faq} />
+        <AppointmentCta business={business} />
+      </>
+    ) : (
+      modules.map((moduleId) => (
+        <>
+          {moduleId === "hero" && (
+            <Hero
+              business={business}
+              theme={theme}
+              h1={`Randevu ve iletişim - ${business.businessName}`}
+              summary={`1) Stil görüşmesi 2) Prova saati 3) Düğün günü planı - ${business.district}`}
+            />
+          )}
+          {moduleId === "trustBadges" && <TrustBadges badges={business.trustBadges} business={business} />}
+          {moduleId === "servicesGrid" && (
+            <ServicesGrid
+              services={business.services}
+              title="Randevu Öncesi Önerilen Hizmetler"
+              tone={business.tone}
+              business={business}
+            />
+          )}
+          {moduleId === "serviceCarousel" && (
+            <ServiceCarousel services={business.services} tone={business.tone} business={business} theme={theme} />
+          )}
+          {moduleId === "processSteps" && <ProcessSteps steps={business.processSteps} />}
+          {moduleId === "reviewsPreview" && <ReviewsPreview reviews={business.reviews} />}
+          {moduleId === "productPreview" && <ProductPreview products={business.products} />}
+          {moduleId === "instagramPreviewGrid" && <InstagramPreviewGrid business={business} theme={theme} />}
+          {moduleId === "appointmentCta" && <AppointmentCta business={business} />}
+          {moduleId === "contactMap" && <ContactMap business={business} />}
+          {moduleId === "faq" && <Faq items={business.faq} />}
+        </>
+      ))
+    )
+  }
+</SiteLayout>
+
+<style>
+  .trust-strip {
+    border-top: 1px solid color-mix(in srgb, var(--primary), white 70%);
+    border-bottom: 1px solid color-mix(in srgb, var(--primary), white 70%);
+  }
+
+  .trust-strip ul {
+    margin: 0;
+    padding: 0.62rem 0;
+    list-style: none;
+    display: flex;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+  }
+
+  .trust-strip li {
+    font-size: 0.78rem;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+</style>

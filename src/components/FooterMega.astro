@@ -1,0 +1,253 @@
+---
+import type { Business } from "../types";
+import { getBusinessLogo } from "../lib/assets";
+import { buildWhatsAppUrl } from "../lib/whatsapp";
+import { slugify } from "../lib/slugify";
+
+type Props = {
+  business: Business;
+  basePath: string;
+};
+
+const { business, basePath } = Astro.props;
+
+const logo = getBusinessLogo(business);
+const services = business.services.slice(0, 8);
+const hasAbout = Boolean(business.cta?.description);
+const hasGallery = Boolean(business.instagramUrl) || business.moduleOrder.home.includes("instagramPreviewGrid");
+const whatsappUrl = buildWhatsAppUrl(business);
+---
+
+<footer class="footer-mega">
+  <div class="container footer-grid">
+    <section class="brand-col">
+      <a class="brand-link" href={basePath}>
+        {
+          logo ? (
+            <>
+              <img
+                src={logo}
+                alt={`${business.businessName} logosu`}
+                class="brand-logo"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"
+              />
+              <span class="brand-fallback">{business.businessName}</span>
+            </>
+          ) : (
+            <span class="brand-title">{business.businessName}</span>
+          )
+        }
+      </a>
+      <p class="brand-summary">
+        {business.district} ve çevresinde {business.mainService.toLocaleLowerCase("tr-TR")} odaklı, randevu ve iletişimi
+        kolaylaştıran premium demo site yapısı.
+      </p>
+      <div class="quick-actions">
+        <a href={`tel:${business.phone}`} class="quick-btn">Telefon</a>
+        <a href={whatsappUrl} target="_blank" rel="noreferrer" class="quick-btn quick-btn-wa">WhatsApp</a>
+      </div>
+    </section>
+
+    <section>
+      <h3>Sayfalar</h3>
+      <ul>
+        <li><a href={basePath}>Ana Sayfa</a></li>
+        <li><a href={`${basePath}hizmetler/`}>Hizmetler</a></li>
+        <li><a href={`${basePath}randevu/`}>Randevu & İletişim</a></li>
+        {hasAbout && <li><a href={`${basePath}randevu/#hakkimizda`}>Hakkımızda</a></li>}
+        {hasGallery && <li><a href={`${basePath}#galeri`}>Galeri / Instagram</a></li>}
+      </ul>
+    </section>
+
+    <section>
+      <h3>Hizmetler</h3>
+      <ul>
+        {
+          services.map((service) => (
+            <li>
+              <a href={`${basePath}hizmetler/#${slugify(service.name)}`}>{service.name}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section>
+      <h3>İletişim</h3>
+      <ul class="contact-list">
+        <li><a href={`tel:${business.phone}`}>{business.phone}</a></li>
+        <li><a href={whatsappUrl} target="_blank" rel="noreferrer">WhatsApp'tan Yaz</a></li>
+        <li><a href={business.instagramUrl} target="_blank" rel="noreferrer">Instagram</a></li>
+        <li>{business.neighborhood}, {business.district}</li>
+        <li><a href={business.mapUrl} target="_blank" rel="noreferrer">Google Maps / Yol Tarifi</a></li>
+      </ul>
+    </section>
+  </div>
+
+  <div class="container footer-bottom">
+    <p>© {new Date().getFullYear()} {business.businessName}. Tüm hakları saklıdır.</p>
+    <p class="demo-note">
+      Demo görseller temsili olarak kullanılmıştır. Yayın öncesi işletmenin kendi görselleriyle değiştirilebilir.
+    </p>
+  </div>
+</footer>
+
+<style>
+  .footer-mega {
+    margin-top: 2rem;
+    padding: 2.2rem 0 1.1rem;
+    border-top: 1px solid color-mix(in srgb, var(--primary), white 72%);
+    background:
+      radial-gradient(360px 180px at 10% 0%, color-mix(in srgb, var(--accent), white 76%), transparent 66%),
+      linear-gradient(180deg, color-mix(in srgb, var(--surface), white 16%), color-mix(in srgb, var(--bg), white 10%));
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 1rem 1.4rem;
+  }
+
+  .brand-link {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    max-width: 100%;
+  }
+
+  .brand-logo {
+    height: 30px;
+    width: auto;
+    max-width: 190px;
+    object-fit: contain;
+  }
+
+  .brand-title,
+  .brand-fallback {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .brand-fallback {
+    display: none;
+  }
+
+  h3 {
+    margin: 0 0 0.5rem;
+    font-size: 0.86rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.38rem;
+  }
+
+  li,
+  a {
+    font-size: 0.92rem;
+    color: color-mix(in srgb, var(--text), white 14%);
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--primary);
+  }
+
+  .brand-summary {
+    margin: 0.72rem 0 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    max-width: 38ch;
+  }
+
+  .quick-actions {
+    margin-top: 0.8rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+
+  .quick-btn {
+    font-size: 0.8rem;
+    padding: 0.45rem 0.7rem;
+    border: 1px solid color-mix(in srgb, var(--primary), white 60%);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--surface), white 20%);
+  }
+
+  .quick-btn-wa {
+    border-color: color-mix(in srgb, #25d366, black 20%);
+    color: #157347;
+  }
+
+  .footer-bottom {
+    margin-top: 1.3rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid color-mix(in srgb, var(--primary), white 76%);
+    display: flex;
+    justify-content: space-between;
+    gap: 0.6rem 1rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-bottom p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.78rem;
+    line-height: 1.45;
+  }
+
+  .demo-note {
+    max-width: 62ch;
+  }
+
+  @media (max-width: 980px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .footer-mega {
+      margin-top: 1.3rem;
+      padding-top: 1.5rem;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 0.95rem;
+    }
+
+    .brand-logo {
+      height: 26px;
+      max-width: 150px;
+    }
+
+    .quick-actions {
+      gap: 0.35rem;
+    }
+
+    .quick-btn {
+      font-size: 0.78rem;
+      padding: 0.42rem 0.6rem;
+    }
+
+    .footer-bottom {
+      margin-top: 1rem;
+      padding-top: 0.7rem;
+    }
+  }
+</style>

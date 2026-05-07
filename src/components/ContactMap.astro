@@ -1,0 +1,171 @@
+---
+import type { Business } from "../types";
+import { getContactMedia } from "../lib/assets";
+import { buildWhatsAppUrl } from "../lib/whatsapp";
+
+type Props = {
+  business: Business;
+};
+
+const { business } = Astro.props;
+const contactMedia = getContactMedia(business);
+const whatsappUrl = buildWhatsAppUrl(business);
+---
+
+<section class="section">
+  <div class="container grid contact-grid">
+    <article class="card contact-card">
+      <h2>Randevu ve İletişim</h2>
+      <p class="about">
+        {business.businessName}, {business.district} bölgesinde özel gün hazırlıkları için saç ve makyaj hizmetlerini
+        randevu planına göre sunar.
+      </p>
+      <p><strong>Telefon:</strong> <a href={`tel:${business.phone}`}>{business.phone}</a></p>
+      <p><strong>WhatsApp:</strong> <a href={whatsappUrl} target="_blank" rel="noreferrer">Randevu bilgisi al</a></p>
+      <p><strong>Adres:</strong> {business.address}</p>
+      <p><strong>Instagram:</strong> <a href={business.instagramUrl} target="_blank" rel="noreferrer">Profili Gör</a></p>
+      <a class="btn btn-secondary" href={business.mapUrl} target="_blank" rel="noreferrer">Haritada Yol Tarifi Al</a>
+      <div class="hours">
+        <h3>Çalışma Saatleri</h3>
+        <ul>
+          <li><span>Pazartesi - Cuma</span><strong>10:00 - 19:00</strong></li>
+          <li><span>Cumartesi</span><strong>10:00 - 18:00</strong></li>
+          <li><span>Pazar</span><strong>Randevuya göre</strong></li>
+        </ul>
+      </div>
+    </article>
+    <article class="card map-wrap">
+      <iframe
+        src={business.mapEmbedUrl}
+        title={`${business.businessName} konum haritası`}
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </article>
+    <article class="card media-wrap">
+      {
+        contactMedia ? (
+          <>
+            <img
+              src={contactMedia}
+              alt={`${business.businessName} stüdyo veya konum görseli`}
+              loading="lazy"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
+            />
+            <div class="media-fallback fallback" role="img" aria-label="Temsili stüdyo görseli"></div>
+          </>
+        ) : (
+          <div class="media-fallback" role="img" aria-label="Temsili stüdyo görseli"></div>
+        )
+      }
+    </article>
+  </div>
+</section>
+
+<style>
+  .contact-grid {
+    grid-template-columns: minmax(240px, 0.95fr) 1.2fr 0.95fr;
+  }
+
+  .contact-card {
+    padding: 1rem;
+    display: grid;
+    gap: 0.65rem;
+    align-content: start;
+  }
+
+  .about {
+    color: var(--muted);
+  }
+
+  .hours {
+    margin-top: 0.35rem;
+    border-top: 1px solid color-mix(in srgb, var(--primary), white 72%);
+    padding-top: 0.65rem;
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .hours h3 {
+    font-size: 0.86rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+  }
+
+  .hours ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .hours li {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    font-size: 0.84rem;
+  }
+
+  .hours li strong {
+    font-size: 0.82rem;
+  }
+
+  .map-wrap {
+    overflow: hidden;
+    min-height: 340px;
+  }
+
+  .media-wrap {
+    min-height: 340px;
+    overflow: hidden;
+    padding: 0;
+    border-radius: 14px;
+    border: 1px solid color-mix(in srgb, var(--primary), white 68%);
+    background: color-mix(in srgb, var(--surface), white 14%);
+  }
+
+  .media-wrap img {
+    width: 100%;
+    height: 100%;
+    min-height: 340px;
+    object-fit: cover;
+  }
+
+  .media-fallback {
+    width: 100%;
+    min-height: 340px;
+    display: grid;
+    place-items: center;
+    background:
+      radial-gradient(120px 80px at 82% 14%, color-mix(in srgb, var(--accent), white 44%), transparent 55%),
+      radial-gradient(110px 70px at 18% 84%, color-mix(in srgb, var(--primary), white 75%), transparent 60%),
+      linear-gradient(135deg, color-mix(in srgb, var(--surface), white 24%), color-mix(in srgb, var(--bg-elevated), white 8%));
+  }
+
+  .media-fallback::after {
+    content: "Temsili görsel";
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--text), white 40%);
+  }
+
+  .media-fallback.fallback {
+    display: none;
+  }
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 340px;
+    border: none;
+  }
+
+  @media (max-width: 1080px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

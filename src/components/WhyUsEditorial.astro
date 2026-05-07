@@ -1,0 +1,97 @@
+---
+import type { Business } from "../types";
+
+type Props = {
+  business: Business;
+};
+
+const { business } = Astro.props;
+const defaults = [
+  {
+    heading: "Prova ve hazırlık planı",
+    description: "Özel gün tarihi, konsept ve istediğiniz görünüm üzerinden hazırlık akışı netleştirilir."
+  },
+  {
+    heading: "Konsepte uyumlu stil",
+    description: "Gelinlik, kına kıyafeti veya davet konseptinize göre saç ve makyaj dili belirlenir."
+  },
+  {
+    heading: "Fotoğrafa hazır görünüm",
+    description: "Saç ve makyaj dili, gün boyu çekimlerde zarif ve dengeli görünmesi için planlanır."
+  },
+  {
+    heading: "WhatsApp ile hızlı bilgi",
+    description: "Tarih, hizmet ve hazırlık detayları için hızlıca randevu bilgisi alınabilir."
+  }
+];
+const items = business.whyUs?.length ? business.whyUs : defaults;
+---
+
+<section class="why-editorial">
+  <div class="container">
+    <h2>Neden Tercih Ediliyor?</h2>
+    <div class="grid-wrap">
+      {
+        items.slice(0, 4).map((item, index) => (
+          <article>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <h3>{item.heading}</h3>
+            <p>{item.description}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .why-editorial {
+    background: #161311;
+    color: #f6f1ed;
+    padding: clamp(2.2rem, 4vw, 3.5rem) 0;
+  }
+
+  .why-editorial h2 {
+    margin-bottom: 1rem;
+    color: #f8f0ea;
+  }
+
+  .grid-wrap {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: 1px solid rgba(255, 255, 255, 0.22);
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .grid-wrap article {
+    padding: 1rem 0.9rem 1.1rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .grid-wrap span {
+    color: #d9bca8;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+  }
+
+  .grid-wrap h3 {
+    font-size: 1rem;
+    line-height: 1.2;
+    color: #fff5ef;
+  }
+
+  .grid-wrap p {
+    color: #eaded5;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 900px) {
+    .grid-wrap {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

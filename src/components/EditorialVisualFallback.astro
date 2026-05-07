@@ -1,0 +1,127 @@
+---
+type Props = {
+  theme: string;
+  aspectRatio?: "3/4" | "1/1" | "16/9";
+  labels?: string[];
+  showNotice?: boolean;
+};
+
+const { theme, aspectRatio = "3/4", labels = ["GELİN", "KINA", "NİŞAN", "DAVET"], showNotice = true } = Astro.props;
+const ratioClass = aspectRatio === "1/1" ? "ratio-square" : aspectRatio === "16/9" ? "ratio-wide" : "ratio-portrait";
+---
+
+<figure class={`editorial-fallback ${ratioClass} ${theme === "bridal-editorial-luxe" ? "bridal" : "neutral"}`} aria-label="Temsili görsel">
+  <div class="inset">
+    <svg viewBox="0 0 560 720" class="silk silk-a" aria-hidden="true">
+      <path d="M28 420 C160 290, 300 530, 540 360" />
+    </svg>
+    <svg viewBox="0 0 560 720" class="silk silk-b" aria-hidden="true">
+      <path d="M24 510 C140 620, 360 330, 536 500" />
+    </svg>
+    <ul class="pearls" aria-hidden="true">
+      <li></li><li></li><li></li><li></li><li></li><li></li>
+    </ul>
+    <div class="labels">
+      {labels.map((label) => <span>{label}</span>)}
+    </div>
+    {showNotice && <small>Temsili görsel</small>}
+  </div>
+</figure>
+
+<style>
+  .editorial-fallback {
+    width: 100%;
+    margin: 0;
+    position: relative;
+    border: 1px solid color-mix(in srgb, var(--primary), white 64%);
+    background:
+      radial-gradient(220px 220px at 85% 8%, #f6ded1, transparent 58%),
+      radial-gradient(260px 220px at 15% 88%, #f7ebe3, transparent 62%),
+      linear-gradient(154deg, #fffaf7 0%, #fbf2ec 44%, #f5e9df 100%);
+  }
+
+  .ratio-portrait {
+    aspect-ratio: 3 / 4;
+  }
+
+  .ratio-square {
+    aspect-ratio: 1 / 1;
+  }
+
+  .ratio-wide {
+    aspect-ratio: 16 / 9;
+  }
+
+  .inset {
+    position: absolute;
+    inset: 10px;
+    border: 1px solid color-mix(in srgb, var(--primary), white 76%);
+    overflow: hidden;
+  }
+
+  .silk {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: color-mix(in srgb, var(--primary), white 54%);
+    stroke-width: 1.1;
+    opacity: 0.62;
+  }
+
+  .silk-b {
+    stroke-width: 0.8;
+    opacity: 0.48;
+  }
+
+  .pearls {
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 7px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .pearls li {
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    background: radial-gradient(circle at 30% 30%, #fff, #ead8ca);
+    border: 1px solid color-mix(in srgb, var(--primary), white 82%);
+  }
+
+  .labels {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.32rem;
+    max-width: 70%;
+  }
+
+  .labels span {
+    padding: 0.24rem 0.46rem;
+    border: 1px solid color-mix(in srgb, var(--primary), white 64%);
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    color: color-mix(in srgb, var(--text), black 10%);
+    background: color-mix(in srgb, white, var(--surface) 30%);
+  }
+
+  small {
+    position: absolute;
+    right: 14px;
+    top: 14px;
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--muted), black 4%);
+  }
+</style>

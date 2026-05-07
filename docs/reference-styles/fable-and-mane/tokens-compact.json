@@ -1,0 +1,74 @@
+{
+  "color": {
+    "maharaja-red": {
+      "$value": "#f9423a",
+      "$type": "color",
+      "$description": "Maharaja Red — Primary action buttons, prominent alerts — a deep, energetic red that commands attention"
+    },
+    "tiger-orange": {
+      "$value": "#f69f82",
+      "$type": "color",
+      "$description": "Tiger Orange — Decorative accents in illustrations and brand elements"
+    },
+    "sunburst-yellow": {
+      "$value": "#ffd100",
+      "$type": "color",
+      "$description": "Sunburst Yellow — Decorative botanical fills and accent elements"
+    },
+    "ocean-deep-blue": {
+      "$value": "#002e5d",
+      "$type": "color",
+      "$description": "Ocean Deep Blue — Decorative botanical fills and accent elements"
+    },
+    "sky-blue": {
+      "$value": "#007aff",
+      "$type": "color",
+      "$description": "Sky Blue — Blue decorative accent for icons, marks, and small graphic details. Do not promote it to the primary CTA color"
+    },
+    "midnight-ink": {
+      "$value": "#000000",
+      "$type": "color",
+      "$description": "Midnight Ink — Primary text, headings, strong borders, and solid icon fills"
+    },
+    "paper-bark": {
+      "$value": "#fff5ec",
+      "$type": "color",
+      "$description": "Paper Bark — Page background, light card surfaces, and ghost button backgrounds — creates a warm, soft base"
+    },
+    "snow-drift": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "Snow Drift — Elevated card backgrounds, product surfaces, and crisp text on dark backgrounds"
+    },
+    "smoky-quartz": {
+      "$value": "#1a243d",
+      "$type": "color",
+      "$description": "Smoky Quartz — Muted text, placeholder text, and subtle outlined button borders"
+    },
+    "pale-ash": {
+      "$value": "#bfb8b1",
+      "$type": "color",
+      "$description": "Pale Ash — Very subtle elevation shadows, providing depth without harshness"
+    }
+  },
+  "font": {
+    "sofia-pro": {
+      "$value": "Sofia Pro",
+      "$type": "fontFamily",
+      "$description": "Specific button text where a slightly bolder appearance is desired."
+    },
+    "quincy-cf": {
+      "$value": "Quincy CF",
+      "$type": "fontFamily",
+      "$description": "Headings and display text — strong and characterful due to its extra-bold nature, balancing legibility with a distinctive presence."
+    }
+  },
+  "$extensions": {
+    "com.refero.extraction": {
+      "url": "https://fableandmane.com",
+      "siteName": "Fable & Mane",
+      "extractedAt": "2026-04-30T02:31:16.357Z",
+      "variant": "compact"
+    }
+  }
+}

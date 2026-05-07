@@ -1,0 +1,235 @@
+{
+  "color": {
+    "midnight-indigo": {
+      "$value": "#2e3fd2",
+      "$type": "color",
+      "$description": "Midnight Indigo — Primary brand color, navigation backgrounds, button fills, and a dominant footer background gradient — signifies trust and authority; A subtle left-to-right gradient, used for prominent background elements like the footer, deepening the primary brand color"
+    },
+    "arctic-teal": {
+      "$value": "#5ed7de",
+      "$type": "color",
+      "$description": "Arctic Teal — Accent for links, interactive borders, and icon strokes — provides a cool, clinical highlight against neutrals, indicating interactive states or important information"
+    },
+    "ebony-text": {
+      "$value": "#302625",
+      "$type": "color",
+      "$description": "Ebony Text — Primary text color for all content, headings, and neutral link/button borders — ensures high contrast and legibility"
+    },
+    "canvas-white": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "Canvas White — Main page background, default button text, and neutral borders — provides a clean, expansive foundation for content"
+    },
+    "soft-vanilla": {
+      "$value": "#fef8f4",
+      "$type": "color",
+      "$description": "Soft Vanilla — Secondary background for subtle content separation or cards — offers a warmer, slightly off-white surface"
+    },
+    "parchment-tan": {
+      "$value": "#efe0d9",
+      "$type": "color",
+      "$description": "Parchment Tan — Tertiary background color for distinct content blocks or subtle cards — offers another subtle variation in surface tone"
+    }
+  },
+  "font": {
+    "surt": {
+      "$value": "Surt",
+      "$type": "fontFamily",
+      "$description": "Functional text for navigation, body copy, and secondary information — its compact line height and subtle tracking create a concise, efficient visual rhythm."
+    },
+    "super": {
+      "$value": "Super",
+      "$type": "fontFamily",
+      "$description": "Display headings and prominent titles — the moderate weight and tight letter-spacing give it a formal, confident presence without being overly bold. Characterized by specific 'case' and 'liga' features that refine its appearance."
+    }
+  },
+  "typography": {
+    "xs": {
+      "$value": {
+        "fontFamily": "Surt",
+        "fontSize": "12px",
+        "fontWeight": 500,
+        "lineHeight": 1.6
+      },
+      "$type": "typography",
+      "$description": "Typography step xs at 12px"
+    },
+    "xs-2": {
+      "$value": {
+        "fontFamily": "Surt",
+        "fontSize": "12px",
+        "fontWeight": 400,
+        "lineHeight": 1.05
+      },
+      "$type": "typography",
+      "$description": "Typography step xs-2 at 12px"
+    },
+    "xs-3": {
+      "$value": {
+        "fontFamily": "Surt",
+        "fontSize": "12px",
+        "fontWeight": 100,
+        "lineHeight": 1.5
+      },
+      "$type": "typography",
+      "$description": "Typography step xs-3 at 12px"
+    },
+    "xs-4": {
+      "$value": {
+        "fontFamily": "Surt",
+        "fontSize": "12px",
+        "fontWeight": 600,
+        "lineHeight": 1.5
+      },
+      "$type": "typography",
+      "$description": "Typography step xs-4 at 12px"
+    },
+    "sm": {
+      "$value": {
+        "fontFamily": "Surt",
+        "fontSize": "13px",
+        "fontWeight": 200,
+        "lineHeight": 1.3
+      },
+      "$type": "typography",
+      "$description": "Typography step sm at 13px"
+    },
+    "sm-2": {
+      "$value": {
+        "fontFamily": "Surt",
+        "fontSize": "14px",
+        "fontWeight": 100,
+        "lineHeight": 1.5
+      },
+      "$type": "typography",
+      "$description": "Typography step sm-2 at 14px"
+    },
+    "lg": {
+      "$value": {
+        "fontFamily": "Surt",
+        "fontSize": "18px",
+        "fontWeight": 100,
+        "lineHeight": 1.4
+      },
+      "$type": "typography",
+      "$description": "Typography step lg at 18px"
+    },
+    "lg-2": {
+      "$value": {
+        "fontFamily": "Surt",
+        "fontSize": "18px",
+        "fontWeight": 400,
+        "lineHeight": 1.05
+      },
+      "$type": "typography",
+      "$description": "Typography step lg-2 at 18px"
+    },
+    "lg-3": {
+      "$value": {
+        "fontFamily": "Surt",
+        "fontSize": "18px",
+        "fontWeight": 100,
+        "lineHeight": 1.5
+      },
+      "$type": "typography",
+      "$description": "Typography step lg-3 at 18px"
+    },
+    "5xl": {
+      "$value": {
+        "fontFamily": "Super",
+        "fontSize": "48px",
+        "fontWeight": 500,
+        "lineHeight": 1.2
+      },
+      "$type": "typography",
+      "$description": "Typography step 5xl at 48px"
+    },
+    "5xl-2": {
+      "$value": {
+        "fontFamily": "Super",
+        "fontSize": "64px",
+        "fontWeight": 500,
+        "lineHeight": 1.1
+      },
+      "$type": "typography",
+      "$description": "Typography step 5xl-2 at 64px"
+    }
+  },
+  "spacing": {
+    "8": {
+      "$value": "8px",
+      "$type": "dimension",
+      "$description": "Spacing 8px"
+    },
+    "16": {
+      "$value": "16px",
+      "$type": "dimension",
+      "$description": "Spacing 16px"
+    },
+    "24": {
+      "$value": "24px",
+      "$type": "dimension",
+      "$description": "Spacing 24px"
+    },
+    "32": {
+      "$value": "32px",
+      "$type": "dimension",
+      "$description": "Spacing 32px"
+    },
+    "40": {
+      "$value": "40px",
+      "$type": "dimension",
+      "$description": "Spacing 40px"
+    },
+    "48": {
+      "$value": "48px",
+      "$type": "dimension",
+      "$description": "Spacing 48px"
+    },
+    "56": {
+      "$value": "56px",
+      "$type": "dimension",
+      "$description": "Spacing 56px"
+    },
+    "80": {
+      "$value": "80px",
+      "$type": "dimension",
+      "$description": "Spacing 80px"
+    },
+    "128": {
+      "$value": "128px",
+      "$type": "dimension",
+      "$description": "Spacing 128px"
+    },
+    "144": {
+      "$value": "144px",
+      "$type": "dimension",
+      "$description": "Spacing 144px"
+    },
+    "unit": {
+      "$value": "8px",
+      "$type": "dimension",
+      "$description": "Base spacing unit"
+    }
+  },
+  "radius": {
+    "md": {
+      "$value": "4px",
+      "$type": "dimension",
+      "$description": "Border radius md"
+    },
+    "full": {
+      "$value": "9999px",
+      "$type": "dimension",
+      "$description": "Border radius full"
+    }
+  },
+  "$extensions": {
+    "com.refero.extraction": {
+      "url": "https://foundations.koahealth.com",
+      "siteName": "Koa Health",
+      "extractedAt": "2026-04-30T03:25:20.427Z",
+      "variant": "extended"
+    }
+  }
+}

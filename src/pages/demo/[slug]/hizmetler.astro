@@ -1,0 +1,37 @@
+---
+import type { Business } from "../../../types";
+import { getBusinesses, getThemeByVariant } from "../../../lib/data";
+import { buildLocalBusinessSchema, buildSeoMeta } from "../../../lib/seo";
+import SiteLayout from "../../../components/SiteLayout.astro";
+import ServicesIntro from "../../../components/ServicesIntro.astro";
+import ServiceCategoryMenu from "../../../components/ServiceCategoryMenu.astro";
+import ServiceMenu from "../../../components/ServiceMenu.astro";
+import FAQAccordion from "../../../components/FAQAccordion.astro";
+import AppointmentCta from "../../../components/AppointmentCta.astro";
+
+export function getStaticPaths() {
+  return getBusinesses().map((business) => ({
+    params: { slug: business.slug },
+    props: { business }
+  }));
+}
+
+const { business } = Astro.props as { business: Business };
+const variant = Astro.url.searchParams.get("variant") ?? "default";
+const theme = getThemeByVariant(business.themeId, variant);
+if (!theme) {
+  throw new Error(`Theme not found for business ${business.slug}`);
+}
+
+const path = `/demo/${business.slug}/hizmetler/`;
+const seo = buildSeoMeta(business, path, { isDemo: true });
+const schema = buildLocalBusinessSchema(business, seo.canonical);
+---
+
+<SiteLayout business={business} theme={theme} seo={seo} schema={schema} currentPath={path} variant={variant}>
+  <ServicesIntro business={business} />
+  <ServiceCategoryMenu services={business.services} />
+  <ServiceMenu business={business} services={business.services} />
+  <FAQAccordion items={business.faq} />
+  <AppointmentCta business={business} />
+</SiteLayout>

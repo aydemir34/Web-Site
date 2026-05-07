@@ -1,0 +1,84 @@
+{
+  "color": {
+    "pine-needle": {
+      "$value": "#4d523c",
+      "$type": "color",
+      "$description": "Pine Needle — Major text and brand accents; a muted, verdant green providing organic warmth to headings and links."
+    },
+    "powder-sand": {
+      "$value": "#f1ece0",
+      "$type": "color",
+      "$description": "Powder Sand — Subtle surface backgrounds and highlights, giving a soft, natural base for UI elements."
+    },
+    "lunar-dust": {
+      "$value": "#f9f7f2",
+      "$type": "color",
+      "$description": "Lunar Dust — Clean primary background, a slightly off-white that adds warmth without starkness."
+    },
+    "white-linen": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "White Linen — Secondary surface background, contrasts gently with Lunar Dust, also used for button text."
+    },
+    "charcoal-bark": {
+      "$value": "#323429",
+      "$type": "color",
+      "$description": "Charcoal Bark — Primary text on light backgrounds and button fills; a very dark, desaturated gray that is softer than pure black."
+    },
+    "deep-moss": {
+      "$value": "#161716",
+      "$type": "color",
+      "$description": "Deep Moss — Darkest text and background for high-contrast elements, subtly colored rather than truly black."
+    },
+    "ash-grey": {
+      "$value": "#6c6c6c",
+      "$type": "color",
+      "$description": "Ash Grey — Subtle text and input colors for secondary information, providing clear readability without dominance."
+    },
+    "pale-mauve": {
+      "$value": "#ead7f3",
+      "$type": "color",
+      "$description": "Pale Mauve — Internal UI background for distinct sections, adding a touch of muted color."
+    },
+    "sunken-orange": {
+      "$value": "#f69371",
+      "$type": "color",
+      "$description": "Sunken Orange — Highlight accent color for specific textual elements, a warm pop of muted orange."
+    },
+    "stone-grey": {
+      "$value": "#a6a6a6",
+      "$type": "color",
+      "$description": "Stone Grey — Disabled states for buttons and subtle border details."
+    },
+    "shadow-tint": {
+      "$value": "#e2d9c2",
+      "$type": "color",
+      "$description": "Shadow Tint — Subtle, diffused shadows, almost a light beige, contributing to the soft, natural aesthetic."
+    }
+  },
+  "font": {
+    "simplon-norm": {
+      "$value": "Simplon Norm",
+      "$type": "fontFamily",
+      "$description": "Primary sans-serif for body text, navigation, and functional elements. Its range of weights and precise letter spacing ensures versatility from small captions to impactful headings."
+    },
+    "saol": {
+      "$value": "Saol",
+      "$type": "fontFamily",
+      "$description": "Signature serif for headings, where its light 300 weight against typical heading sizes creates a sophisticated, understated elegance. The generous negative letter spacing further enhances its delicate appearance. This is a deliberate choice for authority through restraint."
+    },
+    "simplon-mono": {
+      "$value": "Simplon Mono",
+      "$type": "fontFamily",
+      "$description": "Monospaced font for technical details or subtle accents, adding a touch of precision and contrast to the primary typefaces without being overly dominant. Its use is minimal."
+    }
+  },
+  "$extensions": {
+    "com.refero.extraction": {
+      "url": "https://prose.com",
+      "siteName": "Prose",
+      "extractedAt": "2026-04-11T18:44:38.042Z",
+      "variant": "compact"
+    }
+  }
+}

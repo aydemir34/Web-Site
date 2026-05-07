@@ -1,0 +1,69 @@
+{
+  "color": {
+    "forest-green": {
+      "$value": "#0f3e17",
+      "$type": "color",
+      "$description": "Forest Green — Primary brand color for calls to action, text, and critical icons — grounding the UI with a sense of growth and reliability"
+    },
+    "cream-canvas": {
+      "$value": "#fffefc",
+      "$type": "color",
+      "$description": "Cream Canvas — Background for page surfaces and pristine component backdrops, providing a clean, bright foundation"
+    },
+    "mint-glaze": {
+      "$value": "#b1dbb8",
+      "$type": "color",
+      "$description": "Mint Glaze — Soft background for informational cards and sections, introducing a gentle, almost pastel tint to the UI planes"
+    },
+    "slate-mist": {
+      "$value": "#b6ced5",
+      "$type": "color",
+      "$description": "Slate Mist — Cool, muted background for secondary cards and sections, offering visual separation without overwhelming the primary content"
+    },
+    "keylime-wash": {
+      "$value": "#e1f4df",
+      "$type": "color",
+      "$description": "Keylime Wash — Lightest green surface, used for subtle card backgrounds or layered elements, providing a hint of color"
+    },
+    "mint-kiss": {
+      "$value": "#cfe7d3",
+      "$type": "color",
+      "$description": "Mint Kiss — Another very light green surface, subtly differentiating stacked cards or sections"
+    },
+    "border-grey": {
+      "$value": "#e5e7eb",
+      "$type": "color",
+      "$description": "Border Grey — Default boundary and separator color, used for hairline borders and inactive states, maintaining visual separation with minimal distraction"
+    },
+    "ink-text": {
+      "$value": "#222222",
+      "$type": "color",
+      "$description": "Ink Text — Primary text color for navigation and core content, providing strong contrast against light backgrounds"
+    },
+    "dark-charcoal": {
+      "$value": "#333333",
+      "$type": "color",
+      "$description": "Dark Charcoal — Secondary text and link color for less prominent information, like image captions or muted links"
+    }
+  },
+  "font": {
+    "suisseintl": {
+      "$value": "Suisseintl",
+      "$type": "fontFamily",
+      "$description": "The workhorse sans-serif for most body text, links, buttons, and detailed interface elements. Its refined simplicity supports a clinical tone without feeling sterile."
+    },
+    "faire-octave": {
+      "$value": "Faire Octave",
+      "$type": "fontFamily",
+      "$description": "Used exclusively for large, impactful headings. Its light weight (300) for such prominent sizes creates an authoritative yet approachable voice, suggesting wisdom through understatement rather than volume."
+    }
+  },
+  "$extensions": {
+    "com.refero.extraction": {
+      "url": "https://easehealth.com",
+      "siteName": "Ease Health",
+      "extractedAt": "2026-04-30T00:13:33.790Z",
+      "variant": "compact"
+    }
+  }
+}

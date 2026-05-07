@@ -1,0 +1,69 @@
+{
+  "color": {
+    "inkwell-black": {
+      "$value": "#17150",
+      "$type": "color",
+      "$description": "Inkwell Black — Primary text, headline text, dark background sections, button backgrounds. This deep near-black provides strong contrast and a sense of premium quality."
+    },
+    "cloud-white": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "Cloud White — Main page background, card backgrounds, text on dark backgrounds. Dominates the canvas for a bright, open feel."
+    },
+    "porcelain-gray": {
+      "$value": "#f0f7f6",
+      "$type": "color",
+      "$description": "Porcelain Gray — Secondary background color for sections, card hover states, badge backgrounds. Offers a subtle variation from pure white for content differentiation."
+    },
+    "obsidian-black": {
+      "$value": "#000000",
+      "$type": "color",
+      "$description": "Obsidian Black — Navigation text, icons, button outlines. Used for the sharpest contrast elements, often interactive."
+    },
+    "silver-mist": {
+      "$value": "#e2e2e2",
+      "$type": "color",
+      "$description": "Silver Mist — Subtle borders and dividers for section separation."
+    },
+    "genius-yellow": {
+      "$value": "#cccc25",
+      "$type": "color",
+      "$description": "Genius Yellow — Calls to Action, active state indicators. This vibrant yellow gives an immediate energetic and positive feel."
+    },
+    "genius-yellow-gradient": {
+      "$value": "#cccc25",
+      "$type": "color",
+      "$description": "Genius Yellow Gradient — Decorative backgrounds and possibly interactive elements, offering a subtle shift in luminescence for visual interest."
+    },
+    "sky-violet": {
+      "$value": "#9fa6ff",
+      "$type": "color",
+      "$description": "Sky Violet — Promotional banners, card backgrounds, accent areas. This vivid violet provides a playful, modern contrast to the muted neutrals."
+    },
+    "sky-violet-gradient": {
+      "$value": "#9fa6ff",
+      "$type": "color",
+      "$description": "Sky Violet Gradient — Backgrounds for features or promotional blocks, adding depth and visual softness."
+    }
+  },
+  "font": {
+    "basel-grotesk-book": {
+      "$value": "Basel Grotesk Book",
+      "$type": "fontFamily",
+      "$description": "Primary typeface for all UI elements, body text, subheadings, and smaller headlines. Its clean sans-serif form ensures high readability and a contemporary feel across all weights and sizes, from small navigation links to substantial section titles."
+    },
+    "basel-classic-book": {
+      "$value": "Basel Classic Book",
+      "$type": "fontFamily",
+      "$description": "Used exclusively for large, impactful display text. The significantly tighter line-height and letter-spacing, combined with its high contrast to Basel Grotesk Book, give it a distinctive, elegant, and editorial presence for hero headlines."
+    }
+  },
+  "$extensions": {
+    "com.refero.extraction": {
+      "url": "https://glossgenius.com",
+      "siteName": "All-In-One Salon",
+      "extractedAt": "2026-04-11T18:51:54.756Z",
+      "variant": "compact"
+    }
+  }
+}

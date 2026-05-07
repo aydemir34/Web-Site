@@ -1,0 +1,203 @@
+{
+  "$metadata": {
+    "name": "Mortimer / PIED-DE-POULE Inspired Tokens",
+    "source": "User-provided design-extended.md",
+    "usage": "Reference tokens only. Translate into project theme variables; do not copy brand identity one-to-one.",
+    "recommendedArchetypes": [
+      "salon-editorial-menu",
+      "clean-clinic-minimal",
+      "dark-prestige"
+    ]
+  },
+  "color": {
+    "jet-black": {
+      "$value": "#000000",
+      "$type": "color",
+      "$description": "Primary text and stark luxury contrast"
+    },
+    "pure-white": {
+      "$value": "#FFFFFF",
+      "$type": "color",
+      "$description": "Main background and high-contrast surface"
+    },
+    "electric-blue": {
+      "$value": "#0089FC",
+      "$type": "color",
+      "$description": "Primary CTA / interactive highlight; use sparingly"
+    },
+    "warm-gold": {
+      "$value": "#AA957C",
+      "$type": "color",
+      "$description": "Premium accent / organic care signal"
+    },
+    "soft-pink": {
+      "$value": "#F78DA7",
+      "$type": "color",
+      "$description": "Beauty-service accent, use sparingly"
+    },
+    "bright-coral": {
+      "$value": "#FF6900",
+      "$type": "color",
+      "$description": "Promotional accent, very limited use"
+    },
+    "mint-green": {
+      "$value": "#7BDCB5",
+      "$type": "color",
+      "$description": "Wellness / success accent"
+    },
+    "vibrant-green": {
+      "$value": "#00D084",
+      "$type": "color",
+      "$description": "Positive action / success state"
+    },
+    "sky-blue": {
+      "$value": "#8ED1FC",
+      "$type": "color",
+      "$description": "Secondary blue / layered depth"
+    },
+    "muted-gray-blue": {
+      "$value": "#ABB8C3",
+      "$type": "color",
+      "$description": "Secondary supporting text"
+    },
+    "off-white-cream": {
+      "$value": "#F7F5F2",
+      "$type": "color",
+      "$description": "Softer neutral section background"
+    },
+    "input-gray": {
+      "$value": "#F3F3F3",
+      "$type": "color",
+      "$description": "Input background"
+    },
+    "soft-gray": {
+      "$value": "#FBFBFB",
+      "$type": "color",
+      "$description": "Disabled / subtle surface"
+    },
+    "medium-gray": {
+      "$value": "#B2B2B2",
+      "$type": "color",
+      "$description": "Tertiary text / disabled state"
+    },
+    "border-gray": {
+      "$value": "#E6E6E6",
+      "$type": "color",
+      "$description": "Subtle dividers and borders"
+    },
+    "success": {
+      "$value": "#1CB751",
+      "$type": "color",
+      "$description": "Success feedback"
+    },
+    "error": {
+      "$value": "#D74C4C",
+      "$type": "color",
+      "$description": "Error feedback"
+    },
+    "danger": {
+      "$value": "#CF2E2E",
+      "$type": "color",
+      "$description": "Danger / destructive state"
+    },
+    "warning": {
+      "$value": "#FCB900",
+      "$type": "color",
+      "$description": "Warning state"
+    }
+  },
+  "font": {
+    "primary": {
+      "$value": "Gotham Pro",
+      "$type": "fontFamily",
+      "$description": "Geometric sans-serif; use licensed equivalent or fallback"
+    },
+    "fallback": {
+      "$value": "Helvetica Neue, Arial, sans-serif",
+      "$type": "fontFamily",
+      "$description": "Fallback stack"
+    }
+  },
+  "typography": {
+    "display": {
+      "fontSize": "40px",
+      "fontWeight": "500",
+      "lineHeight": "50px",
+      "letterSpacing": "0px"
+    },
+    "h2": {
+      "fontSize": "24px",
+      "fontWeight": "700",
+      "lineHeight": "32px",
+      "letterSpacing": "0px"
+    },
+    "h3": {
+      "fontSize": "18px",
+      "fontWeight": "700",
+      "lineHeight": "27px",
+      "letterSpacing": "0px"
+    },
+    "body": {
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "letterSpacing": "0px"
+    },
+    "caption": {
+      "fontSize": "12px",
+      "fontWeight": "500",
+      "lineHeight": "12px",
+      "letterSpacing": "0px"
+    },
+    "button": {
+      "fontSize": "16px",
+      "fontWeight": "700",
+      "lineHeight": "13px",
+      "letterSpacing": "0px"
+    }
+  },
+  "spacing": {
+    "base": {
+      "$value": "4px",
+      "$type": "dimension"
+    },
+    "scale": [
+      "4px",
+      "8px",
+      "12px",
+      "16px",
+      "20px",
+      "24px",
+      "28px",
+      "32px",
+      "36px",
+      "40px",
+      "44px",
+      "52px"
+    ]
+  },
+  "radius": {
+    "none": {
+      "$value": "0px",
+      "$type": "dimension",
+      "$description": "Sharp modern aesthetic"
+    },
+    "input": {
+      "$value": "0px",
+      "$type": "dimension"
+    },
+    "button": {
+      "$value": "0px",
+      "$type": "dimension"
+    }
+  },
+  "layout": {
+    "maxWidth": "1200px",
+    "grid": "12-column responsive grid",
+    "containerGutters": {
+      "mobile": "16px",
+      "tablet": "24px",
+      "desktop": "32px"
+    }
+  }
+}

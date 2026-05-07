@@ -1,0 +1,109 @@
+{
+  "color": {
+    "midday-sand": {
+      "$value": "#f1d27a",
+      "$type": "color",
+      "$description": "Midday Sand — Primary action background, decorative borders, selected states — a warm, inviting yellow that evokes sunshine and retro leisure"
+    },
+    "ocean-blue": {
+      "$value": "#23659f",
+      "$type": "color",
+      "$description": "Ocean Blue — Outlined button borders, link text, decorative accents — a cool blue providing contrast and secondary interactive cues"
+    },
+    "coral-sunset": {
+      "$value": "#d1796d",
+      "$type": "color",
+      "$description": "Coral Sunset — Outlined button borders, decorative strokes"
+    },
+    "breezy-teal": {
+      "$value": "#39aaa7",
+      "$type": "color",
+      "$description": "Breezy Teal — Decorative borders and backgrounds"
+    },
+    "electric-violet": {
+      "$value": "#0048ff",
+      "$type": "color",
+      "$description": "Electric Violet — Small functional indicators, button backgrounds for specific contexts"
+    },
+    "graphite": {
+      "$value": "#333333",
+      "$type": "color",
+      "$description": "Graphite — Primary text, strong borders, icons, and significant UI elements. Provides strong contrast against lighter backgrounds"
+    },
+    "parchment-white": {
+      "$value": "#e5e7eb",
+      "$type": "color",
+      "$description": "Parchment White — Page background, significant surface background, muted borders — a creamy off-white that softens the overall presentation"
+    },
+    "cloud-cover": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "Cloud Cover — Input backgrounds, elevated card surfaces, strong UI highlights"
+    },
+    "faded-cinder": {
+      "$value": "#6a6966",
+      "$type": "color",
+      "$description": "Faded Cinder — Surface background for specific elements, subtle button backgrounds"
+    },
+    "pale-ash": {
+      "$value": "#dddddd",
+      "$type": "color",
+      "$description": "Pale Ash — Subtle card borders and dividers"
+    },
+    "slate-cloud": {
+      "$value": "#778899",
+      "$type": "color",
+      "$description": "Slate Cloud — Card background for secondary content areas"
+    },
+    "sky-haze": {
+      "$value": "#b0c4de",
+      "$type": "color",
+      "$description": "Sky Haze — Card background for tertiary content areas"
+    }
+  },
+  "font": {
+    "helvetica-neue-lt-std": {
+      "$value": "Helvetica Neue LT Std",
+      "$type": "fontFamily",
+      "$description": "Primary sans-serif for body text, navigation, and some headings. Its clean lines provide readability amidst the more decorative serifs."
+    },
+    "itcgaramondstd-ltcond": {
+      "$value": "ITCGaramondStd-LtCond",
+      "$type": "fontFamily",
+      "$description": "Distinctive serif for display headings and section titles. Its condensed and light weights create an editorial, almost classic magazine feel, making a statement without shouting."
+    },
+    "optimaltp": {
+      "$value": "OptimaLTP",
+      "$type": "fontFamily",
+      "$description": "Secondary serif for smaller supporting text, labels, and some button text. Its subtle humanist lines add warmth and detail at smaller sizes."
+    },
+    "sansitalic": {
+      "$value": "sansItalic",
+      "$type": "fontFamily",
+      "$description": "Italic sans-serif used for specific callouts and decorative body text, adding a casual, handwritten feel."
+    },
+    "metropolis": {
+      "$value": "Metropolis",
+      "$type": "fontFamily",
+      "$description": "Specific supporting text."
+    },
+    "arial": {
+      "$value": "Arial",
+      "$type": "fontFamily",
+      "$description": "Arial — detected in extracted data but not described by AI"
+    },
+    "times": {
+      "$value": "Times",
+      "$type": "fontFamily",
+      "$description": "Times — detected in extracted data but not described by AI"
+    }
+  },
+  "$extensions": {
+    "com.refero.extraction": {
+      "url": "https://www.vacation.inc",
+      "siteName": "Vacation®",
+      "extractedAt": "2026-04-30T03:33:17.296Z",
+      "variant": "compact"
+    }
+  }
+}

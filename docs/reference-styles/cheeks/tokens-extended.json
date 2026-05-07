@@ -1,0 +1,218 @@
+{
+  "$metadata": {
+    "name": "Cheeks + Co Inspired Tokens",
+    "source": "User-provided design-extended.md",
+    "usage": "Reference tokens only. Translate into project theme variables; do not copy brand identity one-to-one.",
+    "recommendedArchetypes": [
+      "clean-clinic-minimal",
+      "product-led-beauty",
+      "warm-luxury-spa"
+    ]
+  },
+  "color": {
+    "warm-chocolate": {
+      "$value": "#4C292B",
+      "$type": "color",
+      "$description": "Primary brand color for text/buttons/navigation"
+    },
+    "deep-espresso": {
+      "$value": "#1D0B0C",
+      "$type": "color",
+      "$description": "Darkest accent / high contrast"
+    },
+    "warm-taupe": {
+      "$value": "#7F6665",
+      "$type": "color",
+      "$description": "Secondary warm neutral text and UI"
+    },
+    "natural-green": {
+      "$value": "#56AD6A",
+      "$type": "color",
+      "$description": "Wellness/success accent"
+    },
+    "warm-gold": {
+      "$value": "#8D6223",
+      "$type": "color",
+      "$description": "Luxury highlight / product marker"
+    },
+    "deep-teal": {
+      "$value": "#142B26",
+      "$type": "color",
+      "$description": "Alternative CTA / elevated interactive"
+    },
+    "danger-red": {
+      "$value": "#D02E2E",
+      "$type": "color",
+      "$description": "Error / alert"
+    },
+    "vibrant-orange": {
+      "$value": "#FF4B00",
+      "$type": "color",
+      "$description": "High visibility warning"
+    },
+    "off-white": {
+      "$value": "#FFFFFF",
+      "$type": "color",
+      "$description": "Primary content surface"
+    },
+    "cream": {
+      "$value": "#F6F3EB",
+      "$type": "color",
+      "$description": "Warm neutral background"
+    },
+    "light-beige": {
+      "$value": "#FCFAF7",
+      "$type": "color",
+      "$description": "Subtle background variation"
+    },
+    "pale-tan": {
+      "$value": "#EEE8D9",
+      "$type": "color",
+      "$description": "Fine borders / gentle separators"
+    },
+    "light-gray": {
+      "$value": "#F7F7F7",
+      "$type": "color",
+      "$description": "Cool neutral subtle contrast"
+    },
+    "platform-gray": {
+      "$value": "#EEEEEE",
+      "$type": "color",
+      "$description": "Soft dividers"
+    },
+    "subtle-border": {
+      "$value": "#DEDEDE",
+      "$type": "color",
+      "$description": "Light structural border"
+    },
+    "black": {
+      "$value": "#000000",
+      "$type": "color",
+      "$description": "High contrast text; map to project ink where possible"
+    }
+  },
+  "font": {
+    "display": {
+      "$value": "Ivar Display Condensed",
+      "$type": "fontFamily",
+      "$description": "Elegant condensed display; use available licensed equivalent"
+    },
+    "displayFallback": {
+      "$value": "Georgia, serif",
+      "$type": "fontFamily"
+    },
+    "body": {
+      "$value": "Figtree",
+      "$type": "fontFamily",
+      "$description": "Modern sans for body/nav/UI"
+    },
+    "bodyFallback": {
+      "$value": "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "$type": "fontFamily"
+    }
+  },
+  "typography": {
+    "hero": {
+      "fontFamily": "Ivar Display Condensed",
+      "fontSize": "39px",
+      "fontWeight": "400",
+      "lineHeight": "48.75px",
+      "letterSpacing": "0px"
+    },
+    "h1": {
+      "fontFamily": "Ivar Display Condensed",
+      "fontSize": "36px",
+      "fontWeight": "400",
+      "lineHeight": "45px",
+      "letterSpacing": "0px"
+    },
+    "h2": {
+      "fontFamily": "Ivar Display Condensed",
+      "fontSize": "28px",
+      "fontWeight": "400",
+      "lineHeight": "36px",
+      "letterSpacing": "0px"
+    },
+    "h3": {
+      "fontFamily": "Ivar Display Condensed",
+      "fontSize": "22px",
+      "fontWeight": "400",
+      "lineHeight": "30.25px",
+      "letterSpacing": "0px"
+    },
+    "bodyRegular": {
+      "fontFamily": "Figtree",
+      "fontSize": "13px",
+      "fontWeight": "600",
+      "lineHeight": "19.5px",
+      "letterSpacing": "0px"
+    },
+    "bodyCompact": {
+      "fontFamily": "Figtree",
+      "fontSize": "14.5px",
+      "fontWeight": "400",
+      "lineHeight": "21.75px",
+      "letterSpacing": "0px"
+    },
+    "caption": {
+      "fontFamily": "Figtree",
+      "fontSize": "12px",
+      "fontWeight": "400",
+      "lineHeight": "18px",
+      "letterSpacing": "0px"
+    },
+    "button": {
+      "fontFamily": "Ivar Display Condensed",
+      "fontSize": "14.5px",
+      "fontWeight": "400",
+      "lineHeight": "21.75px",
+      "letterSpacing": "0px"
+    }
+  },
+  "spacing": {
+    "base": {
+      "$value": "4px",
+      "$type": "dimension"
+    },
+    "scale": [
+      "4px",
+      "8px",
+      "10px",
+      "12px",
+      "16px",
+      "20px",
+      "24px",
+      "32px",
+      "40px",
+      "52px",
+      "80px"
+    ]
+  },
+  "radius": {
+    "none": {
+      "$value": "0px",
+      "$type": "dimension",
+      "$description": "Cards/containers/buttons sharp modern aesthetic"
+    },
+    "interactive": {
+      "$value": "3px",
+      "$type": "dimension",
+      "$description": "Inputs/buttons subtle softness"
+    },
+    "modal": {
+      "$value": "8px",
+      "$type": "dimension",
+      "$description": "Secondary floating surfaces"
+    }
+  },
+  "layout": {
+    "maxWidth": "1200px",
+    "grid": "12-column responsive grid",
+    "gutters": {
+      "mobile": "16px",
+      "tablet": "24px",
+      "desktop": "32px"
+    },
+    "majorSectionGapMin": "52px"
+  }
+}

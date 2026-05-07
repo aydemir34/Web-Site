@@ -1,0 +1,412 @@
+[
+  {
+    "slug": "simay-sarikaya-hair-makeup",
+    "businessName": "Simay Sarıkaya Hair & Makeup Studio",
+    "category": "beauty-salon",
+    "district": "Gaziosmanpaşa",
+    "neighborhood": "Merkez Mahallesi",
+    "address": "Merkez Mah., Salon Sok. No:14 Gaziosmanpaşa / İstanbul",
+    "phone": "+90 212 610 45 45",
+    "whatsapp": "905337774545",
+    "instagramUrl": "https://instagram.com/simaysarikayahairmakeup",
+    "mapUrl": "https://maps.google.com/?q=Gaziosmanpasa+Istanbul",
+    "mapEmbedUrl": "https://maps.google.com/maps?q=Gaziosmanpasa%20Istanbul&output=embed",
+    "mainService": "Gelin Saçı ve Makyajı",
+    "themeId": "bridal-editorial-luxe",
+    "archetype": "soft-beauty-editorial",
+    "tone": "bridal-editorial",
+    "packageFit": "booking",
+    "hasProducts": true,
+    "visualProfile": {
+      "assetSet": "soft-beauty",
+      "heroMedia": "/assets/businesses/simay-sarikaya/hero-bridal-01.jpg",
+      "gridImages": [
+        "/assets/businesses/simay-sarikaya/grid-01.jpg",
+        "/assets/businesses/simay-sarikaya/grid-02.jpg",
+        "/assets/businesses/simay-sarikaya/grid-03.jpg"
+      ],
+      "videos": ["/assets/businesses/simay-sarikaya/reel-01.mp4"],
+      "ornamentStyle": "bridal-silk"
+    },
+    "hero": {
+      "eyebrow": "Editorial Bridal Look",
+      "title": "Özel gününüz için saç ve makyajı zarif bir akışla planlayın.",
+      "description": "Simay Sarıkaya Hair & Makeup Studio, prova gününden düğün sabahına kadar stili tek akışla planlar.",
+      "primaryCta": "WhatsApp’tan Randevu Bilgisi Al",
+      "secondaryCta": "Hizmetleri İncele"
+    },
+    "cta": {
+      "title": "Prova takvimini bu hafta netleştirelim",
+      "description": "Düğün tarihin ve konseptinle mesaj bırak, ekip aynı gün geri dönsün.",
+      "buttonText": "Simay'a WhatsApp'tan Yaz"
+    },
+    "trustBadges": ["Gelin Prova Planı", "Düğün Günü Ekip Desteği", "Konsept Uyumlu Stil", "Randevu Takvim Netliği"],
+    "trustFeatures": [
+      {
+        "heading": "Prova ve hazırlık planı",
+        "description": "Özel gün tarihi, konsept ve istediğiniz görünüm üzerinden hazırlık akışı netleştirilir."
+      },
+      {
+        "heading": "Konsepte uyumlu stil",
+        "description": "Gelinlik, kına kıyafeti veya davet konseptinize göre saç ve makyaj dili belirlenir."
+      },
+      {
+        "heading": "Fotoğrafa hazır görünüm",
+        "description": "Saç ve makyaj dili, gün boyu çekimlerde zarif ve dengeli görünmesi için planlanır."
+      },
+      {
+        "heading": "WhatsApp ile hızlı bilgi",
+        "description": "Tarih, hizmet ve hazırlık detayları için hızlıca randevu bilgisi alınabilir."
+      }
+    ],
+    "services": [
+      { "name": "Gelin Saçı ve Makyajı", "description": "Düğün konsepti, gelinlik ve çekim planına göre prova destekli saç ve makyaj akışı hazırlanır." },
+      { "name": "Kına Hazırlığı", "description": "Kına gecesi için kıyafet ve sahne ışığına uyumlu, kalıcılığı güçlü saç ve makyaj planlanır." },
+      { "name": "Nişan Hazırlığı", "description": "Nişan günü için yüz hatlarını öne çıkaran dengeli makyaj ve zarif saç tasarımı uygulanır." },
+      { "name": "Davet Makyajı", "description": "Özel davetlerde gün boyu taze görünüm sağlayan, cilt tipine uygun makyaj uygulanır." },
+      { "name": "Özel Gün Saç Tasarımı", "description": "Topuz, dalga veya toplu stiller arasından konsepte uygun saç formu belirlenip uygulanır." }
+    ],
+    "processSteps": ["Ön Stil Görüşmesi", "Deneme Seansı", "Look Revizesi", "Düğün Günü Uygulama"],
+    "reviews": [
+      { "name": "Elif Y.", "text": "Prova süreci çok netti, düğün günü hiç stres yaşamadım.", "service": "Bridal Makyaj" },
+      { "name": "Mina B.", "text": "Saç tasarımı tüm gece kaldı, tam hayal ettiğim gibiydi.", "service": "Bridal Saç Tasarımı" }
+    ],
+    "faq": [
+      { "question": "Randevu için nasıl iletişime geçebilirim?", "answer": "WhatsApp üzerinden tarih ve hizmet bilgisini paylaşarak hızlıca randevu bilgisi alabilirsiniz." },
+      { "question": "Gelin, kına ve nişan için ayrı hizmet alabilir miyim?", "answer": "Evet, her özel gün için ayrı hizmet veya birden fazla günü kapsayan paket planlanabilir." },
+      { "question": "Fiyat bilgisi nasıl veriliyor?", "answer": "Tarih, hizmet kapsamı ve hazırlık detaylarına göre WhatsApp üzerinden net fiyat bilgisi paylaşılır." },
+      { "question": "Stüdyoya nasıl ulaşabilirim?", "answer": "Randevu & İletişim sayfasındaki Google Maps bağlantısından yol tarifi alabilirsiniz." }
+    ],
+    "products": [
+      { "name": "Bridal Fixing Mist", "price": "790 TL", "description": "Makyaj kalıcılığını destekleyen hafif sabitleyici." }
+    ],
+    "moduleOrder": {
+      "home": ["hero", "trustBadges", "serviceCarousel", "instagramPreviewGrid", "reviewsPreview", "appointmentCta"],
+      "services": ["hero", "servicesGrid", "processSteps", "instagramPreviewGrid", "faq", "appointmentCta"],
+      "appointment": ["hero", "processSteps", "contactMap", "trustBadges", "faq", "appointmentCta"]
+    },
+    "seo": {
+      "title": "Simay Sarıkaya Hair & Makeup Studio | Gaziosmanpaşa Bridal Saç ve Makyaj",
+      "description": "Gaziosmanpaşa'da bridal saç ve makyaj prova planı için Simay Sarıkaya Hair & Makeup Studio ile randevu al.",
+      "ogImage": "/og/simay-sarikaya-hair-makeup.jpg"
+    },
+    "leadSignals": {
+      "hasWebsite": false,
+      "rating": 4.7,
+      "reviewCount": 75,
+      "instagramActive": true,
+      "visualQuality": 8,
+      "offerDepth": 9,
+      "responseLikelihood": 8
+    }
+  },
+  {
+    "slug": "luna-rituel-gop",
+    "businessName": "Luna Rituel Studio",
+    "category": "beauty-salon",
+    "district": "Gaziosmanpasa",
+    "neighborhood": "Karadeniz Mahallesi",
+    "address": "Karadeniz Mah., Sifa Sok. No:12 Gaziosmanpasa / Istanbul",
+    "phone": "+90 212 410 12 34",
+    "whatsapp": "905324567890",
+    "instagramUrl": "https://instagram.com/lunarituelstudio",
+    "mapUrl": "https://maps.google.com/?q=Gaziosmanpasa+Istanbul",
+    "mapEmbedUrl": "https://maps.google.com/maps?q=Gaziosmanpasa%20Istanbul&output=embed",
+    "mainService": "Cilt Bakimi ve Cilt Yenileme",
+    "themeId": "soft-beauty-editorial",
+    "tone": "warm-beauty",
+    "hasProducts": true,
+    "visualProfile": {
+      "assetSet": "editorial-warm-02",
+      "heroMedia": "/assets/library/soft-beauty/hero-bridal-01.jpg",
+      "gridImages": [
+        "/assets/library/soft-beauty/grid-01.jpg",
+        "/assets/library/soft-beauty/service-makeup-01.jpg",
+        "/assets/library/soft-beauty/service-hair-01.jpg",
+        "/assets/library/soft-beauty/bg-silk-01.jpg"
+      ],
+      "videos": ["/assets/library/soft-beauty/reel-01.mp4"],
+      "ornamentStyle": "blush-waves"
+    },
+    "hero": {
+      "eyebrow": "Butik Guzellik Deneyimi",
+      "title": "Gaziosmanpasa'da cildine nazik ama etkili bir rutin kur.",
+      "description": "Luna Rituel Studio, cilt analiziyle baslayan ve sana ozel planla ilerleyen bakim seanslari sunar.",
+      "primaryCta": "WhatsApp ile Randevu Al",
+      "secondaryCta": "Hizmetleri Incele"
+    },
+    "cta": {
+      "title": "Randevu takvimini birlikte netlestirelim",
+      "description": "30 saniyede on gorusme talebi birak, uygun saatleri ayni gun paylasalim.",
+      "buttonText": "WhatsApp'tan Yaz"
+    },
+    "trustBadges": ["On Gorusme Ucretsiz", "Hijyen Protokolu", "Kisiye Ozel Plan", "Merkezi Konum"],
+    "services": [
+      { "name": "Hydra Cilt Bakimi", "description": "Gozenek temizligi, nem dengesi ve aydinlik gorunum odakli seans." },
+      { "name": "Leke Tonu Dengeleme", "description": "Mevsimsel ton farklari icin hassas bakim ve takip." },
+      { "name": "Ipek Kirpik Uygulamasi", "description": "Gunluk kullanima uygun, dogal yogunluklu kirpik tasarimi." }
+    ],
+    "processSteps": ["Cilt Analizi", "Kisiye Ozel Plan", "Uygulama Seansi", "Bakim Onerileri"],
+    "reviews": [
+      { "name": "Sena K.", "text": "Cildimdeki matlik ilk seanstan sonra azaldi, ekip cok ilgiliydi.", "service": "Hydra Cilt Bakimi" },
+      { "name": "Gizem A.", "text": "Planli ilerlemeleri guven verdi, sonucu adim adim gordum.", "service": "Leke Tonu Dengeleme" }
+    ],
+    "faq": [
+      { "question": "Ilk randevuda ne yapiliyor?", "answer": "Ilk seansta cilt analizi yapilip uygun bakim plani belirlenir." },
+      { "question": "Bakim sureleri ne kadar?", "answer": "Hizmete gore 45-75 dakika arasinda degisir." }
+    ],
+    "products": [
+      { "name": "Nazik Temizleyici Jel", "price": "690 TL", "description": "Gunluk kullanim icin hafif formullu temizleyici." },
+      { "name": "Nem Bariyer Serumu", "price": "890 TL", "description": "Bakim sonrasi nemi korumaya yardimci serum." }
+    ],
+    "moduleOrder": {
+      "home": ["hero", "trustBadges", "servicesGrid", "instagramPreviewGrid", "processSteps", "reviewsPreview", "productPreview", "appointmentCta"],
+      "services": ["hero", "serviceCarousel", "processSteps", "faq", "appointmentCta"],
+      "appointment": ["hero", "contactMap", "trustBadges", "instagramPreviewGrid", "faq", "appointmentCta"]
+    },
+    "seo": {
+      "title": "Luna Rituel Studio | Gaziosmanpasa Cilt Bakimi ve Guzellik Randevusu",
+      "description": "Gaziosmanpasa Karadeniz Mahallesi'nde cilt bakimi, leke tonu dengeleme ve ipek kirpik hizmetleri icin randevu al.",
+      "ogImage": "/og/luna-rituel-gop.jpg"
+    },
+    "leadSignals": {
+      "hasWebsite": false,
+      "rating": 4.6,
+      "reviewCount": 61,
+      "instagramActive": true,
+      "visualQuality": 7,
+      "offerDepth": 8,
+      "responseLikelihood": 7
+    }
+  },
+  {
+    "slug": "atelier-niva-byr",
+    "businessName": "Atelier Niva Beauty",
+    "category": "beauty-salon",
+    "district": "Bayrampasa",
+    "neighborhood": "Muratpasa Mahallesi",
+    "address": "Muratpasa Mah., Park Cad. No:18 Bayrampasa / Istanbul",
+    "phone": "+90 212 550 48 90",
+    "whatsapp": "905335551234",
+    "instagramUrl": "https://instagram.com/ateliernivabeauty",
+    "mapUrl": "https://maps.google.com/?q=Bayrampasa+Istanbul",
+    "mapEmbedUrl": "https://maps.google.com/maps?q=Bayrampasa%20Istanbul&output=embed",
+    "mainService": "Profesyonel Cilt Bakimi ve Ipek Kirpik",
+    "themeId": "campaign-playful-premium",
+    "tone": "playful-campaign",
+    "hasProducts": false,
+    "visualProfile": {
+      "assetSet": "campaign-sun-03",
+      "heroMedia": "/assets/library/soft-beauty/hero-bridal-01.jpg",
+      "gridImages": [
+        "/assets/library/soft-beauty/grid-01.jpg",
+        "/assets/library/soft-beauty/service-makeup-01.jpg",
+        "/assets/library/soft-beauty/service-hair-01.jpg",
+        "/assets/library/soft-beauty/bg-silk-01.jpg"
+      ],
+      "videos": ["/assets/library/soft-beauty/reel-01.mp4"],
+      "ornamentStyle": "playful-shapes"
+    },
+    "hero": {
+      "eyebrow": "Sade ve Zarif Bakim",
+      "title": "Bayrampasa'da sehir temposuna uygun hizli ama rafine bakim.",
+      "description": "Atelier Niva, yogun programi olan misafirleri icin etkili bakimi kisa surede planlar.",
+      "primaryCta": "Bugun Icin Saat Sor",
+      "secondaryCta": "Bakim Paketlerini Gor"
+    },
+    "cta": {
+      "title": "Musait saatleri hemen paylasalim",
+      "description": "Ihtiyacini yaz, sana en uygun bakim akisini birlikte netlestirelim.",
+      "buttonText": "Hemen WhatsApp'tan Ulas"
+    },
+    "trustBadges": ["Ayni Gun Randevu", "Deneyimli Uzman Ekip", "Merkezi Ulasim", "Hijyen Standardi"],
+    "services": [
+      { "name": "Express Cilt Bakimi", "description": "Kisa surede canli gorunum icin hedefli bakim." },
+      { "name": "Ipek Kirpik Tasarimi", "description": "Yuz hatlarina uygun, dogal yogunluk ayari." },
+      { "name": "Kas Sekillendirme", "description": "Yuz formuna uygun kas duzenleme ve sabitleme." }
+    ],
+    "processSteps": ["Ihtiyac Analizi", "Uygun Paket Secimi", "Seans Uygulamasi", "Evde Bakim Onerisi"],
+    "reviews": [
+      { "name": "Melis T.", "text": "Ipek kirpik cok dogal oldu, tam istedigim gibi.", "service": "Ipek Kirpik Tasarimi" },
+      { "name": "Derya S.", "text": "Hizli ama ozenli calisiyorlar, yogun tempoda cok iyi geliyor.", "service": "Express Cilt Bakimi" }
+    ],
+    "faq": [
+      { "question": "Randevusuz gelebilir miyim?", "answer": "Yogunluk durumuna gore ayni gun musaitlik sunulabilir, once mesaj atman iyi olur." },
+      { "question": "Ipek kirpik ne kadar dayaniyor?", "answer": "Kullanim aliskanligina gore ortalama 2-4 hafta arasi kalicidir." }
+    ],
+    "products": [],
+    "moduleOrder": {
+      "home": ["hero", "servicesGrid", "trustBadges", "instagramPreviewGrid", "reviewsPreview", "processSteps", "appointmentCta"],
+      "services": ["hero", "serviceCarousel", "faq", "appointmentCta"],
+      "appointment": ["hero", "contactMap", "instagramPreviewGrid", "faq", "appointmentCta"]
+    },
+    "seo": {
+      "title": "Atelier Niva Beauty | Bayrampasa Cilt Bakimi ve Ipek Kirpik",
+      "description": "Bayrampasa Muratpasa Mahallesi'nde profesyonel cilt bakimi, ipek kirpik ve kas sekillendirme randevusu.",
+      "ogImage": "/og/atelier-niva-byr.jpg"
+    },
+    "leadSignals": {
+      "hasWebsite": false,
+      "rating": 4.4,
+      "reviewCount": 38,
+      "instagramActive": true,
+      "visualQuality": 6,
+      "offerDepth": 7,
+      "responseLikelihood": 8
+    }
+  },
+  {
+    "slug": "nova-derma-eyp",
+    "businessName": "Nova Derma Point",
+    "category": "aesthetic-clinic",
+    "district": "Eyupsultan",
+    "neighborhood": "Alibeykoy Mahallesi",
+    "address": "Alibeykoy Mah., Seckin Sok. No:5 Eyupsultan / Istanbul",
+    "phone": "+90 212 777 20 40",
+    "whatsapp": "905325551100",
+    "instagramUrl": "https://instagram.com/novadermapoint",
+    "mapUrl": "https://maps.google.com/?q=Eyupsultan+Istanbul",
+    "mapEmbedUrl": "https://maps.google.com/maps?q=Eyupsultan%20Istanbul&output=embed",
+    "mainService": "Medikal Estetik Danismanligi ve Cilt Yenileme",
+    "themeId": "clean-clinic-minimal",
+    "tone": "clean-clinic",
+    "hasProducts": true,
+    "visualProfile": {
+      "assetSet": "clinic-minimal-04",
+      "heroMedia": "/assets/library/clean-clinic/hero-clinic-01.jpg",
+      "gridImages": [
+        "/assets/library/clean-clinic/grid-01.jpg",
+        "/assets/library/clean-clinic/service-makeup-01.jpg",
+        "/assets/library/clean-clinic/service-hair-01.jpg",
+        "/assets/library/clean-clinic/bg-silk-01.jpg"
+      ],
+      "videos": ["/assets/library/clean-clinic/reel-01.mp4"],
+      "ornamentStyle": "minimal-lines"
+    },
+    "hero": {
+      "eyebrow": "Planli Klinik Yaklasim",
+      "title": "Eyupsultan'da temiz, net ve olculebilir cilt yenileme sureci.",
+      "description": "Nova Derma Point, her uygulama once analiz sonra plan prensibiyle ilerler.",
+      "primaryCta": "On Degerlendirme Icin Yaz",
+      "secondaryCta": "Tedavi Yaklasimini Incele"
+    },
+    "cta": {
+      "title": "Sana uygun yol haritasini 1 gunde cizelim",
+      "description": "On gorusme notlarini paylas, klinik ekibi uygun zaman ve sureci iletsin.",
+      "buttonText": "Klinikle WhatsApp'ta Konus"
+    },
+    "trustBadges": ["Uzman Degerlendirme", "Steril Klinik Ortam", "Asamali Takip", "Lokasyon Avantaji"],
+    "services": [
+      { "name": "Cilt Bariyeri Guclendirme", "description": "Hassas ciltlerde bariyer odakli, asamali klinik plan." },
+      { "name": "Leke Gorunumu Protokolu", "description": "Ton esitsizligi icin duzenli takip gerektiren uygulama paketi." },
+      { "name": "Nem ve Elastikiyet Destegi", "description": "Yas ve mevsim etkilerine gore planlanan seans akisi." }
+    ],
+    "processSteps": ["Klinik Analiz", "Plan Taslagi", "Seans Takvimi", "Kontrol ve Revize"],
+    "reviews": [
+      { "name": "Esra N.", "text": "Sureci adim adim anlattiklari icin guvenle devam ettim.", "service": "Leke Gorunumu Protokolu" },
+      { "name": "Burcu D.", "text": "Klinik ortami cok temiz, surec net ve duzenliydi.", "service": "Cilt Bariyeri Guclendirme" }
+    ],
+    "faq": [
+      { "question": "Seans araliklari nasil belirleniyor?", "answer": "Cilt durumu ve hedeflere gore doktor/uzman onerisi ile planlanir." },
+      { "question": "Ilk gorusme ne kadar surer?", "answer": "Ortalama 20-30 dakika surer ve yol haritasi cikarilir." }
+    ],
+    "products": [
+      { "name": "Klinik Nem Koruyucu Krem", "price": "1.150 TL", "description": "Seans sonrasi cilt bariyerine destek urun." }
+    ],
+    "moduleOrder": {
+      "home": ["hero", "trustBadges", "processSteps", "serviceCarousel", "instagramPreviewGrid", "reviewsPreview", "productPreview", "appointmentCta"],
+      "services": ["hero", "servicesGrid", "processSteps", "faq", "appointmentCta"],
+      "appointment": ["hero", "contactMap", "trustBadges", "appointmentCta", "faq"]
+    },
+    "seo": {
+      "title": "Nova Derma Point | Eyupsultan Medikal Estetik ve Cilt Yenileme",
+      "description": "Eyupsultan Alibeykoy'de medikal estetik danismanligi ve cilt yenileme plani icin on gorusme al.",
+      "ogImage": "/og/nova-derma-eyp.jpg"
+    },
+    "leadSignals": {
+      "hasWebsite": true,
+      "rating": 4.8,
+      "reviewCount": 121,
+      "instagramActive": true,
+      "visualQuality": 8,
+      "offerDepth": 8,
+      "responseLikelihood": 6
+    }
+  },
+  {
+    "slug": "flora-pulse-byr",
+    "businessName": "Flora Pulse Skin Lab",
+    "category": "skincare-clinic",
+    "district": "Bayrampasa",
+    "neighborhood": "Yildirim Mahallesi",
+    "address": "Yildirim Mah., Atlas Cad. No:27 Bayrampasa / Istanbul",
+    "phone": "+90 212 666 90 11",
+    "whatsapp": "905322221177",
+    "instagramUrl": "https://instagram.com/florapulseskinlab",
+    "mapUrl": "https://maps.google.com/?q=Bayrampasa+Istanbul",
+    "mapEmbedUrl": "https://maps.google.com/maps?q=Bayrampasa%20Istanbul&output=embed",
+    "mainService": "Cilt Analizi ve Kisisel Bakim Programi",
+    "themeId": "product-led-beauty",
+    "tone": "minimal-professional",
+    "hasProducts": false,
+    "visualProfile": {
+      "assetSet": "skinlab-product-05",
+      "heroMedia": "/assets/library/product-led/hero-bridal-01.jpg",
+      "gridImages": [
+        "/assets/library/product-led/grid-01.jpg",
+        "/assets/library/product-led/service-makeup-01.jpg",
+        "/assets/library/product-led/service-hair-01.jpg",
+        "/assets/library/product-led/bg-silk-01.jpg"
+      ],
+      "videos": ["/assets/library/product-led/reel-01.mp4"],
+      "ornamentStyle": "mint-halo"
+    },
+    "hero": {
+      "eyebrow": "Skin Lab Yaklasimi",
+      "title": "Bayrampasa'da bilimsel analize dayali cilt bakim deneyimi.",
+      "description": "Flora Pulse Skin Lab, kisisel analiz verilerine gore planlanan bakim adimlari uygular.",
+      "primaryCta": "Randevu Icin Mesaj Birak",
+      "secondaryCta": "Program Detaylarini Oku"
+    },
+    "cta": {
+      "title": "Cildin icin net bir baslangic planlayalim",
+      "description": "Sorularini gonder, uygun bakim adimini uzman ekiple beraber belirleyelim.",
+      "buttonText": "Uzmanla WhatsApp'ta Basla"
+    },
+    "trustBadges": ["Analiz Odakli Yaklasim", "Seffaf Surec", "Takvimli Takip", "Kolay Ulasim"],
+    "services": [
+      { "name": "Cilt Haritalama Seansi", "description": "Cilt tipine gore detayli ilk analiz ve profil cikarma." },
+      { "name": "Dengeleyici Bakim Programi", "description": "Yag, nem ve hassasiyet dengesine gore planli seanslar." },
+      { "name": "Gozenek Gorunumu Destegi", "description": "Duzenli bakim ve ev rutiniyle gorunum iyilestirme hedefi." }
+    ],
+    "processSteps": ["On Bilgi Alimi", "Analiz Randevusu", "Program Tasarimi", "Aylik Takip"],
+    "reviews": [
+      { "name": "Merve O.", "text": "Cildim icin neyin iyi oldugunu net anlattiklari icin cok rahattim.", "service": "Cilt Haritalama Seansi" },
+      { "name": "Ebru Y.", "text": "Programli takip sayesinde rutinimi duzene soktum.", "service": "Dengeleyici Bakim Programi" }
+    ],
+    "faq": [
+      { "question": "Program kac seans suruyor?", "answer": "Ihtiyaca gore degisiyor; ortalama 4-6 seanslik planlar olusuyor." },
+      { "question": "Erkek misafirler icin de uygun mu?", "answer": "Evet, analiz ve bakim planlari herkes icin kisisel sekilde olusturulur." }
+    ],
+    "products": [],
+    "moduleOrder": {
+      "home": ["hero", "processSteps", "servicesGrid", "instagramPreviewGrid", "trustBadges", "reviewsPreview", "appointmentCta"],
+      "services": ["hero", "servicesGrid", "faq", "processSteps", "appointmentCta"],
+      "appointment": ["hero", "contactMap", "appointmentCta", "faq"]
+    },
+    "seo": {
+      "title": "Flora Pulse Skin Lab | Bayrampasa Cilt Analizi ve Bakim Programi",
+      "description": "Bayrampasa Yildirim Mahallesi'nde cilt analizi, dengeleyici bakim ve takvimli takip randevusu al.",
+      "ogImage": "/og/flora-pulse-byr.jpg"
+    },
+    "leadSignals": {
+      "hasWebsite": false,
+      "rating": 4.5,
+      "reviewCount": 47,
+      "instagramActive": true,
+      "visualQuality": 7,
+      "offerDepth": 9,
+      "responseLikelihood": 8
+    }
+  }
+]

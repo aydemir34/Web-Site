@@ -1,0 +1,78 @@
+{
+  "color": {
+    "pitch-black": {
+      "$value": "#0f0f0f",
+      "$type": "color",
+      "$description": "Pitch Black — Primary page background, structural surfaces"
+    },
+    "deep-graphite": {
+      "$value": "#191919",
+      "$type": "color",
+      "$description": "Deep Graphite — Secondary surface background, subtle layering for content blocks"
+    },
+    "pure-white": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "Pure White — Hairline borders, dividers, input outlines, and card edges on light surfaces. Do not promote it to the primary CTA color"
+    }
+  },
+  "font": {
+    "danzza-bold": {
+      "$value": "Danzza-Bold",
+      "$type": "fontFamily",
+      "$description": "All textual content including headings and links. The extreme compactness and bold weight are signature to the brand's direct, impactful communication style."
+    }
+  },
+  "typography": {
+    "base": {
+      "$value": {
+        "fontFamily": "Danzza-Bold",
+        "fontSize": "16px",
+        "fontWeight": 700,
+        "lineHeight": 1
+      },
+      "$type": "typography",
+      "$description": "Typography step base at 16px"
+    },
+    "5xl": {
+      "$value": {
+        "fontFamily": "Danzza-Bold",
+        "fontSize": "48px",
+        "fontWeight": 700,
+        "lineHeight": 1
+      },
+      "$type": "typography",
+      "$description": "Typography step 5xl at 48px"
+    }
+  },
+  "spacing": {
+    "30": {
+      "$value": "30px",
+      "$type": "dimension",
+      "$description": "Spacing 30px"
+    },
+    "60": {
+      "$value": "60px",
+      "$type": "dimension",
+      "$description": "Spacing 60px"
+    },
+    "90": {
+      "$value": "90px",
+      "$type": "dimension",
+      "$description": "Spacing 90px"
+    },
+    "unit": {
+      "$value": "6px",
+      "$type": "dimension",
+      "$description": "Base spacing unit"
+    }
+  },
+  "$extensions": {
+    "com.refero.extraction": {
+      "url": "https://lacey.studio",
+      "siteName": "LACEY.STUDIO",
+      "extractedAt": "2026-04-30T02:04:15.775Z",
+      "variant": "extended"
+    }
+  }
+}

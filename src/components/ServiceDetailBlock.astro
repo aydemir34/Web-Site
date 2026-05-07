@@ -1,0 +1,122 @@
+---
+import type { Business, ServiceItem } from "../types";
+import { getServiceMedia } from "../lib/assets";
+import { buildWhatsAppUrl } from "../lib/whatsapp";
+import { slugify } from "../lib/slugify";
+import EditorialVisualFallback from "./EditorialVisualFallback.astro";
+
+type Props = {
+  business: Business;
+  service: ServiceItem;
+  index: number;
+};
+
+const { business, service, index } = Astro.props;
+const media = getServiceMedia(business, service);
+const waUrl = buildWhatsAppUrl(business, service);
+---
+
+<article id={slugify(service.name)} class="service-row">
+  <p class="order">{String(index + 1).padStart(2, "0")}</p>
+  <div class="service-copy">
+    <h3>{service.name}</h3>
+    <p>{service.description}</p>
+    <a class="wa-link" href={waUrl} target="_blank" rel="noreferrer">WhatsApp’tan Randevu ve Fiyat Sor</a>
+  </div>
+  <figure class="service-media">
+    {
+      media ? (
+        <>
+          <img
+            src={media}
+            alt={`${service.name} hizmet görseli`}
+            loading="lazy"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+          />
+          <div class="fallback" aria-hidden="true">
+            <EditorialVisualFallback theme={business.themeId} aspectRatio="1/1" labels={["GELİN", "KINA", "NİŞAN"]} />
+          </div>
+        </>
+      ) : (
+        <EditorialVisualFallback theme={business.themeId} aspectRatio="1/1" labels={["GELİN", "KINA", "NİŞAN"]} />
+      )
+    }
+  </figure>
+</article>
+
+<style>
+  .service-row {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr) minmax(160px, 260px);
+    gap: 0.8rem 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--primary), white 72%);
+  }
+
+  .order {
+    font-size: 0.74rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    padding-top: 0.2rem;
+  }
+
+  .service-copy {
+    display: grid;
+    gap: 0.42rem;
+  }
+
+  .service-copy h3 {
+    font-size: clamp(1.1rem, 2.2vw, 1.45rem);
+  }
+
+  .service-copy p {
+    color: var(--muted);
+    max-width: 62ch;
+  }
+
+  .wa-link {
+    margin-top: 0.25rem;
+    justify-self: start;
+    text-decoration: none;
+    font-size: 0.76rem;
+    border: 1px solid color-mix(in srgb, #25d366, black 16%);
+    color: #157347;
+    background: color-mix(in srgb, #25d366, white 90%);
+    border-radius: 999px;
+    padding: 0.3rem 0.62rem;
+  }
+
+  .service-media {
+    margin: 0;
+    border: 1px solid color-mix(in srgb, var(--primary), white 66%);
+    overflow: hidden;
+  }
+
+  .service-media img {
+    width: 100%;
+    height: 100%;
+    min-height: 170px;
+    object-fit: cover;
+  }
+
+  .fallback {
+    display: none;
+    height: 100%;
+  }
+
+  @media (max-width: 860px) {
+    .service-row {
+      grid-template-columns: 1fr;
+      gap: 0.65rem;
+    }
+
+    .order {
+      padding-top: 0;
+    }
+
+    .service-media {
+      order: 3;
+      max-width: 420px;
+    }
+  }
+</style>

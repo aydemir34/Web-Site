@@ -1,0 +1,62 @@
+---
+import type { ServiceItem } from "../types";
+import { slugify } from "../lib/slugify";
+
+type Props = {
+  services: ServiceItem[];
+};
+
+const { services } = Astro.props;
+---
+
+<section class="section menu-section">
+  <div class="container">
+    <h2>Hızlı Hizmet Menüsü</h2>
+    <nav aria-label="Hizmet menüsü" class="menu">
+      <ul>
+        {
+          services.map((service) => (
+            <li>
+              <a href={`#${slugify(service.name)}`}>{service.name}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</section>
+
+<style>
+  .menu-section {
+    padding-top: 0.4rem;
+    padding-bottom: 1rem;
+  }
+
+  .menu {
+    margin-top: 0.8rem;
+    border-top: 1px solid color-mix(in srgb, var(--primary), white 68%);
+    border-bottom: 1px solid color-mix(in srgb, var(--primary), white 68%);
+    padding: 0.6rem 0;
+  }
+
+  .menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+
+  .menu a {
+    text-decoration: none;
+    font-size: 0.8rem;
+    color: var(--muted);
+    border: 1px solid color-mix(in srgb, var(--primary), white 70%);
+    padding: 0.32rem 0.52rem;
+  }
+
+  .menu a:hover {
+    color: var(--primary);
+  }
+</style>

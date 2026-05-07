@@ -1,0 +1,46 @@
+---
+type Props = {
+  basePath: string;
+  currentVariant?: string;
+};
+
+const { basePath, currentVariant = "default" } = Astro.props;
+const variants = ["default", "minimal", "editorial", "campaign"];
+---
+
+<div class="variant-toggle" aria-label="Stil varyanti">
+  {
+    variants.map((variant) => (
+      <a
+        href={variant === "default" ? basePath : `${basePath}?variant=${variant}`}
+        aria-current={currentVariant === variant ? "true" : undefined}
+      >
+        {variant}
+      </a>
+    ))
+  }
+</div>
+
+<style>
+  .variant-toggle {
+    display: inline-flex;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+  }
+
+  .variant-toggle a {
+    font-size: 0.74rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.27rem 0.53rem;
+    background: color-mix(in srgb, var(--surface), white 20%);
+  }
+
+  .variant-toggle a[aria-current="true"] {
+    color: var(--text);
+    border-color: color-mix(in srgb, var(--primary), white 20%);
+  }
+</style>

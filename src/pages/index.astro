@@ -1,0 +1,40 @@
+---
+import { getBusinesses } from "../lib/data";
+
+const businesses = getBusinesses();
+---
+
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo Liste</title>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        margin: 2rem auto;
+        width: min(760px, calc(100% - 2rem));
+      }
+      h1 {
+        margin-bottom: 1rem;
+      }
+      ul {
+        display: grid;
+        gap: 0.6rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Demo Site Listesi</h1>
+    <ul>
+      {
+        businesses.map((business) => (
+          <li>
+            <a href={`/demo/${business.slug}/`}>{business.businessName}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </body>
+</html>

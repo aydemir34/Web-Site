@@ -1,0 +1,74 @@
+{
+  "color": {
+    "ink-black": {
+      "$value": "#06040e",
+      "$type": "color",
+      "$description": "Ink Black — Primary text, outline buttons, card borders, interactive elements"
+    },
+    "deep-ocean": {
+      "$value": "#10242f",
+      "$type": "color",
+      "$description": "Deep Ocean — Secondary text, solid buttons, card background transitions"
+    },
+    "crystal-canvas": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "Crystal Canvas — Page backgrounds, prominent card surfaces, primary button text"
+    },
+    "cloud-gray": {
+      "$value": "#e1edf2",
+      "$type": "color",
+      "$description": "Cloud Gray — Light surface background, subtle button text, icon accents"
+    },
+    "warm-sand": {
+      "$value": "#f5f5f5",
+      "$type": "color",
+      "$description": "Warm Sand — Main page background, subtle elevated card backgrounds, link backgrounds"
+    },
+    "sky-blue": {
+      "$value": "#a5c8d8",
+      "$type": "color",
+      "$description": "Sky Blue — Feature card accents, decorative background shapes"
+    },
+    "lavender-mist": {
+      "$value": "#cbb0eb",
+      "$type": "color",
+      "$description": "Lavender Mist — Feature card accents, decorative background shapes, subtle card borders"
+    },
+    "sunset-orange": {
+      "$value": "#e39a4d",
+      "$type": "color",
+      "$description": "Sunset Orange — Feature card accents, decorative background shapes"
+    },
+    "rich-plum": {
+      "$value": "#1f1738",
+      "$type": "color",
+      "$description": "Rich Plum — Feature card backgrounds, secondary actionable contexts"
+    },
+    "earthy-umber": {
+      "$value": "#452623",
+      "$type": "color",
+      "$description": "Earthy Umber — Feature card backgrounds, decorative elements"
+    },
+    "light-peach": {
+      "$value": "#f6ddc4",
+      "$type": "color",
+      "$description": "Light Peach — Text for buttons and body copy on dark backgrounds, icon accents"
+    }
+  },
+  "font": {
+    "stabilgrotesk": {
+      "$value": "StabilGrotesk",
+      "$type": "fontFamily",
+      "$description": "All text elements: headlines, body copy, navigation, and buttons. Its varied weights and negative letter-spacing for larger sizes contribute to a cohesive yet dynamic feel, avoiding a rigid grid."
+    }
+  },
+  "$extensions": {
+    "com.refero.extraction": {
+      "url": "https://www.podia.com",
+      "siteName": "Podia",
+      "extractedAt": "2026-04-30T00:48:47.288Z",
+      "variant": "compact"
+    }
+  }
+}

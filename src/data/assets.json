@@ -1,0 +1,89 @@
+{
+  "assetSets": {
+    "soft-beauty": {
+      "hero": [
+        "/assets/library/hair-makeup/hero-hair-makeup-01.jpg",
+        "/assets/library/bridal-makeup/hero-bridal-makeup-01.webp"
+      ],
+      "service": {
+        "hair": ["/assets/library/hair-makeup/service-hair-01.jpg"],
+        "makeup": ["/assets/library/hair-makeup/service-makeup-01.jpg"],
+        "default": ["/assets/library/hair-makeup/service-hair-makeup-01.jpg"]
+      },
+      "grid": [
+        "/assets/library/hair-makeup/grid-hair-makeup-01.jpg",
+        "/assets/library/hair-makeup/grid-hair-makeup-02.jpg",
+        "/assets/library/hair-makeup/grid-hair-makeup-03.jpg"
+      ],
+      "video": ["/assets/library/hair-makeup/video-makeup-process-01.mp4"],
+      "contact": ["/assets/library/contact-location/contact-location-01.jpg"]
+    },
+    "clean-clinic": {
+      "hero": ["/assets/library/clinic/hero-clinic-01.jpg"],
+      "service": {
+        "skincare": ["/assets/library/skincare/service-skincare-cilt-bakimi-01.webp"],
+        "laser": ["/assets/library/laser-epilation/service-laser-epilation-01.jpg"],
+        "default": ["/assets/library/clinic/service-clinic-01.jpg"]
+      },
+      "grid": ["/assets/library/clinic/grid-clinic-01.jpg"],
+      "video": ["/assets/library/clinic/video-clinic-01.mp4"],
+      "contact": ["/assets/library/contact-location/contact-location-clinic-01.jpg"]
+    },
+    "product-led": {
+      "hero": ["/assets/library/products/hero-products-01.jpg"],
+      "service": {
+        "default": ["/assets/library/products/service-products-01.jpg"]
+      },
+      "grid": ["/assets/library/products/grid-products-01.jpg"],
+      "video": ["/assets/library/products/video-products-01.mp4"],
+      "contact": ["/assets/library/contact-location/contact-location-01.jpg"]
+    },
+    "campaign": {
+      "hero": ["/assets/library/interiors/hero-interiors-01.jpg"],
+      "service": {
+        "default": ["/assets/library/interiors/service-interiors-01.jpg"]
+      },
+      "grid": ["/assets/library/interiors/grid-interiors-01.jpg"],
+      "video": ["/assets/library/interiors/video-interiors-01.mp4"],
+      "contact": ["/assets/library/contact-location/contact-location-01.jpg"]
+    }
+  },
+  "themeToAssetSet": {
+    "bridal-editorial-luxe": "soft-beauty",
+    "soft-beauty-editorial": "soft-beauty",
+    "soft-beauty-bridal": "soft-beauty",
+    "clean-clinic-minimal": "clean-clinic",
+    "product-led-beauty": "product-led",
+    "campaign-playful-premium": "campaign"
+  },
+  "businesses": {
+    "simay-sarikaya-hair-makeup": {
+      "heroMedia": [
+        "/assets/businesses/simay-sarikaya/hero-bridal-01.jpg",
+        "/assets/businesses/simay-sarikaya/pexels-kerimeveyik-22589552.jpg"
+      ],
+      "gridMedia": [
+        "/assets/businesses/simay-sarikaya/grid-01.jpg",
+        "/assets/businesses/simay-sarikaya/grid-02.jpg",
+        "/assets/businesses/simay-sarikaya/grid-03.jpg"
+      ],
+      "contactMedia": [
+        "/assets/businesses/simay-sarikaya/pexels-kerimeveyik-22589552.jpg"
+      ],
+      "serviceMedia": {
+        "hair": ["/assets/businesses/simay-sarikaya/service-hair-01.jpg"],
+        "makeup": ["/assets/businesses/simay-sarikaya/service-makeup-01.jpg"],
+        "default": ["/assets/businesses/simay-sarikaya/service-hair-01.jpg"]
+      },
+      "remote": {
+        "hero": [],
+        "service": {
+          "default": []
+        },
+        "grid": [],
+        "video": [],
+        "contact": []
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "color": {
+    "pitch-black": {
+      "$value": "#0f0f0f",
+      "$type": "color",
+      "$description": "Pitch Black — Primary page background, structural surfaces"
+    },
+    "deep-graphite": {
+      "$value": "#191919",
+      "$type": "color",
+      "$description": "Deep Graphite — Secondary surface background, subtle layering for content blocks"
+    },
+    "pure-white": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "Pure White — Hairline borders, dividers, input outlines, and card edges on light surfaces. Do not promote it to the primary CTA color"
+    }
+  },
+  "font": {
+    "danzza-bold": {
+      "$value": "Danzza-Bold",
+      "$type": "fontFamily",
+      "$description": "All textual content including headings and links. The extreme compactness and bold weight are signature to the brand's direct, impactful communication style."
+    }
+  },
+  "$extensions": {
+    "com.refero.extraction": {
+      "url": "https://lacey.studio",
+      "siteName": "LACEY.STUDIO",
+      "extractedAt": "2026-04-30T02:04:15.775Z",
+      "variant": "compact"
+    }
+  }
+}

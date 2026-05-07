@@ -1,0 +1,49 @@
+{
+  "color": {
+    "ink": {
+      "$value": "#000000",
+      "$type": "color",
+      "$description": "Ink — Dark borders and separators for elevated surfaces and inverted UI. Do not promote it to the primary CTA color"
+    },
+    "canvas": {
+      "$value": "#ebeadf",
+      "$type": "color",
+      "$description": "Canvas — Dominant page background for a soft, inviting base layer"
+    },
+    "snow": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "Snow — Component backgrounds, button fills, and secondary surface layers"
+    },
+    "sandstone": {
+      "$value": "#d5cec0",
+      "$type": "color",
+      "$description": "Sandstone — Subtle background for cards and secondary page sections, providing gentle visual separation"
+    },
+    "tangerine": {
+      "$value": "#f04923",
+      "$type": "color",
+      "$description": "Tangerine — Orange wash for highlight backgrounds, decorative bands, and soft emphasis behind content. Do not promote it to the primary CTA color"
+    }
+  },
+  "font": {
+    "times": {
+      "$value": "Times",
+      "$type": "fontFamily",
+      "$description": "Fallback and decorative usage, often for short, impactful statements or where a classic serif feel is desired."
+    },
+    "supreme-ll-tt": {
+      "$value": "Supreme LL TT",
+      "$type": "fontFamily",
+      "$description": "Primary brand typeface for all body text, headings, and interactive elements. Its subtle tracking adds a distinctive, composed feel."
+    }
+  },
+  "$extensions": {
+    "com.refero.extraction": {
+      "url": "https://bellakitchenware.com",
+      "siteName": "bella Kitchen Appliances",
+      "extractedAt": "2026-04-30T00:28:23.590Z",
+      "variant": "compact"
+    }
+  }
+}

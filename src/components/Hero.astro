@@ -1,0 +1,156 @@
+---
+import type { Business, Theme } from "../types";
+import { buildWhatsAppUrl } from "../lib/whatsapp";
+import { getHeroMedia } from "../lib/assets";
+import EditorialVisualFallback from "./EditorialVisualFallback.astro";
+
+type Props = {
+  business: Business;
+  theme: Theme;
+  h1: string;
+  summary: string;
+};
+
+const { business, theme, h1, summary } = Astro.props;
+void theme;
+const isBridal = business.tone === "bridal-editorial" || business.themeId === "bridal-editorial-luxe";
+const heroImage = getHeroMedia(business);
+const whatsApp = buildWhatsAppUrl(business);
+---
+
+<section class={`hero ${isBridal ? "bridal" : ""}`}>
+  <div class="container hero-layout">
+    <div class="copy">
+      <p class="eyebrow">{isBridal ? "Gaziosmanpaşa · Gelin Saçı ve Makyajı" : business.hero.eyebrow}</p>
+      <h1>{isBridal ? "Özel gününüz için saç ve makyajı zarif bir akışla planlayın." : h1}</h1>
+      <p class="descriptor">
+        {
+          isBridal
+            ? "Gaziosmanpaşa’da gelin, kına, nişan ve davet hazırlıkları için hizmetleri inceleyin, WhatsApp üzerinden randevu bilgisi alın."
+            : summary
+        }
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href={whatsApp} target="_blank" rel="noreferrer">WhatsApp’tan Randevu Bilgisi Al</a>
+        <a class="btn btn-secondary" href={`/demo/${business.slug}/hizmetler/`}>Hizmetleri İncele</a>
+      </div>
+      <p class="trust-line">Gelin · Kına · Nişan · Davet</p>
+    </div>
+
+    <div class="visual">
+      {
+        heroImage ? (
+          <>
+            <img
+              src={heroImage}
+              alt={`${business.businessName} için ${business.mainService} görseli`}
+              width="900"
+              height="1200"
+              loading="eager"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+            />
+            <div class="fallback" aria-hidden="true">
+              <EditorialVisualFallback theme={business.themeId} aspectRatio="3/4" />
+            </div>
+          </>
+        ) : (
+          <EditorialVisualFallback theme={business.themeId} aspectRatio="3/4" />
+        )
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding: clamp(1.4rem, 4vw, 3rem) 0 clamp(1.8rem, 4vw, 3.6rem);
+  }
+
+  .hero-layout {
+    display: grid;
+    grid-template-columns: 52% 48%;
+    align-items: start;
+    gap: clamp(1rem, 2.4vw, 2rem);
+  }
+
+  .copy {
+    display: grid;
+    gap: 0.9rem;
+    align-content: start;
+  }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--muted);
+    font-weight: 700;
+  }
+
+  .descriptor {
+    font-size: clamp(0.95rem, 1.45vw, 1.12rem);
+    color: color-mix(in srgb, var(--text), black 8%);
+    max-width: 54ch;
+  }
+
+  .actions {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .actions .btn {
+    font-size: 0.86rem;
+  }
+
+  .trust-line {
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+
+  .visual {
+    width: 100%;
+    max-width: 620px;
+    justify-self: end;
+  }
+
+  .visual img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border: 1px solid color-mix(in srgb, var(--primary), white 62%);
+    aspect-ratio: 3 / 4;
+  }
+
+  .fallback {
+    display: none;
+  }
+
+  @media (max-width: 920px) {
+    .hero-layout {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .copy {
+      order: 1;
+    }
+
+    .visual {
+      order: 2;
+      justify-self: center;
+      max-width: 460px;
+    }
+
+    .actions {
+      gap: 0.48rem;
+    }
+
+    .actions .btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

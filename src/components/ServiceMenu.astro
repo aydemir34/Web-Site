@@ -1,0 +1,38 @@
+---
+import type { Business, ServiceItem } from "../types";
+import ServiceDetailBlock from "./ServiceDetailBlock.astro";
+
+type Props = {
+  business: Business;
+  services: ServiceItem[];
+};
+
+const { business, services } = Astro.props;
+---
+
+<section class="section service-menu-section">
+  <div class="container">
+    <h2>Hizmet Detayları</h2>
+    <p class="menu-note">Hizmet satırlarından size uygun seçeneği inceleyip doğrudan WhatsApp üzerinden bilgi alabilirsiniz.</p>
+    <div class="service-list">
+      {services.map((service, index) => <ServiceDetailBlock business={business} service={service} index={index} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .service-menu-section {
+    padding-top: 1rem;
+  }
+
+  .menu-note {
+    margin-top: 0.48rem;
+    color: var(--muted);
+    max-width: 64ch;
+  }
+
+  .service-list {
+    margin-top: 0.95rem;
+    border-top: 1px solid color-mix(in srgb, var(--primary), white 66%);
+  }
+</style>

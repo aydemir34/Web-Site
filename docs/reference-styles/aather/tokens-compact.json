@@ -1,0 +1,54 @@
+{
+  "color": {
+    "inkwell": {
+      "$value": "#000000",
+      "$type": "color",
+      "$description": "Inkwell — Primary text, navigation links, button text, subtle borders, and line elements — establishes a stark, high-contrast presence"
+    },
+    "paper-white": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "Paper White — Page backgrounds, card surfaces, and text fields — provides a clean, expansive canvas"
+    },
+    "ghost-gray": {
+      "$value": "#e8e8e8",
+      "$type": "color",
+      "$description": "Ghost Gray — Subtle borders and dividers, indicating soft separation without harsh lines"
+    },
+    "ash-gray": {
+      "$value": "#808080",
+      "$type": "color",
+      "$description": "Ash Gray — Muted secondary text, informational tooltips, and ghost button borders — provides a softer alternative to Inkwell"
+    }
+  },
+  "font": {
+    "gestura-text-extra-light": {
+      "$value": "Gestura Text Extra Light",
+      "$type": "fontFamily",
+      "$description": "Gestura Text Extra Light — detected in extracted data but not described by AI"
+    },
+    "gestura-text": {
+      "$value": "Gestura Text",
+      "$type": "fontFamily",
+      "$description": "Headlines and display text where a delicate and refined presence is desired. The extra light and thin weights signify understated luxury, particularly for titles up to 35px."
+    },
+    "untitled-sans": {
+      "$value": "Untitled Sans",
+      "$type": "fontFamily",
+      "$description": "Functional text: navigation, body copy, input fields, and smaller headings. The light and regular weights balance readability with a sophisticated, contemporary feel, enhanced by subtle letter-spacing for improved clarity."
+    },
+    "gestura-text-light": {
+      "$value": "Gestura Text Light",
+      "$type": "fontFamily",
+      "$description": "Gestura Text Light — detected in extracted data but not described by AI"
+    }
+  },
+  "$extensions": {
+    "com.refero.extraction": {
+      "url": "https://aather.com",
+      "siteName": "AATHER",
+      "extractedAt": "2026-04-30T01:55:47.309Z",
+      "variant": "compact"
+    }
+  }
+}

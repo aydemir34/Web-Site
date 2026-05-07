@@ -1,0 +1,94 @@
+---
+import type { OrnamentStyle } from "../types";
+
+type Props = {
+  styleId?: OrnamentStyle;
+};
+
+const { styleId = "blush-waves" } = Astro.props;
+---
+
+<div class={`ornaments ${styleId}`} aria-hidden="true">
+  <span class="panel a"></span>
+  <span class="panel b"></span>
+  <svg viewBox="0 0 160 160" class="line" role="presentation">
+    <path d="M10 90 C 45 20, 110 140, 150 70" />
+  </svg>
+</div>
+
+<style>
+  .ornaments {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: clip;
+  }
+
+  .panel {
+    position: absolute;
+    filter: blur(30px);
+    border-radius: 20px;
+    opacity: 0.2;
+    transform: rotate(-11deg);
+  }
+
+  .a {
+    width: 240px;
+    height: 240px;
+    top: 8%;
+    left: -60px;
+  }
+
+  .b {
+    width: 280px;
+    height: 280px;
+    right: -80px;
+    bottom: 10%;
+  }
+
+  .line {
+    position: absolute;
+    right: 3%;
+    top: 22%;
+    width: 160px;
+    height: 160px;
+    opacity: 0.3;
+  }
+
+  .line path {
+    fill: none;
+    stroke: color-mix(in srgb, var(--primary), white 20%);
+    stroke-width: 4;
+    stroke-linecap: round;
+  }
+
+  .blush-waves .panel {
+    background: color-mix(in srgb, var(--accent), white 15%);
+  }
+
+  .minimal-lines .panel {
+    background: color-mix(in srgb, var(--primary), white 38%);
+    opacity: 0.14;
+  }
+
+  .mint-halo .panel {
+    background: color-mix(in srgb, #9ce3ca, white 12%);
+  }
+
+  .playful-shapes .panel {
+    background: color-mix(in srgb, #ffd39e, white 6%);
+    opacity: 0.3;
+  }
+
+  .bridal-silk .panel {
+    background:
+      linear-gradient(140deg, color-mix(in srgb, #f6e5db, white 10%), color-mix(in srgb, #e9d1c6, white 16%));
+    opacity: 0.24;
+  }
+
+  .bridal-silk .line path {
+    stroke: color-mix(in srgb, #b97a68, white 25%);
+    stroke-width: 3;
+  }
+</style>

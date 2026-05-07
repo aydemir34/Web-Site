@@ -1,0 +1,44 @@
+---
+import type { ProductItem } from "../types";
+
+type Props = {
+  products: ProductItem[];
+};
+
+const { products } = Astro.props;
+---
+
+<section class="section">
+  <div class="container">
+    <h2>Bakim Destek Urunleri</h2>
+    <div class="grid products">
+      {
+        products.map((product) => (
+          <article class="card">
+            <h3>{product.name}</h3>
+            <p>{product.description}</p>
+            <strong>{product.price}</strong>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .products {
+    margin-top: 0.9rem;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  }
+
+  .products article {
+    padding: 1rem;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  strong {
+    color: var(--primary);
+    font-size: 1.05rem;
+  }
+</style>

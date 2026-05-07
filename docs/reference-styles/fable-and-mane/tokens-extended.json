@@ -1,0 +1,414 @@
+{
+  "color": {
+    "maharaja-red": {
+      "$value": "#f9423a",
+      "$type": "color",
+      "$description": "Maharaja Red — Primary action buttons, prominent alerts — a deep, energetic red that commands attention"
+    },
+    "tiger-orange": {
+      "$value": "#f69f82",
+      "$type": "color",
+      "$description": "Tiger Orange — Decorative accents in illustrations and brand elements"
+    },
+    "sunburst-yellow": {
+      "$value": "#ffd100",
+      "$type": "color",
+      "$description": "Sunburst Yellow — Decorative botanical fills and accent elements"
+    },
+    "ocean-deep-blue": {
+      "$value": "#002e5d",
+      "$type": "color",
+      "$description": "Ocean Deep Blue — Decorative botanical fills and accent elements"
+    },
+    "sky-blue": {
+      "$value": "#007aff",
+      "$type": "color",
+      "$description": "Sky Blue — Blue decorative accent for icons, marks, and small graphic details. Do not promote it to the primary CTA color"
+    },
+    "midnight-ink": {
+      "$value": "#000000",
+      "$type": "color",
+      "$description": "Midnight Ink — Primary text, headings, strong borders, and solid icon fills"
+    },
+    "paper-bark": {
+      "$value": "#fff5ec",
+      "$type": "color",
+      "$description": "Paper Bark — Page background, light card surfaces, and ghost button backgrounds — creates a warm, soft base"
+    },
+    "snow-drift": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "Snow Drift — Elevated card backgrounds, product surfaces, and crisp text on dark backgrounds"
+    },
+    "smoky-quartz": {
+      "$value": "#1a243d",
+      "$type": "color",
+      "$description": "Smoky Quartz — Muted text, placeholder text, and subtle outlined button borders"
+    },
+    "pale-ash": {
+      "$value": "#bfb8b1",
+      "$type": "color",
+      "$description": "Pale Ash — Very subtle elevation shadows, providing depth without harshness"
+    }
+  },
+  "font": {
+    "sofia-pro": {
+      "$value": "Sofia Pro",
+      "$type": "fontFamily",
+      "$description": "Specific button text where a slightly bolder appearance is desired."
+    },
+    "quincy-cf": {
+      "$value": "Quincy CF",
+      "$type": "fontFamily",
+      "$description": "Headings and display text — strong and characterful due to its extra-bold nature, balancing legibility with a distinctive presence."
+    }
+  },
+  "typography": {
+    "sm": {
+      "$value": {
+        "fontFamily": "SofiaPro-SemiBold",
+        "fontSize": "14px",
+        "fontWeight": 400,
+        "lineHeight": 1.43
+      },
+      "$type": "typography",
+      "$description": "Typography step sm at 14px"
+    },
+    "sm-2": {
+      "$value": {
+        "fontFamily": "SofiaPro-Regular",
+        "fontSize": "14px",
+        "fontWeight": 400,
+        "lineHeight": 1.14
+      },
+      "$type": "typography",
+      "$description": "Typography step sm-2 at 14px"
+    },
+    "sm-3": {
+      "$value": {
+        "fontFamily": "SofiaPro-SemiBold",
+        "fontSize": "14px",
+        "fontWeight": 400,
+        "lineHeight": 1
+      },
+      "$type": "typography",
+      "$description": "Typography step sm-3 at 14px"
+    },
+    "base": {
+      "$value": {
+        "fontFamily": "SofiaPro-Regular",
+        "fontSize": "16px",
+        "fontWeight": 400,
+        "lineHeight": 1.38
+      },
+      "$type": "typography",
+      "$description": "Typography step base at 16px"
+    },
+    "base-2": {
+      "$value": {
+        "fontFamily": "SofiaPro-Bold",
+        "fontSize": "16px",
+        "fontWeight": 400,
+        "lineHeight": 1.5
+      },
+      "$type": "typography",
+      "$description": "Typography step base-2 at 16px"
+    },
+    "base-3": {
+      "$value": {
+        "fontFamily": "SofiaPro-Regular",
+        "fontSize": "16px",
+        "fontWeight": 400,
+        "lineHeight": 1.6
+      },
+      "$type": "typography",
+      "$description": "Typography step base-3 at 16px"
+    },
+    "base-4": {
+      "$value": {
+        "fontFamily": "SofiaPro-Regular",
+        "fontSize": "16px",
+        "fontWeight": 400,
+        "lineHeight": 1
+      },
+      "$type": "typography",
+      "$description": "Typography step base-4 at 16px"
+    },
+    "base-5": {
+      "$value": {
+        "fontFamily": "SofiaPro-SemiBold",
+        "fontSize": "16px",
+        "fontWeight": 400,
+        "lineHeight": 1.38
+      },
+      "$type": "typography",
+      "$description": "Typography step base-5 at 16px"
+    },
+    "base-6": {
+      "$value": {
+        "fontFamily": "SofiaPro-Regular",
+        "fontSize": "16px",
+        "fontWeight": 400,
+        "lineHeight": 1.38
+      },
+      "$type": "typography",
+      "$description": "Typography step base-6 at 16px"
+    },
+    "xl": {
+      "$value": {
+        "fontFamily": "SofiaPro-SemiBold",
+        "fontSize": "20px",
+        "fontWeight": 400,
+        "lineHeight": 1.4
+      },
+      "$type": "typography",
+      "$description": "Typography step xl at 20px"
+    },
+    "xl-2": {
+      "$value": {
+        "fontFamily": "SofiaPro-Regular",
+        "fontSize": "20px",
+        "fontWeight": 400,
+        "lineHeight": 1.4
+      },
+      "$type": "typography",
+      "$description": "Typography step xl-2 at 20px"
+    },
+    "xl-3": {
+      "$value": {
+        "fontFamily": "SofiaPro-Regular",
+        "fontSize": "20px",
+        "fontWeight": 400,
+        "lineHeight": 1.2
+      },
+      "$type": "typography",
+      "$description": "Typography step xl-3 at 20px"
+    },
+    "xl-4": {
+      "$value": {
+        "fontFamily": "SofiaPro-Regular",
+        "fontSize": "20px",
+        "fontWeight": 400,
+        "lineHeight": 1.4
+      },
+      "$type": "typography",
+      "$description": "Typography step xl-4 at 20px"
+    },
+    "xl-5": {
+      "$value": {
+        "fontFamily": "QuincyCF-ExtraBold",
+        "fontSize": "20px",
+        "fontWeight": 400,
+        "lineHeight": 1.2
+      },
+      "$type": "typography",
+      "$description": "Typography step xl-5 at 20px"
+    },
+    "2xl": {
+      "$value": {
+        "fontFamily": "QuincyCF-ExtraBold",
+        "fontSize": "24px",
+        "fontWeight": 400,
+        "lineHeight": 1
+      },
+      "$type": "typography",
+      "$description": "Typography step 2xl at 24px"
+    },
+    "2xl-2": {
+      "$value": {
+        "fontFamily": "SofiaPro-Regular",
+        "fontSize": "24px",
+        "fontWeight": 400,
+        "lineHeight": 1.33
+      },
+      "$type": "typography",
+      "$description": "Typography step 2xl-2 at 24px"
+    },
+    "2xl-3": {
+      "$value": {
+        "fontFamily": "QuincyCF-ExtraBold",
+        "fontSize": "24px",
+        "fontWeight": 400,
+        "lineHeight": 1.17
+      },
+      "$type": "typography",
+      "$description": "Typography step 2xl-3 at 24px"
+    },
+    "5xl": {
+      "$value": {
+        "fontFamily": "QuincyCF-ExtraBold",
+        "fontSize": "48px",
+        "fontWeight": 400,
+        "lineHeight": 1
+      },
+      "$type": "typography",
+      "$description": "Typography step 5xl at 48px"
+    },
+    "5xl-2": {
+      "$value": {
+        "fontFamily": "SofiaPro-Regular",
+        "fontSize": "56px",
+        "fontWeight": 400,
+        "lineHeight": 1.2
+      },
+      "$type": "typography",
+      "$description": "Typography step 5xl-2 at 56px"
+    },
+    "5xl-3": {
+      "$value": {
+        "fontFamily": "QuincyCF-ExtraBold",
+        "fontSize": "56px",
+        "fontWeight": 400,
+        "lineHeight": 1.2
+      },
+      "$type": "typography",
+      "$description": "Typography step 5xl-3 at 56px"
+    },
+    "5xl-4": {
+      "$value": {
+        "fontFamily": "QuincyCF-ExtraBold",
+        "fontSize": "56px",
+        "fontWeight": 400,
+        "lineHeight": 0.86
+      },
+      "$type": "typography",
+      "$description": "Typography step 5xl-4 at 56px"
+    },
+    "5xl-5": {
+      "$value": {
+        "fontFamily": "QuincyCF-ExtraBold",
+        "fontSize": "56px",
+        "fontWeight": 400,
+        "lineHeight": 1
+      },
+      "$type": "typography",
+      "$description": "Typography step 5xl-5 at 56px"
+    },
+    "5xl-6": {
+      "$value": {
+        "fontFamily": "QuincyCF-ExtraBold",
+        "fontSize": "72px",
+        "fontWeight": 400,
+        "lineHeight": 0.89
+      },
+      "$type": "typography",
+      "$description": "Typography step 5xl-6 at 72px"
+    }
+  },
+  "spacing": {
+    "7": {
+      "$value": "7px",
+      "$type": "dimension",
+      "$description": "Spacing 7px"
+    },
+    "8": {
+      "$value": "8px",
+      "$type": "dimension",
+      "$description": "Spacing 8px"
+    },
+    "10": {
+      "$value": "10px",
+      "$type": "dimension",
+      "$description": "Spacing 10px"
+    },
+    "12": {
+      "$value": "12px",
+      "$type": "dimension",
+      "$description": "Spacing 12px"
+    },
+    "13": {
+      "$value": "13px",
+      "$type": "dimension",
+      "$description": "Spacing 13px"
+    },
+    "14": {
+      "$value": "14px",
+      "$type": "dimension",
+      "$description": "Spacing 14px"
+    },
+    "18": {
+      "$value": "18px",
+      "$type": "dimension",
+      "$description": "Spacing 18px"
+    },
+    "20": {
+      "$value": "20px",
+      "$type": "dimension",
+      "$description": "Spacing 20px"
+    },
+    "21": {
+      "$value": "21px",
+      "$type": "dimension",
+      "$description": "Spacing 21px"
+    },
+    "22": {
+      "$value": "22px",
+      "$type": "dimension",
+      "$description": "Spacing 22px"
+    },
+    "30": {
+      "$value": "30px",
+      "$type": "dimension",
+      "$description": "Spacing 30px"
+    },
+    "32": {
+      "$value": "32px",
+      "$type": "dimension",
+      "$description": "Spacing 32px"
+    },
+    "36": {
+      "$value": "36px",
+      "$type": "dimension",
+      "$description": "Spacing 36px"
+    },
+    "44": {
+      "$value": "44px",
+      "$type": "dimension",
+      "$description": "Spacing 44px"
+    },
+    "56": {
+      "$value": "56px",
+      "$type": "dimension",
+      "$description": "Spacing 56px"
+    },
+    "58": {
+      "$value": "58px",
+      "$type": "dimension",
+      "$description": "Spacing 58px"
+    }
+  },
+  "radius": {
+    "3xl": {
+      "$value": "24px",
+      "$type": "dimension",
+      "$description": "Border radius 3xl"
+    }
+  },
+  "shadow": {
+    "lg": {
+      "$value": "rgba(0, 0, 0, 0.25) 0px 4px 20px 0px",
+      "$type": "shadow",
+      "$description": "Shadow elevation lg"
+    }
+  },
+  "surface": {
+    "canvas": {
+      "$value": "#fff5ec",
+      "$type": "color",
+      "$description": "Surface level 0: The primary background for pages and general content areas, providing a warm, earthy foundation."
+    },
+    "card": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "Surface level 1: Used for product cards, information panels, and other elevated content blocks, creating contrast against the canvas."
+    }
+  },
+  "$extensions": {
+    "com.refero.extraction": {
+      "url": "https://fableandmane.com",
+      "siteName": "Fable & Mane",
+      "extractedAt": "2026-04-30T02:31:16.357Z",
+      "variant": "extended"
+    }
+  }
+}

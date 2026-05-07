@@ -1,0 +1,60 @@
+---
+import type { Business } from "../types";
+import { buildWhatsAppUrl } from "../lib/whatsapp";
+
+type Props = {
+  business: Business;
+  ctaLabel?: string;
+};
+
+const { business, ctaLabel = "Randevu Bilgisi Al" } = Astro.props;
+const whatsappUrl = buildWhatsAppUrl(business);
+---
+
+<div class="header-contact">
+  <a href={whatsappUrl} target="_blank" rel="noreferrer" aria-label="WhatsApp üzerinden randevu bilgisi al">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M19.1 4.9A9.83 9.83 0 0 0 12.02 2a9.99 9.99 0 0 0-8.7 14.9L2 22l5.3-1.3A9.95 9.95 0 0 0 12 22h.02a10 10 0 0 0 7.08-17.1Zm-7.08 15.4h-.02a8.3 8.3 0 0 1-4.23-1.15l-.3-.17-3.15.77.85-3.07-.2-.31a8.3 8.3 0 1 1 7.05 3.93Z"
+        fill="currentColor"
+      />
+    </svg>
+    <span>{ctaLabel}</span>
+  </a>
+</div>
+
+<style>
+  .header-contact {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .header-contact a {
+    text-decoration: none;
+    border: 1px solid color-mix(in srgb, #25d366, black 15%);
+    border-radius: 999px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    padding: 0.34rem 0.62rem;
+    background: color-mix(in srgb, #25d366, white 88%);
+    color: #0f7d3c;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.36rem;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .header-contact svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  @media (max-width: 860px) {
+    .header-contact a {
+      font-size: 0.7rem;
+      padding: 0.3rem 0.54rem;
+    }
+  }
+</style>

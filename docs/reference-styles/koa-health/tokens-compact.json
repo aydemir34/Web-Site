@@ -1,0 +1,54 @@
+{
+  "color": {
+    "midnight-indigo": {
+      "$value": "#2e3fd2",
+      "$type": "color",
+      "$description": "Midnight Indigo — Primary brand color, navigation backgrounds, button fills, and a dominant footer background gradient — signifies trust and authority; A subtle left-to-right gradient, used for prominent background elements like the footer, deepening the primary brand color"
+    },
+    "arctic-teal": {
+      "$value": "#5ed7de",
+      "$type": "color",
+      "$description": "Arctic Teal — Accent for links, interactive borders, and icon strokes — provides a cool, clinical highlight against neutrals, indicating interactive states or important information"
+    },
+    "ebony-text": {
+      "$value": "#302625",
+      "$type": "color",
+      "$description": "Ebony Text — Primary text color for all content, headings, and neutral link/button borders — ensures high contrast and legibility"
+    },
+    "canvas-white": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "Canvas White — Main page background, default button text, and neutral borders — provides a clean, expansive foundation for content"
+    },
+    "soft-vanilla": {
+      "$value": "#fef8f4",
+      "$type": "color",
+      "$description": "Soft Vanilla — Secondary background for subtle content separation or cards — offers a warmer, slightly off-white surface"
+    },
+    "parchment-tan": {
+      "$value": "#efe0d9",
+      "$type": "color",
+      "$description": "Parchment Tan — Tertiary background color for distinct content blocks or subtle cards — offers another subtle variation in surface tone"
+    }
+  },
+  "font": {
+    "surt": {
+      "$value": "Surt",
+      "$type": "fontFamily",
+      "$description": "Functional text for navigation, body copy, and secondary information — its compact line height and subtle tracking create a concise, efficient visual rhythm."
+    },
+    "super": {
+      "$value": "Super",
+      "$type": "fontFamily",
+      "$description": "Display headings and prominent titles — the moderate weight and tight letter-spacing give it a formal, confident presence without being overly bold. Characterized by specific 'case' and 'liga' features that refine its appearance."
+    }
+  },
+  "$extensions": {
+    "com.refero.extraction": {
+      "url": "https://foundations.koahealth.com",
+      "siteName": "Koa Health",
+      "extractedAt": "2026-04-30T03:25:20.427Z",
+      "variant": "compact"
+    }
+  }
+}

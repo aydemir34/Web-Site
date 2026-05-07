@@ -1,0 +1,365 @@
+{
+  "color": {
+    "inkwell-black": {
+      "$value": "#17150",
+      "$type": "color",
+      "$description": "Inkwell Black — Primary text, headline text, dark background sections, button backgrounds. This deep near-black provides strong contrast and a sense of premium quality."
+    },
+    "cloud-white": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "Cloud White — Main page background, card backgrounds, text on dark backgrounds. Dominates the canvas for a bright, open feel."
+    },
+    "porcelain-gray": {
+      "$value": "#f0f7f6",
+      "$type": "color",
+      "$description": "Porcelain Gray — Secondary background color for sections, card hover states, badge backgrounds. Offers a subtle variation from pure white for content differentiation."
+    },
+    "obsidian-black": {
+      "$value": "#000000",
+      "$type": "color",
+      "$description": "Obsidian Black — Navigation text, icons, button outlines. Used for the sharpest contrast elements, often interactive."
+    },
+    "silver-mist": {
+      "$value": "#e2e2e2",
+      "$type": "color",
+      "$description": "Silver Mist — Subtle borders and dividers for section separation."
+    },
+    "genius-yellow": {
+      "$value": "#cccc25",
+      "$type": "color",
+      "$description": "Genius Yellow — Calls to Action, active state indicators. This vibrant yellow gives an immediate energetic and positive feel."
+    },
+    "genius-yellow-gradient": {
+      "$value": "#cccc25",
+      "$type": "color",
+      "$description": "Genius Yellow Gradient — Decorative backgrounds and possibly interactive elements, offering a subtle shift in luminescence for visual interest."
+    },
+    "sky-violet": {
+      "$value": "#9fa6ff",
+      "$type": "color",
+      "$description": "Sky Violet — Promotional banners, card backgrounds, accent areas. This vivid violet provides a playful, modern contrast to the muted neutrals."
+    },
+    "sky-violet-gradient": {
+      "$value": "#9fa6ff",
+      "$type": "color",
+      "$description": "Sky Violet Gradient — Backgrounds for features or promotional blocks, adding depth and visual softness."
+    }
+  },
+  "font": {
+    "basel-grotesk-book": {
+      "$value": "Basel Grotesk Book",
+      "$type": "fontFamily",
+      "$description": "Primary typeface for all UI elements, body text, subheadings, and smaller headlines. Its clean sans-serif form ensures high readability and a contemporary feel across all weights and sizes, from small navigation links to substantial section titles."
+    },
+    "basel-classic-book": {
+      "$value": "Basel Classic Book",
+      "$type": "fontFamily",
+      "$description": "Used exclusively for large, impactful display text. The significantly tighter line-height and letter-spacing, combined with its high contrast to Basel Grotesk Book, give it a distinctive, elegant, and editorial presence for hero headlines."
+    }
+  },
+  "typography": {
+    "sm": {
+      "$value": {
+        "fontFamily": "Basel Grotesk Book",
+        "fontSize": "13px",
+        "fontWeight": 500,
+        "lineHeight": 1.13
+      },
+      "$type": "typography",
+      "$description": "Typography step sm at 13px"
+    },
+    "sm-2": {
+      "$value": {
+        "fontFamily": "Basel Grotesk Book",
+        "fontSize": "14px",
+        "fontWeight": 500,
+        "lineHeight": 1.4
+      },
+      "$type": "typography",
+      "$description": "Typography step sm-2 at 14px"
+    },
+    "sm-3": {
+      "$value": {
+        "fontFamily": "Basel Grotesk Book",
+        "fontSize": "14px",
+        "fontWeight": 500,
+        "lineHeight": 1.4
+      },
+      "$type": "typography",
+      "$description": "Typography step sm-3 at 14px"
+    },
+    "sm-4": {
+      "$value": {
+        "fontFamily": "Basel Grotesk Book",
+        "fontSize": "14px",
+        "fontWeight": 500,
+        "lineHeight": 1.4
+      },
+      "$type": "typography",
+      "$description": "Typography step sm-4 at 14px"
+    },
+    "base": {
+      "$value": {
+        "fontFamily": "Basel Grotesk Book",
+        "fontSize": "16px",
+        "fontWeight": 500,
+        "lineHeight": 1.4
+      },
+      "$type": "typography",
+      "$description": "Typography step base at 16px"
+    },
+    "base-2": {
+      "$value": {
+        "fontFamily": "Basel Grotesk Book",
+        "fontSize": "16px",
+        "fontWeight": 400,
+        "lineHeight": 1.4
+      },
+      "$type": "typography",
+      "$description": "Typography step base-2 at 16px"
+    },
+    "base-3": {
+      "$value": {
+        "fontFamily": "Basel Grotesk Book",
+        "fontSize": "16px",
+        "fontWeight": 400,
+        "lineHeight": 1.1
+      },
+      "$type": "typography",
+      "$description": "Typography step base-3 at 16px"
+    },
+    "lg": {
+      "$value": {
+        "fontFamily": "Basel Grotesk Book",
+        "fontSize": "18px",
+        "fontWeight": 500,
+        "lineHeight": 1.4
+      },
+      "$type": "typography",
+      "$description": "Typography step lg at 18px"
+    },
+    "lg-2": {
+      "$value": {
+        "fontFamily": "Basel Grotesk Book",
+        "fontSize": "18px",
+        "fontWeight": 600,
+        "lineHeight": 1.4
+      },
+      "$type": "typography",
+      "$description": "Typography step lg-2 at 18px"
+    },
+    "lg-3": {
+      "$value": {
+        "fontFamily": "Basel Grotesk Book",
+        "fontSize": "18px",
+        "fontWeight": 500,
+        "lineHeight": 1.4
+      },
+      "$type": "typography",
+      "$description": "Typography step lg-3 at 18px"
+    },
+    "lg-4": {
+      "$value": {
+        "fontFamily": "Basel Grotesk Book",
+        "fontSize": "18px",
+        "fontWeight": 500,
+        "lineHeight": 1.4
+      },
+      "$type": "typography",
+      "$description": "Typography step lg-4 at 18px"
+    },
+    "xl": {
+      "$value": {
+        "fontFamily": "Basel Grotesk Book",
+        "fontSize": "22px",
+        "fontWeight": 500,
+        "lineHeight": 1.2
+      },
+      "$type": "typography",
+      "$description": "Typography step xl at 22px"
+    },
+    "xl-2": {
+      "$value": {
+        "fontFamily": "Basel Grotesk Book",
+        "fontSize": "22px",
+        "fontWeight": 400,
+        "lineHeight": 1.02
+      },
+      "$type": "typography",
+      "$description": "Typography step xl-2 at 22px"
+    },
+    "3xl": {
+      "$value": {
+        "fontFamily": "Basel Grotesk Book",
+        "fontSize": "32px",
+        "fontWeight": 500,
+        "lineHeight": 1.1
+      },
+      "$type": "typography",
+      "$description": "Typography step 3xl at 32px"
+    },
+    "4xl": {
+      "$value": {
+        "fontFamily": "Basel Grotesk Book",
+        "fontSize": "40px",
+        "fontWeight": 500,
+        "lineHeight": 1.1
+      },
+      "$type": "typography",
+      "$description": "Typography step 4xl at 40px"
+    },
+    "5xl": {
+      "$value": {
+        "fontFamily": "Basel Grotesk Book",
+        "fontSize": "48px",
+        "fontWeight": 500,
+        "lineHeight": 1.05
+      },
+      "$type": "typography",
+      "$description": "Typography step 5xl at 48px"
+    },
+    "5xl-2": {
+      "$value": {
+        "fontFamily": "Basel Grotesk Book",
+        "fontSize": "72px",
+        "fontWeight": 500,
+        "lineHeight": 0.97
+      },
+      "$type": "typography",
+      "$description": "Typography step 5xl-2 at 72px"
+    },
+    "5xl-3": {
+      "$value": {
+        "fontFamily": "Basel Classic Book",
+        "fontSize": "96px",
+        "fontWeight": 400,
+        "lineHeight": 0.9
+      },
+      "$type": "typography",
+      "$description": "Typography step 5xl-3 at 96px"
+    },
+    "5xl-4": {
+      "$value": {
+        "fontFamily": "Basel Classic Book",
+        "fontSize": "144px",
+        "fontWeight": 400,
+        "lineHeight": 0.8
+      },
+      "$type": "typography",
+      "$description": "Typography step 5xl-4 at 144px"
+    }
+  },
+  "spacing": {
+    "4": {
+      "$value": "4px",
+      "$type": "dimension",
+      "$description": "Spacing 4px"
+    },
+    "8": {
+      "$value": "8px",
+      "$type": "dimension",
+      "$description": "Spacing 8px"
+    },
+    "12": {
+      "$value": "12px",
+      "$type": "dimension",
+      "$description": "Spacing 12px"
+    },
+    "16": {
+      "$value": "16px",
+      "$type": "dimension",
+      "$description": "Spacing 16px"
+    },
+    "20": {
+      "$value": "20px",
+      "$type": "dimension",
+      "$description": "Spacing 20px"
+    },
+    "24": {
+      "$value": "24px",
+      "$type": "dimension",
+      "$description": "Spacing 24px"
+    },
+    "32": {
+      "$value": "32px",
+      "$type": "dimension",
+      "$description": "Spacing 32px"
+    },
+    "40": {
+      "$value": "40px",
+      "$type": "dimension",
+      "$description": "Spacing 40px"
+    },
+    "48": {
+      "$value": "48px",
+      "$type": "dimension",
+      "$description": "Spacing 48px"
+    },
+    "56": {
+      "$value": "56px",
+      "$type": "dimension",
+      "$description": "Spacing 56px"
+    },
+    "80": {
+      "$value": "80px",
+      "$type": "dimension",
+      "$description": "Spacing 80px"
+    },
+    "96": {
+      "$value": "96px",
+      "$type": "dimension",
+      "$description": "Spacing 96px"
+    },
+    "108": {
+      "$value": "108px",
+      "$type": "dimension",
+      "$description": "Spacing 108px"
+    },
+    "120": {
+      "$value": "120px",
+      "$type": "dimension",
+      "$description": "Spacing 120px"
+    },
+    "unit": {
+      "$value": "4px",
+      "$type": "dimension",
+      "$description": "Base spacing unit"
+    }
+  },
+  "radius": {
+    "lg": {
+      "$value": "8px",
+      "$type": "dimension",
+      "$description": "Border radius lg"
+    },
+    "2xl": {
+      "$value": "16px",
+      "$type": "dimension",
+      "$description": "Border radius 2xl"
+    },
+    "3xl": {
+      "$value": "24px",
+      "$type": "dimension",
+      "$description": "Border radius 3xl"
+    },
+    "3xl-2": {
+      "$value": "40px",
+      "$type": "dimension",
+      "$description": "Border radius 3xl-2"
+    },
+    "full": {
+      "$value": "1440px",
+      "$type": "dimension",
+      "$description": "Border radius full"
+    }
+  },
+  "$extensions": {
+    "com.refero.extraction": {
+      "url": "https://glossgenius.com",
+      "siteName": "All-In-One Salon",
+      "extractedAt": "2026-04-11T18:51:54.756Z",
+      "variant": "extended"
+    }
+  }
+}
