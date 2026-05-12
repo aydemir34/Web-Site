@@ -1,0 +1,489 @@
+---
+import type { Business } from "../types";
+import { getContactMedia, getGridMedia, getVideoMedia } from "../lib/assets";
+import { buildWhatsAppUrl } from "../lib/whatsapp";
+import FAQAccordion from "./FAQAccordion.astro";
+import EditorialVisualFallback from "./EditorialVisualFallback.astro";
+
+type Props = {
+  business: Business;
+};
+
+const { business } = Astro.props;
+const whatsAppUrl = buildWhatsAppUrl(business);
+const gallery = getGridMedia(business);
+const contactMedia = gallery[0] ?? getContactMedia(business);
+const studioVideo = getVideoMedia(business)[1] ?? getVideoMedia(business)[0] ?? null;
+const studioImage = gallery[3] ?? gallery[2] ?? contactMedia;
+---
+
+<section class="contact-ritual-hero" data-reveal data-reveal-delay="0">
+  <div class="container contact-hero-grid">
+    <div class="contact-copy" data-reveal data-reveal-delay="90">
+      <h1>Randevu & İletişim</h1>
+      <p>Tarihinizi, hazırlık türünüzü ve aklınızdaki görünümü yazın; prova ve randevu saatini birlikte netleştirelim.</p>
+      <div class="contact-actions">
+        <a class="btn btn-primary" href={whatsAppUrl} target="_blank" rel="noreferrer">WhatsApp’tan Randevu Bilgisi Al</a>
+        <a class="btn btn-secondary" href={`tel:${business.phone}`}>Telefonla Ara</a>
+      </div>
+    </div>
+    <figure class="contact-visual" data-reveal data-reveal-delay="180">
+      {
+        contactMedia ? (
+          <img src={contactMedia} alt={`${business.businessName} stüdyo ve iletişim görseli`} loading="eager" />
+        ) : (
+          <EditorialVisualFallback theme={business.themeId} aspectRatio="3/4" labels={["STÜDYO", "RANDEVU"]} />
+        )
+      }
+    </figure>
+  </div>
+</section>
+
+<section class="section contact-trust" data-reveal>
+  <div class="container contact-trust-grid">
+    <article class="about-block" id="hakkimizda">
+      <h2>Stüdyoda nasıl ilerliyoruz?</h2>
+      <p>{business.businessName}, {business.district} bölgesinde gelin, kına, nişan ve davet hazırlıklarını planlı ve sakin bir stüdyo akışıyla ilerletir.</p>
+      <div class="mini-proof">
+        <span>{business.leadSignals.rating.toLocaleString("tr-TR")} puan</span>
+        <span>{business.leadSignals.reviewCount}+ yorum</span>
+        <span>Güncel Instagram portfolyosu</span>
+      </div>
+    </article>
+
+    <article class="contact-card">
+      <h2>İletişim Bilgileri</h2>
+      <ul>
+        <li><span>Telefon</span><a href={`tel:${business.phone}`}>{business.phone}</a></li>
+        <li><span>WhatsApp</span><a href={whatsAppUrl} target="_blank" rel="noreferrer">Randevu bilgisi al</a></li>
+        <li><span>Instagram</span><a href={business.instagramUrl} target="_blank" rel="noreferrer">@simaysarikayahairmakeup</a></li>
+        <li><span>Adres</span><p>{business.address}</p></li>
+      </ul>
+    </article>
+
+    <article class="social-card">
+      <h2>Karar vermeden önce bakın</h2>
+      <p>Google yorumları ve Instagram kareleri, stüdyo tarzını ve hazırlık akışını görmeniz için iyi bir başlangıç olur.</p>
+      <div class="social-links">
+        <a href={business.instagramUrl} target="_blank" rel="noreferrer">Instagram Profili</a>
+        <a href={business.mapUrl} target="_blank" rel="noreferrer">Google Yorumları</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="section map-media-section" data-reveal>
+  <div class="container map-media-grid">
+    <article class="map-panel">
+      <div>
+        <h2>Konum ve Yol Tarifi</h2>
+        <p>{business.address} adresinde randevu saatine göre stüdyo hazırlığı planlanır. Yol tarifini randevu öncesi kontrol edebilirsiniz.</p>
+      </div>
+      {
+        business.mapEmbedUrl ? (
+          <iframe
+            src={business.mapEmbedUrl}
+            title={`${business.businessName} konum haritası`}
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        ) : (
+          <a class="map-fallback" href={business.mapUrl} target="_blank" rel="noreferrer">Google Maps / Yol Tarifi Al</a>
+        )
+      }
+      <a class="map-link" href={business.mapUrl} target="_blank" rel="noreferrer">Google Maps / Yol Tarifi</a>
+    </article>
+
+    <div class="side-column">
+      <article class="hours-panel">
+        <h2>Çalışma Saatleri</h2>
+        <ul>
+          <li><span>Pazartesi - Cuma</span><strong>10:00 - 19:00</strong></li>
+          <li><span>Cumartesi</span><strong>10:00 - 18:00</strong></li>
+          <li><span>Pazar</span><strong>Randevuya göre</strong></li>
+        </ul>
+      </article>
+
+      <article class="studio-panel" aria-label="Stüdyo akışı">
+        <h2>Stüdyo Akışı</h2>
+        <p>Randevu öncesi hazırlık alanı ve uygulama akışını kısaca görün.</p>
+        <div class="studio-media">
+          {
+            studioVideo ? (
+              <video src={studioVideo} autoplay muted loop playsinline preload="metadata" aria-label="Stüdyo hazırlık videosu"></video>
+            ) : studioImage ? (
+              <img src={studioImage} alt="Stüdyo hazırlık görseli" loading="lazy" />
+            ) : (
+              <EditorialVisualFallback theme={business.themeId} aspectRatio="3/4" labels={["STÜDYO"]} />
+            )
+          }
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<FAQAccordion items={business.faq} />
+
+<section class="section contact-final" data-reveal>
+  <div class="container contact-final-inner">
+    <h2>{business.cta.title}</h2>
+    <p>{business.cta.description}</p>
+    <a class="btn btn-primary" href={whatsAppUrl} target="_blank" rel="noreferrer">{business.cta.buttonText}</a>
+  </div>
+</section>
+
+<script is:inline>
+  const root = document.documentElement;
+  root.classList.add("ritual-enhanced");
+  const expressive = new URLSearchParams(window.location.search).get("motion") === "expressive";
+  if (expressive) {
+    root.classList.add("motion-expressive");
+  }
+
+  const items = document.querySelectorAll("[data-reveal]");
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+          const delay = Number(entry.target.getAttribute("data-reveal-delay") ?? "0");
+          window.setTimeout(() => entry.target.classList.add("is-visible"), delay);
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.16 }
+    );
+    items.forEach((item) => observer.observe(item));
+  } else {
+    items.forEach((item) => item.classList.add("is-visible"));
+  }
+</script>
+
+<style>
+  .contact-ritual-hero {
+    background:
+      radial-gradient(circle at 82% 10%, rgba(220, 150, 163, 0.22), transparent 24rem),
+      linear-gradient(180deg, #0a1023, #111a2f 30%, #f9fbff 100%);
+    border-bottom: 1px solid rgba(220, 150, 163, 0.3);
+  }
+
+  .contact-hero-grid {
+    min-height: min(720px, 82svh);
+    padding: clamp(5rem, 9vw, 7rem) 0 clamp(1.4rem, 4vw, 2.2rem);
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(280px, 0.72fr);
+    gap: clamp(0.9rem, 2.8vw, 1.8rem);
+    align-items: center;
+  }
+
+  .contact-copy {
+    display: grid;
+    gap: 0.88rem;
+  }
+
+  .contact-copy h1,
+  .contact-trust h2,
+  .map-media-section h2,
+  .contact-final h2 {
+    font-family: "Space Grotesk", var(--font-heading);
+    color: #14213f;
+  }
+
+  .contact-copy h1 {
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    line-height: 0.92;
+    max-width: 8ch;
+    color: #f5f8ff;
+    text-wrap: balance;
+  }
+
+  .contact-copy p {
+    color: rgba(234, 240, 255, 0.92);
+    max-width: 54ch;
+    margin: 0;
+  }
+
+  .contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.58rem;
+  }
+
+  .contact-ritual-hero .btn,
+  .contact-final .btn {
+    border-radius: 999px;
+    min-height: 42px;
+    padding: 0.72rem 1rem;
+  }
+
+  .contact-ritual-hero .btn-primary,
+  .contact-final .btn-primary {
+    background: #f6f9ff;
+    color: #0d1a36;
+  }
+
+  .contact-ritual-hero .btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: #f5f8ff;
+    border-color: rgba(234, 241, 255, 0.6);
+  }
+
+  .contact-visual {
+    margin: 0;
+    min-height: 420px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #eef4fb;
+  }
+
+  .contact-visual img {
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    object-fit: cover;
+  }
+
+  .contact-trust,
+  .map-media-section,
+  .contact-final {
+    background:
+      radial-gradient(circle at 8% 34%, rgba(20, 33, 63, 0.05), transparent 22rem),
+      #fbfcff;
+  }
+
+  .contact-trust-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr 0.9fr;
+    gap: 0.9rem;
+    align-items: stretch;
+  }
+
+  .about-block,
+  .contact-card,
+  .social-card,
+  .map-panel,
+  .hours-panel,
+  .studio-panel {
+    border-top: 1px solid #ead9df;
+    padding-top: 0.9rem;
+    display: grid;
+    align-content: start;
+    gap: 0.65rem;
+  }
+
+  .about-block p,
+  .social-card p,
+  .map-panel p,
+  .studio-panel p,
+  .contact-final p {
+    color: #4b5870;
+    margin: 0;
+  }
+
+  .mini-proof {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .mini-proof span {
+    border-radius: 999px;
+    background: #fff1f4;
+    color: #14213f;
+    padding: 0.34rem 0.55rem;
+    font-size: 0.76rem;
+    font-weight: 900;
+  }
+
+  .contact-card ul,
+  .hours-panel ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.52rem;
+  }
+
+  .contact-card li,
+  .hours-panel li {
+    display: grid;
+    grid-template-columns: 98px 1fr;
+    gap: 0.7rem;
+    align-items: start;
+  }
+
+  .contact-card span,
+  .hours-panel span {
+    color: #6d7b93;
+    font-size: 0.78rem;
+    font-weight: 800;
+  }
+
+  .contact-card a,
+  .contact-card p,
+  .hours-panel strong,
+  .social-links a,
+  .map-link {
+    color: #14213f;
+    text-decoration: none;
+    font-weight: 900;
+    margin: 0;
+  }
+
+  .social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+
+  .social-links a {
+    border: 1px solid #ead9df;
+    border-radius: 999px;
+    padding: 0.52rem 0.7rem;
+    background: #fff;
+    font-size: 0.8rem;
+  }
+
+  .map-media-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.44fr);
+    gap: 1rem;
+  }
+
+  .side-column {
+    display: grid;
+    gap: 0.9rem;
+    align-content: start;
+  }
+
+  .map-panel iframe,
+  .map-fallback {
+    width: 100%;
+    min-height: 360px;
+    border: 0;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .map-fallback {
+    display: grid;
+    place-items: center;
+    background: #fff1f4;
+    color: #14213f;
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  .studio-media {
+    min-height: 260px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #eef4fb;
+  }
+
+  .studio-media video,
+  .studio-media img {
+    width: 100%;
+    height: 100%;
+    min-height: 260px;
+    object-fit: cover;
+  }
+
+  .contact-final-inner {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    gap: 0.75rem;
+  }
+
+  .contact-final h2 {
+    font-size: clamp(1.9rem, 5vw, 3.5rem);
+    max-width: 13ch;
+  }
+
+  .contact-final p {
+    max-width: 54ch;
+  }
+
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(26px) scale(0.987);
+    transition: opacity 620ms ease, transform 620ms ease;
+  }
+
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .motion-expressive [data-reveal] {
+    transform: translateY(36px) scale(0.975);
+    transition-duration: 860ms;
+    transition-timing-function: cubic-bezier(0.18, 0.72, 0.18, 1);
+  }
+
+  @media (max-width: 980px) {
+    .contact-hero-grid,
+    .contact-trust-grid,
+    .map-media-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-visual,
+    .contact-visual img {
+      min-height: 330px;
+    }
+
+    .side-column {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .contact-hero-grid {
+      min-height: min(650px, 76svh);
+      padding-top: 4.8rem;
+      gap: 0.75rem;
+    }
+
+    .contact-copy h1 {
+      font-size: clamp(2.2rem, 11.8vw, 3.35rem);
+      max-width: 8.4ch;
+    }
+
+    .contact-copy p {
+      max-width: 34ch;
+    }
+
+    .contact-actions .btn,
+    .contact-final .btn {
+      width: 100%;
+    }
+
+    .contact-visual,
+    .contact-visual img {
+      min-height: 250px;
+    }
+
+    .side-column {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-card li,
+    .hours-panel li {
+      grid-template-columns: 1fr;
+      gap: 0.1rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>

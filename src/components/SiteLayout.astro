@@ -49,6 +49,8 @@ const mobileBrandFallback = business.businessName.split(" ").slice(0, 2).join(" 
   </head>
   <body
     data-variant={variant}
+    data-archetype={business.archetype ?? ""}
+    data-tone={business.tone}
     style={`--bg:${theme.palette.bg};--bg-elevated:${theme.palette.bgElevated};--surface:${theme.palette.surface};--text:${theme.palette.text};--muted:${theme.palette.muted};--primary:${theme.palette.primary};--primary-contrast:${theme.palette.primaryContrast};--accent:${theme.palette.accent};--border:${theme.palette.border};--glow:${theme.palette.glow};--font-heading:${theme.fontHeading};--font-body:${theme.fontBody};`}
   >
     <BackgroundOrnaments styleId={business.visualProfile?.ornamentStyle ?? theme.ornamentStyle} />
@@ -76,7 +78,9 @@ const mobileBrandFallback = business.businessName.split(" ").slice(0, 2).join(" 
             }
           </ul>
         </nav>
-        <HeaderContact business={business} ctaLabel={compactDesktopCta} />
+        <div class="desktop-contact">
+          <HeaderContact business={business} ctaLabel={compactDesktopCta} />
+        </div>
       </div>
 
       <div class="container mobile-bar">
@@ -122,6 +126,12 @@ const mobileBrandFallback = business.businessName.split(" ").slice(0, 2).join(" 
       </div>
     </header>
 
+    <script is:inline>
+      if (new URLSearchParams(window.location.search).get("motion") === "expressive") {
+        document.documentElement.classList.add("motion-expressive");
+      }
+    </script>
+
     <main class="fade-up">
       <slot />
     </main>
@@ -138,7 +148,8 @@ const mobileBrandFallback = business.businessName.split(" ").slice(0, 2).join(" 
     z-index: 40;
     backdrop-filter: blur(12px);
     border-bottom: 1px solid color-mix(in srgb, var(--primary), white 78%);
-    background: color-mix(in srgb, var(--bg), white 28%);
+    background:
+      linear-gradient(90deg, color-mix(in srgb, var(--bg), white 34%), color-mix(in srgb, var(--surface), white 22%));
   }
 
   .brand {
@@ -170,11 +181,29 @@ const mobileBrandFallback = business.businessName.split(" ").slice(0, 2).join(" 
   }
 
   .desktop-bar {
-    min-height: 68px;
+    min-height: 60px;
     display: grid;
-    grid-template-columns: minmax(180px, 1fr) auto auto;
+    grid-template-columns: minmax(240px, 1fr) minmax(160px, auto) minmax(240px, 1fr);
     align-items: center;
     gap: 0.75rem;
+  }
+
+  .desktop-bar > .brand {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: center;
+  }
+
+  .desktop-bar > nav {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+  }
+
+  .desktop-contact {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
   }
 
   .desktop-bar nav ul {
@@ -187,9 +216,10 @@ const mobileBrandFallback = business.businessName.split(" ").slice(0, 2).join(" 
 
   .desktop-bar nav a {
     text-decoration: none;
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     line-height: 1;
     color: var(--muted);
+    font-weight: 800;
   }
 
   .desktop-bar nav a[aria-current="page"] {
@@ -262,12 +292,13 @@ const mobileBrandFallback = business.businessName.split(" ").slice(0, 2).join(" 
     position: absolute;
     right: 0.55rem;
     top: 56px;
-    min-width: 205px;
-    border: 1px solid color-mix(in srgb, var(--primary), white 70%);
-    border-radius: 14px;
-    background: color-mix(in srgb, var(--surface), white 14%);
-    box-shadow: 0 16px 30px -24px var(--glow);
-    padding: 0.2rem;
+    width: min(230px, calc(100vw - 1.1rem));
+    border: 1px solid color-mix(in srgb, var(--primary), white 72%);
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--surface), white 10%);
+    box-shadow: 0 18px 36px -28px var(--glow);
+    padding: 0.24rem;
+    overflow: hidden;
   }
 
   .menu nav ul {
@@ -278,10 +309,11 @@ const mobileBrandFallback = business.businessName.split(" ").slice(0, 2).join(" 
 
   .menu nav a {
     display: block;
-    padding: 0.5rem 0.58rem;
+    padding: 0.48rem 0.56rem;
     text-decoration: none;
-    font-size: 0.8rem;
-    border-radius: 8px;
+    font-size: 0.78rem;
+    line-height: 1.2;
+    border-radius: 7px;
   }
 
   .menu nav a[aria-current="page"] {

@@ -44,26 +44,110 @@
       "tags": ["konum", "stüdyo"],
       "alt": "Konum ve stüdyo görseli",
       "source": "library"
+    },
+    {
+      "src": "/assets/library/all/pexels-goksun-baris-gokalp-2158208031-35225397.jpg",
+      "type": "image",
+      "category": "hair-makeup",
+      "role": "hero",
+      "assetSet": "soft-beauty",
+      "tags": ["gelin", "saç", "makyaj", "özel gün"],
+      "alt": "Özel gün saç ve makyaj hero görseli",
+      "source": "library-all"
+    },
+    {
+      "src": "/assets/library/all/pexels-kerimeveyik-22668308.jpg",
+      "type": "image",
+      "category": "hair-makeup",
+      "role": "service",
+      "assetSet": "soft-beauty",
+      "tags": ["saç", "hazırlık", "özel gün"],
+      "serviceSlug": "ozel-gun-sac-tasarimi",
+      "alt": "Özel gün saç tasarımı hazırlığı",
+      "source": "library-all"
+    },
+    {
+      "src": "/assets/library/all/pexels-kerimeveyik-22668324.jpg",
+      "type": "image",
+      "category": "hair-makeup",
+      "role": "featured",
+      "assetSet": "soft-beauty",
+      "tags": ["gelin", "kına", "nişan", "makyaj"],
+      "alt": "Saç ve makyaj hizmet vitrini görseli",
+      "source": "library-all"
+    },
+    {
+      "src": "/assets/library/all/pexels-freestocks-361755.jpg",
+      "type": "image",
+      "category": "hair-makeup",
+      "role": "grid",
+      "assetSet": "soft-beauty",
+      "tags": ["galeri", "makyaj", "detay"],
+      "alt": "Makyaj detay galeri görseli",
+      "source": "library-all"
+    },
+    {
+      "src": "/assets/library/all/pexels-goksun-baris-gokalp-2158208031-35225425.jpg",
+      "type": "image",
+      "category": "hair-makeup",
+      "role": "grid",
+      "assetSet": "soft-beauty",
+      "tags": ["galeri", "gelin", "özel gün"],
+      "alt": "Özel gün hazırlığı galeri görseli",
+      "source": "library-all"
+    },
+    {
+      "src": "/assets/library/all/pexels-kerimeveyik-22589552.jpg",
+      "type": "image",
+      "category": "contact-location",
+      "role": "contact",
+      "assetSet": "soft-beauty",
+      "tags": ["stüdyo", "iç mekan", "konum"],
+      "alt": "Saç ve makyaj stüdyo iç mekan görseli",
+      "source": "library-all"
+    },
+    {
+      "src": "/assets/library/all/8225477-hd_1080_1920_25fps.mp4",
+      "type": "video",
+      "category": "hair-makeup",
+      "role": "video",
+      "assetSet": "soft-beauty",
+      "tags": ["makyaj", "hazırlık", "reels"],
+      "alt": "Makyaj hazırlık videosu",
+      "source": "library-all"
+    },
+    {
+      "src": "/assets/library/all/7754410-hd_1080_1920_30fps.mp4",
+      "type": "video",
+      "category": "hair-makeup",
+      "role": "video",
+      "assetSet": "soft-beauty",
+      "tags": ["saç", "hazırlık", "reels"],
+      "alt": "Saç hazırlık videosu",
+      "source": "library-all"
     }
   ],
   "assetSets": {
     "soft-beauty": {
       "hero": [
-        "/assets/library/hair-makeup/hero-hair-makeup-01.jpg",
-        "/assets/library/bridal-makeup/hero-bridal-makeup-01.webp"
+        "/assets/library/all/pexels-goksun-baris-gokalp-2158208031-35225397.jpg",
+        "/assets/library/all/pexels-kerimeveyik-22668324.jpg"
       ],
       "service": {
-        "hair": ["/assets/library/hair-makeup/service-hair-01.jpg"],
-        "makeup": ["/assets/library/hair-makeup/service-makeup-01.jpg"],
-        "default": ["/assets/library/hair-makeup/service-hair-makeup-01.jpg"]
+        "hair": ["/assets/library/all/pexels-kerimeveyik-22668308.jpg"],
+        "makeup": ["/assets/library/all/pexels-freestocks-361755.jpg"],
+        "default": ["/assets/library/all/pexels-kerimeveyik-22668324.jpg"]
       },
       "grid": [
-        "/assets/library/hair-makeup/grid-hair-makeup-01.jpg",
-        "/assets/library/hair-makeup/grid-hair-makeup-02.jpg",
-        "/assets/library/hair-makeup/grid-hair-makeup-03.jpg"
+        "/assets/library/all/pexels-freestocks-361755.jpg",
+        "/assets/library/all/pexels-goksun-baris-gokalp-2158208031-35225425.jpg",
+        "/assets/library/all/pexels-kerimeveyik-22668308.jpg"
       ],
-      "video": ["/assets/library/hair-makeup/video-makeup-process-01.mp4"],
-      "contact": ["/assets/library/contact-location/contact-location-01.jpg"]
+      "video": [
+        "/assets/library/all/8225477-hd_1080_1920_25fps.mp4",
+        "/assets/library/all/7754410-hd_1080_1920_30fps.mp4"
+      ],
+      "contact": ["/assets/library/all/pexels-kerimeveyik-22589552.jpg"]
     },
     "clean-clinic": {
       "hero": ["/assets/library/clinic/hero-clinic-01.jpg"],
@@ -111,7 +195,17 @@
           "type": "image",
           "category": "hair-makeup",
           "role": "hero",
-          "tags": ["gelin", "saç", "makyaj", "özel gün"],
+          "tags": ["gelin", "saç", "makyaj", "özel gün", "hero"],
+          "alt": "Gelin saçı ve makyaj hazırlığı",
+          "source": "business"
+        },
+        {
+          "src": "/assets/businesses/simay-sarikaya/service-hair-01.jpg",
+          "type": "image",
+          "category": "hair-makeup",
+          "role": "service",
+          "tags": ["gelin", "saç", "makyaj", "prova"],
+          "serviceSlug": "gelin-sac-ve-makyaj",
           "alt": "Gelin saçı ve makyaj hazırlığı",
           "source": "business"
         },
@@ -120,29 +214,39 @@
           "type": "image",
           "category": "hair-makeup",
           "role": "service",
-          "tags": ["gelin", "kına", "nişan", "makyaj"],
-          "serviceSlug": "gelin-saci-ve-makyaji",
-          "alt": "Gelin saçı ve makyaj hazırlığı",
+          "tags": ["kına", "saç", "makyaj", "gece"],
+          "serviceSlug": "kna-hazrlg",
+          "alt": "Kına hazırlığı",
           "source": "business"
         },
         {
-          "src": "/assets/businesses/simay-sarikaya/service-hair-01.jpg",
+          "src": "/assets/businesses/simay-sarikaya/grid-02.jpg",
+          "type": "image",
+          "category": "hair-makeup",
+          "role": "service",
+          "tags": ["nişan", "söz", "özel gün"],
+          "serviceSlug": "nisan-hazrlg",
+          "alt": "Nişan hazırlığı",
+          "source": "business"
+        },
+        {
+          "src": "/assets/library/all/pexels-freestocks-324655.jpg",
+          "type": "image",
+          "category": "hair-makeup",
+          "role": "service",
+          "tags": ["davet", "makyaj", "göz", "özel gün"],
+          "serviceSlug": "davet-makyaj",
+          "alt": "Davet makyajı",
+          "source": "business"
+        },
+        {
+          "src": "/assets/businesses/simay-sarikaya/grid-01.jpg",
           "type": "image",
           "category": "hair-makeup",
           "role": "service",
           "tags": ["özel gün", "saç", "tasarım"],
-          "serviceSlug": "ozel-gun-sac-tasarimi",
+          "serviceSlug": "ozel-gun-sac-tasarm",
           "alt": "Özel gün saç tasarımı",
-          "source": "business"
-        },
-        {
-          "src": "/assets/businesses/simay-sarikaya/service-makeup-01.jpg",
-          "type": "image",
-          "category": "hair-makeup",
-          "role": "featured",
-          "tags": ["gelin", "kına", "davet", "makyaj"],
-          "serviceSlug": "davet-makyaji",
-          "alt": "Davet makyajı hazırlığı",
           "source": "business"
         },
         {
@@ -150,9 +254,49 @@
           "type": "image",
           "category": "hair-makeup",
           "role": "featured",
-          "tags": ["saç", "kına", "nişan"],
-          "serviceSlug": "kina-hazirligi",
-          "alt": "Kına hazırlığı için saç tasarımı",
+          "tags": ["gelin", "saç", "makyaj", "prova"],
+          "serviceSlug": "gelin-sac-ve-makyaj",
+          "alt": "Gelin saçı ve makyajı görseli",
+          "source": "business"
+        },
+        {
+          "src": "/assets/businesses/simay-sarikaya/service-makeup-01.jpg",
+          "type": "image",
+          "category": "hair-makeup",
+          "role": "featured",
+          "tags": ["kına", "saç", "makyaj", "gece"],
+          "serviceSlug": "kna-hazrlg",
+          "alt": "Kına hazırlığı görseli",
+          "source": "business"
+        },
+        {
+          "src": "/assets/businesses/simay-sarikaya/grid-02.jpg",
+          "type": "image",
+          "category": "hair-makeup",
+          "role": "featured",
+          "tags": ["nişan", "söz", "özel gün"],
+          "serviceSlug": "nisan-hazrlg",
+          "alt": "Nişan hazırlığı görseli",
+          "source": "business"
+        },
+        {
+          "src": "/assets/library/all/pexels-freestocks-324655.jpg",
+          "type": "image",
+          "category": "hair-makeup",
+          "role": "featured",
+          "tags": ["davet", "makyaj", "göz", "özel gün"],
+          "serviceSlug": "davet-makyaj",
+          "alt": "Davet makyajı görseli",
+          "source": "business"
+        },
+        {
+          "src": "/assets/businesses/simay-sarikaya/grid-01.jpg",
+          "type": "image",
+          "category": "hair-makeup",
+          "role": "featured",
+          "tags": ["özel gün", "saç", "tasarım"],
+          "serviceSlug": "ozel-gun-sac-tasarm",
+          "alt": "Özel gün saç tasarımı görseli",
           "source": "business"
         },
         {
@@ -160,7 +304,7 @@
           "type": "image",
           "category": "hair-makeup",
           "role": "grid",
-          "tags": ["galeri", "gelin", "saç", "makyaj"],
+          "tags": ["galeri", "gelin", "saç", "makyaj", "review"],
           "alt": "Instagram galeri görseli 1",
           "source": "business"
         },
@@ -190,24 +334,56 @@
           "tags": ["stüdyo", "iç mekan", "konum"],
           "alt": "Stüdyo iç mekan görseli",
           "source": "business"
+        },
+        {
+          "src": "/assets/library/all/pexels-orhunruzgaroz-6080267.jpg",
+          "type": "image",
+          "category": "hair-makeup",
+          "role": "background",
+          "tags": ["dark", "texture", "cta"],
+          "alt": "Koyu arka plan dokusu",
+          "source": "business"
+        },
+        {
+          "src": "/assets/library/all/pexels-thefullonmonet-28994568.jpg",
+          "type": "image",
+          "category": "hair-makeup",
+          "role": "background",
+          "tags": ["review", "portre", "social-proof"],
+          "alt": "Sosyal kanıt alanı görseli",
+          "source": "business"
         }
       ],
       "heroMedia": [
         "/assets/businesses/simay-sarikaya/hero-bridal-01.jpg",
-        "/assets/businesses/simay-sarikaya/pexels-kerimeveyik-22589552.jpg"
+        "/assets/library/all/pexels-filipeleme-2593305.jpg",
+        "/assets/library/all/pexels-enginakyurt-3065170.jpg"
       ],
       "gridMedia": [
         "/assets/businesses/simay-sarikaya/grid-01.jpg",
         "/assets/businesses/simay-sarikaya/grid-02.jpg",
-        "/assets/businesses/simay-sarikaya/grid-03.jpg"
+        "/assets/businesses/simay-sarikaya/grid-03.jpg",
+        "/assets/library/all/pexels-freestocks-324655.jpg",
+        "/assets/library/all/pexels-filipeleme-2593305.jpg",
+        "/assets/library/all/pexels-cottonbro-3993468.jpg"
       ],
       "contactMedia": [
-        "/assets/businesses/simay-sarikaya/pexels-kerimeveyik-22589552.jpg"
+        "/assets/businesses/simay-sarikaya/pexels-kerimeveyik-22589552.jpg",
+        "/assets/library/all/pexels-enginakyurt-3065170.jpg"
       ],
       "serviceMedia": {
-        "hair": ["/assets/businesses/simay-sarikaya/service-hair-01.jpg"],
-        "makeup": ["/assets/businesses/simay-sarikaya/service-makeup-01.jpg"],
-        "default": ["/assets/businesses/simay-sarikaya/service-hair-01.jpg"]
+        "hair": [
+          "/assets/businesses/simay-sarikaya/service-hair-01.jpg",
+          "/assets/businesses/simay-sarikaya/grid-01.jpg"
+        ],
+        "makeup": [
+          "/assets/businesses/simay-sarikaya/service-makeup-01.jpg",
+          "/assets/library/all/pexels-freestocks-324655.jpg"
+        ],
+        "default": [
+          "/assets/businesses/simay-sarikaya/grid-02.jpg",
+          "/assets/businesses/simay-sarikaya/grid-03.jpg"
+        ]
       },
       "remote": {
         "hero": [],

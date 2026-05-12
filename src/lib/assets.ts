@@ -14,6 +14,7 @@ type AssetEntry = {
   category: string;
   role: AssetRole;
   tags: string[];
+  assetSet?: string | string[];
   serviceSlug?: string;
   alt?: string;
   source?: string;
@@ -138,6 +139,10 @@ function sanitizeEntry(input: unknown): AssetEntry | null {
     category: typeof raw.category === "string" ? raw.category : "misc",
     role: raw.role as AssetRole,
     tags: Array.isArray(raw.tags) ? raw.tags.filter((tag): tag is string => typeof tag === "string") : [],
+    assetSet:
+      typeof raw.assetSet === "string" || (Array.isArray(raw.assetSet) && raw.assetSet.every((item) => typeof item === "string"))
+        ? raw.assetSet
+        : undefined,
     serviceSlug: typeof raw.serviceSlug === "string" ? raw.serviceSlug : undefined,
     alt: typeof raw.alt === "string" ? raw.alt : undefined,
     source: typeof raw.source === "string" ? raw.source : undefined,
@@ -149,10 +154,20 @@ function getStructuredAssets(business: Business): { businessAssets: AssetEntry[]
   const cfg = businessConfig(business) as Record<string, unknown> | null;
   const businessAssetsRaw = (cfg?.assets as unknown[]) ?? [];
   const sharedAssetsRaw = (assetsConfig.assets as unknown[]) ?? [];
+  const assetSetId = getAssetSetId(business);
+  const matchesAssetSet = (entry: AssetEntry): boolean => {
+    if (!entry.assetSet || !assetSetId) {
+      return true;
+    }
+    return Array.isArray(entry.assetSet) ? entry.assetSet.includes(assetSetId) : entry.assetSet === assetSetId;
+  };
 
   return {
     businessAssets: businessAssetsRaw.map(sanitizeEntry).filter((item): item is AssetEntry => Boolean(item)),
-    sharedAssets: sharedAssetsRaw.map(sanitizeEntry).filter((item): item is AssetEntry => Boolean(item))
+    sharedAssets: sharedAssetsRaw
+      .map(sanitizeEntry)
+      .filter((item): item is AssetEntry => Boolean(item))
+      .filter(matchesAssetSet)
   };
 }
 

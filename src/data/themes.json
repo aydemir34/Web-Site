@@ -108,15 +108,15 @@
     "ornamentStyle": "bridal-silk",
     "palette": {
       "bg": "#fffbf8",
-      "bgElevated": "#fdf4ee",
+      "bgElevated": "#f8eef1",
       "surface": "#ffffff",
-      "text": "#2d211f",
-      "muted": "#7d655f",
-      "primary": "#b97a68",
-      "primaryContrast": "#fff9f6",
-      "accent": "#ecd8cc",
-      "border": "#ead8cd",
-      "glow": "rgba(185,122,104,0.2)"
+      "text": "#101829",
+      "muted": "#5c6478",
+      "primary": "#14213f",
+      "primaryContrast": "#fff8f7",
+      "accent": "#e8a0ac",
+      "border": "#ead9df",
+      "glow": "rgba(232,160,172,0.28)"
     }
   },
   {

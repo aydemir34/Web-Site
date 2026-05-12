@@ -38,6 +38,10 @@ export type Theme = {
 export type ServiceItem = {
   name: string;
   description: string;
+  detailBody?: string;
+  detailPoints?: string[];
+  bestFor?: string;
+  mediaTags?: string[];
 };
 
 export type ReviewItem = {

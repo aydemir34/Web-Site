@@ -1,0 +1,767 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simay Sarıkaya | Interior Atelier Artifact</title>
+    <style>
+      :root {
+        --cream: #f6f1ea;
+        --paper: #fcf8f3;
+        --ink: #171212;
+        --cocoa: #4a312f;
+        --deep: #130d0d;
+        --rose: #b18986;
+        --line: #ddcfbf;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "Avenir Next", "Segoe UI", Arial, sans-serif;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .page {
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at 14% 14%, rgba(177, 137, 134, 0.17), transparent 45%),
+          radial-gradient(circle at 82% 20%, rgba(74, 49, 47, 0.09), transparent 48%),
+          var(--paper);
+      }
+
+      .shell {
+        width: min(1260px, calc(100% - 2.2rem));
+        margin-inline: auto;
+      }
+
+      .hero {
+        min-height: 100svh;
+        position: relative;
+        overflow: clip;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        background:
+          radial-gradient(circle at 16% 18%, rgba(177, 137, 134, 0.42), transparent 42%),
+          linear-gradient(130deg, #2a1b1b 0%, #0f0909 66%, #352322 100%);
+      }
+
+      .hero img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(180deg, rgba(17, 12, 12, 0.2) 0%, rgba(17, 12, 12, 0.76) 100%),
+          linear-gradient(90deg, rgba(17, 12, 12, 0.74) 0%, rgba(17, 12, 12, 0.18) 44%, rgba(17, 12, 12, 0.65) 100%);
+      }
+
+      .hero-top {
+        position: relative;
+        z-index: 3;
+        min-height: 62px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0 1.1rem;
+      }
+
+      .brand {
+        color: #fff;
+        font-family: "Times New Roman", Georgia, serif;
+        font-size: 1.22rem;
+        letter-spacing: 0;
+        text-decoration: none;
+      }
+
+      .hero-nav {
+        display: none;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .hero-nav a:not(.wa) {
+        color: rgba(255, 255, 255, 0.9);
+        text-decoration: none;
+        font-size: 0.82rem;
+        border-bottom: 1px solid transparent;
+        padding-bottom: 0.12rem;
+      }
+
+      .hero-nav a:not(.wa):hover {
+        border-color: rgba(255, 255, 255, 0.7);
+      }
+
+      .wa,
+      .menu {
+        width: 2.18rem;
+        height: 2.18rem;
+        border: 1px solid rgba(255, 255, 255, 0.48);
+        border-radius: 4px;
+        color: #fff;
+        background: rgba(255, 255, 255, 0.06);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+      }
+
+      .wa svg,
+      .menu svg {
+        width: 1rem;
+        height: 1rem;
+      }
+
+      .hero-mobile {
+        display: inline-flex;
+        gap: 0.45rem;
+      }
+
+      .hero-content {
+        position: absolute;
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+        z-index: 3;
+        display: grid;
+        gap: 0.7rem;
+      }
+
+      .glass {
+        max-width: 460px;
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        background: rgba(11, 8, 8, 0.46);
+        backdrop-filter: blur(7px);
+        color: #fff;
+        padding: 0.88rem;
+      }
+
+      .glass h1 {
+        margin: 0;
+        font-family: "Times New Roman", Georgia, serif;
+        font-size: 1.98rem;
+        line-height: 1.05;
+        letter-spacing: 0;
+      }
+
+      .glass p {
+        margin: 0.72rem 0 0;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .hero-actions {
+        margin-top: 0.86rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .btn {
+        text-decoration: none;
+        border-radius: 4px;
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        color: #fff;
+        padding: 0.56rem 0.82rem;
+        font-size: 0.79rem;
+      }
+
+      .btn.main {
+        background: #fff;
+        color: #1a1414;
+        border-color: #fff;
+      }
+
+      .spots {
+        display: flex;
+        gap: 0.45rem;
+        flex-wrap: wrap;
+      }
+
+      .spot {
+        border: 1px solid rgba(255, 255, 255, 0.34);
+        background: rgba(11, 8, 8, 0.38);
+        color: #fff;
+        font-size: 0.72rem;
+        padding: 0.3rem 0.5rem;
+      }
+
+      .spot-map {
+        display: none;
+      }
+
+      .spot-map span {
+        position: absolute;
+        z-index: 3;
+        border: 1px solid rgba(255, 255, 255, 0.36);
+        background: rgba(12, 8, 8, 0.34);
+        color: #fff;
+        font-size: 0.72rem;
+        padding: 0.3rem 0.48rem;
+      }
+
+      .s1 {
+        top: 20%;
+        left: 7%;
+      }
+
+      .s2 {
+        top: 30%;
+        right: 12%;
+      }
+
+      .s3 {
+        bottom: 26%;
+        right: 8%;
+      }
+
+      .block {
+        padding: 1.7rem 0;
+      }
+
+      .intro {
+        background: var(--cream);
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .intro-grid {
+        display: grid;
+        gap: 0.9rem;
+      }
+
+      .intro h2 {
+        margin: 0;
+        font-family: "Times New Roman", Georgia, serif;
+        font-size: 2.1rem;
+        line-height: 1.04;
+        letter-spacing: 0;
+      }
+
+      .intro p {
+        margin: 0;
+        color: rgba(23, 18, 18, 0.82);
+      }
+
+      .intro-list {
+        margin-top: 0.76rem;
+        display: grid;
+        gap: 0.24rem;
+      }
+
+      .intro-list span {
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 0.24rem;
+      }
+
+      .curated h2,
+      .method h2,
+      .gallery h2 {
+        margin: 0;
+        font-family: "Times New Roman", Georgia, serif;
+        font-size: 1.9rem;
+        letter-spacing: 0;
+      }
+
+      .curated-grid {
+        margin-top: 0.82rem;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.62rem;
+      }
+
+      .tile {
+        min-height: 9.5rem;
+        border: 1px solid var(--line);
+        position: relative;
+        overflow: clip;
+        background:
+          radial-gradient(circle at 18% 20%, rgba(177, 137, 134, 0.48), transparent 52%),
+          linear-gradient(130deg, #f0e2d4 0%, #cfb39f 100%);
+      }
+
+      .tile img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .tile::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(19, 13, 13, 0.02) 42%, rgba(19, 13, 13, 0.66) 100%);
+      }
+
+      .tile p {
+        position: absolute;
+        left: 0.52rem;
+        right: 0.52rem;
+        bottom: 0.5rem;
+        margin: 0;
+        z-index: 2;
+        color: #fff;
+        font-size: 0.79rem;
+      }
+
+      .t1 {
+        grid-column: 1 / 3;
+        min-height: 14rem;
+      }
+
+      .t4 {
+        grid-column: 1 / 2;
+      }
+
+      .t5 {
+        grid-column: 2 / 3;
+      }
+
+      .insitu {
+        padding: 0;
+      }
+
+      .insitu-frame {
+        min-height: 62vh;
+        position: relative;
+        overflow: clip;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        background:
+          radial-gradient(circle at 80% 18%, rgba(177, 137, 134, 0.52), transparent 54%),
+          linear-gradient(130deg, #e8d8c8 0%, #c6a993 100%);
+      }
+
+      .insitu-frame img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .insitu-frame::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(180deg, rgba(21, 15, 15, 0.08) 0%, rgba(21, 15, 15, 0.46) 100%);
+      }
+
+      .insitu-label {
+        position: absolute;
+        z-index: 2;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        background: rgba(13, 9, 9, 0.36);
+        color: #fff;
+        font-size: 0.73rem;
+        padding: 0.3rem 0.5rem;
+      }
+
+      .i1 {
+        top: 16%;
+        left: 8%;
+      }
+
+      .i2 {
+        top: 36%;
+        right: 10%;
+      }
+
+      .i3 {
+        bottom: 20%;
+        left: 24%;
+      }
+
+      .method {
+        background: var(--paper);
+      }
+
+      .method-grid {
+        display: grid;
+        gap: 0.8rem;
+      }
+
+      .steps {
+        border-top: 1px solid var(--line);
+      }
+
+      .step {
+        border-bottom: 1px solid var(--line);
+        padding: 0.7rem 0;
+      }
+
+      .step strong {
+        font-family: "Times New Roman", Georgia, serif;
+        font-size: 1.18rem;
+      }
+
+      .step p {
+        margin: 0.26rem 0 0;
+        color: rgba(23, 18, 18, 0.8);
+      }
+
+      .gallery-collage {
+        margin-top: 0.8rem;
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        grid-template-rows: repeat(3, minmax(6rem, 1fr));
+        gap: 0.58rem;
+      }
+
+      .g {
+        border: 1px solid var(--line);
+        position: relative;
+        overflow: clip;
+        background:
+          radial-gradient(circle at 18% 20%, rgba(177, 137, 134, 0.48), transparent 52%),
+          linear-gradient(130deg, #f1e2d4 0%, #cfb29e 100%);
+      }
+
+      .g img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .g1 {
+        grid-column: 1 / 3;
+        grid-row: 1 / 3;
+      }
+
+      .g2 {
+        grid-column: 3 / 5;
+        grid-row: 1 / 2;
+      }
+
+      .g3 {
+        grid-column: 5 / 7;
+        grid-row: 1 / 3;
+      }
+
+      .g4 {
+        grid-column: 3 / 4;
+        grid-row: 2 / 4;
+      }
+
+      .g5 {
+        grid-column: 4 / 5;
+        grid-row: 2 / 3;
+      }
+
+      .g6 {
+        grid-column: 1 / 3;
+        grid-row: 3 / 4;
+      }
+
+      .g7 {
+        grid-column: 4 / 7;
+        grid-row: 3 / 4;
+      }
+
+      .foot {
+        background: linear-gradient(130deg, #231716 0%, #130d0d 100%);
+        color: rgba(255, 255, 255, 0.9);
+        border-top: 1px solid rgba(255, 255, 255, 0.13);
+        margin-top: 1.45rem;
+        padding: 1.2rem 0 1.45rem;
+      }
+
+      .foot-grid {
+        display: grid;
+        gap: 0.9rem;
+      }
+
+      .foot h3 {
+        margin: 0 0 0.28rem;
+        font-size: 0.73rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: rgba(255, 255, 255, 0.68);
+      }
+
+      .foot ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 0.18rem;
+      }
+
+      .foot li,
+      .foot a {
+        text-decoration: none;
+        font-size: 0.8rem;
+      }
+
+      .credit {
+        margin-top: 0.8rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        padding-top: 0.55rem;
+        font-size: 0.77rem;
+        color: rgba(255, 255, 255, 0.68);
+      }
+
+      .credit strong {
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      @media (min-width: 980px) {
+        .hero-nav {
+          display: inline-flex;
+        }
+
+        .hero-mobile {
+          display: none;
+        }
+
+        .hero-top {
+          padding: 0 2rem;
+        }
+
+        .hero-content {
+          left: 2rem;
+          right: 2rem;
+          bottom: 1.6rem;
+        }
+
+        .spot-map {
+          display: block;
+        }
+
+        .spots {
+          display: none;
+        }
+
+        .intro-grid {
+          grid-template-columns: 1.1fr 0.9fr;
+          gap: 1.4rem;
+          align-items: start;
+        }
+
+        .curated-grid {
+          grid-template-columns: repeat(6, minmax(0, 1fr));
+          grid-template-rows: repeat(2, minmax(10rem, 1fr));
+          gap: 0.64rem;
+        }
+
+        .t1 {
+          grid-column: 1 / 3;
+          grid-row: 1 / 3;
+          min-height: auto;
+        }
+
+        .t2 {
+          grid-column: 3 / 5;
+          grid-row: 1 / 2;
+        }
+
+        .t3 {
+          grid-column: 5 / 7;
+          grid-row: 1 / 3;
+        }
+
+        .t4 {
+          grid-column: 3 / 4;
+          grid-row: 2 / 3;
+        }
+
+        .t5 {
+          grid-column: 4 / 5;
+          grid-row: 2 / 3;
+        }
+
+        .method-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 1.2rem;
+          align-items: start;
+        }
+
+        .foot-grid {
+          grid-template-columns: 1.2fr 1fr 1fr 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <section class="hero">
+        <img src="../public/assets/businesses/simay-sarikaya/hero-bridal-01.jpg" alt="Atölye atmosferi" onerror="this.style.display='none'" />
+        <div class="spot-map" aria-hidden="true">
+          <span class="s1">Gelin Hazırlığı</span>
+          <span class="s2">Saç & Makyaj</span>
+          <span class="s3">Özel Gün</span>
+        </div>
+        <header class="hero-top">
+          <a class="brand" href="#">Simay Sarıkaya</a>
+          <nav class="hero-nav" aria-label="Üst menü">
+            <a href="#">Ana Sayfa</a>
+            <a href="#">Hizmetler</a>
+            <a href="#">Randevu</a>
+            <a class="wa" href="https://wa.me/905337774545" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M20.52 3.48A11.85 11.85 0 0 0 12 0C5.37 0 .01 5.37 0 12c0 2.12.56 4.2 1.62 6.02L0 24l6.17-1.6A11.95 11.95 0 0 0 12 24h.01C18.63 24 24 18.63 24 12c0-3.2-1.25-6.2-3.48-8.52Z" />
+              </svg>
+            </a>
+          </nav>
+          <div class="hero-mobile">
+            <a class="wa" href="https://wa.me/905337774545" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M20.52 3.48A11.85 11.85 0 0 0 12 0C5.37 0 .01 5.37 0 12c0 2.12.56 4.2 1.62 6.02L0 24l6.17-1.6A11.95 11.95 0 0 0 12 24h.01C18.63 24 24 18.63 24 12c0-3.2-1.25-6.2-3.48-8.52Z" />
+              </svg>
+            </a>
+            <span class="menu">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path>
+              </svg>
+            </span>
+          </div>
+        </header>
+        <div class="hero-content">
+          <article class="glass">
+            <h1>Özel gün hazırlığınız için zarif bir stüdyo deneyimi.</h1>
+            <p>
+              Gelin saçı, makyaj, kına, nişan ve davet hazırlıkları için hizmetleri inceleyin; randevu bilgisi için
+              WhatsApp üzerinden iletişime geçin.
+            </p>
+            <div class="hero-actions">
+              <a class="btn main" href="https://wa.me/905337774545">WhatsApp’tan Randevu Bilgisi Al</a>
+              <a class="btn" href="#">Hizmetleri İncele</a>
+            </div>
+          </article>
+          <div class="spots" aria-hidden="true">
+            <span class="spot">Gelin Hazırlığı</span>
+            <span class="spot">Saç & Makyaj</span>
+            <span class="spot">Özel Gün</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="intro block">
+        <div class="shell intro-grid">
+          <h2>Stüdyo atmosferi, sakin ritim ve güçlü hazırlık disiplini</h2>
+          <div>
+            <p>Simay Sarıkaya Hair & Makeup Studio, özel gün hazırlığını sadece uygulama değil, bütüncül bir atölye deneyimi olarak kurgular.</p>
+            <div class="intro-list">
+              <span>Gelin Saçı ve Makyajı</span>
+              <span>Kına Hazırlığı</span>
+              <span>Nişan Hazırlığı</span>
+              <span>Davet Makyajı</span>
+              <span>Özel Gün Saç Tasarımı</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="curated block">
+        <div class="shell">
+          <h2>Küratörlü Hizmet Alanları</h2>
+          <div class="curated-grid">
+            <figure class="tile t1"><img src="../public/assets/businesses/simay-sarikaya/service-makeup-01.jpg" alt="Gelin Saçı ve Makyajı" onerror="this.style.display='none'" /><p>Gelin Saçı ve Makyajı</p></figure>
+            <figure class="tile t2"><img src="../public/assets/businesses/simay-sarikaya/service-hair-01.jpg" alt="Kına Hazırlığı" onerror="this.style.display='none'" /><p>Kına Hazırlığı</p></figure>
+            <figure class="tile t3"><img src="../public/assets/businesses/simay-sarikaya/grid-01.jpg" alt="Nişan Hazırlığı" onerror="this.style.display='none'" /><p>Nişan Hazırlığı</p></figure>
+            <figure class="tile t4"><img src="../public/assets/businesses/simay-sarikaya/grid-02.jpg" alt="Davet Makyajı" onerror="this.style.display='none'" /><p>Davet Makyajı</p></figure>
+            <figure class="tile t5"><img src="../public/assets/businesses/simay-sarikaya/grid-03.jpg" alt="Özel Gün Saç Tasarımı" onerror="this.style.display='none'" /><p>Özel Gün Saç Tasarımı</p></figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="insitu block">
+        <figure class="insitu-frame">
+          <img src="../public/assets/businesses/simay-sarikaya/pexels-kerimeveyik-22589552.jpg" alt="Stüdyo içi hazırlık alanı" onerror="this.style.display='none'" />
+          <span class="insitu-label i1">Prova Alanı</span>
+          <span class="insitu-label i2">Işık Denge Noktası</span>
+          <span class="insitu-label i3">Son Dokunuş Bölgesi</span>
+        </figure>
+      </section>
+
+      <section class="method block">
+        <div class="shell method-grid">
+          <h2>Hazırlık Akışı</h2>
+          <div class="steps">
+            <article class="step"><strong>1. Ön Görüşme</strong><p>Tarih, konsept ve beklenti çerçevesi birlikte belirlenir.</p></article>
+            <article class="step"><strong>2. Prova ve Revize</strong><p>Saç ve makyaj dili prova ile netleşir, gerekli dokunuşlar tamamlanır.</p></article>
+            <article class="step"><strong>3. Uygulama Günü</strong><p>Planlanan akış, etkinlik saatine uygun şekilde disiplinle uygulanır.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="gallery block">
+        <div class="shell">
+          <h2>Galeri ve Sosyal Ritim</h2>
+          <div class="gallery-collage">
+            <figure class="g g1"><img src="../public/assets/businesses/simay-sarikaya/grid-01.jpg" alt="Galeri 1" onerror="this.style.display='none'" /></figure>
+            <figure class="g g2"><img src="../public/assets/businesses/simay-sarikaya/service-makeup-01.jpg" alt="Galeri 2" onerror="this.style.display='none'" /></figure>
+            <figure class="g g3"><img src="../public/assets/businesses/simay-sarikaya/grid-02.jpg" alt="Galeri 3" onerror="this.style.display='none'" /></figure>
+            <figure class="g g4"><img src="../public/assets/businesses/simay-sarikaya/service-hair-01.jpg" alt="Galeri 4" onerror="this.style.display='none'" /></figure>
+            <figure class="g g5"><img src="../public/assets/businesses/simay-sarikaya/grid-03.jpg" alt="Galeri 5" onerror="this.style.display='none'" /></figure>
+            <figure class="g g6"><img src="../public/assets/businesses/simay-sarikaya/hero-bridal-01.jpg" alt="Galeri 6" onerror="this.style.display='none'" /></figure>
+            <figure class="g g7"><img src="../public/assets/businesses/simay-sarikaya/pexels-kerimeveyik-22589552.jpg" alt="Galeri 7" onerror="this.style.display='none'" /></figure>
+          </div>
+        </div>
+      </section>
+
+      <footer class="foot">
+        <div class="shell">
+          <div class="foot-grid">
+            <section>
+              <h3>Marka</h3>
+              <ul>
+                <li>Simay Sarıkaya</li>
+                <li>Gaziosmanpaşa · İstanbul</li>
+              </ul>
+            </section>
+            <section>
+              <h3>Sayfalar</h3>
+              <ul>
+                <li><a href="#">Ana Sayfa</a></li>
+                <li><a href="#">Hizmetler</a></li>
+                <li><a href="#">Randevu</a></li>
+              </ul>
+            </section>
+            <section>
+              <h3>Hizmetler</h3>
+              <ul>
+                <li>Gelin Saçı ve Makyajı</li>
+                <li>Kına Hazırlığı</li>
+                <li>Nişan Hazırlığı</li>
+                <li>Davet Makyajı</li>
+              </ul>
+            </section>
+            <section>
+              <h3>İletişim</h3>
+              <ul>
+                <li><a href="tel:+902126104545">+90 212 610 45 45</a></li>
+                <li><a href="https://wa.me/905337774545">WhatsApp</a></li>
+                <li><a href="https://instagram.com/simaysarikayahairmakeup">Instagram</a></li>
+              </ul>
+            </section>
+          </div>
+          <div class="credit">
+            <strong>Web tasarım ve bakım: aydemirs.com</strong>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

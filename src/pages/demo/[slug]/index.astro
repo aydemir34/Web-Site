@@ -14,8 +14,7 @@ import Faq from "../../../components/Faq.astro";
 import ProductPreview from "../../../components/ProductPreview.astro";
 import InstagramPreviewGrid from "../../../components/InstagramPreviewGrid.astro";
 import ServiceCarousel from "../../../components/ServiceCarousel.astro";
-import WhyUsEditorial from "../../../components/WhyUsEditorial.astro";
-import FeaturedServices from "../../../components/FeaturedServices.astro";
+import RitualHome from "../../../components/RitualHome.astro";
 
 export function getStaticPaths() {
   return getBusinesses().map((business) => ({
@@ -35,24 +34,13 @@ const path = `/demo/${business.slug}/`;
 const seo = buildSeoMeta(business, path, { isDemo: true });
 const schema = buildLocalBusinessSchema(business, seo.canonical);
 const modules = business.moduleOrder.home.filter((moduleId) => moduleId !== "productPreview" || business.hasProducts);
-const isSimay = business.slug === "simay-sarikaya-hair-makeup";
+const useRitualCommerce = business.archetype === "soft-beauty-editorial" && business.tone === "bridal-editorial";
 ---
 
 <SiteLayout business={business} theme={theme} seo={seo} schema={schema} currentPath={path} variant={variant}>
   {
-    isSimay ? (
-      <>
-        <Hero
-          business={business}
-          theme={theme}
-          h1="Özel gününüz için saç ve makyajı zarif bir akışla planlayın."
-          summary="Gaziosmanpaşa’da gelin, kına, nişan ve davet hazırlıkları için hizmetleri inceleyin, WhatsApp üzerinden randevu bilgisi alın."
-        />
-        <FeaturedServices business={business} services={business.services} maxItems={4} />
-        <WhyUsEditorial business={business} />
-        <InstagramPreviewGrid business={business} theme={theme} />
-        <AppointmentCta business={business} />
-      </>
+    useRitualCommerce ? (
+      <RitualHome business={business} theme={theme} />
     ) : (
       modules.map((moduleId) => (
         <>

@@ -1,0 +1,709 @@
+---
+import type { Business } from "../types";
+import { getFeaturedServiceMedia, getHeroMedia, getServiceMediaGallery } from "../lib/assets";
+import { buildWhatsAppUrl } from "../lib/whatsapp";
+import { slugify } from "../lib/slugify";
+import FAQAccordion from "./FAQAccordion.astro";
+import EditorialVisualFallback from "./EditorialVisualFallback.astro";
+
+type Props = {
+  business: Business;
+};
+
+const { business } = Astro.props;
+const basePath = `/demo/${business.slug}/`;
+const firstService = business.services[0];
+const heroMedia = getFeaturedServiceMedia(business, firstService ?? business.mainService) ?? getHeroMedia(business);
+---
+
+<section class="services-hero" data-reveal data-reveal-delay="0">
+  {
+    heroMedia && (
+      <div class="services-hero-media" aria-hidden="true">
+        <img src={heroMedia} alt="" loading="eager" />
+      </div>
+    )
+  }
+  <div class="services-hero-wash"></div>
+  <div class="container services-hero-inner">
+    <div data-reveal data-reveal-delay="80">
+      <p class="services-eyebrow">Hazırlık Seçimi</p>
+      <h1>Hangi güne hazırlanıyoruz?</h1>
+      <p>Gelin, kına, nişan ya da davet... Saç ve makyaj akışını günün temposuna göre birlikte seçelim.</p>
+    </div>
+    <a class="btn btn-primary" href={buildWhatsAppUrl(business)} target="_blank" rel="noreferrer" data-reveal data-reveal-delay="180">WhatsApp’tan Randevu Bilgisi Al</a>
+  </div>
+</section>
+
+<section class="section service-dossier" data-service-dossier data-reveal>
+  <div class="container dossier-grid">
+    <aside class="service-index" aria-label="Hizmet seçimi">
+      <p>Hazırlık Seçimi</p>
+      <h2>Güne göre ilerleyin</h2>
+      <div class="service-tabs" role="tablist" aria-label="Hizmetler">
+        {
+          business.services.map((service, index) => (
+            <button
+              id={`tab-${slugify(service.name)}`}
+              type="button"
+              role="tab"
+              class:list={["service-tab", index === 0 && "is-active"]}
+              aria-selected={index === 0 ? "true" : "false"}
+              aria-controls={slugify(service.name)}
+              data-service-tab={slugify(service.name)}
+            >
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              {service.name}
+            </button>
+          ))
+        }
+      </div>
+    </aside>
+
+    <div class="service-panels">
+      {
+        business.services.map((service, index) => {
+          const id = slugify(service.name);
+          const media = getServiceMediaGallery(business, service, 4);
+          const waUrl = buildWhatsAppUrl(business, service);
+          return (
+            <article
+              id={id}
+              class:list={["service-panel", index === 0 && "is-active"]}
+              data-service-panel={id}
+              role="tabpanel"
+              aria-labelledby={`tab-${id}`}
+            >
+              <div class="panel-copy">
+                <p class="service-number">{String(index + 1).padStart(2, "0")}</p>
+                <h2>{service.name}</h2>
+                <p>{service.detailBody ?? service.description}</p>
+                {service.bestFor && <p class="best-for"><strong>Kimler için:</strong> {service.bestFor}</p>}
+                <ul>
+                  {(service.detailPoints ?? business.processSteps).slice(0, 4).map((point) => <li>{point}</li>)}
+                </ul>
+                <div class="panel-actions">
+                  <a class="btn btn-primary" href={waUrl} target="_blank" rel="noreferrer">Bu Hizmet İçin Bilgi Al</a>
+                  <a class="btn btn-secondary" href={`${basePath}randevu/`}>Randevu & İletişim</a>
+                </div>
+              </div>
+              <div class="panel-media">
+                {
+                  media.length > 0 ? (
+                    media.map((item, mediaIndex) => (
+                      <figure class:list={["media-shot", mediaIndex === 0 && "featured", mediaIndex === 0 && "is-selected"]} data-media-shot>
+                        <img src={item} alt={`${service.name} görseli ${mediaIndex + 1}`} loading="lazy" />
+                      </figure>
+                    ))
+                  ) : (
+                    <figure class="media-shot featured">
+                      <EditorialVisualFallback theme={business.themeId} aspectRatio="3/4" labels={["SAÇ", "MAKYAJ"]} />
+                    </figure>
+                  )
+                }
+              </div>
+            </article>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section service-flow" data-reveal>
+  <div class="container flow-inner">
+    <div>
+      <h2>Prova Günü Akışı</h2>
+      <p>İlk görüşmeden özel gün uygulamasına kadar süreç sade, anlaşılır ve randevu odaklı ilerler.</p>
+    </div>
+    <ol>
+      {business.processSteps.map((step) => <li>{step}</li>)}
+    </ol>
+  </div>
+</section>
+
+<FAQAccordion items={business.faq} />
+
+<section class="section services-cta" data-reveal>
+  <div class="container services-cta-inner">
+    <h2>{firstService ? `${firstService.name} için tarih sor` : business.cta.title}</h2>
+    <p>{business.cta.description}</p>
+    <a class="btn btn-primary" href={buildWhatsAppUrl(business, firstService ?? business.mainService)} target="_blank" rel="noreferrer">
+      WhatsApp’tan Bilgi Al
+    </a>
+  </div>
+</section>
+
+<script is:inline>
+  const root = document.documentElement;
+  root.classList.add("ritual-enhanced");
+  const expressive = new URLSearchParams(window.location.search).get("motion") === "expressive";
+  if (expressive) {
+    root.classList.add("motion-expressive");
+  }
+
+  const reveals = document.querySelectorAll("[data-reveal]");
+  if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+          const delay = Number(entry.target.getAttribute("data-reveal-delay") ?? "0");
+          window.setTimeout(() => entry.target.classList.add("is-visible"), delay);
+          revealObserver.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.18 }
+    );
+    reveals.forEach((item) => revealObserver.observe(item));
+  } else {
+    reveals.forEach((item) => item.classList.add("is-visible"));
+  }
+
+  document.querySelectorAll("[data-service-dossier]").forEach((dossier) => {
+    const tabs = Array.from(dossier.querySelectorAll("[data-service-tab]"));
+    const panels = Array.from(dossier.querySelectorAll("[data-service-panel]"));
+
+    const activate = (tab) => {
+      const target = tab.getAttribute("data-service-tab");
+      tabs.forEach((item) => {
+        const active = item === tab;
+        item.classList.toggle("is-active", active);
+        item.setAttribute("aria-selected", active ? "true" : "false");
+      });
+
+      panels.forEach((panel) => {
+        const isActive = panel.getAttribute("data-service-panel") === target;
+        panel.classList.toggle("is-active", isActive);
+        if (!isActive) {
+          return;
+        }
+        panel.animate(
+          [
+            { opacity: 0, transform: "translateY(12px) scale(0.988)" },
+            { opacity: 1, transform: "translateY(0) scale(1)" }
+          ],
+          {
+            duration: expressive ? 520 : 360,
+            easing: expressive ? "cubic-bezier(0.18,0.72,0.18,1)" : "ease"
+          }
+        );
+      });
+    };
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => activate(tab));
+      tab.addEventListener("keydown", (event) => {
+        if (!["ArrowRight", "ArrowDown", "ArrowLeft", "ArrowUp", "Home", "End"].includes(event.key)) {
+          return;
+        }
+        event.preventDefault();
+        const nextIndex =
+          event.key === "Home"
+            ? 0
+            : event.key === "End"
+              ? tabs.length - 1
+              : event.key === "ArrowRight" || event.key === "ArrowDown"
+                ? (index + 1) % tabs.length
+                : (index - 1 + tabs.length) % tabs.length;
+        const nextTab = tabs[nextIndex];
+        if (nextTab) {
+          nextTab.focus();
+          activate(nextTab);
+        }
+      });
+    });
+
+    dossier.querySelectorAll("[data-media-shot]").forEach((shot) => {
+      shot.addEventListener("click", () => {
+        const siblings = Array.from(shot.parentElement?.querySelectorAll("[data-media-shot]") ?? []);
+        siblings.forEach((item) => item.classList.toggle("is-selected", item === shot));
+      });
+    });
+  });
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!prefersReducedMotion) {
+    const heroImage = document.querySelector(".services-hero-media img");
+    let ticking = false;
+
+    const updateHero = () => {
+      const amount = Math.min(window.scrollY * 0.045, 36);
+      if (heroImage) {
+        heroImage.style.setProperty("--services-hero-shift", `${amount}px`);
+      }
+      ticking = false;
+    };
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          window.requestAnimationFrame(updateHero);
+          ticking = true;
+        }
+      },
+      { passive: true }
+    );
+  }
+</script>
+
+<style>
+  .services-hero {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 78% 12%, rgba(220, 150, 163, 0.2), transparent 24rem),
+      linear-gradient(180deg, #080e1f, #0f1730);
+    border-bottom: 1px solid rgba(220, 150, 163, 0.32);
+  }
+
+  .services-hero-media,
+  .services-hero-wash {
+    position: absolute;
+    inset: 0;
+  }
+
+  .services-hero-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translateY(var(--services-hero-shift, 0)) scale(1.08);
+    transition: transform 180ms linear;
+    filter: saturate(0.94) contrast(1.08);
+  }
+
+  .services-hero-wash {
+    background:
+      radial-gradient(circle at 22% 18%, rgba(220, 150, 163, 0.22), transparent 18rem),
+      linear-gradient(92deg, rgba(8, 13, 30, 0.95) 0%, rgba(8, 13, 30, 0.68) 44%, rgba(8, 13, 30, 0.2) 100%),
+      linear-gradient(180deg, rgba(8, 13, 30, 0.56), rgba(8, 13, 30, 0.24));
+  }
+
+  .services-hero-inner {
+    position: relative;
+    z-index: 1;
+    min-height: min(680px, 80svh);
+    padding: clamp(5rem, 9vw, 7.2rem) 0 clamp(1.5rem, 4vw, 2.3rem);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 0.9rem;
+  }
+
+  .services-eyebrow {
+    margin: 0;
+    color: rgba(220, 150, 163, 0.9);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+  }
+
+  .services-hero h1,
+  .service-index h2,
+  .service-panel h2,
+  .flow-inner h2,
+  .services-cta h2 {
+    font-family: "Space Grotesk", var(--font-heading);
+    color: #14213f;
+  }
+
+  .services-hero h1 {
+    font-size: clamp(2.4rem, 6.8vw, 5rem);
+    max-width: 10ch;
+    line-height: 0.92;
+    color: #f6f9ff;
+    text-wrap: balance;
+  }
+
+  .services-hero p {
+    color: rgba(235, 240, 252, 0.92);
+    max-width: 54ch;
+    margin-top: 0.68rem;
+  }
+
+  .services-hero .btn {
+    border-radius: 999px;
+    min-height: 44px;
+    padding: 0.72rem 1rem;
+    background: #f6f9ff;
+    color: #0d1a36;
+    border-color: transparent;
+  }
+
+  .service-dossier {
+    background:
+      radial-gradient(circle at 8% 28%, rgba(20, 33, 63, 0.06), transparent 22rem),
+      #fbfcff;
+  }
+
+  .dossier-grid {
+    display: grid;
+    grid-template-columns: minmax(220px, 0.33fr) minmax(0, 1fr);
+    gap: clamp(0.95rem, 2.8vw, 1.8rem);
+    align-items: start;
+    min-width: 0;
+  }
+
+  .service-index {
+    position: sticky;
+    top: 84px;
+    display: grid;
+    gap: 0.8rem;
+    min-width: 0;
+  }
+
+  .service-index > p {
+    color: #7c6470;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    margin: 0;
+  }
+
+  .service-tabs {
+    display: grid;
+    gap: 0.4rem;
+    min-width: 0;
+  }
+
+  .service-tab {
+    appearance: none;
+    border: 1px solid #ead9df;
+    background: #fff;
+    color: #14213f;
+    min-height: 50px;
+    border-radius: 10px;
+    text-align: left;
+    padding: 0.62rem 0.7rem;
+    font: 800 0.86rem/1.18 var(--font-body);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.52rem;
+    transition: border-color 220ms ease, transform 220ms ease, background 220ms ease;
+  }
+
+  .service-tab span {
+    color: #7d8da7;
+    font-size: 0.72rem;
+  }
+
+  .service-tab.is-active {
+    background: #14213f;
+    color: #fff;
+    border-color: #14213f;
+    transform: translateX(4px);
+  }
+
+  .service-tab.is-active span {
+    color: #cddaff;
+  }
+
+  .service-panels {
+    min-width: 0;
+  }
+
+  .service-panel {
+    display: none;
+    grid-template-columns: minmax(0, 0.92fr) minmax(280px, 1fr);
+    gap: clamp(0.9rem, 2.5vw, 1.5rem);
+    align-items: stretch;
+    border-top: 1px solid #ead9df;
+    padding-top: 0.95rem;
+    min-width: 0;
+  }
+
+  .service-panel.is-active {
+    display: grid;
+  }
+
+  .panel-copy {
+    display: grid;
+    gap: 0.76rem;
+    align-content: center;
+  }
+
+  .service-number {
+    color: #8190a7;
+    font-weight: 900;
+    margin: 0;
+  }
+
+  .panel-copy > p {
+    color: #4b5870;
+    margin: 0;
+  }
+
+  .best-for {
+    border-left: 3px solid #dc96a3;
+    padding-left: 0.7rem;
+  }
+
+  .panel-copy ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .panel-copy li {
+    color: #1d2e56;
+    font-weight: 700;
+  }
+
+  .panel-copy li::before {
+    content: "•";
+    color: #dc96a3;
+    margin-right: 0.45rem;
+  }
+
+  .panel-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+  }
+
+  .service-dossier .btn,
+  .services-cta .btn {
+    border-radius: 999px;
+    min-height: 42px;
+    padding: 0.72rem 1rem;
+  }
+
+  .service-dossier .btn-primary,
+  .services-cta .btn-primary {
+    background: #14213f;
+    color: #fff;
+  }
+
+  .service-dossier .btn-secondary {
+    background: #fff;
+    border-color: #14213f;
+    color: #14213f;
+  }
+
+  .panel-media {
+    display: grid;
+    grid-template-columns: 1fr 0.72fr;
+    grid-auto-rows: minmax(145px, auto);
+    gap: 0.54rem;
+    min-width: 0;
+  }
+
+  .media-shot {
+    margin: 0;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #edf3f8;
+    cursor: pointer;
+    opacity: 0.66;
+    transform: scale(0.992);
+    transition: opacity 240ms ease, transform 240ms ease, box-shadow 240ms ease;
+  }
+
+  .media-shot.is-selected,
+  .media-shot:hover {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 18px 38px -30px rgba(20, 33, 63, 0.62);
+  }
+
+  .media-shot.featured {
+    grid-row: span 2;
+    min-height: 470px;
+  }
+
+  .media-shot img {
+    width: 100%;
+    height: 100%;
+    min-height: 175px;
+    object-fit: cover;
+  }
+
+  .media-shot.featured img {
+    min-height: 470px;
+  }
+
+  .flow-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.82fr) 1fr;
+    gap: 1rem;
+    align-items: start;
+    border-block: 1px solid #ead9df;
+    padding-block: clamp(1.5rem, 3.6vw, 2.5rem);
+  }
+
+  .flow-inner p {
+    color: #4b5870;
+    max-width: 52ch;
+    margin: 0;
+  }
+
+  .flow-inner ol {
+    counter-reset: flow;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.62rem;
+  }
+
+  .flow-inner li {
+    counter-increment: flow;
+    display: flex;
+    gap: 0.78rem;
+    color: #14213f;
+    font-weight: 900;
+    align-items: center;
+  }
+
+  .flow-inner li::before {
+    content: counter(flow, decimal-leading-zero);
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    background: #fff1f4;
+    color: #14213f;
+    font-size: 0.74rem;
+  }
+
+  .services-cta {
+    background: #fbfcff;
+  }
+
+  .services-cta-inner {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    gap: 0.7rem;
+  }
+
+  .services-cta h2 {
+    font-size: clamp(1.84rem, 4.6vw, 3.2rem);
+  }
+
+  .services-cta p {
+    color: #4b5870;
+    max-width: 56ch;
+    margin: 0;
+  }
+
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(26px) scale(0.987);
+    transition: opacity 620ms ease, transform 620ms ease;
+  }
+
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .motion-expressive [data-reveal] {
+    transform: translateY(36px) scale(0.976);
+    transition-duration: 860ms;
+    transition-timing-function: cubic-bezier(0.18, 0.72, 0.18, 1);
+  }
+
+  @media (max-width: 980px) {
+    .services-hero-inner,
+    .dossier-grid,
+    .service-panel,
+    .flow-inner {
+      grid-template-columns: 1fr;
+    }
+
+    .service-index {
+      position: static;
+    }
+
+    .service-tabs {
+      display: flex;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding-bottom: 0.35rem;
+      scroll-snap-type: x mandatory;
+      max-width: 100%;
+    }
+
+    .service-tab {
+      flex: 0 0 min(245px, 74vw);
+      min-width: 0;
+      scroll-snap-align: start;
+    }
+
+    .service-tab.is-active {
+      transform: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .services-hero-inner {
+      min-height: min(640px, 76svh);
+      align-items: end;
+      padding-top: 4.8rem;
+      gap: 0.72rem;
+    }
+
+    .services-hero h1 {
+      font-size: clamp(2rem, 10.4vw, 3.15rem);
+      max-width: 8.4ch;
+    }
+
+    .services-hero p {
+      max-width: 34ch;
+      margin-top: 0.56rem;
+    }
+
+    .services-hero .btn,
+    .panel-actions .btn,
+    .services-cta .btn {
+      width: 100%;
+    }
+
+    .service-tabs {
+      padding-inline: 0;
+    }
+
+    .service-tab {
+      flex: 0 0 min(228px, 76vw);
+    }
+
+    .panel-media {
+      grid-template-columns: 1fr;
+      gap: 0.45rem;
+    }
+
+    .media-shot.featured,
+    .media-shot.featured img {
+      min-height: 320px;
+    }
+
+    .media-shot:not(.featured) img {
+      min-height: 180px;
+    }
+
+    .flow-inner li {
+      align-items: flex-start;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal],
+    .media-shot,
+    .services-hero-media img,
+    .service-tab {
+      opacity: 1;
+      transform: none;
+      transition: none;
+      animation: none;
+    }
+  }
+</style>

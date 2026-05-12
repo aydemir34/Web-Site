@@ -1,0 +1,994 @@
+---
+import type { Business, Theme } from "../types";
+import { getFeaturedServiceMedia, getGridMedia, getHeroMedia, getVideoMedia } from "../lib/assets";
+import { buildWhatsAppUrl } from "../lib/whatsapp";
+import { slugify } from "../lib/slugify";
+import EditorialVisualFallback from "./EditorialVisualFallback.astro";
+
+type Props = {
+  business: Business;
+  theme: Theme;
+};
+
+const { business, theme } = Astro.props;
+void theme;
+
+const heroMedia = getHeroMedia(business);
+const gridMedia = getGridMedia(business);
+const videos = getVideoMedia(business);
+const whatsAppUrl = buildWhatsAppUrl(business);
+const servicesPath = `/demo/${business.slug}/hizmetler/`;
+const contactPath = `/demo/${business.slug}/randevu/`;
+const featuredServices = business.services.slice(0, 5);
+const editorialImages = [
+  gridMedia[0] ?? getFeaturedServiceMedia(business, business.services[0] ?? business.mainService),
+  gridMedia[1] ?? getFeaturedServiceMedia(business, business.services[1] ?? business.mainService)
+].filter(Boolean);
+const extraGallery = gridMedia.slice(0, 6);
+const proofItems = [
+  `${business.district} / ${business.neighborhood}`,
+  `${business.leadSignals.rating.toLocaleString("tr-TR")} Google puanı`,
+  `${business.leadSignals.reviewCount}+ yorum`,
+  ...business.trustBadges.slice(0, 2)
+];
+const firstVideo = videos[0] ?? null;
+const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
+---
+
+<div class="ritual-home">
+  <section class="ritual-hero" data-reveal data-reveal-delay="0">
+    <div class="hero-media" aria-hidden={heroMedia ? "true" : "false"}>
+      {
+        heroMedia ? (
+          <img src={heroMedia} alt={`${business.businessName} özel gün saç ve makyaj görseli`} loading="eager" />
+        ) : (
+          <EditorialVisualFallback theme={business.themeId} aspectRatio="16/9" labels={["GELİN", "KINA", "DAVET"]} />
+        )
+      }
+    </div>
+    <div class="hero-wash"></div>
+    <div class="container hero-inner">
+      <div class="hero-copy" data-reveal data-reveal-delay="120">
+        <p class="hero-eyebrow">{business.hero.eyebrow}</p>
+        <h1>{business.hero.title}</h1>
+        <p>{business.hero.description}</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href={whatsAppUrl} target="_blank" rel="noreferrer">{business.hero.primaryCta}</a>
+          <a class="btn btn-secondary" href={servicesPath}>{business.hero.secondaryCta}</a>
+        </div>
+      </div>
+      <div class="hero-mini-gallery" aria-label="Seçili hazırlık görselleri" data-reveal data-reveal-delay="220">
+        {extraGallery.slice(0, 3).map((item, index) => <img src={item} alt={`Hazırlık görseli ${index + 1}`} loading={index === 0 ? "eager" : "lazy"} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="proof-strip" aria-label="Sosyal kanıt" data-reveal data-reveal-delay="0">
+    <div class="container proof-inner">
+      {proofItems.map((item) => <span>{item}</span>)}
+    </div>
+  </section>
+
+  <section class="section service-shelf" id="hizmet-vitrini" data-reveal>
+    <div class="container">
+      <div class="section-head shelf-head">
+        <div>
+          <h2>Özel gün hazırlıkları</h2>
+          <p>Gelin, kına, nişan ve davet için en çok sorulan saç ve makyaj seçenekleri.</p>
+        </div>
+        <a class="shelf-cta" href={servicesPath}>Tüm Hizmetleri Gör</a>
+      </div>
+      <div class="shelf" aria-label="Öne çıkan hizmetler">
+        {
+          featuredServices.map((service, index) => {
+            const media = getFeaturedServiceMedia(business, service);
+            return (
+              <article class="service-tile" style={`--stagger:${index};`}>
+                <a href={`${servicesPath}#${slugify(service.name)}`}>
+                  <figure>
+                    {
+                      media ? (
+                        <img src={media} alt={`${service.name} hizmet görseli`} loading="lazy" />
+                      ) : (
+                        <EditorialVisualFallback theme={business.themeId} aspectRatio="3/4" labels={["SAÇ", "MAKYAJ"]} />
+                      )
+                    }
+                  </figure>
+                  <div class="service-tile-copy">
+                    <h3>{service.name}</h3>
+                    <p>{service.bestFor ?? service.description}</p>
+                    <span>Detayı İncele</span>
+                  </div>
+                </a>
+              </article>
+            );
+          })
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section editorial-duo" data-reveal>
+    <div class="container">
+      <div class="duo-title">
+        <h2>Hazırlık sabahı daha sakin aksın</h2>
+      </div>
+      <div class="duo-grid">
+        {
+          editorialImages.slice(0, 2).map((item, index) => (
+            <article class="duo-panel" style={`--panel:${index};`}>
+              <img src={item!} alt={index === 0 ? "Gelin hazırlık süreci" : "Özel gün saç ve makyaj detayı"} loading="lazy" />
+              <div>
+                <p>{index === 0 ? "Prova Günü" : "Görünüm Seçimi"}</p>
+                <h3>{index === 0 ? "Saç, makyaj ve aksesuar fikri önceden birlikte denenir." : "Kıyafet, mekan ışığı ve fotoğraf planı aynı dilde buluşur."}</h3>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="process-band" id="hazirlik-sureci" data-reveal>
+    <div class="container process-inner">
+      <div>
+        <h2>Hazırlık Süreci</h2>
+        <p>İlk mesajdan özel gün sabahına kadar akış adım adım görünür ilerler.</p>
+      </div>
+      <div class="process-progress" aria-hidden="true">
+        <span data-process-progress></span>
+      </div>
+      <ol>
+        {business.processSteps.map((step, index) => <li data-process-step style={`--step:${index};`}><span>{step}</span></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section media-story" id="galeri" data-reveal>
+    <div class="container media-story-grid">
+      <article class="video-panel">
+        {
+          firstVideo ? (
+            <video src={firstVideo} autoplay muted loop playsinline preload="metadata" aria-label="Hazırlık süreci videosu"></video>
+          ) : (
+            <EditorialVisualFallback theme={business.themeId} aspectRatio="3/4" labels={["VİDEO", "HAZIRLIK"]} />
+          )
+        }
+        <a href={business.instagramUrl} target="_blank" rel="noreferrer">Instagram’dan Karelere Bak</a>
+      </article>
+      <div class="gallery-mosaic">
+        <div class="section-head">
+          <h2>Hazırlıktan seçili kareler</h2>
+          <p>Stil kararını verirken saç formu, makyaj yoğunluğu ve aksesuar dengesi birlikte değerlendirilir.</p>
+        </div>
+        <div class="mosaic-grid">
+          {extraGallery.slice(0, 4).map((item, index) => <img src={item} alt={`Galeri görseli ${index + 1}`} loading="lazy" />)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reviews-band" id="yorumlar" data-reveal>
+    <div class="container reviews-inner">
+      <div class="reviews-copy">
+        <p class="stars">★★★★★ <span>({business.leadSignals.reviewCount}+ yorum)</span></p>
+        <h2>Misafir yorumlarında öne çıkan konu: rahat hazırlık akışı</h2>
+        <p>Randevu saatinden prova detayına kadar sürecin net olması, özel gün sabahında daha sakin hissettiriyor.</p>
+        <a href={business.mapUrl} target="_blank" rel="noreferrer">Google yorumlarını gör</a>
+      </div>
+      <div class="review-stack" aria-label="Misafir yorumları">
+        <figure class="review-photo">
+          {
+            reviewImage ? (
+              <img src={reviewImage} alt="Yorumlar için hazırlık görseli" loading="lazy" />
+            ) : (
+              <EditorialVisualFallback theme={business.themeId} aspectRatio="3/4" labels={["YORUMLAR"]} />
+            )
+          }
+        </figure>
+        {business.reviews.map((review) => <blockquote><p>“{review.text}”</p><footer>{review.name} · {review.service}</footer></blockquote>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section final-cta" data-reveal>
+    <div class="container final-cta-inner">
+      <h2>{business.cta.title}</h2>
+      <p>{business.cta.description}</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href={whatsAppUrl} target="_blank" rel="noreferrer">{business.cta.buttonText}</a>
+        <a class="btn btn-secondary" href={contactPath}>Randevu & İletişim</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script is:inline>
+  const root = document.documentElement;
+  root.classList.add("ritual-enhanced");
+  const expressive = new URLSearchParams(window.location.search).get("motion") === "expressive";
+  if (expressive) {
+    root.classList.add("motion-expressive");
+  }
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const revealItems = document.querySelectorAll("[data-reveal]");
+
+  if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+          const delay = Number(entry.target.getAttribute("data-reveal-delay") ?? "0");
+          window.setTimeout(() => entry.target.classList.add("is-visible"), delay);
+          revealObserver.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.18 }
+    );
+
+    revealItems.forEach((item) => revealObserver.observe(item));
+
+    const steps = Array.from(document.querySelectorAll("[data-process-step]"));
+    const progress = document.querySelector("[data-process-progress]");
+
+    if (steps.length > 0) {
+      const stepObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) {
+              return;
+            }
+            const index = steps.indexOf(entry.target);
+            steps.forEach((step, stepIndex) => step.classList.toggle("is-active", stepIndex <= index));
+            if (progress) {
+              const percent = Math.max(16, ((index + 1) / steps.length) * 100);
+              progress.style.width = `${percent}%`;
+            }
+          });
+        },
+        { rootMargin: "-35% 0px -45% 0px", threshold: 0.2 }
+      );
+
+      steps.forEach((step) => stepObserver.observe(step));
+    }
+  } else {
+    revealItems.forEach((item) => item.classList.add("is-visible"));
+  }
+
+  if (!prefersReducedMotion) {
+    const heroImage = document.querySelector(".hero-media img");
+    const heroGallery = document.querySelector(".hero-mini-gallery");
+    let ticking = false;
+
+    const updateHero = () => {
+      const amount = Math.min(window.scrollY * 0.055, 56);
+      if (heroImage) {
+        heroImage.style.setProperty("--hero-shift", `${amount}px`);
+      }
+      if (heroGallery) {
+        heroGallery.style.setProperty("--gallery-shift", `${Math.min(amount * 0.35, 14)}px`);
+      }
+      ticking = false;
+    };
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          window.requestAnimationFrame(updateHero);
+          ticking = true;
+        }
+      },
+      { passive: true }
+    );
+  }
+</script>
+
+<style>
+  .ritual-home {
+    --ritual-ink: #f5f7fc;
+    --ritual-primary: #14213f;
+    --ritual-muted: #cad4ea;
+    --ritual-rose: #dc96a3;
+    --ritual-bg: #070d1f;
+    position: relative;
+    isolation: isolate;
+    background:
+      radial-gradient(circle at 80% 8%, rgba(220, 150, 163, 0.24), transparent 34rem),
+      radial-gradient(circle at 10% 12%, rgba(20, 33, 63, 0.46), transparent 20rem),
+      linear-gradient(180deg, #090f20 0%, #111a2f 22%, #f7f9ff 40%, #fff 100%);
+    color: #101829;
+  }
+
+  .ritual-home::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.14;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+    mask-image: linear-gradient(180deg, black, transparent 56%);
+  }
+
+  .ritual-hero {
+    position: relative;
+    min-height: min(860px, 96svh);
+    overflow: hidden;
+    display: grid;
+    align-items: end;
+    border-bottom: 1px solid rgba(184, 198, 229, 0.26);
+  }
+
+  .hero-media,
+  .hero-wash {
+    position: absolute;
+    inset: 0;
+  }
+
+  .hero-media img,
+  .hero-media :global(svg) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translateY(var(--hero-shift, 0)) scale(1.08);
+    transform-origin: center center;
+    transition: transform 160ms linear;
+    filter: saturate(0.95) contrast(1.06);
+  }
+
+  .hero-wash {
+    background:
+      radial-gradient(circle at 18% 24%, rgba(220, 150, 163, 0.24), transparent 24rem),
+      linear-gradient(90deg, rgba(9, 14, 32, 0.92) 0%, rgba(9, 14, 32, 0.62) 34%, rgba(9, 14, 32, 0.18) 76%),
+      linear-gradient(180deg, rgba(8, 12, 28, 0.64), rgba(8, 12, 28, 0.22));
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    padding: clamp(5.4rem, 10vw, 7.6rem) 0 clamp(1.5rem, 3.8vw, 2.2rem);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 0.62fr);
+    align-items: end;
+    gap: clamp(0.8rem, 2.6vw, 1.8rem);
+  }
+
+  .hero-copy {
+    max-width: 640px;
+    display: grid;
+    gap: 0.95rem;
+    color: var(--ritual-ink);
+  }
+
+  .hero-eyebrow {
+    margin: 0;
+    color: color-mix(in srgb, var(--ritual-rose), white 22%);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+
+  .hero-copy h1 {
+    font-family: "Space Grotesk", var(--font-heading);
+    font-size: clamp(2.45rem, 6.6vw, 5.4rem);
+    line-height: 0.9;
+    letter-spacing: 0;
+    color: #f8fbff;
+    max-width: 10.5ch;
+    text-wrap: balance;
+  }
+
+  .hero-copy p {
+    color: rgba(237, 242, 252, 0.9);
+    font-size: clamp(1rem, 1.42vw, 1.16rem);
+    max-width: 50ch;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.64rem;
+  }
+
+  .ritual-home .btn {
+    border-radius: 999px;
+    min-height: 44px;
+    padding: 0.72rem 1.08rem;
+  }
+
+  .ritual-home .btn-primary {
+    background: #f5f8ff;
+    color: #0d1a36;
+    border-color: transparent;
+    box-shadow: 0 20px 36px -24px rgba(11, 22, 52, 0.8);
+  }
+
+  .ritual-home .btn-secondary {
+    background: rgba(11, 20, 44, 0.28);
+    border-color: rgba(233, 240, 255, 0.56);
+    color: #f5f8ff;
+  }
+
+  .hero-mini-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(70px, 1fr));
+    gap: 0.55rem;
+    justify-self: end;
+    width: min(390px, 100%);
+    transform: translateY(var(--gallery-shift, 0));
+    transition: transform 180ms linear;
+  }
+
+  .hero-mini-gallery img {
+    aspect-ratio: 4 / 5;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    box-shadow: 0 24px 40px -30px rgba(1, 6, 20, 0.94);
+  }
+
+  .proof-strip {
+    background: rgba(11, 20, 44, 0.88);
+    border-block: 1px solid rgba(220, 150, 163, 0.4);
+  }
+
+  .proof-inner {
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(0.76rem, 2.8vw, 1.9rem);
+    flex-wrap: wrap;
+    color: rgba(238, 243, 255, 0.9);
+    font-size: 0.76rem;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .section-head {
+    display: grid;
+    gap: 0.34rem;
+    max-width: 620px;
+  }
+
+  .shelf-head {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 0.8rem;
+    max-width: none;
+  }
+
+  .shelf-head > div {
+    display: grid;
+    gap: 0.34rem;
+    max-width: 620px;
+  }
+
+  .section-head h2,
+  .duo-title h2,
+  .process-inner h2,
+  .reviews-copy h2,
+  .final-cta h2 {
+    font-family: "Space Grotesk", var(--font-heading);
+    color: #14213f;
+  }
+
+  .section-head p,
+  .process-inner p,
+  .reviews-copy p,
+  .final-cta p {
+    color: #4c5871;
+  }
+
+  .shelf {
+    margin-top: 0.82rem;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(208px, 1fr);
+    gap: 0.82rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0.2rem 0 0.86rem;
+    scroll-snap-type: x mandatory;
+  }
+
+  .service-tile {
+    scroll-snap-align: start;
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 460ms ease, transform 460ms ease;
+    transition-delay: calc(var(--stagger, 0) * 70ms);
+  }
+
+  .service-shelf.is-visible .service-tile {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .service-tile a {
+    display: grid;
+    gap: 0.62rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .service-tile figure {
+    margin: 0;
+    aspect-ratio: 4 / 5;
+    border-radius: 10px;
+    background: #eef3f8;
+    overflow: hidden;
+  }
+
+  .service-tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 420ms ease;
+  }
+
+  .service-tile:hover img {
+    transform: scale(1.04);
+  }
+
+  .service-tile-copy {
+    display: grid;
+    gap: 0.22rem;
+  }
+
+  .service-tile h3 {
+    font-family: "Space Grotesk", var(--font-heading);
+    font-size: 1rem;
+    color: #14213f;
+  }
+
+  .service-tile p {
+    color: #59647c;
+    font-size: 0.78rem;
+    line-height: 1.42;
+  }
+
+  .service-tile span,
+  .shelf-cta,
+  .reviews-copy a {
+    color: #14213f;
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .shelf-cta {
+    display: inline-flex;
+    min-height: 42px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    border: 1px solid rgba(20, 33, 63, 0.24);
+    background: #fff;
+    padding: 0.65rem 0.95rem;
+    white-space: nowrap;
+    box-shadow: 0 14px 28px -24px rgba(20, 33, 63, 0.62);
+  }
+
+  .duo-title {
+    display: grid;
+    place-items: center;
+    text-align: center;
+    margin-bottom: 1.08rem;
+  }
+
+  .duo-title h2 {
+    font-size: clamp(2rem, 4.2vw, 3.2rem);
+    max-width: 14.5ch;
+  }
+
+  .duo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .duo-panel {
+    position: relative;
+    overflow: hidden;
+    min-height: clamp(420px, 58vw, 620px);
+    border-radius: 10px;
+    background: #e9edf4;
+    opacity: 0;
+    transform: translateY(30px) scale(0.985);
+    transition: transform 520ms ease, opacity 520ms ease;
+    transition-delay: calc(var(--panel, 0) * 120ms);
+  }
+
+  .editorial-duo.is-visible .duo-panel {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .duo-panel img {
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+    object-fit: cover;
+  }
+
+  .duo-panel::after {
+    content: "";
+    position: absolute;
+    inset: 44% 0 0;
+    background: linear-gradient(180deg, transparent, rgba(6, 18, 45, 0.76));
+  }
+
+  .duo-panel div {
+    position: absolute;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 2;
+    display: grid;
+    gap: 0.25rem;
+    color: #fff;
+    text-align: center;
+  }
+
+  .duo-panel p,
+  .duo-panel h3 {
+    color: #fff;
+  }
+
+  .duo-panel p {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 0.98rem;
+  }
+
+  .duo-panel h3 {
+    font-family: "Space Grotesk", var(--font-heading);
+    font-size: clamp(1.14rem, 2vw, 1.72rem);
+  }
+
+  .process-band {
+    margin: 0.95rem auto;
+    width: min(1200px, calc(100% - 2rem));
+    border-radius: 10px;
+    background:
+      radial-gradient(circle at 80% 20%, rgba(220, 150, 163, 0.24), transparent 22rem),
+      linear-gradient(180deg, #fff7f9, #f8fcff);
+    border: 1px solid rgba(220, 150, 163, 0.3);
+    overflow: hidden;
+  }
+
+  .process-inner {
+    padding: clamp(2rem, 5vw, 3.7rem) 0;
+    text-align: center;
+    display: grid;
+    gap: 1.2rem;
+  }
+
+  .process-progress {
+    width: min(440px, 92%);
+    height: 7px;
+    background: rgba(20, 33, 63, 0.1);
+    border-radius: 999px;
+    margin-inline: auto;
+    overflow: hidden;
+  }
+
+  .process-progress span {
+    display: block;
+    height: 100%;
+    width: 16%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #14213f, #dc96a3);
+    transition: width 420ms ease;
+  }
+
+  .process-inner ol {
+    counter-reset: step;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.7rem;
+  }
+
+  .process-inner li {
+    counter-increment: step;
+    display: grid;
+    gap: 0.35rem;
+    color: #14213f;
+    font-weight: 800;
+    opacity: 0.42;
+    transform: translateY(12px);
+    transition: opacity 360ms ease, transform 360ms ease;
+  }
+
+  .process-inner li.is-active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .process-inner li::before {
+    content: counter(step, decimal-leading-zero);
+    color: #7e6882;
+    font-size: 0.74rem;
+  }
+
+  .media-story-grid {
+    display: grid;
+    grid-template-columns: minmax(250px, 0.84fr) 1fr;
+    gap: 1.05rem;
+    align-items: stretch;
+  }
+
+  .video-panel {
+    position: relative;
+    min-height: 520px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #edf3f8;
+  }
+
+  .video-panel video {
+    width: 100%;
+    height: 100%;
+    min-height: 520px;
+    object-fit: cover;
+  }
+
+  .video-panel a {
+    position: absolute;
+    left: 50%;
+    bottom: 0.94rem;
+    transform: translateX(-50%);
+    border-radius: 999px;
+    background: rgba(248, 252, 255, 0.94);
+    color: #14213f;
+    padding: 0.66rem 0.95rem;
+    text-decoration: none;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .gallery-mosaic {
+    display: grid;
+    gap: 0.95rem;
+    align-content: center;
+  }
+
+  .mosaic-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.62rem;
+  }
+
+  .mosaic-grid img {
+    aspect-ratio: 1.05 / 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .reviews-band {
+    background: #fff;
+  }
+
+  .reviews-inner {
+    display: grid;
+    grid-template-columns: 0.88fr 1fr;
+    gap: 1.1rem;
+    align-items: start;
+  }
+
+  .reviews-copy {
+    display: grid;
+    gap: 0.68rem;
+  }
+
+  .stars {
+    color: #ffc83d;
+    font-weight: 900;
+  }
+
+  .stars span {
+    color: #4b5870;
+    font-size: 0.82rem;
+  }
+
+  .review-stack {
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .review-photo {
+    margin: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #eff3fb;
+    min-height: 240px;
+  }
+
+  .review-photo img {
+    width: 100%;
+    height: 100%;
+    min-height: 240px;
+    object-fit: cover;
+  }
+
+  .review-stack blockquote {
+    margin: 0;
+    border-radius: 10px;
+    padding: 1rem;
+    background:
+      radial-gradient(circle at 84% 18%, rgba(220, 150, 163, 0.2), transparent 7rem),
+      #f8f1f4;
+    color: #14213f;
+    border: 1px solid rgba(220, 150, 163, 0.22);
+  }
+
+  .review-stack p {
+    color: #26324f;
+    font-weight: 700;
+  }
+
+  .review-stack footer {
+    margin-top: 0.5rem;
+    color: #677698;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+
+  .final-cta-inner {
+    text-align: center;
+    display: grid;
+    justify-items: center;
+    gap: 0.8rem;
+  }
+
+  .final-cta h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    max-width: 13ch;
+  }
+
+  .final-cta p {
+    max-width: 54ch;
+  }
+
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(28px) scale(0.986);
+    transition: opacity 620ms ease, transform 620ms ease;
+    will-change: opacity, transform;
+  }
+
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .motion-expressive [data-reveal] {
+    transform: translateY(38px) scale(0.978);
+    transition-duration: 860ms;
+    transition-timing-function: cubic-bezier(0.18, 0.72, 0.18, 1);
+  }
+
+  @media (max-width: 980px) {
+    .hero-inner,
+    .duo-grid,
+    .media-story-grid,
+    .reviews-inner {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-mini-gallery {
+      justify-self: start;
+      width: min(420px, 100%);
+    }
+
+    .duo-panel {
+      min-height: 440px;
+    }
+
+    .process-inner ol {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .ritual-hero {
+      min-height: min(780px, 88svh);
+    }
+
+    .hero-inner {
+      padding-top: 5rem;
+      gap: 0.72rem;
+    }
+
+    .hero-copy h1 {
+      font-size: clamp(2.15rem, 10.8vw, 3.25rem);
+      max-width: 8.8ch;
+    }
+
+    .hero-copy p {
+      max-width: 34ch;
+    }
+
+    .hero-actions .btn {
+      width: 100%;
+    }
+
+    .hero-mini-gallery {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      width: 100%;
+    }
+
+    .shelf-head {
+      align-items: start;
+      flex-direction: column;
+    }
+
+    .shelf {
+      grid-auto-columns: minmax(188px, 74vw);
+      margin-inline: -0.1rem;
+    }
+
+    .duo-panel {
+      min-height: 340px;
+    }
+
+    .process-inner {
+      gap: 1rem;
+    }
+
+    .process-inner ol {
+      grid-template-columns: 1fr;
+    }
+
+    .video-panel,
+    .video-panel video {
+      min-height: 360px;
+    }
+
+    .review-photo,
+    .review-photo img {
+      min-height: 220px;
+    }
+
+    .final-cta .hero-actions .btn {
+      width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal],
+    .service-tile,
+    .duo-panel,
+    .process-inner li,
+    .hero-media img,
+    .hero-mini-gallery,
+    .service-tile img {
+      opacity: 1;
+      transform: none;
+      transition: none;
+      animation: none;
+    }
+
+    .process-progress span {
+      transition: none;
+    }
+  }
+</style>

@@ -16,9 +16,10 @@ const services = business.services.slice(0, 8);
 const hasAbout = Boolean(business.cta?.description);
 const hasGallery = Boolean(business.instagramUrl) || business.moduleOrder.home.includes("instagramPreviewGrid");
 const whatsappUrl = buildWhatsAppUrl(business);
+const isRitualCommerce = business.archetype === "soft-beauty-editorial" && business.tone === "bridal-editorial";
 ---
 
-<footer class="footer-mega">
+<footer class:list={["footer-mega", isRitualCommerce && "ritual-footer"]}>
   <div class="container footer-grid">
     <section class="brand-col">
       <a class="brand-link" href={basePath}>
@@ -106,6 +107,51 @@ const whatsappUrl = buildWhatsAppUrl(business);
     background:
       radial-gradient(360px 180px at 10% 0%, color-mix(in srgb, var(--accent), white 76%), transparent 66%),
       linear-gradient(180deg, color-mix(in srgb, var(--surface), white 16%), color-mix(in srgb, var(--bg), white 10%));
+  }
+
+  .footer-mega.ritual-footer {
+    margin-top: 0;
+    padding: clamp(2.2rem, 5vw, 4rem) 0 1rem;
+    background: linear-gradient(180deg, #e7f3ff, #dfeeff);
+    border-top: 1px solid #cadff4;
+    color: #071a3c;
+  }
+
+  .ritual-footer .footer-grid {
+    grid-template-columns: 1.45fr 0.9fr 1.1fr 1.1fr;
+    gap: 1.2rem clamp(1rem, 4vw, 3rem);
+  }
+
+  .ritual-footer .brand-title,
+  .ritual-footer .brand-fallback {
+    font-family: "Space Grotesk", var(--font-heading);
+    font-size: clamp(1.5rem, 3.5vw, 2.6rem);
+    line-height: 1;
+    color: #071a3c;
+  }
+
+  .ritual-footer h3 {
+    color: #324767;
+    letter-spacing: 0;
+    text-transform: none;
+    font-family: "Space Grotesk", var(--font-heading);
+    font-size: 1rem;
+  }
+
+  .ritual-footer li,
+  .ritual-footer a,
+  .ritual-footer .brand-summary {
+    color: #263a5c;
+  }
+
+  .ritual-footer .contact-list a[href*="wa.me"],
+  .ritual-footer a:hover,
+  .ritual-footer .credit a {
+    color: #071f63;
+  }
+
+  .ritual-footer .footer-bottom {
+    border-top-color: #c9ddf2;
   }
 
   .footer-grid {

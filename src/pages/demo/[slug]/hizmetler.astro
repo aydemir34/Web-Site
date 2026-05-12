@@ -8,6 +8,7 @@ import ServiceCategoryMenu from "../../../components/ServiceCategoryMenu.astro";
 import ServiceMenu from "../../../components/ServiceMenu.astro";
 import FAQAccordion from "../../../components/FAQAccordion.astro";
 import AppointmentCta from "../../../components/AppointmentCta.astro";
+import RitualServices from "../../../components/RitualServices.astro";
 
 export function getStaticPaths() {
   return getBusinesses().map((business) => ({
@@ -26,12 +27,21 @@ if (!theme) {
 const path = `/demo/${business.slug}/hizmetler/`;
 const seo = buildSeoMeta(business, path, { isDemo: true });
 const schema = buildLocalBusinessSchema(business, seo.canonical);
+const useRitualCommerce = business.archetype === "soft-beauty-editorial" && business.tone === "bridal-editorial";
 ---
 
 <SiteLayout business={business} theme={theme} seo={seo} schema={schema} currentPath={path} variant={variant}>
-  <ServicesIntro business={business} />
-  <ServiceCategoryMenu services={business.services} />
-  <ServiceMenu business={business} services={business.services} />
-  <FAQAccordion items={business.faq} />
-  <AppointmentCta business={business} />
+  {
+    useRitualCommerce ? (
+      <RitualServices business={business} />
+    ) : (
+      <>
+        <ServicesIntro business={business} />
+        <ServiceCategoryMenu services={business.services} />
+        <ServiceMenu business={business} services={business.services} />
+        <FAQAccordion items={business.faq} />
+        <AppointmentCta business={business} />
+      </>
+    )
+  }
 </SiteLayout>
