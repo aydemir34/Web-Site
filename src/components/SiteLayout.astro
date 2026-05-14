@@ -6,6 +6,7 @@ import HeaderContact from "./HeaderContact.astro";
 import FloatingWhatsApp from "./FloatingWhatsApp.astro";
 import BackgroundOrnaments from "./BackgroundOrnaments.astro";
 import FooterMega from "./FooterMega.astro";
+import AnimatedIcon from "./AnimatedIcon.astro";
 import { buildWhatsAppUrl } from "../lib/whatsapp";
 import { getBusinessLogo } from "../lib/assets";
 
@@ -29,6 +30,12 @@ const whatsApp = buildWhatsAppUrl(business);
 const logo = getBusinessLogo(business);
 const compactDesktopCta = business.themeId === "clean-clinic-minimal" ? "Randevu Al" : "Randevu Bilgisi Al";
 const mobileBrandFallback = business.businessName.split(" ").slice(0, 2).join(" ");
+const formatLocalPhone = (phone: string) => {
+  const digits = phone.replace(/\D/g, "");
+  const local = digits.startsWith("90") ? `0${digits.slice(2)}` : digits;
+  return local.length === 11 ? `${local.slice(0, 4)} ${local.slice(4, 7)} ${local.slice(7, 9)} ${local.slice(9)}` : phone;
+};
+const formattedPhone = formatLocalPhone(business.phone);
 ---
 
 <!doctype html>
@@ -97,18 +104,14 @@ const mobileBrandFallback = business.businessName.split(" ").slice(0, 2).join(" 
           }
         </a>
         <div class="mobile-actions">
-          <a class="wa-mini" href={whatsApp} target="_blank" rel="noreferrer" aria-label="WhatsApp">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M19.1 4.9A9.83 9.83 0 0 0 12.02 2a9.99 9.99 0 0 0-8.7 14.9L2 22l5.3-1.3A9.95 9.95 0 0 0 12 22h.02a10 10 0 0 0 7.08-17.1Zm-7.08 15.4h-.02a8.3 8.3 0 0 1-4.23-1.15l-.3-.17-3.15.77.85-3.07-.2-.31a8.3 8.3 0 1 1 7.05 3.93Z"
-                fill="currentColor"
-              />
-            </svg>
+          <a class="phone-mini" href={`tel:${business.phone}`} aria-label={`${formattedPhone} telefon ile ara`}>
+            {formattedPhone}
           </a>
-          <details class="menu">
+          <details class="menu" data-mobile-menu>
             <summary aria-label="Menü">
-              <span></span><span></span><span></span>
+              <AnimatedIcon name="menu" size={18} />
             </summary>
+            <button class="menu-overlay" type="button" aria-label="Menüyü kapat" data-menu-close></button>
             <nav aria-label="Mobil menü">
               <ul>
                 {
@@ -116,7 +119,7 @@ const mobileBrandFallback = business.businessName.split(" ").slice(0, 2).join(" 
                     <li><a href={item.href} aria-current={currentPath === item.href ? "page" : undefined}>{item.label}</a></li>
                   ))
                 }
-                <li><a class="menu-phone" href={`tel:${business.phone}`}>Telefon</a></li>
+                <li><a class="menu-phone" href={`tel:${business.phone}`}>{formattedPhone}</a></li>
                 <li><a class="menu-instagram" href={business.instagramUrl} target="_blank" rel="noreferrer">Instagram</a></li>
                 <li><a class="menu-wa" href={whatsApp} target="_blank" rel="noreferrer">WhatsApp'tan Randevu Bilgisi Al</a></li>
               </ul>
@@ -130,6 +133,75 @@ const mobileBrandFallback = business.businessName.split(" ").slice(0, 2).join(" 
       if (new URLSearchParams(window.location.search).get("motion") === "expressive") {
         document.documentElement.classList.add("motion-expressive");
       }
+
+      const menu = document.querySelector("[data-mobile-menu]");
+      if (menu instanceof HTMLDetailsElement) {
+        const closeTriggers = menu.querySelectorAll("a, [data-menu-close]");
+        const syncMenuState = () => {
+          document.documentElement.classList.toggle("menu-open", menu.open);
+          document.body.classList.toggle("menu-open", menu.open);
+        };
+
+        menu.addEventListener("toggle", syncMenuState);
+
+        closeTriggers.forEach((item) => {
+          item.addEventListener("click", () => {
+            if (!menu.open) {
+              return;
+            }
+            menu.open = false;
+            syncMenuState();
+          });
+        });
+
+        window.addEventListener("resize", () => {
+          if (window.innerWidth > 920 && menu.open) {
+            menu.open = false;
+            syncMenuState();
+          }
+        });
+      }
+
+      const header = document.querySelector(".site-header");
+      if (header instanceof HTMLElement) {
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        let lastScrollY = window.scrollY;
+        let ticking = false;
+
+        const onScroll = () => {
+          const currentScrollY = Math.max(0, window.scrollY);
+          const delta = currentScrollY - lastScrollY;
+          const menuOpen = document.documentElement.classList.contains("menu-open");
+
+          header.classList.toggle("is-scrolled", currentScrollY > 8);
+
+          if (menuOpen || currentScrollY <= 8) {
+            header.classList.remove("is-hidden");
+          } else if (delta > 8) {
+            header.classList.add("is-hidden");
+          } else if (delta < -8) {
+            header.classList.remove("is-hidden");
+          }
+
+          lastScrollY = currentScrollY;
+          ticking = false;
+        };
+
+        const requestScrollUpdate = () => {
+          if (reduceMotion) {
+            onScroll();
+            return;
+          }
+
+          if (!ticking) {
+            window.requestAnimationFrame(onScroll);
+            ticking = true;
+          }
+        };
+
+        onScroll();
+        window.addEventListener("scroll", requestScrollUpdate, { passive: true });
+      }
     </script>
 
     <main class="fade-up">
@@ -142,15 +214,27 @@ const mobileBrandFallback = business.businessName.split(" ").slice(0, 2).join(" 
 </html>
 
 <style>
-  .site-header {
-    position: sticky;
-    top: 0;
-    z-index: 40;
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid color-mix(in srgb, var(--primary), white 78%);
-    background:
-      linear-gradient(90deg, color-mix(in srgb, var(--bg), white 34%), color-mix(in srgb, var(--surface), white 22%));
-  }
+	  .site-header {
+	    position: sticky;
+	    top: 0;
+	    z-index: 40;
+	    max-width: 100%;
+	    overflow-x: clip;
+	    backdrop-filter: blur(12px);
+	    border-bottom: 1px solid color-mix(in srgb, var(--primary), white 78%);
+	    background:
+	      linear-gradient(90deg, color-mix(in srgb, var(--bg), white 34%), color-mix(in srgb, var(--surface), white 22%));
+	    transition: box-shadow 220ms ease, border-color 220ms ease, transform 260ms ease;
+	  }
+
+	  .site-header.is-scrolled {
+	    box-shadow: 0 14px 28px -24px rgba(11, 19, 39, 0.62);
+	    border-bottom-color: color-mix(in srgb, var(--primary), white 70%);
+	  }
+
+	  .site-header.is-hidden {
+	    transform: translateY(-104%);
+	  }
 
   .brand {
     text-decoration: none;
@@ -165,23 +249,23 @@ const mobileBrandFallback = business.businessName.split(" ").slice(0, 2).join(" 
   }
 
   .brand-logo {
-    height: 26px;
+    height: 40px;
     width: auto;
-    max-width: 160px;
+    max-width: 240px;
     object-fit: contain;
   }
 
-  .brand-logo.mobile-logo {
-    height: 22px;
-    max-width: 120px;
-  }
+	  .brand-logo.mobile-logo {
+	    height: 48px;
+	    max-width: 176px;
+	  }
 
   .brand-text.fallback {
     display: none;
   }
 
   .desktop-bar {
-    min-height: 60px;
+    min-height: 72px;
     display: grid;
     grid-template-columns: minmax(240px, 1fr) minmax(160px, auto) minmax(240px, 1fr);
     align-items: center;
@@ -227,42 +311,45 @@ const mobileBrandFallback = business.businessName.split(" ").slice(0, 2).join(" 
     font-weight: 700;
   }
 
-  .mobile-bar {
-    display: none;
-    min-height: 64px;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.45rem;
-  }
+	  .mobile-bar {
+	    display: none;
+	    width: min(100%, calc(100vw - 1.2rem));
+	    min-width: 0;
+	    min-height: 64px;
+	    align-items: center;
+	    justify-content: space-between;
+	    gap: 0.3rem;
+	  }
 
-  .mobile-brand {
-    font-size: 0.9rem;
-    line-height: 1;
-    max-width: calc(100% - 104px);
-  }
+	  .mobile-brand {
+	    font-size: 0.9rem;
+	    line-height: 1;
+	    max-width: calc(100% - 158px);
+	  }
 
   .mobile-actions {
     display: inline-flex;
     align-items: center;
+    flex: 0 0 auto;
     gap: 0.35rem;
   }
 
-  .wa-mini {
-    width: 30px;
-    height: 30px;
-    display: inline-grid;
-    place-items: center;
-    color: #157347;
-    border: 1px solid color-mix(in srgb, #25d366, black 14%);
-    background: color-mix(in srgb, #25d366, white 84%);
-    border-radius: 999px;
-    text-decoration: none;
-  }
-
-  .wa-mini svg {
-    width: 15px;
-    height: 15px;
-  }
+	  .phone-mini {
+	    min-height: 30px;
+	    display: inline-flex;
+	    align-items: center;
+	    justify-content: center;
+	    color: var(--text);
+	    border: 1px solid color-mix(in srgb, var(--primary), white 62%);
+	    background: color-mix(in srgb, var(--surface), white 18%);
+	    border-radius: 999px;
+	    text-decoration: none;
+	    padding: 0.34rem 0.52rem;
+	    font-size: 0.7rem;
+	    line-height: 1;
+	    font-weight: 800;
+	    white-space: nowrap;
+	  }
 
   .menu summary {
     list-style: none;
@@ -280,18 +367,10 @@ const mobileBrandFallback = business.businessName.split(" ").slice(0, 2).join(" 
     display: none;
   }
 
-  .menu summary span {
-    width: 12px;
-    height: 1px;
-    background: var(--text);
-    margin: 1px 0;
-    display: block;
-  }
-
   .menu nav {
-    position: absolute;
+    position: fixed;
     right: 0.55rem;
-    top: 56px;
+    top: 64px;
     width: min(230px, calc(100vw - 1.1rem));
     border: 1px solid color-mix(in srgb, var(--primary), white 72%);
     border-radius: 10px;
@@ -299,6 +378,26 @@ const mobileBrandFallback = business.businessName.split(" ").slice(0, 2).join(" 
     box-shadow: 0 18px 36px -28px var(--glow);
     padding: 0.24rem;
     overflow: hidden;
+    z-index: 130;
+  }
+
+  .menu-overlay {
+    position: fixed;
+    inset: 64px 0 0;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    background: rgba(6, 12, 24, 0.42);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 240ms ease;
+    z-index: 120;
+  }
+
+  .menu[open] .menu-overlay {
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .menu nav ul {
@@ -343,4 +442,15 @@ const mobileBrandFallback = business.businessName.split(" ").slice(0, 2).join(" 
       display: flex;
     }
   }
-</style>
+
+	  :global(html.menu-open),
+	  :global(body.menu-open) {
+	    overflow: hidden;
+	  }
+
+	  @media (prefers-reduced-motion: reduce) {
+	    .site-header {
+	      transition: box-shadow 220ms ease, border-color 220ms ease;
+	    }
+	  }
+	</style>

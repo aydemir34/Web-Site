@@ -1,0 +1,126 @@
+---
+type IconName = "menu" | "phone" | "message" | "star";
+
+type Props = {
+  name: IconName;
+  title?: string;
+  size?: number;
+};
+
+const { name, title, size = 20 } = Astro.props;
+const hidden = title ? undefined : "true";
+---
+
+<span class={`animated-icon icon-${name}`} style={`--icon-size:${size}px;`} aria-hidden={hidden}>
+  <svg viewBox="0 0 24 24" role={title ? "img" : undefined} aria-label={title}>
+    {
+      name === "menu" ? (
+        <>
+          <path class="menu-line menu-line-top" d="M5 7h14" />
+          <path class="menu-line menu-line-mid" d="M5 12h14" />
+          <path class="menu-line menu-line-bottom" d="M5 17h14" />
+        </>
+      ) : name === "phone" ? (
+        <path
+          class="icon-path"
+          d="M7.2 4.5 9.1 8c.3.55.18 1.24-.3 1.66l-1.2 1.04a10.2 10.2 0 0 0 5.7 5.7l1.04-1.2c.42-.48 1.11-.6 1.66-.3l3.5 1.9c.64.35.93 1.1.7 1.8-.43 1.32-1.66 2.25-3.08 2.25C9.44 20.85 3.15 14.56 3.15 6.88c0-1.42.93-2.65 2.25-3.08.7-.23 1.45.06 1.8.7Z"
+        />
+      ) : name === "message" ? (
+        <>
+          <path
+            class="icon-path"
+            d="M12 3.1a8.74 8.74 0 0 0-7.48 13.25l-.95 3.56 3.68-.9A8.74 8.74 0 1 0 12 3.1Z"
+          />
+          <path class="message-dot" d="M8.2 12h.02M12 12h.02M15.8 12h.02" />
+        </>
+      ) : (
+        <path
+          class="icon-path"
+          d="m12 3.6 2.36 4.78 5.28.77-3.82 3.72.9 5.25L12 15.64l-4.72 2.48.9-5.25-3.82-3.72 5.28-.77L12 3.6Z"
+        />
+      )
+    }
+  </svg>
+</span>
+
+<style>
+  .animated-icon {
+    width: var(--icon-size);
+    height: var(--icon-size);
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 auto;
+    color: currentColor;
+  }
+
+  .animated-icon svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .icon-path,
+  .menu-line,
+  .message-dot {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), opacity 200ms ease, stroke-width 200ms ease;
+    transform-origin: center;
+  }
+
+  .message-dot {
+    stroke-width: 2.4;
+  }
+
+  :global(a:hover) .icon-phone .icon-path,
+  :global(a:focus-visible) .icon-phone .icon-path {
+    transform: rotate(-8deg) translateY(-1px);
+  }
+
+  :global(a:hover) .icon-message .icon-path,
+  :global(a:focus-visible) .icon-message .icon-path {
+    transform: scale(1.05);
+  }
+
+  :global(a:hover) .icon-message .message-dot,
+  :global(a:focus-visible) .icon-message .message-dot {
+    transform: translateY(-1px);
+    stroke-width: 3;
+  }
+
+  :global(a:hover) .icon-star .icon-path,
+  :global(a:focus-visible) .icon-star .icon-path,
+  :global(.proof-pill:hover) .icon-star .icon-path {
+    transform: scale(1.08) rotate(8deg);
+  }
+
+  :global(.menu[open]) .icon-menu .menu-line-top,
+  :global(summary:hover) .icon-menu .menu-line-top,
+  :global(summary:focus-visible) .icon-menu .menu-line-top {
+    transform: translateY(5px) rotate(45deg);
+  }
+
+  :global(.menu[open]) .icon-menu .menu-line-mid,
+  :global(summary:hover) .icon-menu .menu-line-mid,
+  :global(summary:focus-visible) .icon-menu .menu-line-mid {
+    opacity: 0;
+    transform: scaleX(0.4);
+  }
+
+  :global(.menu[open]) .icon-menu .menu-line-bottom,
+  :global(summary:hover) .icon-menu .menu-line-bottom,
+  :global(summary:focus-visible) .icon-menu .menu-line-bottom {
+    transform: translateY(-5px) rotate(-45deg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .icon-path,
+    .menu-line,
+    .message-dot {
+      transition: none;
+    }
+  }
+</style>

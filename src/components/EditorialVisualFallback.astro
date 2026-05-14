@@ -6,7 +6,7 @@ type Props = {
   showNotice?: boolean;
 };
 
-const { theme, aspectRatio = "3/4", labels = ["GELİN", "KINA", "NİŞAN", "DAVET"], showNotice = true } = Astro.props;
+const { theme, aspectRatio = "3/4", labels = ["Gelin", "Kına", "Nişan", "Davet"], showNotice = true } = Astro.props;
 const ratioClass = aspectRatio === "1/1" ? "ratio-square" : aspectRatio === "16/9" ? "ratio-wide" : "ratio-portrait";
 ---
 

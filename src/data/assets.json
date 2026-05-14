@@ -191,7 +191,7 @@
     "simay-sarikaya-hair-makeup": {
       "assets": [
         {
-          "src": "/assets/businesses/simay-sarikaya/hero-bridal-01.jpg",
+          "src": "/assets/library/all/makeup-bride-2.jpg",
           "type": "image",
           "category": "hair-makeup",
           "role": "hero",
@@ -200,102 +200,102 @@
           "source": "business"
         },
         {
-          "src": "/assets/businesses/simay-sarikaya/service-hair-01.jpg",
+          "src": "/assets/library/all/makeup-bride-1.jpg",
           "type": "image",
           "category": "hair-makeup",
           "role": "service",
           "tags": ["gelin", "saç", "makyaj", "prova"],
-          "serviceSlug": "gelin-sac-ve-makyaj",
+          "serviceSlug": "gelin-saci-ve-makyaji",
           "alt": "Gelin saçı ve makyaj hazırlığı",
           "source": "business"
         },
         {
-          "src": "/assets/businesses/simay-sarikaya/service-makeup-01.jpg",
+          "src": "/assets/library/all/hair-decoration-bride.jpg",
           "type": "image",
           "category": "hair-makeup",
           "role": "service",
           "tags": ["kına", "saç", "makyaj", "gece"],
-          "serviceSlug": "kna-hazrlg",
+          "serviceSlug": "kina-hazirligi",
           "alt": "Kına hazırlığı",
           "source": "business"
         },
         {
-          "src": "/assets/businesses/simay-sarikaya/grid-02.jpg",
+          "src": "/assets/library/all/makeup-customer.jpg",
           "type": "image",
           "category": "hair-makeup",
           "role": "service",
           "tags": ["nişan", "söz", "özel gün"],
-          "serviceSlug": "nisan-hazrlg",
+          "serviceSlug": "nisan-hazirligi",
           "alt": "Nişan hazırlığı",
           "source": "business"
         },
         {
-          "src": "/assets/library/all/pexels-freestocks-324655.jpg",
+          "src": "/assets/library/all/makeup-eye-1.jpg",
           "type": "image",
           "category": "hair-makeup",
           "role": "service",
           "tags": ["davet", "makyaj", "göz", "özel gün"],
-          "serviceSlug": "davet-makyaj",
+          "serviceSlug": "davet-makyaji",
           "alt": "Davet makyajı",
           "source": "business"
         },
         {
-          "src": "/assets/businesses/simay-sarikaya/grid-01.jpg",
+          "src": "/assets/library/all/hair-1.jpg",
           "type": "image",
           "category": "hair-makeup",
           "role": "service",
           "tags": ["özel gün", "saç", "tasarım"],
-          "serviceSlug": "ozel-gun-sac-tasarm",
+          "serviceSlug": "ozel-gun-sac-tasarimi",
           "alt": "Özel gün saç tasarımı",
           "source": "business"
         },
         {
-          "src": "/assets/businesses/simay-sarikaya/service-hair-01.jpg",
+          "src": "/assets/library/all/makeup-bride-1.jpg",
           "type": "image",
           "category": "hair-makeup",
           "role": "featured",
           "tags": ["gelin", "saç", "makyaj", "prova"],
-          "serviceSlug": "gelin-sac-ve-makyaj",
+          "serviceSlug": "gelin-saci-ve-makyaji",
           "alt": "Gelin saçı ve makyajı görseli",
           "source": "business"
         },
         {
-          "src": "/assets/businesses/simay-sarikaya/service-makeup-01.jpg",
+          "src": "/assets/library/all/hair-3.jpg",
           "type": "image",
           "category": "hair-makeup",
           "role": "featured",
           "tags": ["kına", "saç", "makyaj", "gece"],
-          "serviceSlug": "kna-hazrlg",
+          "serviceSlug": "kina-hazirligi",
           "alt": "Kına hazırlığı görseli",
           "source": "business"
         },
         {
-          "src": "/assets/businesses/simay-sarikaya/grid-02.jpg",
+          "src": "/assets/library/all/makeup-lipstick-1.jpg",
           "type": "image",
           "category": "hair-makeup",
           "role": "featured",
           "tags": ["nişan", "söz", "özel gün"],
-          "serviceSlug": "nisan-hazrlg",
+          "serviceSlug": "nisan-hazirligi",
           "alt": "Nişan hazırlığı görseli",
           "source": "business"
         },
         {
-          "src": "/assets/library/all/pexels-freestocks-324655.jpg",
+          "src": "/assets/library/all/makeup-1.jpg",
           "type": "image",
           "category": "hair-makeup",
           "role": "featured",
           "tags": ["davet", "makyaj", "göz", "özel gün"],
-          "serviceSlug": "davet-makyaj",
+          "serviceSlug": "davet-makyaji",
           "alt": "Davet makyajı görseli",
           "source": "business"
         },
         {
-          "src": "/assets/businesses/simay-sarikaya/grid-01.jpg",
+          "src": "/assets/library/all/hair-curling.jpg",
           "type": "image",
           "category": "hair-makeup",
           "role": "featured",
           "tags": ["özel gün", "saç", "tasarım"],
-          "serviceSlug": "ozel-gun-sac-tasarm",
+          "serviceSlug": "ozel-gun-sac-tasarimi",
           "alt": "Özel gün saç tasarımı görseli",
           "source": "business"
         },
@@ -327,7 +327,7 @@
           "source": "business"
         },
         {
-          "src": "/assets/businesses/simay-sarikaya/pexels-kerimeveyik-22589552.jpg",
+          "src": "/assets/library/all/beauty-face-2.jpg",
           "type": "image",
           "category": "contact-location",
           "role": "contact",
@@ -336,7 +336,7 @@
           "source": "business"
         },
         {
-          "src": "/assets/library/all/pexels-orhunruzgaroz-6080267.jpg",
+          "src": "/assets/library/all/beauty-face-1.jpg",
           "type": "image",
           "category": "hair-makeup",
           "role": "background",
@@ -345,7 +345,7 @@
           "source": "business"
         },
         {
-          "src": "/assets/library/all/pexels-thefullonmonet-28994568.jpg",
+          "src": "/assets/library/all/makeup-eye-1.jpg",
           "type": "image",
           "category": "hair-makeup",
           "role": "background",
@@ -355,34 +355,38 @@
         }
       ],
       "heroMedia": [
-        "/assets/businesses/simay-sarikaya/hero-bridal-01.jpg",
-        "/assets/library/all/pexels-filipeleme-2593305.jpg",
-        "/assets/library/all/pexels-enginakyurt-3065170.jpg"
+        "/assets/library/all/makeup-bride-2.jpg",
+        "/assets/library/all/makeup-bride-1.jpg",
+        "/assets/library/all/hair-decoration-bride.jpg"
       ],
       "gridMedia": [
         "/assets/businesses/simay-sarikaya/grid-01.jpg",
         "/assets/businesses/simay-sarikaya/grid-02.jpg",
         "/assets/businesses/simay-sarikaya/grid-03.jpg",
-        "/assets/library/all/pexels-freestocks-324655.jpg",
-        "/assets/library/all/pexels-filipeleme-2593305.jpg",
-        "/assets/library/all/pexels-cottonbro-3993468.jpg"
+        "/assets/library/all/hair-1.jpg",
+        "/assets/library/all/makeup-eye-1.jpg",
+        "/assets/library/all/makeup-bride-1.jpg",
+        "/assets/library/all/hair-decoration-bride.jpg",
+        "/assets/library/all/makeup-customer.jpg",
+        "/assets/library/all/beauty-face-2.jpg",
+        "/assets/library/all/makeup-lipstick-1.jpg"
       ],
       "contactMedia": [
-        "/assets/businesses/simay-sarikaya/pexels-kerimeveyik-22589552.jpg",
-        "/assets/library/all/pexels-enginakyurt-3065170.jpg"
+        "/assets/library/all/beauty-face-2.jpg",
+        "/assets/library/all/beauty-face-1.jpg"
       ],
       "serviceMedia": {
         "hair": [
-          "/assets/businesses/simay-sarikaya/service-hair-01.jpg",
-          "/assets/businesses/simay-sarikaya/grid-01.jpg"
+          "/assets/library/all/hair-1.jpg",
+          "/assets/library/all/hair-3.jpg"
         ],
         "makeup": [
-          "/assets/businesses/simay-sarikaya/service-makeup-01.jpg",
-          "/assets/library/all/pexels-freestocks-324655.jpg"
+          "/assets/library/all/makeup-1.jpg",
+          "/assets/library/all/makeup-eye-1.jpg"
         ],
         "default": [
-          "/assets/businesses/simay-sarikaya/grid-02.jpg",
-          "/assets/businesses/simay-sarikaya/grid-03.jpg"
+          "/assets/library/all/makeup-customer.jpg",
+          "/assets/library/all/makeup-lipstick-1.jpg"
         ]
       },
       "remote": {

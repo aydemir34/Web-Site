@@ -16,7 +16,9 @@ const { items } = Astro.props;
         items.map((item) => (
           <details>
             <summary>{item.question}</summary>
-            <p>{item.answer}</p>
+            <div class="answer">
+              <p>{item.answer}</p>
+            </div>
           </details>
         ))
       }
@@ -35,7 +37,7 @@ const { items } = Astro.props;
   }
 
   details {
-    padding: 0.9rem 0.1rem;
+    padding: 0.8rem 0.1rem;
     border-bottom: 1px solid color-mix(in srgb, var(--primary), white 74%);
   }
 
@@ -59,9 +61,30 @@ const { items } = Astro.props;
     content: "−";
   }
 
-  p {
+  .answer {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 320ms cubic-bezier(0.22, 1, 0.36, 1), opacity 260ms ease;
+    opacity: 0.2;
+  }
+
+  details[open] .answer {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+
+  .answer p {
+    overflow: hidden;
     margin-top: 0.55rem;
     color: var(--muted);
     max-width: 72ch;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .answer {
+      transition: none;
+      grid-template-rows: 1fr;
+      opacity: 1;
+    }
   }
 </style>

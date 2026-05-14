@@ -232,6 +232,10 @@ export function getBusinessLogo(business: Business): string | null {
   if (byRole) {
     return byRole;
   }
+  const sharedDefaultLogo = ensureAbsolute("/assets/library/all/your-logo.png");
+  if (sharedDefaultLogo) {
+    return sharedDefaultLogo;
+  }
   const base = businessMediaBase(business);
   return firstValid([`${base}logo.svg`, `${base}logo.png`, `${base}logo.webp`]);
 }

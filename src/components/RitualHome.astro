@@ -21,18 +21,81 @@ const servicesPath = `/demo/${business.slug}/hizmetler/`;
 const contactPath = `/demo/${business.slug}/randevu/`;
 const featuredServices = business.services.slice(0, 5);
 const editorialImages = [
-  gridMedia[0] ?? getFeaturedServiceMedia(business, business.services[0] ?? business.mainService),
-  gridMedia[1] ?? getFeaturedServiceMedia(business, business.services[1] ?? business.mainService)
+  gridMedia[1] ?? getFeaturedServiceMedia(business, business.services[0] ?? business.mainService),
+  gridMedia[2] ?? getFeaturedServiceMedia(business, business.services[1] ?? business.mainService)
 ].filter(Boolean);
-const extraGallery = gridMedia.slice(0, 6);
+const extraGallery = gridMedia.slice(0, 8);
+const servicePresentation: Record<string, { summary: string; label: string }> = {
+  "gelin-saci-ve-makyaji": {
+    summary: "Düğün sabahı için saç, makyaj ve prova akışı birlikte planlanır.",
+    label: "Gelin"
+  },
+  "kina-hazirligi": {
+    summary: "Kına gecesi temposuna uygun saç ve makyaj dili birlikte seçilir.",
+    label: "Kına"
+  },
+  "nisan-hazirligi": {
+    summary: "Nişan ve söz hazırlığında zarif, fotoğrafa dengeli bir görünüm hazırlanır.",
+    label: "Nişan"
+  },
+  "davet-makyaji": {
+    summary: "Davet, mezuniyet ve kutlamalar için taze duran makyaj planlanır.",
+    label: "Davet"
+  },
+  "ozel-gun-sac-tasarimi": {
+    summary: "Topuz, dalga veya toplu stiller etkinlik akışına göre şekillenir.",
+    label: "Saç Tasarımı"
+  }
+};
 const proofItems = [
-  `${business.district} / ${business.neighborhood}`,
-  `${business.leadSignals.rating.toLocaleString("tr-TR")} Google puanı`,
-  `${business.leadSignals.reviewCount}+ yorum`,
-  ...business.trustBadges.slice(0, 2)
+  {
+    label: `${business.district} / ${business.neighborhood}`,
+    icon: "",
+    href: business.mapUrl,
+    ariaLabel: `${business.district} ${business.neighborhood} konumu için Google Maps`
+  },
+  {
+    label: `${business.leadSignals.rating.toLocaleString("tr-TR")} Google Puanı`,
+    icon: "★",
+    href: business.mapUrl,
+    ariaLabel: `${business.businessName} Google puanını görüntüle`
+  },
+  {
+    label: `${business.leadSignals.reviewCount}+ Yorum`,
+    icon: "",
+    href: business.mapUrl,
+    ariaLabel: `${business.businessName} Google yorumlarını görüntüle`
+  },
+  { label: "Gelin Prova Planı", icon: "" },
+  { label: "Düğün Günü Ekip Desteği", icon: "" }
+] satisfies Array<{ label: string; icon: string; href?: string; ariaLabel?: string }>;
+const processDetails = [
+  {
+    title: "Tarih ve konsept konuşması",
+    text: "Gününüz, mekanınız, kıyafetiniz ve istediğiniz görünüm netleşir."
+  },
+  {
+    title: "Prova günü planı",
+    text: "Saç, makyaj ve aksesuar seçenekleri birlikte denenir."
+  },
+  {
+    title: "Son rötuşlar",
+    text: "Cilt tonu, ışık, fotoğraf ve kalıcılık detayları kontrol edilir."
+  },
+  {
+    title: "Özel gün uygulaması",
+    text: "Saat planına göre hazırlık süreci sakin şekilde ilerler."
+  }
+];
+const ctaHints = [
+  { title: "Tarih", text: "Müsaitlik için gün ve saat aralığı" },
+  { title: "Etkinlik türü", text: "Gelin, kına, nişan veya davet" },
+  { title: "Kişi sayısı", text: "Sadece siz ya da ek hazırlıklar" },
+  { title: "İstenen görünüm", text: "Doğal, belirgin, topuz veya dalga" }
 ];
 const firstVideo = videos[0] ?? null;
 const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
+const reviewScreens = ["/assets/library/all/review-1.png", "/assets/library/all/review-2.png", "/assets/library/all/review-3.png"];
 ---
 
 <div class="ritual-home">
@@ -40,32 +103,54 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
     <div class="hero-media" aria-hidden={heroMedia ? "true" : "false"}>
       {
         heroMedia ? (
-          <img src={heroMedia} alt={`${business.businessName} özel gün saç ve makyaj görseli`} loading="eager" />
+          <img src={heroMedia} alt={`${business.businessName} özel gün saç ve makyaj görseli`} loading="eager" onerror="this.style.display='none'" />
         ) : (
-          <EditorialVisualFallback theme={business.themeId} aspectRatio="16/9" labels={["GELİN", "KINA", "DAVET"]} />
+          <EditorialVisualFallback theme={business.themeId} aspectRatio="16/9" labels={["Gelin", "Kına", "Davet"]} />
         )
       }
     </div>
     <div class="hero-wash"></div>
     <div class="container hero-inner">
-      <div class="hero-copy" data-reveal data-reveal-delay="120">
-        <p class="hero-eyebrow">{business.hero.eyebrow}</p>
-        <h1>{business.hero.title}</h1>
-        <p>{business.hero.description}</p>
-        <div class="hero-actions">
+      <div class="hero-copy">
+        <p class="hero-eyebrow" data-reveal data-reveal-delay="120">{business.hero.eyebrow}</p>
+        <h1 data-reveal data-reveal-delay="260">{business.hero.title}</h1>
+        <p data-reveal data-reveal-delay="420">{business.hero.description}</p>
+        <div class="hero-actions" data-reveal data-reveal-delay="580">
           <a class="btn btn-primary" href={whatsAppUrl} target="_blank" rel="noreferrer">{business.hero.primaryCta}</a>
           <a class="btn btn-secondary" href={servicesPath}>{business.hero.secondaryCta}</a>
         </div>
       </div>
-      <div class="hero-mini-gallery" aria-label="Seçili hazırlık görselleri" data-reveal data-reveal-delay="220">
-        {extraGallery.slice(0, 3).map((item, index) => <img src={item} alt={`Hazırlık görseli ${index + 1}`} loading={index === 0 ? "eager" : "lazy"} />)}
+      <div class="hero-mini-gallery" aria-label="Seçili hazırlık görselleri" data-reveal data-reveal-delay="740">
+        {extraGallery.slice(0, 3).map((item, index) => <img src={item} alt={`Hazırlık görseli ${index + 1}`} loading={index === 0 ? "eager" : "lazy"} onerror="this.style.display='none'" />)}
       </div>
     </div>
   </section>
 
   <section class="proof-strip" aria-label="Sosyal kanıt" data-reveal data-reveal-delay="0">
-    <div class="container proof-inner">
-      {proofItems.map((item) => <span>{item}</span>)}
+    <div class="container proof-scroller" data-proof-scroller>
+      <div class="proof-track">
+      {
+        proofItems.map((item) =>
+          item.href ? (
+            <a
+              class="proof-pill"
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={item.ariaLabel}
+            >
+              {item.icon ? <span class="proof-icon">{item.icon}</span> : null}
+              {item.label}
+            </a>
+          ) : (
+            <span class="proof-pill">
+              {item.icon ? <span class="proof-icon">{item.icon}</span> : null}
+              {item.label}
+            </span>
+          )
+        )
+      }
+      </div>
     </div>
   </section>
 
@@ -82,22 +167,24 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
         {
           featuredServices.map((service, index) => {
             const media = getFeaturedServiceMedia(business, service);
+            const meta = servicePresentation[slugify(service.name)] ?? { summary: service.description, label: "Özel Gün" };
             return (
               <article class="service-tile" style={`--stagger:${index};`}>
                 <a href={`${servicesPath}#${slugify(service.name)}`}>
                   <figure>
                     {
                       media ? (
-                        <img src={media} alt={`${service.name} hizmet görseli`} loading="lazy" />
+                        <img src={media} alt={`${service.name} hizmet görseli`} loading="lazy" onerror="this.style.display='none'" />
                       ) : (
                         <EditorialVisualFallback theme={business.themeId} aspectRatio="3/4" labels={["SAÇ", "MAKYAJ"]} />
                       )
                     }
                   </figure>
                   <div class="service-tile-copy">
+                    <span class="service-tag">{meta.label}</span>
                     <h3>{service.name}</h3>
-                    <p>{service.bestFor ?? service.description}</p>
-                    <span>Detayı İncele</span>
+                    <p>{meta.summary}</p>
+                    <strong>Detayı İncele</strong>
                   </div>
                 </a>
               </article>
@@ -117,7 +204,7 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
         {
           editorialImages.slice(0, 2).map((item, index) => (
             <article class="duo-panel" style={`--panel:${index};`}>
-              <img src={item!} alt={index === 0 ? "Gelin hazırlık süreci" : "Özel gün saç ve makyaj detayı"} loading="lazy" />
+              <img src={item!} alt={index === 0 ? "Gelin hazırlık süreci" : "Özel gün saç ve makyaj detayı"} loading="lazy" onerror="this.style.display='none'" />
               <div>
                 <p>{index === 0 ? "Prova Günü" : "Görünüm Seçimi"}</p>
                 <h3>{index === 0 ? "Saç, makyaj ve aksesuar fikri önceden birlikte denenir." : "Kıyafet, mekan ışığı ve fotoğraf planı aynı dilde buluşur."}</h3>
@@ -139,7 +226,15 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
         <span data-process-progress></span>
       </div>
       <ol>
-        {business.processSteps.map((step, index) => <li data-process-step style={`--step:${index};`}><span>{step}</span></li>)}
+        {
+          processDetails.map((step, index) => (
+            <li data-process-step style={`--step:${index};`}>
+              <small>{String(index + 1).padStart(2, "0")}</small>
+              <strong>{step.title}</strong>
+              <p>{step.text}</p>
+            </li>
+          ))
+        }
       </ol>
     </div>
   </section>
@@ -147,13 +242,15 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
   <section class="section media-story" id="galeri" data-reveal>
     <div class="container media-story-grid">
       <article class="video-panel">
-        {
-          firstVideo ? (
-            <video src={firstVideo} autoplay muted loop playsinline preload="metadata" aria-label="Hazırlık süreci videosu"></video>
-          ) : (
-            <EditorialVisualFallback theme={business.themeId} aspectRatio="3/4" labels={["VİDEO", "HAZIRLIK"]} />
-          )
-        }
+        <div class="video-frame">
+          {
+            firstVideo ? (
+              <video src={firstVideo} autoplay muted loop playsinline preload="metadata" aria-label="Hazırlık süreci videosu"></video>
+            ) : (
+              <EditorialVisualFallback theme={business.themeId} aspectRatio="3/4" labels={["VİDEO", "HAZIRLIK"]} />
+            )
+          }
+        </div>
         <a href={business.instagramUrl} target="_blank" rel="noreferrer">Instagram’dan Karelere Bak</a>
       </article>
       <div class="gallery-mosaic">
@@ -162,7 +259,7 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
           <p>Stil kararını verirken saç formu, makyaj yoğunluğu ve aksesuar dengesi birlikte değerlendirilir.</p>
         </div>
         <div class="mosaic-grid">
-          {extraGallery.slice(0, 4).map((item, index) => <img src={item} alt={`Galeri görseli ${index + 1}`} loading="lazy" />)}
+          {extraGallery.slice(0, 2).map((item, index) => <img src={item} alt={`Galeri görseli ${index + 1}`} loading="lazy" onerror="this.style.display='none'" />)}
         </div>
       </div>
     </div>
@@ -175,18 +272,20 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
         <h2>Misafir yorumlarında öne çıkan konu: rahat hazırlık akışı</h2>
         <p>Randevu saatinden prova detayına kadar sürecin net olması, özel gün sabahında daha sakin hissettiriyor.</p>
         <a href={business.mapUrl} target="_blank" rel="noreferrer">Google yorumlarını gör</a>
+        <div class="review-docs" aria-label="Google yorum ekran görüntüleri">
+          {reviewScreens.map((item, index) => <img src={item} alt={`Google yorum ekran görüntüsü ${index + 1}`} loading="lazy" onerror="this.style.display='none'" />)}
+        </div>
       </div>
       <div class="review-stack" aria-label="Misafir yorumları">
         <figure class="review-photo">
           {
             reviewImage ? (
-              <img src={reviewImage} alt="Yorumlar için hazırlık görseli" loading="lazy" />
+              <img src={reviewImage} alt="Yorumlar için hazırlık görseli" loading="lazy" onerror="this.style.display='none'" />
             ) : (
               <EditorialVisualFallback theme={business.themeId} aspectRatio="3/4" labels={["YORUMLAR"]} />
             )
           }
         </figure>
-        {business.reviews.map((review) => <blockquote><p>“{review.text}”</p><footer>{review.name} · {review.service}</footer></blockquote>)}
       </div>
     </div>
   </section>
@@ -195,6 +294,13 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
     <div class="container final-cta-inner">
       <h2>{business.cta.title}</h2>
       <p>{business.cta.description}</p>
+      <div class="cta-note">
+        <strong>WhatsApp mesajınızda şunları yazmanız yeterli:</strong>
+        <span>Tarih, etkinlik türü, kişi sayısı, hazırlık lokasyonu ve istediğiniz görünüm.</span>
+      </div>
+      <div class="cta-hints" aria-label="Randevu mesajı için bilgiler">
+        {ctaHints.map((item) => <article><strong>{item.title}</strong><span>{item.text}</span></article>)}
+      </div>
       <div class="hero-actions">
         <a class="btn btn-primary" href={whatsAppUrl} target="_blank" rel="noreferrer">{business.cta.buttonText}</a>
         <a class="btn btn-secondary" href={contactPath}>Randevu & İletişim</a>
@@ -213,6 +319,11 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const revealItems = document.querySelectorAll("[data-reveal]");
+  const ritualRoot = document.querySelector(".ritual-home");
+
+  if (ritualRoot && !prefersReducedMotion) {
+    ritualRoot.classList.add("motion-enabled");
+  }
 
   if ("IntersectionObserver" in window) {
     const revealObserver = new IntersectionObserver(
@@ -229,12 +340,53 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
       { threshold: 0.18 }
     );
 
-    revealItems.forEach((item) => revealObserver.observe(item));
+    revealItems.forEach((item) => {
+      const revealImmediately = item.closest(".ritual-hero") || item.classList.contains("proof-strip");
+      if (revealImmediately) {
+        const delay = Number(item.getAttribute("data-reveal-delay") ?? "0");
+        window.setTimeout(() => item.classList.add("is-visible"), Math.max(0, delay * 0.6));
+      } else {
+        revealObserver.observe(item);
+      }
+    });
 
     const steps = Array.from(document.querySelectorAll("[data-process-step]"));
     const progress = document.querySelector("[data-process-progress]");
+    const processBand = document.querySelector(".process-band");
+    const desktopAutoplay = !prefersReducedMotion && window.matchMedia("(min-width: 981px)").matches;
 
-    if (steps.length > 0) {
+    if (steps.length > 0 && desktopAutoplay && processBand) {
+      const runProcessSequence = () => {
+        steps.forEach((step) => step.classList.remove("is-active"));
+        if (progress) {
+          progress.style.width = "0%";
+        }
+        steps.forEach((_, index) => {
+          window.setTimeout(() => {
+            steps.forEach((item, stepIndex) => item.classList.toggle("is-active", stepIndex <= index));
+            if (progress) {
+              const percent = ((index + 1) / steps.length) * 100;
+              progress.style.width = `${percent}%`;
+            }
+          }, index * 360);
+        });
+      };
+
+      const processObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) {
+              return;
+            }
+            runProcessSequence();
+            processObserver.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.35 }
+      );
+
+      processObserver.observe(processBand);
+    } else if (steps.length > 0) {
       const stepObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -244,7 +396,7 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
             const index = steps.indexOf(entry.target);
             steps.forEach((step, stepIndex) => step.classList.toggle("is-active", stepIndex <= index));
             if (progress) {
-              const percent = Math.max(16, ((index + 1) / steps.length) * 100);
+              const percent = ((index + 1) / steps.length) * 100;
               progress.style.width = `${percent}%`;
             }
           });
@@ -257,34 +409,6 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
   } else {
     revealItems.forEach((item) => item.classList.add("is-visible"));
   }
-
-  if (!prefersReducedMotion) {
-    const heroImage = document.querySelector(".hero-media img");
-    const heroGallery = document.querySelector(".hero-mini-gallery");
-    let ticking = false;
-
-    const updateHero = () => {
-      const amount = Math.min(window.scrollY * 0.055, 56);
-      if (heroImage) {
-        heroImage.style.setProperty("--hero-shift", `${amount}px`);
-      }
-      if (heroGallery) {
-        heroGallery.style.setProperty("--gallery-shift", `${Math.min(amount * 0.35, 14)}px`);
-      }
-      ticking = false;
-    };
-
-    window.addEventListener(
-      "scroll",
-      () => {
-        if (!ticking) {
-          window.requestAnimationFrame(updateHero);
-          ticking = true;
-        }
-      },
-      { passive: true }
-    );
-  }
 </script>
 
 <style>
@@ -296,11 +420,14 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
     --ritual-bg: #070d1f;
     position: relative;
     isolation: isolate;
+    width: 100%;
+    max-width: 100%;
     background:
       radial-gradient(circle at 80% 8%, rgba(220, 150, 163, 0.24), transparent 34rem),
       radial-gradient(circle at 10% 12%, rgba(20, 33, 63, 0.46), transparent 20rem),
-      linear-gradient(180deg, #090f20 0%, #111a2f 22%, #f7f9ff 40%, #fff 100%);
+      linear-gradient(180deg, #090f20 0%, #111a2f 18%, #f7f9ff 28%, #fff 100%);
     color: #101829;
+    overflow-x: clip;
   }
 
   .ritual-home::before {
@@ -319,10 +446,10 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
 
   .ritual-hero {
     position: relative;
-    min-height: min(860px, 96svh);
+    min-height: min(840px, 94svh);
     overflow: hidden;
     display: grid;
-    align-items: end;
+    align-items: stretch;
     border-bottom: 1px solid rgba(184, 198, 229, 0.26);
   }
 
@@ -337,33 +464,51 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transform: translateY(var(--hero-shift, 0)) scale(1.08);
+    transform: scale(1.05);
     transform-origin: center center;
-    transition: transform 160ms linear;
     filter: saturate(0.95) contrast(1.06);
   }
 
   .hero-wash {
+    opacity: 0;
     background:
       radial-gradient(circle at 18% 24%, rgba(220, 150, 163, 0.24), transparent 24rem),
       linear-gradient(90deg, rgba(9, 14, 32, 0.92) 0%, rgba(9, 14, 32, 0.62) 34%, rgba(9, 14, 32, 0.18) 76%),
       linear-gradient(180deg, rgba(8, 12, 28, 0.64), rgba(8, 12, 28, 0.22));
+    transition: opacity 680ms ease 90ms;
+  }
+
+  .ritual-hero.is-visible .hero-wash {
+    opacity: 1;
   }
 
   .hero-inner {
     position: relative;
     z-index: 2;
-    padding: clamp(5.4rem, 10vw, 7.6rem) 0 clamp(1.5rem, 3.8vw, 2.2rem);
+    padding: clamp(4.3rem, 7vw, 5.8rem) 0 clamp(1rem, 2.5vw, 1.35rem);
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(240px, 0.62fr);
-    align-items: end;
-    gap: clamp(0.8rem, 2.6vw, 1.8rem);
+    align-items: center;
+    gap: clamp(0.9rem, 2.8vw, 2rem);
+  }
+
+  .hero-inner,
+  .hero-copy,
+  .hero-mini-gallery,
+  .proof-inner,
+  .shelf,
+  .duo-grid,
+  .process-inner,
+  .media-story-grid,
+  .reviews-inner,
+  .final-cta-inner {
+    min-width: 0;
   }
 
   .hero-copy {
-    max-width: 640px;
+    max-width: 600px;
     display: grid;
-    gap: 0.95rem;
+    gap: 0.78rem;
     color: var(--ritual-ink);
   }
 
@@ -372,13 +517,12 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
     color: color-mix(in srgb, var(--ritual-rose), white 22%);
     font-size: 0.78rem;
     letter-spacing: 0.08em;
-    text-transform: uppercase;
     font-weight: 800;
   }
 
   .hero-copy h1 {
     font-family: "Space Grotesk", var(--font-heading);
-    font-size: clamp(2.45rem, 6.6vw, 5.4rem);
+    font-size: clamp(2.25rem, 5.9vw, 4.8rem);
     line-height: 0.9;
     letter-spacing: 0;
     color: #f8fbff;
@@ -396,6 +540,7 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
     display: flex;
     flex-wrap: wrap;
     gap: 0.64rem;
+    margin-top: 0.06rem;
   }
 
   .ritual-home .btn {
@@ -422,9 +567,8 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
     grid-template-columns: repeat(3, minmax(70px, 1fr));
     gap: 0.55rem;
     justify-self: end;
+    align-self: center;
     width: min(390px, 100%);
-    transform: translateY(var(--gallery-shift, 0));
-    transition: transform 180ms linear;
   }
 
   .hero-mini-gallery img {
@@ -442,17 +586,73 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
     border-block: 1px solid rgba(220, 150, 163, 0.4);
   }
 
-  .proof-inner {
+  .proof-scroller {
     min-height: 56px;
     display: flex;
     align-items: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .proof-scroller::-webkit-scrollbar {
+    display: none;
+  }
+
+  .proof-track {
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
-    gap: clamp(0.76rem, 2.8vw, 1.9rem);
-    flex-wrap: wrap;
-    color: rgba(238, 243, 255, 0.9);
+    gap: 0.52rem;
+    min-width: max-content;
+    padding-block: 0.2rem;
+    padding-inline: 0.14rem;
+  }
+
+  .proof-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.32rem;
+    min-height: 32px;
+    border-radius: 999px;
+    padding: 0.34rem 0.62rem;
+    color: rgba(238, 243, 255, 0.92);
     font-size: 0.76rem;
     font-weight: 800;
-    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .proof-strip a.proof-pill {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .proof-icon {
+    color: #ffc83d;
+    font-size: 0.86rem;
+  }
+
+  .service-shelf {
+    position: relative;
+    z-index: 1;
+    background:
+      radial-gradient(circle at 88% 0%, rgba(220, 150, 163, 0.18), transparent 22rem),
+      linear-gradient(180deg, #f8fbff 0%, #fff 100%);
+    border-bottom: 1px solid rgba(20, 33, 63, 0.08);
+    color: #14213f;
+    padding-block: clamp(1.8rem, 4vw, 3.2rem);
+  }
+
+  .editorial-duo {
+    padding-top: clamp(1.7rem, 3.8vw, 3rem);
+  }
+
+  .media-story,
+  .reviews-band,
+  .final-cta {
+    padding-block: clamp(2.1rem, 4.6vw, 3.8rem);
   }
 
   .section-head {
@@ -492,18 +692,17 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
   }
 
   .shelf {
-    margin-top: 0.82rem;
+    margin-top: 0.92rem;
     display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(208px, 1fr);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 0.82rem;
-    overflow-x: auto;
-    overflow-y: hidden;
+    overflow: visible;
     padding: 0.2rem 0 0.86rem;
-    scroll-snap-type: x mandatory;
   }
 
   .service-tile {
+    --tile-tint: rgba(220, 150, 163, 0.12);
+    --tile-border: rgba(220, 150, 163, 0.26);
     scroll-snap-align: start;
     opacity: 0;
     transform: translateY(26px);
@@ -516,17 +715,52 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
     transform: translateY(0);
   }
 
+  .service-tile:nth-child(2) {
+    --tile-tint: rgba(177, 210, 246, 0.18);
+    --tile-border: rgba(116, 154, 211, 0.28);
+  }
+
+  .service-tile:nth-child(3) {
+    --tile-tint: rgba(244, 217, 188, 0.2);
+    --tile-border: rgba(214, 166, 116, 0.25);
+  }
+
+  .service-tile:nth-child(4) {
+    --tile-tint: rgba(206, 237, 226, 0.18);
+    --tile-border: rgba(121, 175, 152, 0.24);
+  }
+
+  .service-tile:nth-child(5) {
+    --tile-tint: rgba(218, 209, 247, 0.17);
+    --tile-border: rgba(146, 131, 194, 0.25);
+  }
+
   .service-tile a {
     display: grid;
-    gap: 0.62rem;
+    gap: 0;
     text-decoration: none;
     color: inherit;
+    min-height: 100%;
+    border: 1px solid var(--tile-border);
+    border-radius: 12px;
+    overflow: hidden;
+    background:
+      linear-gradient(148deg, var(--tile-tint), rgba(255, 255, 255, 0.72)),
+      rgba(255, 255, 255, 0.72);
+    box-shadow: 0 22px 48px -38px rgba(20, 33, 63, 0.54);
+    backdrop-filter: blur(16px);
+    transition: transform 240ms ease, box-shadow 240ms ease;
+  }
+
+  .service-tile:hover a {
+    transform: translateY(-1px);
+    box-shadow: 0 26px 52px -38px rgba(20, 33, 63, 0.58);
   }
 
   .service-tile figure {
     margin: 0;
     aspect-ratio: 4 / 5;
-    border-radius: 10px;
+    border-radius: 0;
     background: #eef3f8;
     overflow: hidden;
   }
@@ -539,17 +773,32 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
   }
 
   .service-tile:hover img {
-    transform: scale(1.04);
+    transform: scale(1.03);
   }
 
   .service-tile-copy {
     display: grid;
-    gap: 0.22rem;
+    gap: 0.38rem;
+    align-content: start;
+    min-height: 170px;
+    padding: 0.78rem;
+  }
+
+  .service-tag {
+    width: fit-content;
+    border-radius: 999px;
+    background: rgba(220, 150, 163, 0.16);
+    color: #7b4153;
+    padding: 0.2rem 0.48rem;
+    font-size: 0.66rem;
+    font-weight: 900;
+    letter-spacing: 0.03em;
   }
 
   .service-tile h3 {
     font-family: "Space Grotesk", var(--font-heading);
-    font-size: 1rem;
+    font-size: clamp(1.03rem, 1.3vw, 1.22rem);
+    line-height: 1.05;
     color: #14213f;
   }
 
@@ -559,13 +808,17 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
     line-height: 1.42;
   }
 
-  .service-tile span,
+  .service-tile strong,
   .shelf-cta,
   .reviews-copy a {
     color: #14213f;
     font-size: 0.78rem;
     font-weight: 800;
     text-decoration: none;
+  }
+
+  .service-tile strong {
+    margin-top: auto;
   }
 
   .shelf-cta {
@@ -585,7 +838,7 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
     display: grid;
     place-items: center;
     text-align: center;
-    margin-bottom: 1.08rem;
+    margin-bottom: 0.72rem;
   }
 
   .duo-title h2 {
@@ -602,7 +855,9 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
   .duo-panel {
     position: relative;
     overflow: hidden;
-    min-height: clamp(420px, 58vw, 620px);
+    height: clamp(420px, 44vw, 600px);
+    min-height: 420px;
+    max-height: 620px;
     border-radius: 10px;
     background: #e9edf4;
     opacity: 0;
@@ -659,7 +914,7 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
   }
 
   .process-band {
-    margin: 0.95rem auto;
+    margin: 0.5rem auto 1.25rem;
     width: min(1200px, calc(100% - 2rem));
     border-radius: 10px;
     background:
@@ -670,25 +925,31 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
   }
 
   .process-inner {
-    padding: clamp(2rem, 5vw, 3.7rem) 0;
-    text-align: center;
+    padding: clamp(1.65rem, 3.4vw, 2.5rem) 0;
+    text-align: left;
     display: grid;
-    gap: 1.2rem;
+    gap: 1rem;
+  }
+
+  .process-inner > div:first-child {
+    display: grid;
+    gap: 0.24rem;
+    max-width: 620px;
   }
 
   .process-progress {
-    width: min(440px, 92%);
+    width: 100%;
     height: 7px;
     background: rgba(20, 33, 63, 0.1);
     border-radius: 999px;
-    margin-inline: auto;
+    margin-inline: 0;
     overflow: hidden;
   }
 
   .process-progress span {
     display: block;
     height: 100%;
-    width: 16%;
+    width: 0%;
     border-radius: 999px;
     background: linear-gradient(90deg, #14213f, #dc96a3);
     transition: width 420ms ease;
@@ -701,58 +962,88 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
     padding: 0;
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0.7rem;
+    gap: 0.76rem;
   }
 
   .process-inner li {
-    counter-increment: step;
     display: grid;
-    gap: 0.35rem;
+    align-content: start;
+    gap: 0.4rem;
+    min-height: 160px;
+    border-radius: 12px;
+    border: 1px solid rgba(20, 33, 63, 0.08);
+    background: rgba(255, 255, 255, 0.62);
+    padding: 0.9rem;
     color: #14213f;
     font-weight: 800;
-    opacity: 0.42;
-    transform: translateY(12px);
-    transition: opacity 360ms ease, transform 360ms ease;
+    opacity: 0.58;
+    transform: translateY(14px);
+    transition: opacity 360ms ease, transform 360ms ease, background 360ms ease, border-color 360ms ease;
   }
 
   .process-inner li.is-active {
     opacity: 1;
     transform: translateY(0);
+    background: rgba(255, 255, 255, 0.88);
+    border-color: rgba(220, 150, 163, 0.28);
   }
 
-  .process-inner li::before {
-    content: counter(step, decimal-leading-zero);
+  .process-inner small {
     color: #7e6882;
     font-size: 0.74rem;
+    letter-spacing: 0.06em;
+  }
+
+  .process-inner strong {
+    font-family: "Space Grotesk", var(--font-heading);
+    font-size: 1.02rem;
+    line-height: 1.08;
+  }
+
+  .process-inner li p {
+    margin: 0;
+    color: #5a657d;
+    font-size: 0.8rem;
+    line-height: 1.45;
+    font-weight: 600;
   }
 
   .media-story-grid {
+    --media-gap: clamp(0.86rem, 2vw, 1.25rem);
+    --media-frame-height: clamp(560px, 40vw, 640px);
     display: grid;
-    grid-template-columns: minmax(250px, 0.84fr) 1fr;
-    gap: 1.05rem;
-    align-items: stretch;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--media-gap);
+    align-items: start;
   }
 
   .video-panel {
-    position: relative;
-    min-height: 520px;
+    grid-column: 1;
+    grid-row: 2;
+    display: grid;
+    gap: 0.62rem;
+    align-content: start;
+    padding-top: 0;
+  }
+
+  .video-frame {
+    height: var(--media-frame-height);
+    min-height: 0;
+    max-height: none;
     border-radius: 10px;
     overflow: hidden;
     background: #edf3f8;
   }
 
-  .video-panel video {
+  .video-frame video {
     width: 100%;
     height: 100%;
-    min-height: 520px;
     object-fit: cover;
   }
 
   .video-panel a {
-    position: absolute;
-    left: 50%;
-    bottom: 0.94rem;
-    transform: translateX(-50%);
+    width: fit-content;
+    position: static;
     border-radius: 999px;
     background: rgba(248, 252, 255, 0.94);
     color: #14213f;
@@ -763,32 +1054,44 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
   }
 
   .gallery-mosaic {
-    display: grid;
-    gap: 0.95rem;
-    align-content: center;
+    grid-column: span 2;
+    display: contents;
+  }
+
+  .gallery-mosaic > .section-head {
+    grid-column: 2 / -1;
+    grid-row: 1;
   }
 
   .mosaic-grid {
+    grid-column: 2 / -1;
+    grid-row: 2;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.62rem;
+    gap: var(--media-gap);
+    align-items: start;
   }
 
   .mosaic-grid img {
-    aspect-ratio: 1.05 / 1;
     width: 100%;
-    height: 100%;
+    height: var(--media-frame-height);
+    max-height: none;
     object-fit: cover;
     border-radius: 10px;
+    background:
+      radial-gradient(circle at 25% 15%, rgba(255, 255, 255, 0.72), transparent 12rem),
+      linear-gradient(135deg, #edf3f8, #fbf6f8);
+    border: 1px solid rgba(20, 33, 63, 0.08);
   }
 
   .reviews-band {
     background: #fff;
+    overflow: hidden;
   }
 
   .reviews-inner {
     display: grid;
-    grid-template-columns: 0.88fr 1fr;
+    grid-template-columns: 1fr minmax(300px, 0.9fr);
     gap: 1.1rem;
     align-items: start;
   }
@@ -813,18 +1116,34 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
     gap: 0.7rem;
   }
 
+  .review-docs {
+    margin-top: 0.24rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.62rem;
+    width: min(520px, 100%);
+  }
+
+  .review-docs img {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid rgba(20, 33, 63, 0.1);
+    box-shadow: 0 14px 28px -20px rgba(12, 22, 48, 0.34);
+    background: #fff;
+  }
+
   .review-photo {
     margin: 0;
     border-radius: 10px;
     overflow: hidden;
     background: #eff3fb;
-    min-height: 240px;
+    height: clamp(660px, 48vw, 760px);
+    max-height: 760px;
   }
 
   .review-photo img {
     width: 100%;
     height: 100%;
-    min-height: 240px;
     object-fit: cover;
   }
 
@@ -848,7 +1167,6 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
     margin-top: 0.5rem;
     color: #677698;
     font-size: 0.72rem;
-    text-transform: uppercase;
     font-weight: 800;
   }
 
@@ -856,7 +1174,13 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
     text-align: center;
     display: grid;
     justify-items: center;
-    gap: 0.8rem;
+    gap: 0.86rem;
+    border-radius: 14px;
+    padding: clamp(1.4rem, 4vw, 2.5rem);
+    background:
+      radial-gradient(circle at 12% 8%, rgba(220, 150, 163, 0.2), transparent 18rem),
+      linear-gradient(135deg, #ffffff, #f4f8ff);
+    border: 1px solid rgba(20, 33, 63, 0.08);
   }
 
   .final-cta h2 {
@@ -866,6 +1190,50 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
 
   .final-cta p {
     max-width: 54ch;
+  }
+
+  .cta-note {
+    display: grid;
+    gap: 0.24rem;
+    width: min(680px, 100%);
+    border-radius: 12px;
+    border: 1px solid rgba(20, 33, 63, 0.1);
+    background: rgba(255, 255, 255, 0.72);
+    padding: 0.78rem 0.9rem;
+    color: #14213f;
+  }
+
+  .cta-note span {
+    color: #59647c;
+    font-size: 0.86rem;
+  }
+
+  .cta-hints {
+    width: min(860px, 100%);
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.56rem;
+  }
+
+  .cta-hints article {
+    display: grid;
+    gap: 0.24rem;
+    text-align: left;
+    border-radius: 12px;
+    border: 1px solid rgba(220, 150, 163, 0.2);
+    background: rgba(255, 255, 255, 0.66);
+    padding: 0.72rem;
+  }
+
+  .cta-hints strong {
+    color: #14213f;
+    font-size: 0.84rem;
+  }
+
+  .cta-hints span {
+    color: #65718a;
+    font-size: 0.74rem;
+    line-height: 1.36;
   }
 
   [data-reveal] {
@@ -878,12 +1246,14 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
   [data-reveal].is-visible {
     opacity: 1;
     transform: translateY(0) scale(1);
+    filter: blur(0);
   }
 
   .motion-expressive [data-reveal] {
-    transform: translateY(38px) scale(0.978);
-    transition-duration: 860ms;
-    transition-timing-function: cubic-bezier(0.18, 0.72, 0.18, 1);
+    transform: translateY(16px) scale(0.988);
+    filter: blur(2px);
+    transition-duration: 760ms;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   @media (max-width: 980px) {
@@ -900,40 +1270,117 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
     }
 
     .duo-panel {
-      min-height: 440px;
+      height: clamp(360px, 58vw, 500px);
+      min-height: 340px;
+      max-height: 540px;
+    }
+
+    .gallery-mosaic {
+      grid-column: auto;
+      display: grid;
+      gap: 0.86rem;
+      align-content: start;
+    }
+
+    .gallery-mosaic > .section-head {
+      grid-column: auto;
+      grid-row: auto;
+    }
+
+    .mosaic-grid {
+      grid-column: auto;
+      grid-row: auto;
+      gap: 0.62rem;
+    }
+
+    .mosaic-grid img {
+      height: auto;
+      max-height: clamp(500px, 40vw, 640px);
+      object-fit: contain;
     }
 
     .process-inner ol {
       grid-template-columns: 1fr 1fr;
     }
+
+    .cta-hints {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 
-  @media (max-width: 640px) {
-    .ritual-hero {
-      min-height: min(780px, 88svh);
-    }
+	  @media (max-width: 640px) {
+	    .ritual-hero {
+	      min-height: min(760px, 84svh);
+	    }
 
     .hero-inner {
-      padding-top: 5rem;
+      padding-top: 4rem;
+      align-items: end;
       gap: 0.72rem;
     }
 
     .hero-copy h1 {
-      font-size: clamp(2.15rem, 10.8vw, 3.25rem);
+      font-size: clamp(1.72rem, 8vw, 2.45rem);
       max-width: 8.8ch;
     }
 
     .hero-copy p {
-      max-width: 34ch;
+      max-width: 31ch;
+      font-size: 0.94rem;
     }
 
-    .hero-actions .btn {
+    .ritual-hero .hero-actions {
       width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.44rem;
+    }
+
+    .ritual-hero .hero-actions .btn {
+      width: 100%;
+      min-height: 40px;
+      font-size: 0.74rem;
+      justify-content: center;
+      padding-inline: 0.5rem;
+    }
+
+    .proof-scroller {
+      justify-content: flex-start;
+      min-height: 52px;
+      cursor: grab;
+      scroll-snap-type: x proximity;
+    }
+
+    .proof-track {
+      padding-block: 0.44rem;
+    }
+
+    .proof-pill {
+      scroll-snap-align: start;
+      flex: 0 0 auto;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.05);
     }
 
     .hero-mini-gallery {
       grid-template-columns: repeat(3, minmax(0, 1fr));
       width: 100%;
+    }
+
+    .hero-media img,
+    .hero-media :global(svg) {
+      object-position: center 34%;
+    }
+
+    .hero-wash {
+      background:
+        radial-gradient(circle at 24% 16%, rgba(220, 150, 163, 0.14), transparent 19rem),
+        linear-gradient(100deg, rgba(9, 14, 32, 0.76) 0%, rgba(9, 14, 32, 0.46) 52%, rgba(9, 14, 32, 0.14) 86%),
+        linear-gradient(180deg, rgba(8, 12, 28, 0.48), rgba(8, 12, 28, 0.16));
+    }
+
+    .service-shelf {
+      padding-block: 1.75rem;
     }
 
     .shelf-head {
@@ -942,8 +1389,19 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
     }
 
     .shelf {
-      grid-auto-columns: minmax(188px, 74vw);
-      margin-inline: -0.1rem;
+      width: 100%;
+      grid-template-columns: unset;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(230px, min(78vw, 310px));
+      overflow-x: auto;
+      overflow-y: hidden;
+      margin-inline: 0;
+      padding-inline: 0;
+      scroll-snap-type: x mandatory;
+    }
+
+    .service-tile-copy {
+      min-height: 144px;
     }
 
     .duo-panel {
@@ -958,14 +1416,48 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
       grid-template-columns: 1fr;
     }
 
-    .video-panel,
-    .video-panel video {
-      min-height: 360px;
+	    .process-inner li {
+	      min-height: auto;
+	    }
+
+	    .media-story {
+	      padding-bottom: 2.6rem;
+	    }
+
+	    .media-story-grid {
+	      row-gap: 1rem;
+	    }
+
+	    .video-panel,
+	    .video-frame,
+	    .video-frame video {
+	      min-height: 320px;
+      height: clamp(320px, 74vw, 420px);
     }
 
-    .review-photo,
-    .review-photo img {
-      min-height: 220px;
+	    .video-panel {
+	      padding-top: 0;
+	      gap: 0.78rem;
+	      margin-bottom: 1.4rem;
+	    }
+
+	    .mosaic-grid {
+	      grid-template-columns: 1fr 1fr;
+	      align-items: stretch;
+	    }
+
+	    .mosaic-grid img {
+	      height: clamp(390px, 92vw, 520px);
+	      max-height: none;
+	      object-fit: cover;
+	    }
+
+    .cta-hints {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .review-stack {
+      display: none;
     }
 
     .final-cta .hero-actions .btn {
@@ -990,5 +1482,20 @@ const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
     .process-progress span {
       transition: none;
     }
+  }
+
+  @media (min-width: 981px) {
+    .hero-copy {
+      margin-top: 0;
+    }
+  }
+
+  @media (min-width: 641px) {
+    .proof-track {
+      min-width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
   }
 </style>

@@ -9,7 +9,7 @@
     "phone": "05366061108",
     "whatsapp": "905366061108",
     "instagramUrl": "https://instagram.com/simaysarikayahairmakeup",
-    "mapUrl": "https://maps.google.com/?q=Sar%C4%B1g%C3%B6l,+Ordu+Cd.+no:15+D:1,+34250+Gaziosmanpa%C5%9Fa,+%C4%B0stanbul",
+    "mapUrl": "https://share.google/BmD79AoYSaE72vSu9",
     "mapEmbedUrl": "https://maps.google.com/maps?q=Sar%C4%B1g%C3%B6l%20Ordu%20Cd.%20no%3A15%20D%3A1%2034250%20Gaziosmanpa%C5%9Fa%20%C4%B0stanbul&output=embed",
     "mainService": "Gelin Saçı ve Makyajı",
     "themeId": "bridal-editorial-luxe",
@@ -19,25 +19,25 @@
     "hasProducts": true,
     "visualProfile": {
       "assetSet": "soft-beauty",
-      "heroMedia": "/assets/businesses/simay-sarikaya/hero-bridal-01.jpg",
+      "heroMedia": "/assets/library/all/makeup-bride-2.jpg",
       "gridImages": [
-        "/assets/businesses/simay-sarikaya/grid-01.jpg",
-        "/assets/businesses/simay-sarikaya/grid-02.jpg",
-        "/assets/businesses/simay-sarikaya/grid-03.jpg",
-        "/assets/library/all/pexels-kerimeveyik-22668308.jpg",
-        "/assets/library/all/pexels-kerimeveyik-22668324.jpg",
-        "/assets/library/all/pexels-goksun-baris-gokalp-2158208031-35225397.jpg"
+        "/assets/library/all/makeup-bride-1.jpg",
+        "/assets/library/all/hair-decoration-bride.jpg",
+        "/assets/library/all/makeup-eye-1.jpg",
+        "/assets/library/all/hair-1.jpg",
+        "/assets/library/all/makeup-customer.jpg",
+        "/assets/library/all/beauty-face-2.jpg"
       ],
       "videos": [
-        "/assets/library/all/8225477-hd_1080_1920_25fps.mp4",
+        "/assets/library/all/makeup-bride-1.mp4",
         "/assets/library/all/7754410-hd_1080_1920_30fps.mp4",
-        "/assets/library/all/5669040-hd_1920_1080_30fps.mp4"
+        "/assets/library/all/hair-washing-2.mp4"
       ],
       "ornamentStyle": "bridal-silk"
     },
     "hero": {
       "eyebrow": "Özel Gün Hazırlığı",
-      "title": "Özel gün sabahınızı saç ve makyajla birlikte sakin sakin planlayalım.",
+      "title": "Özel gün sabahınız telaşsız, görünümünüz hazır olsun.",
       "description": "Gelin, kına, nişan ve davet hazırlığınızda prova, saat planı ve görünüm dili en baştan netleşsin.",
       "primaryCta": "WhatsApp’tan Randevu Bilgisi Al",
       "secondaryCta": "Hazırlık Seçeneklerine Bak"
@@ -135,8 +135,8 @@
     },
     "leadSignals": {
       "hasWebsite": false,
-      "rating": 4.7,
-      "reviewCount": 75,
+      "rating": 4.6,
+      "reviewCount": 119,
       "instagramActive": true,
       "visualQuality": 8,
       "offerDepth": 9,
