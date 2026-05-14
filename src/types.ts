@@ -95,6 +95,7 @@ export type Business = {
   whatsapp: string;
   instagramUrl: string;
   mapUrl: string;
+  googleReviewUrl?: string;
   mapEmbedUrl: string;
   mainService: string;
   themeId: string;

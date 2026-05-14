@@ -6,7 +6,6 @@ import HeaderContact from "./HeaderContact.astro";
 import FloatingWhatsApp from "./FloatingWhatsApp.astro";
 import BackgroundOrnaments from "./BackgroundOrnaments.astro";
 import FooterMega from "./FooterMega.astro";
-import AnimatedIcon from "./AnimatedIcon.astro";
 import { buildWhatsAppUrl } from "../lib/whatsapp";
 import { getBusinessLogo } from "../lib/assets";
 
@@ -108,11 +107,15 @@ const formattedPhone = formatLocalPhone(business.phone);
             {formattedPhone}
           </a>
           <details class="menu" data-mobile-menu>
-            <summary aria-label="Menü">
-              <AnimatedIcon name="menu" size={18} />
+            <summary class="menu-trigger" aria-label="Menüyü aç" aria-controls="mobile-menu-panel" aria-expanded="false">
+              <span class="hamburger-icon" aria-hidden="true">
+                <span class="hamburger-line line-1"></span>
+                <span class="hamburger-line line-2"></span>
+                <span class="hamburger-line line-3"></span>
+              </span>
             </summary>
             <button class="menu-overlay" type="button" aria-label="Menüyü kapat" data-menu-close></button>
-            <nav aria-label="Mobil menü">
+            <nav id="mobile-menu-panel" aria-label="Mobil menü">
               <ul>
                 {
                   navItems.map((item) => (
@@ -137,9 +140,22 @@ const formattedPhone = formatLocalPhone(business.phone);
       const menu = document.querySelector("[data-mobile-menu]");
       if (menu instanceof HTMLDetailsElement) {
         const closeTriggers = menu.querySelectorAll("a, [data-menu-close]");
+        const menuTrigger = menu.querySelector(".menu-trigger");
+        const setMenuTriggerState = () => {
+          if (!(menuTrigger instanceof HTMLElement)) {
+            return;
+          }
+          menuTrigger.setAttribute("aria-expanded", menu.open ? "true" : "false");
+          menuTrigger.setAttribute("aria-label", menu.open ? "Menüyü kapat" : "Menüyü aç");
+        };
+
         const syncMenuState = () => {
           document.documentElement.classList.toggle("menu-open", menu.open);
           document.body.classList.toggle("menu-open", menu.open);
+          if (menu.open) {
+            document.querySelector(".site-header")?.classList.remove("is-hidden");
+          }
+          setMenuTriggerState();
         };
 
         menu.addEventListener("toggle", syncMenuState);
@@ -160,27 +176,48 @@ const formattedPhone = formatLocalPhone(business.phone);
             syncMenuState();
           }
         });
+
+        setMenuTriggerState();
       }
 
       const header = document.querySelector(".site-header");
       if (header instanceof HTMLElement) {
-        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        let lastScrollY = window.scrollY;
+        const reduceMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+        const directionThreshold = 10;
+        const topThreshold = 8;
+        let lastScrollY = Math.max(0, window.scrollY);
+        let lastDecisionY = lastScrollY;
+        let hidden = false;
         let ticking = false;
+        let reduceMotion = reduceMotionQuery.matches;
+
+        const setHeaderHidden = (nextHidden) => {
+          if (hidden === nextHidden) {
+            return;
+          }
+          hidden = nextHidden;
+          header.classList.toggle("is-hidden", hidden);
+        };
 
         const onScroll = () => {
           const currentScrollY = Math.max(0, window.scrollY);
           const delta = currentScrollY - lastScrollY;
           const menuOpen = document.documentElement.classList.contains("menu-open");
+          const movementFromDecision = currentScrollY - lastDecisionY;
 
-          header.classList.toggle("is-scrolled", currentScrollY > 8);
+          header.classList.toggle("is-scrolled", currentScrollY > topThreshold);
 
-          if (menuOpen || currentScrollY <= 8) {
-            header.classList.remove("is-hidden");
-          } else if (delta > 8) {
-            header.classList.add("is-hidden");
-          } else if (delta < -8) {
-            header.classList.remove("is-hidden");
+          if (menuOpen || currentScrollY <= topThreshold) {
+            setHeaderHidden(false);
+            lastDecisionY = currentScrollY;
+          } else {
+            if (movementFromDecision > directionThreshold && delta > 0) {
+              setHeaderHidden(true);
+              lastDecisionY = currentScrollY;
+            } else if (movementFromDecision < -directionThreshold && delta < 0) {
+              setHeaderHidden(false);
+              lastDecisionY = currentScrollY;
+            }
           }
 
           lastScrollY = currentScrollY;
@@ -200,7 +237,20 @@ const formattedPhone = formatLocalPhone(business.phone);
         };
 
         onScroll();
+        const onMotionChange = (event) => {
+          reduceMotion = event.matches;
+        };
+
         window.addEventListener("scroll", requestScrollUpdate, { passive: true });
+        reduceMotionQuery.addEventListener("change", onMotionChange);
+        window.addEventListener(
+          "pagehide",
+          () => {
+            window.removeEventListener("scroll", requestScrollUpdate);
+            reduceMotionQuery.removeEventListener("change", onMotionChange);
+          },
+          { once: true }
+        );
       }
     </script>
 
@@ -217,7 +267,7 @@ const formattedPhone = formatLocalPhone(business.phone);
 	  .site-header {
 	    position: sticky;
 	    top: 0;
-	    z-index: 40;
+	    z-index: 80;
 	    max-width: 100%;
 	    overflow-x: clip;
 	    backdrop-filter: blur(12px);
@@ -249,15 +299,15 @@ const formattedPhone = formatLocalPhone(business.phone);
   }
 
   .brand-logo {
-    height: 40px;
+    height: 67px;
     width: auto;
-    max-width: 240px;
+    max-width: 360px;
     object-fit: contain;
   }
 
 	  .brand-logo.mobile-logo {
-	    height: 48px;
-	    max-width: 176px;
+	    height: 44px;
+	    max-width: 230px;
 	  }
 
   .brand-text.fallback {
@@ -265,7 +315,7 @@ const formattedPhone = formatLocalPhone(business.phone);
   }
 
   .desktop-bar {
-    min-height: 72px;
+    min-height: 82px;
     display: grid;
     grid-template-columns: minmax(240px, 1fr) minmax(160px, auto) minmax(240px, 1fr);
     align-items: center;
@@ -315,7 +365,7 @@ const formattedPhone = formatLocalPhone(business.phone);
 	    display: none;
 	    width: min(100%, calc(100vw - 1.2rem));
 	    min-width: 0;
-	    min-height: 64px;
+	    min-height: 68px;
 	    align-items: center;
 	    justify-content: space-between;
 	    gap: 0.3rem;
@@ -324,7 +374,7 @@ const formattedPhone = formatLocalPhone(business.phone);
 	  .mobile-brand {
 	    font-size: 0.9rem;
 	    line-height: 1;
-	    max-width: calc(100% - 158px);
+	    max-width: calc(100% - 170px);
 	  }
 
   .mobile-actions {
@@ -353,18 +403,69 @@ const formattedPhone = formatLocalPhone(business.phone);
 
   .menu summary {
     list-style: none;
-    width: 30px;
-    height: 30px;
+    width: 36px;
+    height: 36px;
     display: grid;
     place-items: center;
     border: 1px solid color-mix(in srgb, var(--primary), white 64%);
     border-radius: 999px;
     cursor: pointer;
     background: color-mix(in srgb, var(--surface), white 18%);
+    transition:
+      transform 220ms ease,
+      background-color 220ms ease,
+      border-color 220ms ease,
+      box-shadow 220ms ease;
+    box-shadow: 0 10px 26px -22px var(--glow);
   }
 
   .menu summary::-webkit-details-marker {
     display: none;
+  }
+
+  .menu summary:hover {
+    border-color: color-mix(in srgb, var(--primary), white 52%);
+    background: color-mix(in srgb, var(--surface), white 24%);
+    box-shadow: 0 14px 26px -20px var(--glow);
+  }
+
+  .menu summary:active {
+    transform: scale(0.96);
+  }
+
+  .menu summary:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--primary), white 46%);
+    outline-offset: 2px;
+  }
+
+  .hamburger-icon {
+    width: 16px;
+    height: 14px;
+    display: grid;
+    align-content: center;
+    gap: 3px;
+  }
+
+  .hamburger-line {
+    height: 1.7px;
+    width: 100%;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--text), black 12%);
+    transition: transform 240ms ease, opacity 220ms ease, width 220ms ease;
+    transform-origin: center;
+  }
+
+  .menu[open] .hamburger-line.line-1 {
+    transform: translateY(4.7px) rotate(45deg);
+  }
+
+  .menu[open] .hamburger-line.line-2 {
+    opacity: 0;
+    width: 0;
+  }
+
+  .menu[open] .hamburger-line.line-3 {
+    transform: translateY(-4.7px) rotate(-45deg);
   }
 
   .menu nav {
@@ -440,6 +541,15 @@ const formattedPhone = formatLocalPhone(business.phone);
 
     .mobile-bar {
       display: flex;
+    }
+
+    .mobile-brand {
+      max-width: calc(100% - 190px);
+    }
+
+    .brand-logo.mobile-logo {
+      height: 60px;
+      max-width: 260px;
     }
   }
 

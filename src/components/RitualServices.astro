@@ -4,7 +4,6 @@ import { getFeaturedServiceMedia, getHeroMedia, getServiceMediaGallery } from ".
 import { buildWhatsAppUrl } from "../lib/whatsapp";
 import { slugify } from "../lib/slugify";
 import FAQAccordion from "./FAQAccordion.astro";
-import EditorialVisualFallback from "./EditorialVisualFallback.astro";
 
 type Props = {
   business: Business;
@@ -13,7 +12,7 @@ type Props = {
 const { business } = Astro.props;
 const basePath = `/demo/${business.slug}/`;
 const firstService = business.services[0];
-const heroMedia = getFeaturedServiceMedia(business, firstService ?? business.mainService) ?? getHeroMedia(business);
+const heroMedia = "/assets/library/all/makeup-eyebrow-2.jpg";
 const processDetails = [
   ["Tarih ve konsept konuşması", "Gününüz, mekanınız, kıyafetiniz ve istediğiniz görünüm netleşir."],
   ["Prova günü planı", "Saç, makyaj ve aksesuar seçenekleri birlikte denenir."],
@@ -78,7 +77,13 @@ const ctaHints = [
           const id = slugify(service.name);
           const media = getServiceMediaGallery(business, service, 4);
           const waUrl = buildWhatsAppUrl(business, service);
-          const mediaSlots = [media[0] ?? null, media[1] ?? null, media[2] ?? null, media[3] ?? null];
+          const orderedMedia = [media[0] ?? null, media[1] ?? null, media[2] ?? null, media[3] ?? null].filter(
+            (item): item is string => Boolean(item)
+          );
+          const mediaCount = Math.min(orderedMedia.length, 3);
+          const mediaMain = orderedMedia[0] ?? null;
+          const mediaA = orderedMedia[1] ?? null;
+          const mediaB = orderedMedia[2] ?? null;
           return (
             <article
               id={id}
@@ -100,20 +105,40 @@ const ctaHints = [
                   <a class="btn btn-secondary" href={`${basePath}randevu/`}>Randevu & İletişim</a>
                 </div>
               </div>
-              <div class="panel-media">
-                <figure class="media-shot media-main">
-                  {
-                    mediaSlots[0] ? (
-                      <img src={mediaSlots[0]} alt={`${service.name} görseli 1`} loading="lazy" onerror="this.closest('figure')?.setAttribute('hidden','true')" />
-                    ) : (
-                      <EditorialVisualFallback theme={business.themeId} aspectRatio="3/4" labels={["SAÇ", "MAKYAJ"]} />
-                    )
-                  }
-                </figure>
-                {mediaSlots[1] && <figure class="media-shot media-a"><img src={mediaSlots[1]} alt={`${service.name} görseli 2`} loading="lazy" onerror="this.closest('figure')?.setAttribute('hidden','true')" /></figure>}
-                {mediaSlots[2] && <figure class="media-shot media-b"><img src={mediaSlots[2]} alt={`${service.name} görseli 3`} loading="lazy" onerror="this.closest('figure')?.setAttribute('hidden','true')" /></figure>}
-                {mediaSlots[3] && <figure class="media-shot media-wide"><img src={mediaSlots[3]} alt={`${service.name} görseli 4`} loading="lazy" onerror="this.closest('figure')?.setAttribute('hidden','true')" /></figure>}
-              </div>
+              {mediaCount > 0 && (
+                <div class:list={["panel-media", `count-${mediaCount}`]} data-panel-media>
+                  {mediaMain && (
+                    <figure class="media-shot media-main">
+                      <img
+                        src={mediaMain}
+                        alt={`${service.name} görseli 1`}
+                        loading="lazy"
+                        onerror="this.closest('figure')?.setAttribute('hidden','true')"
+                      />
+                    </figure>
+                  )}
+                  {mediaA && (
+                    <figure class="media-shot media-a">
+                      <img
+                        src={mediaA}
+                        alt={`${service.name} görseli 2`}
+                        loading="lazy"
+                        onerror="this.closest('figure')?.setAttribute('hidden','true')"
+                      />
+                    </figure>
+                  )}
+                  {mediaB && (
+                    <figure class="media-shot media-b">
+                      <img
+                        src={mediaB}
+                        alt={`${service.name} görseli 3`}
+                        loading="lazy"
+                        onerror="this.closest('figure')?.setAttribute('hidden','true')"
+                      />
+                    </figure>
+                  )}
+                </div>
+              )}
             </article>
           );
         })
@@ -187,6 +212,25 @@ const ctaHints = [
   document.querySelectorAll("[data-service-dossier]").forEach((dossier) => {
     const tabs = Array.from(dossier.querySelectorAll("[data-service-tab]"));
     const panels = Array.from(dossier.querySelectorAll("[data-service-panel]"));
+    const normalizePanelMedia = (panel) => {
+      const media = panel.querySelector("[data-panel-media]");
+      if (!(media instanceof HTMLElement)) {
+        return;
+      }
+      const visibleShots = Array.from(media.querySelectorAll(".media-shot")).filter((item) => !item.hasAttribute("hidden")).length;
+      media.classList.remove("count-3", "count-2", "count-1");
+      if (visibleShots <= 0) {
+        media.remove();
+        return;
+      }
+      media.classList.add(`count-${Math.min(3, visibleShots)}`);
+    };
+    panels.forEach((panel) => {
+      panel.querySelectorAll("img").forEach((img) => {
+        img.addEventListener("error", () => normalizePanelMedia(panel));
+      });
+      normalizePanelMedia(panel);
+    });
 
     const activate = (tab) => {
       const target = tab.getAttribute("data-service-tab");
@@ -202,6 +246,7 @@ const ctaHints = [
         if (!isActive) {
           return;
         }
+        normalizePanelMedia(panel);
         panel.animate(
           [
             { opacity: 0, transform: "translateY(12px) scale(0.988)" },
@@ -359,17 +404,18 @@ const ctaHints = [
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     gap: clamp(0.95rem, 2.8vw, 1.8rem);
-    align-items: center;
+    align-items: start;
     min-width: 0;
   }
 
   .service-index {
-    position: sticky;
-    top: 84px;
+    position: relative;
     display: grid;
     gap: 0.8rem;
     min-width: 0;
     grid-column: span 3;
+    align-self: start;
+    max-width: 320px;
   }
 
   .service-index > p {
@@ -383,6 +429,7 @@ const ctaHints = [
     display: grid;
     gap: 0.4rem;
     min-width: 0;
+    width: 100%;
   }
 
   .service-tab {
@@ -399,6 +446,7 @@ const ctaHints = [
     display: flex;
     align-items: center;
     gap: 0.52rem;
+    width: 100%;
     transition: border-color 220ms ease, transform 220ms ease, background 220ms ease;
   }
 
@@ -421,17 +469,18 @@ const ctaHints = [
   .service-panels {
     min-width: 0;
     grid-column: span 9;
+    min-height: clamp(500px, 36vw, 560px);
   }
 
   .service-panel {
     display: none;
     grid-template-columns: repeat(9, minmax(0, 1fr));
     gap: clamp(0.9rem, 2.5vw, 1.5rem);
-    align-items: stretch;
+    align-items: start;
     border-top: 1px solid #ead9df;
     padding-top: 0.95rem;
     min-width: 0;
-    min-height: 600px;
+    min-height: clamp(500px, 36vw, 560px);
   }
 
   .service-panel.is-active {
@@ -439,11 +488,13 @@ const ctaHints = [
   }
 
   .panel-copy {
-    display: grid;
-    gap: 0.76rem;
-    align-content: start;
+    display: flex;
+    flex-direction: column;
+    gap: 0.72rem;
     grid-column: span 4;
-    min-height: 600px;
+    min-height: 0;
+    max-width: 44ch;
+    align-self: start;
   }
 
   .service-number {
@@ -485,7 +536,8 @@ const ctaHints = [
     display: flex;
     flex-wrap: wrap;
     gap: 0.55rem;
-    margin-top: auto;
+    margin-top: 0.1rem;
+    padding-top: 0;
   }
 
   .service-dossier .btn,
@@ -509,13 +561,16 @@ const ctaHints = [
 
   .panel-media {
     display: grid;
-    grid-template-columns: 1.02fr 0.92fr;
-    grid-template-rows: repeat(3, minmax(0, 1fr));
+    grid-template-columns: 1.02fr 0.98fr;
+    grid-template-rows: repeat(2, minmax(0, 1fr));
     gap: 0.54rem;
     min-width: 0;
     grid-column: span 5;
-    min-height: 560px;
-    height: 560px;
+    min-height: 480px;
+    height: clamp(480px, 34vw, 540px);
+    max-height: 540px;
+    width: 100%;
+    align-self: start;
   }
 
   .media-shot {
@@ -533,7 +588,7 @@ const ctaHints = [
   }
 
   .media-main {
-    grid-row: span 2;
+    grid-row: 1 / 3;
     grid-column: 1;
   }
 
@@ -547,9 +602,26 @@ const ctaHints = [
     grid-row: 2;
   }
 
-  .media-wide {
-    grid-column: 1 / -1;
-    grid-row: 3;
+  .panel-media.count-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: 1fr;
+    height: clamp(320px, 24vw, 400px);
+    min-height: 320px;
+    max-height: 400px;
+  }
+
+  .panel-media.count-2 .media-shot,
+  .panel-media.count-1 .media-shot {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .panel-media.count-1 {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    height: clamp(320px, 24vw, 420px);
+    min-height: 320px;
+    max-height: 420px;
   }
 
   .media-shot img {
@@ -701,6 +773,7 @@ const ctaHints = [
     .service-index {
       position: static;
       grid-column: span 12;
+      max-width: 100%;
     }
 
     .service-tabs {
@@ -713,7 +786,7 @@ const ctaHints = [
     }
 
     .service-tab {
-      flex: 0 0 min(245px, 74vw);
+      flex: 0 0 min(220px, 68vw);
       min-width: 0;
       scroll-snap-align: start;
     }
@@ -724,45 +797,75 @@ const ctaHints = [
 
     .service-panels {
       grid-column: span 12;
+      min-height: auto;
     }
 
     .service-panel {
       min-height: auto;
       grid-template-columns: 1fr;
-      gap: 0.8rem;
+      gap: 0.68rem;
     }
 
     .panel-copy {
       grid-column: auto;
       min-height: auto;
+      max-width: none;
     }
 
     .panel-media {
       grid-column: auto;
       min-height: 0;
       height: auto;
+      max-height: none;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      grid-template-rows: repeat(2, minmax(0, 1fr));
+      grid-template-rows: auto auto;
+      align-items: stretch;
+      margin-top: 0.12rem;
     }
 
-    .media-main {
+    .panel-media.count-3 .media-main {
       grid-column: 1 / -1;
       grid-row: 1;
-      min-height: 300px;
+      min-height: 0;
+      aspect-ratio: 16 / 10;
     }
 
-    .media-a {
+    .panel-media.count-3 .media-a {
       grid-column: 1;
       grid-row: 2;
+      aspect-ratio: 1 / 1;
     }
 
-    .media-b {
+    .panel-media.count-3 .media-b {
       grid-column: 2;
       grid-row: 2;
+      aspect-ratio: 1 / 1;
     }
 
-    .media-wide {
-      display: none;
+    .panel-media.count-2 {
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(2, auto);
+    }
+
+    .panel-media.count-2 .media-main,
+    .panel-media.count-2 .media-a,
+    .panel-media.count-2 .media-b {
+      grid-column: 1;
+      grid-row: auto;
+      aspect-ratio: 16 / 10;
+    }
+
+    .panel-media.count-1 {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+    }
+
+    .panel-media.count-1 .media-main,
+    .panel-media.count-1 .media-a,
+    .panel-media.count-1 .media-b {
+      grid-column: 1;
+      grid-row: auto;
+      aspect-ratio: 16 / 10;
     }
 
     .cta-hints {
@@ -772,10 +875,12 @@ const ctaHints = [
 
   @media (max-width: 640px) {
     .services-hero-inner {
-      min-height: min(560px, 68svh);
+      min-height: min(640px, 76svh);
       align-items: end;
-      padding-top: 4.8rem;
-      gap: 0.72rem;
+      align-content: end;
+      padding-top: 6.2rem;
+      padding-bottom: clamp(0.9rem, 4.5vw, 1.3rem);
+      gap: 0.42rem;
     }
 
     .services-hero h1 {
@@ -785,7 +890,7 @@ const ctaHints = [
 
     .services-hero p {
       max-width: 34ch;
-      margin-top: 0.56rem;
+      margin-top: 0.42rem;
     }
 
     .services-hero .btn,
@@ -800,16 +905,32 @@ const ctaHints = [
     }
 
     .service-tab {
-      flex: 0 0 min(228px, 76vw);
+      flex: 0 0 min(205px, 72vw);
       min-width: 0;
     }
 
     .panel-media {
-      gap: 0.45rem;
+      gap: 0.4rem;
+      margin-bottom: 0.18rem;
     }
 
-    .media-main {
-      min-height: 260px;
+    .panel-media.count-3 .media-main {
+      min-height: 0;
+      aspect-ratio: 16 / 11;
+    }
+
+    .panel-media.count-3 .media-a,
+    .panel-media.count-3 .media-b {
+      aspect-ratio: 1 / 1;
+    }
+
+    .panel-media.count-2 .media-main,
+    .panel-media.count-2 .media-a,
+    .panel-media.count-2 .media-b,
+    .panel-media.count-1 .media-main,
+    .panel-media.count-1 .media-a,
+    .panel-media.count-1 .media-b {
+      aspect-ratio: 16 / 11;
     }
 
     .cta-hints {

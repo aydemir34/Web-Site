@@ -94,7 +94,16 @@ const formattedPhone = formatLocalPhone(business.phone);
           </a>
         </li>
         <li>{business.neighborhood}, {business.district}</li>
-        <li><a href={business.mapUrl} target="_blank" rel="noreferrer">Google Maps / Yol Tarifi</a></li>
+        <li>
+          <a
+            href={business.mapUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${business.businessName} için Google Maps yol tarifi`}
+          >
+            Google Maps / Yol Tarifi
+          </a>
+        </li>
       </ul>
     </section>
   </div>

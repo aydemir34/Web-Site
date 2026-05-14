@@ -322,25 +322,16 @@ export function getServiceMediaGallery(business: Business, service: ServiceItem 
   const group = serviceGroupFromName(serviceName);
   const { businessAssets, sharedAssets } = getStructuredAssets(business);
 
-  const roleMatches = [
-    ...businessAssets.filter(
-      (entry) =>
-        (entry.role === "service" || entry.role === "featured") &&
-        (entry.serviceSlug === serviceSlug ||
-          entry.tags.some((tag) => serviceTokens.some((token) => slugify(tag).includes(token))) ||
-          entry.category === group)
-    ),
-    ...sharedAssets.filter(
-      (entry) =>
-        (entry.role === "service" || entry.role === "featured") &&
-        (entry.serviceSlug === serviceSlug ||
-          entry.tags.some((tag) => serviceTokens.some((token) => slugify(tag).includes(token))) ||
-          entry.category === group)
-    )
-  ].map((entry) => entry.src);
+  const matchesService = (entry: AssetEntry) =>
+    (entry.role === "service" || entry.role === "featured") &&
+    (entry.serviceSlug === serviceSlug ||
+      entry.tags.some((tag) => serviceTokens.some((token) => slugify(tag).includes(token))) ||
+      entry.category === group);
+  const businessRoleMatches = businessAssets.filter(matchesService).map((entry) => entry.src);
+  const sharedRoleMatches = sharedAssets.filter(matchesService).map((entry) => entry.src);
 
-  const fallbackGallery = getGridMedia(business).slice(0, 2);
-  const merged = allValid([primary, ...roleMatches, ...fallbackGallery]);
+  const fallbackGallery = getGridMedia(business);
+  const merged = allValid([primary, ...businessRoleMatches, ...fallbackGallery, ...sharedRoleMatches]);
   return merged.slice(0, maxItems);
 }
 
