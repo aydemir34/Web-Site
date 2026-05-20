@@ -37,16 +37,16 @@
       "ornamentStyle": "bridal-silk"
     },
     "hero": {
-      "eyebrow": "Özel Gün Hazırlığı",
-      "title": "Özel gün sabahınız telaşsız, görünümünüz hazır olsun.",
+      "eyebrow": "",
+      "title": "Sabahınız telaşsız, gününüz sizin gibi.",
       "description": "Gelin, kına, nişan ve davet hazırlığınızda prova, saat planı ve görünüm dili en baştan netleşsin.",
-      "primaryCta": "WhatsApp’tan Randevu Bilgisi Al",
-      "secondaryCta": "Hazırlık Seçeneklerine Bak"
+      "primaryCta": "WhatsApp’tan Randevu Bilgisi Alın",
+      "secondaryCta": "Hazırlık Seçeneklerini İnceleyin"
     },
     "cta": {
       "title": "Tarihinizi birlikte kontrol edelim",
       "description": "Gününüzü, kıyafetinizi ve istediğiniz görünümü yazın; uygun saatleri birlikte netleştirelim.",
-      "buttonText": "WhatsApp’tan Tarih Sor"
+      "buttonText": "WhatsApp’tan Tarih Sorun"
     },
     "trustBadges": ["Gelin Prova Planı", "Düğün Günü Ekip Desteği", "Konsept Uyumlu Stil", "Randevu Takvim Netliği"],
     "trustFeatures": [

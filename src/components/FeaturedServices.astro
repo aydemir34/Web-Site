@@ -22,7 +22,7 @@ const servicesPath = `/demo/${business.slug}/hizmetler/`;
         <p class="eyebrow">Öne Çıkan Hizmetler</p>
         <h2>Özel gün hazırlıkları için hizmet seçkisi</h2>
       </div>
-      <a class="all-link" href={servicesPath}>Tüm Hizmetleri Gör</a>
+      <a class="all-link" href={servicesPath}>Tüm Hizmetleri İnceleyin</a>
     </div>
 
     <div class="strip">
@@ -54,7 +54,7 @@ const servicesPath = `/demo/${business.slug}/hizmetler/`;
               <div class="copy glass">
                 <h3>{service.name}</h3>
                 <p>{service.description}</p>
-                <a class="mini-link" href={`${servicesPath}#${slugify(service.name)}`}>Detayı İncele</a>
+                <a class="mini-link" href={`${servicesPath}#${slugify(service.name)}`}>Detayı İnceleyin</a>
               </div>
             </article>
           );

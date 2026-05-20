@@ -8,7 +8,7 @@ type Props = {
   ctaLabel?: string;
 };
 
-const { business, ctaLabel = "Randevu Bilgisi Al" } = Astro.props;
+const { business, ctaLabel = "Randevu Bilgisi Alın" } = Astro.props;
 const whatsappUrl = buildWhatsAppUrl(business);
 const formatLocalPhone = (phone: string) => {
   const digits = phone.replace(/\D/g, "");

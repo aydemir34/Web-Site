@@ -23,7 +23,7 @@ const isEditorial = tone === "bridal-editorial";
       {
         services.map((service, index) => (
           <article id={slugify(service.name)} class={`service-card ${isEditorial ? "editorial" : ""}`}>
-            {business && <a class="service-cta" href={buildWhatsAppUrl(business, service)} target="_blank" rel="noreferrer">Randevu ve Fiyat Sor</a>}
+            {business && <a class="service-cta" href={buildWhatsAppUrl(business, service)} target="_blank" rel="noreferrer">Randevu ve Fiyat Sorun</a>}
             {
               business && (
                 <figure class="service-media">

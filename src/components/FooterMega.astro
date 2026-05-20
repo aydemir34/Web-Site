@@ -89,9 +89,9 @@ const instagramHandle = (() => {
     <section>
       <h3>İletişim</h3>
       <ul class="contact-list">
-        <li><a href={`tel:${business.phone}`}>{formattedPhone}</a></li>
-        <li><a href={whatsappUrl} target="_blank" rel="noreferrer">WhatsApp'tan Yaz</a></li>
-        <li>
+        <li class="contact-primary"><a href={`tel:${business.phone}`}>{formattedPhone}</a></li>
+        <li class="contact-primary"><a href={whatsappUrl} target="_blank" rel="noreferrer">WhatsApp’tan Yazın</a></li>
+        <li class="contact-primary">
           <a href={business.instagramUrl} target="_blank" rel="noreferrer" class="social-link" aria-label="Instagram">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <rect x="3.5" y="3.5" width="17" height="17" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="1.7"></rect>
@@ -101,8 +101,8 @@ const instagramHandle = (() => {
             <span>{instagramHandle}</span>
           </a>
         </li>
-        <li>{business.neighborhood}, {business.district}</li>
-        <li>
+        <li class="contact-location">{business.neighborhood}, {business.district}</li>
+        <li class="contact-location">
           <a
             href={business.mapUrl}
             target="_blank"
@@ -334,6 +334,26 @@ const instagramHandle = (() => {
     .footer-grid > .brand-col,
     .footer-grid > section:nth-child(4) {
       grid-column: 1 / -1;
+    }
+
+    .ritual-footer .footer-grid > section:nth-child(4) h3 {
+      text-align: center;
+    }
+
+    .ritual-footer .contact-list {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0.34rem 0.9rem;
+      align-items: start;
+    }
+
+    .ritual-footer .contact-list .contact-primary {
+      grid-column: 1;
+    }
+
+    .ritual-footer .contact-list .contact-location {
+      grid-column: 2;
+      text-align: right;
+      justify-self: end;
     }
 
     .brand-logo {

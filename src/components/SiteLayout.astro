@@ -27,7 +27,7 @@ const navItems = [
 ];
 const whatsApp = buildWhatsAppUrl(business);
 const logo = getBusinessLogo(business);
-const compactDesktopCta = business.themeId === "clean-clinic-minimal" ? "Randevu Al" : "Randevu Bilgisi Al";
+const compactDesktopCta = business.themeId === "clean-clinic-minimal" ? "Randevu Alın" : "Randevu Bilgisi Alın";
 const mobileBrandFallback = business.businessName.split(" ").slice(0, 2).join(" ");
 const formatLocalPhone = (phone: string) => {
   const digits = phone.replace(/\D/g, "");
@@ -133,7 +133,7 @@ const faviconHref = `data:image/svg+xml,${encodeURIComponent(faviconSvg)}`;
                 }
                 <li><a class="menu-phone" href={`tel:${business.phone}`}>{formattedPhone}</a></li>
                 <li><a class="menu-instagram" href={business.instagramUrl} target="_blank" rel="noreferrer">Instagram</a></li>
-                <li><a class="menu-wa" href={whatsApp} target="_blank" rel="noreferrer">WhatsApp'tan Randevu Bilgisi Al</a></li>
+                <li><a class="menu-wa" href={whatsApp} target="_blank" rel="noreferrer">WhatsApp’tan Randevu Bilgisi Alın</a></li>
               </ul>
             </nav>
           </details>
