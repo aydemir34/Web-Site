@@ -21,6 +21,14 @@ const formatLocalPhone = (phone: string) => {
   return local.length === 11 ? `${local.slice(0, 4)} ${local.slice(4, 7)} ${local.slice(7, 9)} ${local.slice(9)}` : phone;
 };
 const formattedPhone = formatLocalPhone(business.phone);
+const instagramHandle = (() => {
+  try {
+    const pathname = new URL(business.instagramUrl).pathname.replace(/^\/+|\/+$/g, "");
+    return pathname ? `@${pathname.split("/")[0]}` : "Instagram";
+  } catch {
+    return "Instagram";
+  }
+})();
 ---
 
 <section
@@ -67,7 +75,7 @@ const formattedPhone = formatLocalPhone(business.phone);
       <ul>
         <li><span>Telefon</span><a href={`tel:${business.phone}`}>{formattedPhone}</a></li>
         <li><span>WhatsApp</span><a href={whatsAppUrl} target="_blank" rel="noreferrer">Randevu bilgisi al</a></li>
-        <li><span>Instagram</span><a href={business.instagramUrl} target="_blank" rel="noreferrer">@simaysarikayahairmakeup</a></li>
+        <li><span>Instagram</span><a href={business.instagramUrl} target="_blank" rel="noreferrer">{instagramHandle}</a></li>
         <li><span>Adres</span><p>{business.address}</p></li>
       </ul>
     </article>
@@ -103,6 +111,7 @@ const formattedPhone = formatLocalPhone(business.phone);
             src={business.mapEmbedUrl}
             title={`${business.businessName} konum haritası`}
             loading="lazy"
+            allowfullscreen
             referrerpolicy="no-referrer-when-downgrade"
           ></iframe>
         ) : (

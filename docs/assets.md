@@ -101,3 +101,9 @@ Selection priority:
 - Do not add copyrighted media.
 - Do not fetch random remote images.
 - Demos stay static and Cloudflare Pages compatible.
+
+## Export Safety
+
+- Export and upload scripts must collect assets from `src`, `poster`, and `srcset` references.
+- When a component uses desktop/mobile `<picture>` sources, verify both variants are copied into the customer upload folder.
+- CSS aspect ratios should match the dominant asset ratio. For example, 4:3 before/after images should render in a 4:3 desktop frame.

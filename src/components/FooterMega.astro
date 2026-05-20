@@ -23,6 +23,14 @@ const formatLocalPhone = (phone: string) => {
   return local.length === 11 ? `${local.slice(0, 4)} ${local.slice(4, 7)} ${local.slice(7, 9)} ${local.slice(9)}` : phone;
 };
 const formattedPhone = formatLocalPhone(business.phone);
+const instagramHandle = (() => {
+  try {
+    const pathname = new URL(business.instagramUrl).pathname.replace(/^\/+|\/+$/g, "");
+    return pathname ? `@${pathname.split("/")[0]}` : "Instagram";
+  } catch {
+    return "Instagram";
+  }
+})();
 ---
 
 <footer class:list={["footer-mega", isRitualCommerce && "ritual-footer"]}>
@@ -90,7 +98,7 @@ const formattedPhone = formatLocalPhone(business.phone);
               <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.7"></circle>
               <circle cx="17.1" cy="6.9" r="1" fill="currentColor"></circle>
             </svg>
-            <span>Instagram</span>
+            <span>{instagramHandle}</span>
           </a>
         </li>
         <li>{business.neighborhood}, {business.district}</li>
@@ -176,6 +184,11 @@ const formattedPhone = formatLocalPhone(business.phone);
     display: grid;
     grid-template-columns: 1.35fr 1fr 1fr 1fr;
     gap: 0.85rem 1.1rem;
+    min-width: 0;
+  }
+
+  .footer-grid > section {
+    min-width: 0;
   }
 
   .brand-link {
@@ -229,6 +242,7 @@ const formattedPhone = formatLocalPhone(business.phone);
     font-size: 0.84rem;
     color: color-mix(in srgb, var(--text), white 14%);
     text-decoration: none;
+    overflow-wrap: anywhere;
   }
 
   a:hover {
@@ -268,6 +282,7 @@ const formattedPhone = formatLocalPhone(business.phone);
     justify-content: space-between;
     gap: 0.45rem 0.9rem;
     flex-wrap: wrap;
+    min-width: 0;
   }
 
   .footer-bottom p {
@@ -283,14 +298,20 @@ const formattedPhone = formatLocalPhone(business.phone);
     font-weight: 700;
   }
 
+  .credit {
+    opacity: 0.5;
+  }
+
   .demo-note {
     flex-basis: 100%;
     max-width: 68ch;
   }
 
   @media (max-width: 980px) {
-    .footer-grid {
+    .footer-grid,
+    .ritual-footer .footer-grid {
       grid-template-columns: 1fr 1fr;
+      gap: 1rem;
     }
   }
 
@@ -300,9 +321,19 @@ const formattedPhone = formatLocalPhone(business.phone);
       padding-top: 1.2rem;
     }
 
-    .footer-grid {
-      grid-template-columns: 1fr;
-      gap: 0.7rem;
+    .footer-grid,
+    .ritual-footer .footer-grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0.86rem 1rem;
+    }
+
+    .footer-mega.ritual-footer {
+      padding-top: 1.35rem;
+    }
+
+    .footer-grid > .brand-col,
+    .footer-grid > section:nth-child(4) {
+      grid-column: 1 / -1;
     }
 
     .brand-logo {
@@ -327,6 +358,9 @@ const formattedPhone = formatLocalPhone(business.phone);
     .footer-bottom {
       margin-top: 0.8rem;
       padding-top: 0.55rem;
+      display: grid;
+      justify-content: stretch;
+      gap: 0.48rem;
     }
   }
 </style>

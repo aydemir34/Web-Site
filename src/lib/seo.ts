@@ -15,7 +15,7 @@ export function buildSeoMeta(
   pathName: string,
   options?: { isDemo?: boolean; siteUrl?: string }
 ): SeoMeta {
-  const siteUrl = options?.siteUrl ?? "https://demo-placeholder.example.com";
+  const siteUrl = options?.siteUrl ?? import.meta.env.PUBLIC_DEMO_SITE_URL ?? "https://simay-sarikaya-demo.pages.dev";
   const path = pathName.startsWith("/") ? pathName : `/${pathName}`;
   const canonical = `${siteUrl}${path}`;
   const isDemo = options?.isDemo ?? true;

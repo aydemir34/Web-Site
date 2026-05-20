@@ -42,14 +42,39 @@ All demo pages are configured with `noindex, nofollow`.
 - `InstagramPreviewGrid` (manual image list, no API)
 - `BackgroundOrnaments`
 - `ServiceCarousel`
-- `StyleVariantToggle`
 - `DemoNotice`
 
 ## Asset onboarding
-1. Put local assets under `public/assets/brands/<business-slug>/`.
+1. Put local assets under `public/assets/businesses/<business-slug>/`.
 2. Set `visualProfile.heroMedia` and `visualProfile.gridImages` in `src/data/businesses.json`.
 3. Keep file names stable so static routes continue working on Cloudflare Pages.
 4. Do not use proprietary reference assets.
+
+## Bulk business onboarding
+
+The production source is `src/data/businesses.json`; CSV is the batch collection/import format.
+
+Recommended CSV columns:
+- Core: `businessName`, `slug`, `category`, `district`, `neighborhood`, `mainService`
+- Contact: `phone`, `whatsapp`, `instagramUrl`, `mapUrl`, `mapEmbedUrl`, `address`, `googleReviewUrl`
+- Lead score: `rating`, `reviewCount`, `hasWebsite`, `instagramActive`, `visualQuality`, `offerDepth`, `responseLikelihood`
+- Demo direction: `themeId`, `archetype`, `tone`, `packageFit`, `hasProducts`
+- Assets: `assetSet`, `heroMedia`, `gridImages`, `videos`, `ornamentStyle`
+- Copy/SEO: `heroEyebrow`, `heroTitle`, `heroDescription`, `primaryCta`, `secondaryCta`, `ctaTitle`, `ctaDescription`, `ctaButtonText`, `seoTitle`, `seoDescription`, `ogImage`
+- Services: `service1Name`, `service1Description`, `service1DetailBody`, `service1DetailPoints`, `service1BestFor`, `service1MediaTags`, `service1WhatsappMessage` up to `service5...`
+
+Flow:
+1. Collect lead data in CSV.
+2. Normalize slugs, phones, WhatsApp numbers, Instagram URLs, and Google Maps URLs.
+3. Dry-run import: `npm run import-businesses-csv -- path/to/businesses.csv`.
+4. Run `npm run check`, `npm run build`, `npm run score-leads`, and `npm run export-demo-list`.
+5. If the dry-run is correct, write import: `npm run import-businesses-csv -- path/to/businesses.csv --write`.
+6. Pick the best leads, add local assets, then export the customer upload folder.
+
+Useful current scripts:
+- `npm run score-leads` ranks businesses from `leadSignals`.
+- `npm run export-demo-list` prints the 3 demo URLs for every business.
+- `npm run import-businesses-csv -- --template` prints the current header order.
 
 ## Variant preview
 - Every demo page supports style preview query:

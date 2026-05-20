@@ -52,6 +52,7 @@ Message rules:
 - general message must be Turkish and URL-encoded
 - general template: `Merhaba, hizmetleriniz ve randevu bilgisi hakkında bilgi almak istiyorum.`
 - service template: `Merhaba, {serviceName} hizmeti için randevu ve fiyat bilgisi almak istiyorum.`
+- if a service needs a more helpful flow, define `whatsappMessage` on that service data item and let the helper prefer it before falling back to the generic service template
 
 ## Footer Standard (Documentation Baseline)
 
@@ -64,3 +65,9 @@ Message rules:
 - Google Maps / yol tarifi link
 - copyright
 - demo visual notice when needed
+
+Mobile layout:
+- keep brand/summary full width
+- place Pages and Services side by side on narrow screens when there is enough width for two compact columns
+- place Contact below them, spanning the full footer width
+- set `min-width: 0` and wrapping rules on all footer columns so phone, map, and social text cannot push the viewport horizontally

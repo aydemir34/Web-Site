@@ -6,10 +6,13 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "build:simay-cloudflare": "astro build && node scripts/export-simay-cloudflare.mjs",
+    "export:simay-cloudflare": "node scripts/export-simay-cloudflare.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "score-leads": "tsx scripts/score-leads.ts",
-    "export-demo-list": "tsx scripts/export-demo-list.ts"
+    "export-demo-list": "tsx scripts/export-demo-list.ts",
+    "import-businesses-csv": "tsx scripts/import-businesses-csv.ts"
   },
   "dependencies": {
     "astro": "^5.18.0"

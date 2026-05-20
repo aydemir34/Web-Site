@@ -8,10 +8,10 @@
     "address": "Sarıgöl, Ordu Cd. no:15 D:1, 34250 Gaziosmanpaşa/İstanbul",
     "phone": "05366061108",
     "whatsapp": "905366061108",
-    "instagramUrl": "https://instagram.com/simaysarikayahairmakeup",
+    "instagramUrl": "https://www.instagram.com/simaysarikayans/",
     "mapUrl": "https://maps.app.goo.gl/XSWreHMkqfeGmmN36",
     "googleReviewUrl": "https://share.google/SRz5GB1UrRfghpWR4",
-    "mapEmbedUrl": "https://maps.google.com/maps?q=Sar%C4%B1g%C3%B6l%20Ordu%20Cd.%20no%3A15%20D%3A1%2034250%20Gaziosmanpa%C5%9Fa%20%C4%B0stanbul&output=embed",
+    "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3008.4885834093006!2d28.912407712165795!3d41.05831167122404!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab12e770a5eb7%3A0xa0f5772078c2542a!2sSimay%20SARIKAYA%20Hair%20%26%20Makeup%20Studio!5e0!3m2!1str!2str!4v1779283391616!5m2!1str!2str",
     "mainService": "Gelin Saçı ve Makyajı",
     "themeId": "bridal-editorial-luxe",
     "archetype": "soft-beauty-editorial",
@@ -74,7 +74,8 @@
         "detailBody": "Prova görüşmesinde gelinlik, mekan ışığı, duvak ve çekim saati birlikte konuşulur. Düğün sabahı hangi sırayla ilerleyeceğimiz, ne kadar süre ayıracağımız ve rötuş ihtiyacı en baştan netleşir.",
         "detailPoints": ["Prova gününde görünümü birlikte seçme", "Duvak ve aksesuarla uyumlu saç formu", "Fotoğraf ışığına göre dengeli makyaj"],
         "bestFor": "Düğün günü saç, makyaj ve prova planını tek akışta rahatça netleştirmek isteyen gelinler",
-        "mediaTags": ["gelin", "saç", "makyaj", "prova"]
+        "mediaTags": ["gelin", "saç", "makyaj", "prova"],
+        "whatsappMessage": "Merhaba, web sitenizden geliyorum.\nGelin saçı ve makyajı için tarih/saat bilgisi almak istiyorum.\nTarihim: ...\nMekân: ...\nProva istiyorum/istemiyorum."
       },
       {
         "name": "Kına Hazırlığı",
@@ -82,7 +83,8 @@
         "detailBody": "Kına konsepti, kıyafet tonu ve gece akışı üzerinden daha belirgin ya da daha zarif bir görünüm seçilir. Saç formu sahne, dans ve uzun gece temposu düşünülerek hazırlanır.",
         "detailPoints": ["Kıyafet tonuna göre makyaj dengesi", "Sahne ışığında güçlü duran görünüm", "Gece temposuna uygun saç sabitleme"],
         "bestFor": "Kına, bekarlığa veda ve yüksek tempolu özel gün hazırlıkları",
-        "mediaTags": ["kına", "makyaj", "saç", "gece"]
+        "mediaTags": ["kına", "makyaj", "saç", "gece"],
+        "whatsappMessage": "Merhaba, web sitenizden geliyorum.\nKına hazırlığı için tarih/saat bilgisi almak istiyorum.\nTarihim: ...\nMekân: ...\nSaç ve makyaj birlikte olsun/olmasın."
       },
       {
         "name": "Nişan Hazırlığı",
@@ -90,7 +92,8 @@
         "detailBody": "Nişan konsepti, elbise rengi ve fotoğraf planı konuşularak sade ama belirgin bir görünüm hazırlanır. Stil, gün içi ve akşam ışığında dengeli duracak şekilde seçilir.",
         "detailPoints": ["Elbise ve aksesuarla uyum", "Gün ışığı ve salon ışığı dengesi", "Zarif saç formu seçimi"],
         "bestFor": "Nişan, söz ve aile buluşması gibi daha rafine hazırlıklar",
-        "mediaTags": ["nişan", "söz", "davet", "zarif"]
+        "mediaTags": ["nişan", "söz", "davet", "zarif"],
+        "whatsappMessage": "Merhaba, web sitenizden geliyorum.\nNişan hazırlığı için tarih/saat bilgisi almak istiyorum.\nTarihim: ...\nMekân: ...\nİstediğim görünüm: ..."
       },
       {
         "name": "Davet Makyajı",
@@ -98,7 +101,8 @@
         "detailBody": "Davet saati, kıyafet tonu ve istediğiniz belirginlik üzerinden cilde uygun ürün seçimi yapılır. Görünüm, fotoğrafta dengeli ve yüz yüze kullanımda doğal kalacak şekilde hazırlanır.",
         "detailPoints": ["Cilt tipine göre ürün seçimi", "Kıyafet tonuna uygun renk geçişi", "Fotoğrafa hazır doğal denge"],
         "bestFor": "Mezuniyet, doğum günü, davet ve özel kutlama hazırlıkları",
-        "mediaTags": ["davet", "makyaj", "özel gün"]
+        "mediaTags": ["davet", "makyaj", "özel gün"],
+        "whatsappMessage": "Merhaba, web sitenizden geliyorum.\nDavet makyajı için tarih/saat bilgisi almak istiyorum.\nTarihim: ...\nEtkinlik türü: ...\nİstediğim makyaj yoğunluğu: ..."
       },
       {
         "name": "Özel Gün Saç Tasarımı",
@@ -106,7 +110,8 @@
         "detailBody": "Saç yoğunluğu, yüz formu, aksesuar ve etkinlik temposu birlikte düşünülür. Topuz, dalga veya yarım toplu stiller arasından size en rahat hissettiren form seçilir.",
         "detailPoints": ["Yüz formuna göre saç çizgisi", "Aksesuar ve duvak hazırlığı", "Topuz, dalga veya yarım toplu alternatifler"],
         "bestFor": "Makyajsız yalnız saç tasarımı isteyen özel gün misafirleri",
-        "mediaTags": ["saç", "topuz", "dalga", "özel gün"]
+        "mediaTags": ["saç", "topuz", "dalga", "özel gün"],
+        "whatsappMessage": "Merhaba, web sitenizden geliyorum.\nÖzel gün saç tasarımı için tarih/saat bilgisi almak istiyorum.\nTarihim: ...\nMekân: ...\nİstediğim model: topuz/dalga/yarım toplu."
       }
     ],
     "processSteps": ["Tarih ve konsept konuşması", "Prova günü planı", "Görünümün son rötuşları", "Özel gün uygulaması"],
@@ -132,12 +137,12 @@
     "seo": {
       "title": "Simay Sarıkaya Hair & Makeup Studio | Gaziosmanpaşa Özel Gün Saç ve Makyaj",
       "description": "Gaziosmanpaşa'da gelin, kına ve nişan hazırlığı için Simay Sarıkaya Hair & Makeup Studio ile randevu alın.",
-      "ogImage": "/og/simay-sarikaya-hair-makeup.jpg"
+      "ogImage": "/assets/library/all/makeup-bride-2.jpg"
     },
     "leadSignals": {
       "hasWebsite": false,
       "rating": 4.6,
-      "reviewCount": 119,
+      "reviewCount": 120,
       "instagramActive": true,
       "visualQuality": 8,
       "offerDepth": 9,

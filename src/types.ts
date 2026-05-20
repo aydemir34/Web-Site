@@ -42,6 +42,7 @@ export type ServiceItem = {
   detailPoints?: string[];
   bestFor?: string;
   mediaTags?: string[];
+  whatsappMessage?: string;
 };
 
 export type ReviewItem = {

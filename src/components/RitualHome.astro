@@ -97,6 +97,12 @@ const ctaHints = [
 const firstVideo = videos[0] ?? null;
 const reviewImage = gridMedia[4] ?? gridMedia[3] ?? gridMedia[0] ?? heroMedia;
 const reviewScreens = ["/assets/library/all/review-1.png", "/assets/library/all/review-2.png", "/assets/library/all/review-3.png"];
+const beforeAfter = {
+  beforeMobile: "/assets/library/all/bride-before.jpeg",
+  afterMobile: "/assets/library/all/bride-after.jpeg",
+  beforeDesktop: "/assets/library/all/bride-before-web.jpeg",
+  afterDesktop: "/assets/library/all/bride-after-web.jpeg"
+};
 ---
 
 <div class="ritual-home">
@@ -130,27 +136,52 @@ const reviewScreens = ["/assets/library/all/review-1.png", "/assets/library/all/
   <section class="proof-strip" aria-label="Sosyal kanıt" data-reveal data-reveal-delay="0">
     <div class="container proof-scroller" data-proof-scroller>
       <div class="proof-track">
-      {
-        proofItems.map((item) =>
-          item.href ? (
-            <a
-              class="proof-pill"
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={item.ariaLabel}
-            >
-              {item.icon ? <span class="proof-icon">{item.icon}</span> : null}
-              {item.label}
-            </a>
-          ) : (
-            <span class="proof-pill">
-              {item.icon ? <span class="proof-icon">{item.icon}</span> : null}
-              {item.label}
-            </span>
-          )
-        )
-      }
+        <div class="proof-segment">
+          {
+            proofItems.map((item) =>
+              item.href ? (
+                <a
+                  class="proof-pill"
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={item.ariaLabel}
+                >
+                  {item.icon ? <span class="proof-icon">{item.icon}</span> : null}
+                  {item.label}
+                </a>
+              ) : (
+                <span class="proof-pill">
+                  {item.icon ? <span class="proof-icon">{item.icon}</span> : null}
+                  {item.label}
+                </span>
+              )
+            )
+          }
+        </div>
+        <div class="proof-segment proof-segment-clone" aria-hidden="true">
+          {
+            proofItems.map((item) =>
+              item.href ? (
+                <a
+                  class="proof-pill"
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  tabindex="-1"
+                >
+                  {item.icon ? <span class="proof-icon">{item.icon}</span> : null}
+                  {item.label}
+                </a>
+              ) : (
+                <span class="proof-pill">
+                  {item.icon ? <span class="proof-icon">{item.icon}</span> : null}
+                  {item.label}
+                </span>
+              )
+            )
+          }
+        </div>
       </div>
     </div>
   </section>
@@ -193,6 +224,31 @@ const reviewScreens = ["/assets/library/all/review-1.png", "/assets/library/all/
           })
         }
       </div>
+    </div>
+  </section>
+
+  <section class="section transformation-compare" data-reveal>
+    <div class="container compare-inner">
+      <div class="compare-copy">
+        <p>Hazırlık Öncesi / Hazırlık Sonrası</p>
+        <h2>Hazırlık öncesinden özel gün görünümüne</h2>
+        <span>Amaç yüz hatlarını değiştirmek değil; saç, makyaj ve ışık dengesini özel gün konseptine uyumlu hale getirmek.</span>
+      </div>
+      <div class="compare-frame" data-before-after style="--compare-position: 50%;">
+        <picture>
+          <source media="(min-width: 641px)" srcset={beforeAfter.beforeDesktop} />
+          <img src={beforeAfter.beforeMobile} alt="Hazırlık öncesi temsili gelin görseli" loading="lazy" />
+        </picture>
+        <picture class="compare-after">
+          <source media="(min-width: 641px)" srcset={beforeAfter.afterDesktop} />
+          <img src={beforeAfter.afterMobile} alt="Gelin dokunuşu sonrası temsili özel gün görünümü" loading="lazy" />
+        </picture>
+        <span class="compare-label compare-label-before">Hazırlık Öncesi</span>
+        <span class="compare-label compare-label-after">Gelin Dokunuşu</span>
+        <span class="compare-handle" aria-hidden="true"></span>
+        <input type="range" min="8" max="92" value="50" aria-label="Hazırlık öncesi ve gelin dokunuşu karşılaştırması" data-before-after-control />
+      </div>
+      <p class="compare-note">Görseller temsilidir. Yayın öncesi işletmenin kendi çalışmalarıyla değiştirilebilir.</p>
     </div>
   </section>
 
@@ -332,7 +388,6 @@ const reviewScreens = ["/assets/library/all/review-1.png", "/assets/library/all/
   }
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const mobileTickerQuery = window.matchMedia("(max-width: 640px)");
   const revealItems = document.querySelectorAll("[data-reveal]");
   const ritualRoot = document.querySelector(".ritual-home");
 
@@ -340,75 +395,19 @@ const reviewScreens = ["/assets/library/all/review-1.png", "/assets/library/all/
     ritualRoot.classList.add("motion-enabled");
   }
 
-  const proofScroller = document.querySelector("[data-proof-scroller]");
-  const proofTrack = proofScroller?.querySelector(".proof-track");
-  if (proofScroller instanceof HTMLElement && proofTrack instanceof HTMLElement && mobileTickerQuery.matches) {
-    const sourceItems = Array.from(proofTrack.children);
-    if (sourceItems.length > 0 && !proofTrack.dataset.loopReady) {
-      for (let i = 0; i < 2; i += 1) {
-        sourceItems.forEach((item) => {
-          proofTrack.appendChild(item.cloneNode(true));
-        });
-      }
-      proofTrack.dataset.loopReady = "true";
+  document.querySelectorAll("[data-before-after]").forEach((slider) => {
+    const control = slider.querySelector("[data-before-after-control]");
+    if (!(slider instanceof HTMLElement) || !(control instanceof HTMLInputElement)) {
+      return;
     }
 
-    const baseWidth = Math.max(proofTrack.scrollWidth / 3, proofScroller.clientWidth + 1);
-    proofScroller.scrollLeft = baseWidth;
-
-    const normalizeLoopOffset = () => {
-      if (proofScroller.scrollLeft >= baseWidth * 2) {
-        proofScroller.scrollLeft -= baseWidth;
-      } else if (proofScroller.scrollLeft <= baseWidth * 0.35) {
-        proofScroller.scrollLeft += baseWidth;
-      }
+    const syncCompare = () => {
+      slider.style.setProperty("--compare-position", `${control.value}%`);
     };
 
-    let rafId = 0;
-    let lastTs = 0;
-    let isPaused = false;
-    const speed = 0.03;
-
-    const runTicker = (ts) => {
-      if (!lastTs) {
-        lastTs = ts;
-      }
-      const dt = ts - lastTs;
-      lastTs = ts;
-
-      if (!prefersReducedMotion && !isPaused) {
-        proofScroller.scrollLeft += dt * speed;
-        normalizeLoopOffset();
-      }
-
-      rafId = window.requestAnimationFrame(runTicker);
-    };
-
-    const pauseTicker = () => {
-      isPaused = true;
-    };
-
-    const resumeTicker = () => {
-      isPaused = false;
-      normalizeLoopOffset();
-    };
-
-    proofScroller.addEventListener("pointerdown", pauseTicker);
-    proofScroller.addEventListener("pointerup", resumeTicker);
-    proofScroller.addEventListener("pointercancel", resumeTicker);
-    proofScroller.addEventListener("touchstart", pauseTicker, { passive: true });
-    proofScroller.addEventListener("touchend", resumeTicker, { passive: true });
-    proofScroller.addEventListener("scroll", normalizeLoopOffset, { passive: true });
-    rafId = window.requestAnimationFrame(runTicker);
-
-    window.addEventListener(
-      "pagehide",
-      () => {
-        window.cancelAnimationFrame(rafId);
-      },
-      { once: true }
-    );
-  }
+    control.addEventListener("input", syncCompare);
+    syncCompare();
+  });
 
   if ("IntersectionObserver" in window) {
     const revealObserver = new IntersectionObserver(
@@ -696,6 +695,13 @@ const reviewScreens = ["/assets/library/all/review-1.png", "/assets/library/all/
     padding-inline: 0.14rem;
   }
 
+  .proof-segment {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.52rem;
+    padding-right: 0.52rem;
+  }
+
   .proof-pill {
     display: inline-flex;
     align-items: center;
@@ -729,6 +735,147 @@ const reviewScreens = ["/assets/library/all/review-1.png", "/assets/library/all/
     border-bottom: 1px solid rgba(20, 33, 63, 0.08);
     color: #14213f;
     padding-block: clamp(1.8rem, 4vw, 3.2rem);
+  }
+
+  .transformation-compare {
+    background:
+      radial-gradient(circle at 10% 0%, rgba(220, 150, 163, 0.16), transparent 18rem),
+      linear-gradient(180deg, #fff 0%, #f8fbff 100%);
+    border-bottom: 1px solid rgba(20, 33, 63, 0.08);
+    padding-block: clamp(2rem, 4.8vw, 3.7rem);
+  }
+
+  .compare-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.72fr) minmax(340px, 1fr);
+    gap: clamp(1rem, 3vw, 2rem);
+    align-items: center;
+    min-width: 0;
+  }
+
+  .compare-copy {
+    display: grid;
+    gap: 0.58rem;
+    max-width: 520px;
+  }
+
+  .compare-copy p {
+    margin: 0;
+    color: #8d5c70;
+    font-weight: 900;
+    font-size: 0.76rem;
+  }
+
+  .compare-copy h2 {
+    font-family: "Space Grotesk", var(--font-heading);
+    color: #14213f;
+    font-size: clamp(2rem, 4.6vw, 3.6rem);
+    line-height: 0.96;
+    max-width: 12ch;
+  }
+
+  .compare-copy span,
+  .compare-note {
+    color: #4c5871;
+    line-height: 1.55;
+  }
+
+  .compare-frame {
+    --compare-position: 50%;
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    min-height: 360px;
+    overflow: hidden;
+    border-radius: 14px;
+    background: #edf3f8;
+    border: 1px solid rgba(20, 33, 63, 0.1);
+    box-shadow: 0 28px 56px -42px rgba(20, 33, 63, 0.58);
+  }
+
+  .compare-frame picture,
+  .compare-frame img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .compare-frame img {
+    object-fit: cover;
+  }
+
+  .compare-after {
+    clip-path: inset(0 0 0 var(--compare-position));
+  }
+
+  .compare-label {
+    position: absolute;
+    z-index: 3;
+    top: 0.8rem;
+    border-radius: 999px;
+    padding: 0.42rem 0.68rem;
+    background: rgba(248, 251, 255, 0.86);
+    color: #14213f;
+    font-size: 0.76rem;
+    font-weight: 900;
+    box-shadow: 0 14px 28px -24px rgba(20, 33, 63, 0.64);
+    backdrop-filter: blur(12px);
+  }
+
+  .compare-label-before {
+    left: 0.8rem;
+  }
+
+  .compare-label-after {
+    right: 0.8rem;
+  }
+
+  .compare-handle {
+    position: absolute;
+    z-index: 4;
+    top: 0;
+    bottom: 0;
+    left: var(--compare-position);
+    width: 2px;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 0 0 1px rgba(20, 33, 63, 0.16);
+    pointer-events: none;
+  }
+
+  .compare-handle::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 42px;
+    height: 42px;
+    transform: translate(-50%, -50%);
+    border-radius: 999px;
+    background:
+      linear-gradient(90deg, transparent 42%, #14213f 42% 48%, transparent 48% 52%, #14213f 52% 58%, transparent 58%),
+      rgba(248, 251, 255, 0.94);
+    border: 1px solid rgba(20, 33, 63, 0.18);
+    box-shadow: 0 16px 28px -20px rgba(20, 33, 63, 0.72);
+  }
+
+  .compare-frame input {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: ew-resize;
+  }
+
+  .compare-note {
+    grid-column: 2;
+    margin: -0.45rem 0 0;
+    font-size: 0.78rem;
   }
 
   .editorial-duo {
@@ -1379,10 +1526,24 @@ const reviewScreens = ["/assets/library/all/review-1.png", "/assets/library/all/
   @media (max-width: 980px) {
     .hero-inner,
     .duo-grid,
+    .compare-inner,
     .media-story-grid,
     .reviews-media-grid,
     .reviews-inner {
       grid-template-columns: 1fr;
+    }
+
+    .compare-copy {
+      max-width: 680px;
+    }
+
+    .compare-copy h2 {
+      max-width: 14ch;
+    }
+
+    .compare-note {
+      grid-column: auto;
+      margin-top: -0.3rem;
     }
 
     .hero-mini-gallery {
@@ -1489,8 +1650,14 @@ const reviewScreens = ["/assets/library/all/review-1.png", "/assets/library/all/
 	      justify-content: flex-start;
 	      align-items: center;
 	      width: max-content;
-	      gap: 0.5rem;
+	      gap: 0;
+        animation: proof-marquee 28s linear infinite;
 	    }
+
+      .proof-scroller:hover .proof-track,
+      .proof-scroller:focus-within .proof-track {
+        animation-play-state: paused;
+      }
 
 	    .proof-pill {
 	      scroll-snap-align: none;
@@ -1545,6 +1712,30 @@ const reviewScreens = ["/assets/library/all/review-1.png", "/assets/library/all/
 
     .duo-panel {
       min-height: 340px;
+    }
+
+    .compare-frame {
+      aspect-ratio: 4 / 5;
+      min-height: 420px;
+      border-radius: 12px;
+    }
+
+    .compare-label {
+      top: 0.62rem;
+      max-width: calc(50% - 0.9rem);
+      white-space: normal;
+      line-height: 1.08;
+      padding: 0.38rem 0.52rem;
+      font-size: 0.68rem;
+    }
+
+    .compare-label-before {
+      left: 0.62rem;
+    }
+
+    .compare-label-after {
+      right: 0.62rem;
+      text-align: right;
     }
 
     .process-inner {
@@ -1645,6 +1836,7 @@ const reviewScreens = ["/assets/library/all/review-1.png", "/assets/library/all/
     [data-reveal],
     .service-tile,
     .duo-panel,
+    .proof-track,
     .process-inner li,
     .hero-media img,
     .hero-mini-gallery,
@@ -1739,5 +1931,19 @@ const reviewScreens = ["/assets/library/all/review-1.png", "/assets/library/all/
       flex-wrap: wrap;
     }
 
+    .proof-segment-clone {
+      display: none;
+    }
+
+  }
+
+  @keyframes proof-marquee {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
   }
 </style>

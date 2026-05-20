@@ -21,6 +21,10 @@ function normalizeServiceLabel(service: ServiceItem | string): string {
 
 export function buildWhatsAppMessage(business: Business, service?: ServiceItem | string): string {
   if (service) {
+    if (typeof service !== "string" && service.whatsappMessage) {
+      return service.whatsappMessage;
+    }
+
     const serviceLabel = normalizeServiceLabel(service);
     return `Merhaba, ${serviceLabel} hizmeti için randevu ve fiyat bilgisi almak istiyorum.`;
   }

@@ -87,10 +87,32 @@ Desktop:
 - contact/social/map
 
 Mobile:
-- compact stacked sections
+- brand/summary full width
+- pages and services as two compact columns
+- contact/social/map below those columns at full width
 - no long unstructured list
 
-## 8. Visual Rejection Rules
+## 8. Before / After Compare
+
+Use for:
+- bridal preparation
+- hair and makeup transformation context
+- visual service proof where assets are representative or approved
+
+Structure:
+- title and short explanation that avoids guaranteed-result language
+- two image layers in the same frame
+- draggable/tappable range control
+- concise labels such as before / after, preparation / final touch
+- small note when visuals are representative demo assets
+
+Rules:
+- do not imply face or body alteration guarantees
+- do not use real customer before/after imagery without explicit approval
+- match the frame aspect ratio to the actual asset ratio, especially on desktop
+- keep labels readable on mobile and avoid covering the main subject
+
+## 9. Visual Rejection Rules
 
 Reject if any of these are true:
 - white equal cards are the main design pattern
